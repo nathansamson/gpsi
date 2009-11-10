@@ -4,14 +4,42 @@
 #include <iostream>
 
 namespace si {
+/**
+ * Class to represent a vector.
+ *
+ * Can be used as location or as speed vector.
+*/
 class Vector2 {
 public:
 	Vector2 ();
 	Vector2 (double, double);
 	
+	/**
+	 * Get the X value of the vector.
+	 *
+	 * @return The X value of the vector.
+	*/
 	double getX() const { return fX; };
+	
+	/**
+	 * Get the Y value of the vector.
+	 *
+	 * @return The X value of the vector.
+	*/
 	double getY() const { return fY; };
+	
+	/**
+	 * Set the X value for the vector.
+	 *
+	 * @param a The new X value.
+	*/
 	void setX(double a) { fX = a; }
+	
+	/**
+	 * Set the Y value for the vector.
+	 *
+	 * @param a The new Y value.
+	*/
 	void setY(double a) { fY = a; }
 	
 	double length() const;
@@ -38,7 +66,15 @@ public:
 	bool operator!=(const Vector2&) const;
 	
 private:
-	double fX, fY;	
+	/**
+	 * X value of the vector.
+	*/
+	double fX;
+	
+	/**
+	 * Y value of the vector.
+	*/
+	double fY;	
 };
 
 Vector2 operator+(const double, const Vector2&);

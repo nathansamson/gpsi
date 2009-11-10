@@ -10,7 +10,7 @@ DEPFILES = $(patsubst %.cpp,%.d,$(CXXTESTSOURCES))
 LIB = libsi.so
 TEST = sitest
 
-.PHONY: all clean test
+.PHONY: all clean test docs
 
 all: $(LIB)
 
@@ -22,6 +22,9 @@ test: $(TEST)
 
 $(TEST): $(CXXTESTOBJECTS)
 	$(CXX) $(LDTESTFLAGS) -o $@ $^
+
+docs: $(CXXSOURCES)
+	doxygen > /dev/null
 	
 clean:
 	$(RM) $(CXXTESTOBJECTS) $(LIB) $(TEST) $(DEPFILES)
