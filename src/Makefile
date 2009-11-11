@@ -22,9 +22,6 @@ test: $(TEST)
 
 $(TEST): $(CXXTESTOBJECTS)
 	$(CXX) $(LDTESTFLAGS) -o $@ $^
-
-docs: $(CXXSOURCES)
-	doxygen > /dev/null
 	
 clean:
 	$(RM) $(CXXTESTOBJECTS) $(LIB) $(TEST) $(DEPFILES)
