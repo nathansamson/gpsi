@@ -7,12 +7,14 @@ namespace si {
 /**
  * Class to represent a vector.
  *
- * Can be used as location or as speed vector.
+ * Can be used as point vector (location in 2D space), or as normal vector (like a speed vector).
 */
 class Vector2 {
 public:
 	Vector2 ();
+	Vector2 (const Vector2&);
 	Vector2 (double, double);
+	Vector2 operator=(const Vector2&);
 	
 	/**
 	 * Get the X value of the vector.
@@ -53,14 +55,14 @@ public:
 	Vector2 operator+() const;
 	Vector2 operator-() const;
 	
-	Vector2 operator+(const double) const;
-	Vector2& operator+=(const double);
-	Vector2 operator-(const double) const;
-	Vector2& operator-=(const double);
-	Vector2 operator*(const double) const;
-	Vector2& operator*=(const double);
-	Vector2 operator/(const double) const;
-	Vector2& operator/=(const double);
+	Vector2 operator+(const double&) const;
+	Vector2& operator+=(const double&);
+	Vector2 operator-(const double&) const;
+	Vector2& operator-=(const double&);
+	Vector2 operator*(const double&) const;
+	Vector2& operator*=(const double&);
+	Vector2 operator/(const double&) const;
+	Vector2& operator/=(const double&);
 	
 	bool operator==(const Vector2&) const;
 	bool operator!=(const Vector2&) const;
@@ -77,10 +79,10 @@ private:
 	double fY;	
 };
 
-Vector2 operator+(const double, const Vector2&);
-Vector2 operator-(const double, const Vector2&);
-Vector2 operator*(const double, const Vector2&);
-Vector2 operator/(const double, const Vector2&);
+Vector2 operator+(const double&, const Vector2&);
+Vector2 operator-(const double&, const Vector2&);
+Vector2 operator*(const double&, const Vector2&);
+Vector2 operator/(const double&, const Vector2&);
 std::ostream& operator<<(std::ostream&, const Vector2&);
 
 }

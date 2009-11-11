@@ -11,16 +11,32 @@ Vector2::Vector2() {
 }
 
 /**
+ * Copy constructor.
+ *
+ * @param v The vector to copy.
+*/
+Vector2::Vector2(const Vector2& v) : fX(v.fX), fY(v.fY) {
+}
+
+/**
  * Constructor to initialize the length of the vector.
  *
- * Azert en querty samen geeft dvorak.
- *
- * @param a The X value of the vector
- * @param b The Y value of the vector.
+ * @param x The X value of the vector.
+ * @param y The Y value of the vector.
 */
-Vector2::Vector2(double a, double b) {
-	fX = a;
-	fY = b;
+Vector2::Vector2(double x, double y) : fX(x), fY(y) {
+}
+
+/**
+ * Assignment operator.
+ *
+ * @param rhs The right hand side of the assignment.
+ * @return The assigned value.
+*/
+Vector2 Vector2::operator=(const Vector2& rhs) {
+	fX = rhs.fX;
+	fY = rhs.fY;
+	return *this;
 }
 
 /**
@@ -132,7 +148,7 @@ Vector2 Vector2::operator-() const {
  * @param a The scalar a.
  * @return The sum of this vector and the scalar a.
 */
-Vector2 Vector2::operator+(const double a) const {
+Vector2 Vector2::operator+(const double& a) const {
 	Vector2 r = Vector2(fX+a, fY+a);
 	return r;
 }
@@ -146,7 +162,7 @@ Vector2 Vector2::operator+(const double a) const {
  * @param a The scalar a.
  * @return The sum of this vector and the scalar a.
 */
-Vector2& Vector2::operator+=(const double a) {
+Vector2& Vector2::operator+=(const double& a) {
 	fX += a;
 	fY += a;
 	return *this;
@@ -161,7 +177,7 @@ Vector2& Vector2::operator+=(const double a) {
  * @param a The scalar a.
  * @return The difference of this vector and the scalar a.
 */
-Vector2 Vector2::operator-(const double a) const {
+Vector2 Vector2::operator-(const double& a) const {
 	Vector2 r = Vector2(fX-a, fY-a);
 	return r;
 }
@@ -175,7 +191,7 @@ Vector2 Vector2::operator-(const double a) const {
  * @param a The scalar a.
  * @return The difference of this vector and the scalar a.
 */
-Vector2& Vector2::operator-=(const double a) {
+Vector2& Vector2::operator-=(const double& a) {
 	fX -= a;
 	fY -= a;
 	return *this;
@@ -189,7 +205,7 @@ Vector2& Vector2::operator-=(const double a) {
  * @param a The scalar
  * @return this vector multiplied with a.
 */
-Vector2 Vector2::operator*(const double a) const {
+Vector2 Vector2::operator*(const double& a) const {
 	Vector2 r = Vector2(fX*a, fY*a);
 	return r;
 }
@@ -203,7 +219,7 @@ Vector2 Vector2::operator*(const double a) const {
  * @param a The scalar a.
  * @return The multiplication of this vector and the scalar a.
 */
-Vector2& Vector2::operator*=(const double a) {
+Vector2& Vector2::operator*=(const double& a) {
 	fX *= a;
 	fY *= a;
 	return *this;
@@ -217,7 +233,7 @@ Vector2& Vector2::operator*=(const double a) {
  * @param a The scalar
  * @return this vector divided with a.
 */
-Vector2 Vector2::operator/(const double a) const {
+Vector2 Vector2::operator/(const double& a) const {
 	Vector2 r = Vector2(fX/a, fY/a);
 	return r;
 }
@@ -231,7 +247,7 @@ Vector2 Vector2::operator/(const double a) const {
  * @param a The scalar a.
  * @return The division of this vector and the scalar a.
 */
-Vector2& Vector2::operator/=(const double a) {
+Vector2& Vector2::operator/=(const double& a) {
 	fX /= a;
 	fY /= a;
 	return *this;
@@ -267,7 +283,7 @@ bool Vector2::operator!=(const Vector2& w) const {
  * @param v The vector v.
  * @return The sum of vector v and the scalar a.
 */
-Vector2 operator+(const double a, const Vector2& v) {
+Vector2 operator+(const double& a, const Vector2& v) {
 	Vector2 r = Vector2(v.getX()+a, v.getY()+a);
 	return r;
 }
@@ -282,7 +298,7 @@ Vector2 operator+(const double a, const Vector2& v) {
  * @param v The vector v.
  * @return The difference of vector v and the scalar a.
 */
-Vector2 operator-(const double a, const Vector2& v) {
+Vector2 operator-(const double& a, const Vector2& v) {
 	Vector2 r = Vector2(v.getX()-a, v.getY()-a);
 	return r;
 }
@@ -297,7 +313,7 @@ Vector2 operator-(const double a, const Vector2& v) {
  * @param v The vector v.
  * @return The multiplication of vector v and the scalar a.
 */
-Vector2 operator*(const double a, const Vector2& v) {
+Vector2 operator*(const double& a, const Vector2& v) {
 	Vector2 r = Vector2(v.getX()*a, v.getY()*a);
 	return r;
 }
@@ -312,7 +328,7 @@ Vector2 operator*(const double a, const Vector2& v) {
  * @param v The vector v.
  * @return The multiplication of vector v and the scalar a.
 */
-Vector2 operator/(const double a, const Vector2& v) {
+Vector2 operator/(const double& a, const Vector2& v) {
 	Vector2 r = Vector2(v.getX()/a, v.getY()/a);
 	return r;
 }
