@@ -5,6 +5,10 @@ body, table, div, p, dl {
 	font-size: 12px;
 }
 
+#body {
+	max-width: 800px;
+}
+
 /* @group Heading Levels */
 
 h1 {
