@@ -15,13 +15,27 @@ namespace sitest {
 			void tearDown();
 			
 			//Tests
-			void testAddition();
-			void testSubtraction();
+			void testTrivialVectorOperations();
+			void testLength();
+			void testDotProduct();
+			void testNormalize();
+			
+			
+			// Operators
+			void testVectorAddition();
+			void testVectorSubtraction();
 			void testNegative();
+			void testScalarAddition();
+			void testScalarSubtraction();
+			void testScalarMultiplication();
+			void testScalarDivision();
+			void testComparison();
+			
+			
 			
 			static CppUnit::Test* suite();
 		private:
-			Vector2 v1, v2, v3;
+			Vector2 v1, v2, v3, zero;
 			void assertVectorEquality(Vector2 v1, Vector2 v2);
 	};
 	
