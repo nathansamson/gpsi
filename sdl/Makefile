@@ -1,5 +1,5 @@
 INCLUDES = -I$(shell pwd)
-CXXFLAGS = -Wall $(INCLUDES)
+CXXFLAGS = -Wall $(INCLUDES) -Werror
 LDFLAGS = `pkg-config --libs sdl`
 CXXSOURCES = $(shell find . -type f -name '*.cpp')
 CXXOBJECTS = $(patsubst %.cpp,%.o,$(CXXSOURCES))

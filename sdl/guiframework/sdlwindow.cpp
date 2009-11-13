@@ -14,8 +14,9 @@ SDLWindow::SDLWindow(const SDLWindow&) {
 	
 }
 
-SDLWindow& SDLWindow::operator=(const SDLWindow&) {
-	
+SDLWindow& SDLWindow::operator=(const SDLWindow& rhs) {
+	screen = rhs.screen;
+	return *this;
 }
 
 void SDLWindow::open(int xres, int yres, bool fs) {

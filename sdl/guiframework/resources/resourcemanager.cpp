@@ -40,6 +40,7 @@ namespace sdlframework {
 	VResource* ResourceManager::GetResource(std::string name) {
 		VResource* res = fResourceList[name];
 		res->fRefCount++;
+		return res;
 	}
 	
 	ResourceManager ResourceManager::fManager = ResourceManager();
