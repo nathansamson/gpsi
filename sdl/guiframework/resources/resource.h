@@ -9,16 +9,14 @@ namespace sdlframework {
 		VResource(std::string);
 		virtual ~VResource();
 	
-		//friend VResource* ResourceManager::GetResource(std::string);
+		friend class ResourceManager;
 		
 		std::string getName();
-	public:
-		int fRefCount;
 	private:
 		VResource();
 	
 		std::string fName;
-		
+		int fRefCount;
 	};
 }
 

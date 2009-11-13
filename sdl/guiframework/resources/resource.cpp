@@ -4,7 +4,7 @@
 
 namespace sdlframework {
 
-	VResource::VResource(std::string name) : fRefCount(1), fName(name) {
+	VResource::VResource(std::string name) : fName(name), fRefCount(1) {
 	}
 	
 	VResource::~VResource() {
