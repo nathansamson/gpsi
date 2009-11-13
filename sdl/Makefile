@@ -1,6 +1,6 @@
 INCLUDES = -I$(shell pwd)
 CXXFLAGS = -Wall $(INCLUDES)
-LDFLAGS = 
+LDFLAGS = `pkg-config --libs sdl`
 CXXSOURCES = $(shell find . -type f -name '*.cpp')
 CXXOBJECTS = $(patsubst %.cpp,%.o,$(CXXSOURCES))
 DEPFILES = $(patsubst %.cpp,%.d,$(CXXSOURCES))
@@ -12,9 +12,9 @@ all: $(EXE)
 
 $(EXE): $(CXXOBJECTS)
 	$(CXX) $(LDFLAGS) -o $@ $^
-
+	
 clean:
-	$(RM) $(CXXTESTOBJECTS) $(EXE) $(DEPFILES)
+	$(RM) $(CXXOBJECTS) $(EXE) $(DEPFILES)
 	
 %.d: %.cpp
 	@set -e; rm -f $@; \
