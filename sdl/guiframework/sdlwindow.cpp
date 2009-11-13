@@ -1,7 +1,8 @@
 #include <SDL/SDL.h>
 #include <iostream>
 
-#include "sdlwindow.h"
+#include "guiframework/sdlwindow.h"
+#include "guiframework/resources/imageresource.h"
 
 namespace sdlframework {
 
@@ -42,20 +43,24 @@ void SDLWindow::draw() {
 	SDL_Flip(screen);
 }
 
-void SDLWindow::drawSurface(SDL_Surface* s) {
+void SDLWindow::drawImage(ImageResource* img, int x, int y) {
+	drawImage(img, x, y, 1.0);
+}
+
+void SDLWindow::drawImage(ImageResource* img, int x, int y, double scale) {
 	SDL_Rect src, dest;
 	
 	src.x = 0;
 	src.y = 0;
-	src.w = 100;
-	src.h = 100;
+	src.w = img->getWidth();
+	src.h = img->getHeight();
 	
-	dest.x = 20;
-	dest.y = 20;
-	dest.w = 200;
-	dest.h = 200;
+	dest.x = x;
+	dest.y = y;
+	dest.w = img->getWidth() * scale;
+	dest.h = img->getHeight() * scale;
 	
-	SDL_BlitSurface(s, &src, screen, &dest);
+	SDL_BlitSurface(img->getSurface(), &src, screen, &dest);
 }
 
 }

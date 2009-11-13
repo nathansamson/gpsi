@@ -31,6 +31,8 @@ namespace sisdl {
 			SDL_Delay(1);
 		}
 		close();
+		
+		delete controller;
 	}
 
 }

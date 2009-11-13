@@ -4,6 +4,7 @@
 #include <string>
 
 #include "guiframework/controller/sdlcontroller.h"
+#include "guiframework/resources/imageresource.h"
 
 namespace sdlframework {
 	class SplashController : public VSDLController {
@@ -14,7 +15,7 @@ namespace sdlframework {
 		
 			virtual void draw();
 		private:
-			SDL_Surface* fImageSurface;
+			ImageResource* fImage;
 	};
 }
 

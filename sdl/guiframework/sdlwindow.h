@@ -3,6 +3,8 @@
 
 #include <SDL/SDL.h>
 
+#include "guiframework/resources/imageresource.h"
+
 namespace sdlframework {
 
 
@@ -18,7 +20,8 @@ namespace sdlframework {
 		void open(int, int, bool);
 		void close();
 
-		void drawSurface(SDL_Surface* surface);
+		void drawImage(ImageResource*, int, int);
+		void drawImage(ImageResource*, int, int, double);
 	private:
 		SDL_Surface *screen;
 	};

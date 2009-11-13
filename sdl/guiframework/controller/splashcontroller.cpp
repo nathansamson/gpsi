@@ -1,31 +1,22 @@
 #include <SDL/SDL.h>
 
 #include "guiframework/controller/splashcontroller.h"
-
-#include <iostream>
+#include "guiframework/resources/resourcemanager.h"
 
 namespace sdlframework {
 
 	SplashController::SplashController(SDLWindow* window, std::string fileName) : VSDLController(window) {
-		SDL_Surface *temp;
-		temp = SDL_LoadBMP(("../data/"+fileName).c_str());
-		if (temp == NULL) {
-			// What to do now?
-			return;
-		}
-		
-		fImageSurface = SDL_DisplayFormat(temp);
-		SDL_FreeSurface(temp);
+		fImage = ResourceManager::manager().image(fileName);
 	}
 	
 	SplashController::SplashController(const SplashController& orig) : VSDLController(orig.fWindow)  {
 	}
 	
-	SplashController::~SplashController() {	
-		SDL_FreeSurface(fImageSurface);
+	SplashController::~SplashController() {
+		ResourceManager::manager().free(fImage);
 	}
 	
 	void SplashController::draw() {
-		fWindow->drawSurface(fImageSurface);
+		fWindow->drawImage(fImage, 0, 0);
 	}
 }
