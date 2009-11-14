@@ -1,4 +1,4 @@
-.PHONY: sdlgui lib test
+.PHONY: sdlgui lib test docs
 
 all: lib sdlgui
 
