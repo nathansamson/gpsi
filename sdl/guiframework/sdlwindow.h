@@ -7,7 +7,7 @@
 
 namespace sdlframework {
 
-
+	class VSDLController;
 
 	class SDLWindow {
 	public:
@@ -19,11 +19,19 @@ namespace sdlframework {
 		
 		void open(int, int, bool);
 		void close();
+		
+	    void run(VSDLController*);
 
+		/***** API for controllers ******/
+		
+		void closeController(VSDLController*);
+		
 		void drawImage(ImageResource*, int, int);
 		void drawImage(ImageResource*, int, int, double);
+		void drawRectangle(int, int, int, int, int, int, int);
 	private:
-		SDL_Surface *screen;
+		SDL_Surface* screen;
+		VSDLController* fController;
 	};
 
 }

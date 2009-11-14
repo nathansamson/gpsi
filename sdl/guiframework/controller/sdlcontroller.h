@@ -1,6 +1,8 @@
 #ifndef _SDLCONTROLLER_H_
 #define _SDLCONTROLLER_H_
 
+#include <SDL/SDL.h>
+
 #include "guiframework/sdlwindow.h"
 
 namespace sdlframework {
@@ -9,7 +11,9 @@ namespace sdlframework {
 			VSDLController(SDLWindow* window);
 			virtual ~VSDLController();
 			
-			virtual void draw() = 0;
+			virtual void draw();
+			virtual void keyDown(SDL_KeyboardEvent);
+			virtual void quit();
 		protected:
 			SDLWindow* fWindow;
 	};

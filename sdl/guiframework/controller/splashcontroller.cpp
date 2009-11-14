@@ -5,8 +5,11 @@
 
 namespace sdlframework {
 
-	SplashController::SplashController(SDLWindow* window, std::string fileName) : VSDLController(window) {
+	SplashController::SplashController(SDLWindow* window,
+	          std::string fileName, VSDLController* controller) 
+	          : VSDLController(window), fNextController(controller) {
 		fImage = ResourceManager::manager().image(fileName);
+		i = 0;
 	}
 	
 	SplashController::SplashController(const SplashController& orig) : VSDLController(orig.fWindow)  {
@@ -18,5 +21,10 @@ namespace sdlframework {
 	
 	void SplashController::draw() {
 		fWindow->drawImage(fImage, 0, 0);
+		SDL_Delay(1000);
+		i++;
+		if (i > 5) {
+			fWindow->closeController(fNextController);
+		}
 	}
 }

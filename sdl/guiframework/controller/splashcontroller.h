@@ -9,13 +9,15 @@
 namespace sdlframework {
 	class SplashController : public VSDLController {
 		public:
-			SplashController(SDLWindow*, std::string);
+			SplashController(SDLWindow*, std::string, VSDLController*);
 			SplashController(const SplashController&);
 			virtual ~SplashController();
 		
 			virtual void draw();
 		private:
 			ImageResource* fImage;
+			VSDLController* fNextController;
+			int i;
 	};
 }
 

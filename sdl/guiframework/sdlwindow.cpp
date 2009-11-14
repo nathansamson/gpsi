@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "guiframework/sdlwindow.h"
+#include "guiframework/controller/sdlcontroller.h"
 #include "guiframework/resources/imageresource.h"
 
 namespace sdlframework {
@@ -34,14 +35,52 @@ void SDLWindow::open(int xres, int yres, bool fs) {
 		//printf("Unable to set video mode: %s\n", SDL_GetError());
 		return;
 	}
+    this->run(fController);
 }
 
 void SDLWindow::close() {
-	SDL_FreeSurface(screen);
+	if (screen)
+		SDL_FreeSurface(screen);
+}
+
+void SDLWindow::run(VSDLController* controller) {
+	fController = controller;
+	SDL_Event event;
+	bool running = true;
+
+	while (running) {
+		while (SDL_PollEvent(&event)) {
+			switch (event.type) {
+				case SDL_KEYDOWN:
+					fController->keyDown(event.key);
+					break;
+				case SDL_QUIT:
+					fController->quit();
+					break;
+			}
+		}
+		if (fController) {
+			// It is possible that we already have closed our controller.
+			fController->draw();
+			draw();
+			SDL_Delay(1);
+		} else {
+			screen = NULL;
+			running = false;
+		}
+	}
 }
 
 void SDLWindow::draw() {
 	SDL_Flip(screen);
+}
+
+void SDLWindow::closeController(VSDLController* next) {
+	delete fController;
+	fController = next;
+	if (next == NULL) {
+		SDL_Quit();
+	}
 }
 
 void SDLWindow::drawImage(ImageResource* img, int x, int y) {
@@ -62,6 +101,17 @@ void SDLWindow::drawImage(ImageResource* img, int x, int y, double scale) {
 	dest.h = img->getHeight() * scale;
 	
 	SDL_BlitSurface(img->getSurface(), &src, screen, &dest);
+}
+
+void SDLWindow::drawRectangle(int x, int y, int w, int h, int r, int g, int b) {
+	SDL_Rect dest;
+	dest.x = x;
+	dest.y = y;
+	dest.w = w;
+	dest.h = h;
+	
+
+	SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, r, g, b));
 }
 
 }
