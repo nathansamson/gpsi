@@ -38,9 +38,12 @@ namespace sdlframework {
 		void drawImage(ImageResource*, int, int);
 		void drawImage(ImageResource*, int, int, double);
 		void drawRectangle(int, int, int, int, int, int, int);
-	private:
-		SDL_Surface* screen;
+	protected:
 		VSDLController* fController;
+	private:
+		VSDLController* fOldController;
+		SDL_Surface* screen;
+		bool fRunning;
 	};
 
 }

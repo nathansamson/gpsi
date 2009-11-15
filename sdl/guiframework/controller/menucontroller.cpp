@@ -7,8 +7,11 @@ namespace sdlframework {
 	
 	MenuController::MenuController(const MenuController& orig) : VSDLController(orig.fWindow)  {
 	}
-	
+
 	MenuController::~MenuController() {
+		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
+			delete (*it);
+		}
 	}
 
 	void MenuController::addWidget(VWidget* widget) {
@@ -33,6 +36,12 @@ namespace sdlframework {
 	void MenuController::mouseMotion(SDL_MouseMotionEvent event) {
 		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
 			(*it)->mouseMotion(event);
+		}
+	}
+
+	void MenuController::mouseButton(SDL_MouseButtonEvent event) {
+		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
+			(*it)->mouseButton(event);
 		}
 	}
 	

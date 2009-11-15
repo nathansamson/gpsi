@@ -49,10 +49,10 @@ void SDLWindow::close() {
 void SDLWindow::run(VSDLController* controller) {
 	fController = controller;
 	SDL_Event event;
-	bool running = true;
+	fRunning = true;
 
-	while (running) {
-		while (SDL_PollEvent(&event)) {
+	while (fRunning) {
+		while (fRunning && SDL_PollEvent(&event)) {
 			switch (event.type) {
 				case SDL_KEYDOWN:
 					fController->keyDown(event.key);
@@ -60,20 +60,29 @@ void SDLWindow::run(VSDLController* controller) {
 				case SDL_MOUSEMOTION:
 					fController->mouseMotion(event.motion);
 					break;
+				case SDL_MOUSEBUTTONUP:
+					fController->mouseButton(event.button);
+					break;
 				case SDL_QUIT:
 					fController->quit();
 					break;
 			}
 		}
-		
-		if (fController && screen) { // It is possible that we already have closed our controller.
+
+		if (fOldController) {
+			delete fOldController;
+			fOldController = NULL;
+		}
+
+		if (fRunning) { // it is possible we quit when firing events.
 			drawRectangle(0, 0, screen->w, screen->h, 0, 0, 0);
 			fController->draw();
 			draw();
 			SDL_Delay(1);
 		} else {
+			delete fController;
+			fController = NULL;
 			screen = NULL;
-			running = false;
 		}
 	}
 }
@@ -83,9 +92,12 @@ void SDLWindow::draw() {
 }
 
 void SDLWindow::closeController(VSDLController* next) {
-	delete fController;
-	fController = next;
-	if (next == NULL) {
+	if (next != NULL) {
+		fOldController = fController;
+		fController = next;
+	} else {
+		// We keep the old controller.
+		fRunning = false;
 		SDL_Quit();
 	}
 }

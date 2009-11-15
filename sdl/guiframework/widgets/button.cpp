@@ -6,6 +6,13 @@ namespace sdlframework {
 	Button::Button(SDLWindow* window, std::string label) : VWidget(window), fLabel(label), fWidth(0), fHeight(0), fHover(false) {
 	}
 
+	Button::~Button() {
+	}
+
+	void Button::connectOnMouseClick(IMouseButtonCallback* e) {
+		fMouseClickEvent.connect(e);
+	}
+
 	int Button::getWidth() {
 		return fWidth ? fWidth : getRealWidth();
 	}
@@ -47,6 +54,12 @@ namespace sdlframework {
 			fHover = true;
 		} else {
 			fHover = false;
+		}
+	}
+
+	void Button::mouseButton(SDL_MouseButtonEvent e) {
+		if (fHover && e.button == SDL_BUTTON_LEFT) {
+			fMouseClickEvent.fire(e);
 		}
 	}
 

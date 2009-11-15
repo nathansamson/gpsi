@@ -15,7 +15,9 @@ namespace sdlframework {
 	}
 
 	void VSDLController::mouseMotion(SDL_MouseMotionEvent evnt) {
+	}
 
+	void VSDLController::mouseButton(SDL_MouseButtonEvent evnt) {
 	}
 	
 	void VSDLController::quit() {

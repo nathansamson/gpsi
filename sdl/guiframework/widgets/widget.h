@@ -20,6 +20,7 @@ namespace sdlframework {
 
 		// Events
 		virtual void mouseMotion(SDL_MouseMotionEvent);
+		virtual void mouseButton(SDL_MouseButtonEvent);
 	protected:
 		SDLWindow* fWindow;
 		bool fFill;

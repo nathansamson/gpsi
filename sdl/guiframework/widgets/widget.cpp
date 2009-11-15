@@ -14,4 +14,7 @@ namespace sdlframework {
 
 	void VWidget::mouseMotion(SDL_MouseMotionEvent) {
 	}
+
+	void VWidget::mouseButton(SDL_MouseButtonEvent) {
+	}
 }
