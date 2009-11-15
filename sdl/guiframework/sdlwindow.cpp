@@ -35,7 +35,6 @@ void SDLWindow::open(int xres, int yres, bool fs) {
 		//printf("Unable to set video mode: %s\n", SDL_GetError());
 		return;
 	}
-    this->run(fController);
 }
 
 void SDLWindow::close() {
@@ -54,13 +53,17 @@ void SDLWindow::run(VSDLController* controller) {
 				case SDL_KEYDOWN:
 					fController->keyDown(event.key);
 					break;
+				case SDL_MOUSEMOTION:
+					fController->mouseMotion(event.motion);
+					break;
 				case SDL_QUIT:
 					fController->quit();
 					break;
 			}
 		}
-		if (fController) {
-			// It is possible that we already have closed our controller.
+		
+		if (fController && screen) { // It is possible that we already have closed our controller.
+			drawRectangle(0, 0, screen->w, screen->h, 0, 0, 0);
 			fController->draw();
 			draw();
 			SDL_Delay(1);

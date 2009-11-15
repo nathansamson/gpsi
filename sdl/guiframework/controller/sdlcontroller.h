@@ -13,6 +13,7 @@ namespace sdlframework {
 			
 			virtual void draw();
 			virtual void keyDown(SDL_KeyboardEvent);
+			virtual void mouseMotion(SDL_MouseMotionEvent);
 			virtual void quit();
 		protected:
 			SDLWindow* fWindow;

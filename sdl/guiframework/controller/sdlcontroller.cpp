@@ -10,8 +10,12 @@ namespace sdlframework {
 	
 	void VSDLController::draw() {
 	}
-	
+
 	void VSDLController::keyDown(SDL_KeyboardEvent evnt) {
+	}
+
+	void VSDLController::mouseMotion(SDL_MouseMotionEvent evnt) {
+
 	}
 	
 	void VSDLController::quit() {
