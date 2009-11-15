@@ -1,3 +1,4 @@
+#include <iostream>
 #include <SDL/SDL.h>
 
 #include "guiframework/sdlwindow.h"
@@ -9,7 +10,12 @@
 namespace sisdl {
 	
 	void SIWindow::run() {
-		open(400, 300, false);
+		try {
+			open(400, 300, false);
+		} catch (SDLInitializationException e) {
+			std::cerr << "Could not initialize SDL: " << e.getError() << std::endl;
+			return;
+		}
 		
 		MenuController* menu = new MenuController(this);
 		menu->addWidget(new Button(this, "My Shiny Button"));

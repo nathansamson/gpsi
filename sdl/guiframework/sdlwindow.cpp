@@ -7,6 +7,13 @@
 
 namespace sdlframework {
 
+SDLInitializationException::SDLInitializationException(std::string s) : fError(s) {
+}
+
+std::string SDLInitializationException::getError() {
+	return fError;
+}
+
 SDLWindow::SDLWindow() {
 	
 }
@@ -22,18 +29,14 @@ SDLWindow& SDLWindow::operator=(const SDLWindow& rhs) {
 
 void SDLWindow::open(int xres, int yres, bool fs) {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		std::cout << SDL_GetError() << std::endl;;
-		//printf("Unable to initialize SDL: %s\n", SDL_GetError());
-		return;
+		throw SDLInitializationException(SDL_GetError());
 	}
- 
+
 	atexit(SDL_Quit);
- 
+
 	screen = SDL_SetVideoMode(xres, yres, 0, SDL_DOUBLEBUF);
 	if (screen == NULL) {
-		std::cout << SDL_GetError() << std::endl;;
-		//printf("Unable to set video mode: %s\n", SDL_GetError());
-		return;
+		throw SDLInitializationException(SDL_GetError());
 	}
 }
 

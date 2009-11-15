@@ -1,6 +1,7 @@
 #ifndef _SDLWINDOW_H_
 #define _SDLWINDOW_H_
 
+#include <string>
 #include <SDL/SDL.h>
 
 #include "guiframework/resources/imageresource.h"
@@ -8,6 +9,14 @@
 namespace sdlframework {
 
 	class VSDLController;
+
+	class SDLInitializationException {
+	public:
+		SDLInitializationException(std::string);
+		std::string getError();
+	private:
+		std::string fError;
+	};
 
 	class SDLWindow {
 	public:
