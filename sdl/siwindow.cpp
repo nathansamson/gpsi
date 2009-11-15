@@ -21,7 +21,7 @@ namespace sisdl {
 		menu->addWidget(new Button(this, "My Shiny Button"));
 		menu->addWidget(new Button(this, "Another button"));
 		Button* b = new Button(this, "Quit");
-		b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::onQuit));
+		b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::confirmQuit));
 		menu->addWidget(b);
 
 		VSDLController* controller = new SplashController(this, "splash.bmp", menu);
@@ -32,6 +32,24 @@ namespace sisdl {
 	void SIWindow::onQuit(SDL_MouseButtonEvent e)
 	{
 		fController->quit();
+	}
+
+	void SIWindow::cancelQuit(SDL_MouseButtonEvent e)
+	{
+		fController->openParentController();
+	}
+
+	void SIWindow::confirmQuit(SDL_MouseButtonEvent e)
+	{
+		MenuController* quitConfirmation = new MenuController(this);
+		Button* b = new Button(this, "Yes");
+		b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::onQuit));
+		quitConfirmation->addWidget(b);
+		b = new Button(this, "No");
+		b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::cancelQuit));
+		quitConfirmation->addWidget(b);
+
+		fController->openController(quitConfirmation);
 	}
 
 	SIWindowMouseButtonCallback::SIWindowMouseButtonCallback(SIWindow* window, void (SIWindow::*fp)(SDL_MouseButtonEvent)) : fWindow(window), fFunction(fp) {

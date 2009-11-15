@@ -16,7 +16,10 @@ namespace sdlframework {
 			virtual void mouseMotion(SDL_MouseMotionEvent);
 			virtual void mouseButton(SDL_MouseButtonEvent);
 			virtual void quit();
+			void openParentController();
+			void openController(VSDLController*);
 		protected:
+			VSDLController* fParentController;
 			SDLWindow* fWindow;
 	};
 }

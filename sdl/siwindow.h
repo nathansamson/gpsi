@@ -13,6 +13,8 @@ namespace sisdl {
 		void run();
 
 		void onQuit(SDL_MouseButtonEvent);
+		void confirmQuit(SDL_MouseButtonEvent);
+		void cancelQuit(SDL_MouseButtonEvent);
 	};
 
 	class SIWindowMouseButtonCallback : public IMouseButtonCallback {

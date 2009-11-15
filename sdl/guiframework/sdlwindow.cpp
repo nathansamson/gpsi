@@ -102,6 +102,15 @@ void SDLWindow::closeController(VSDLController* next) {
 	}
 }
 
+void SDLWindow::openParentController(VSDLController* prev) {
+	fOldController = fController;
+	fController = prev;
+}
+
+void SDLWindow::openController(VSDLController* c) {
+	fController = c;
+}
+
 void SDLWindow::drawImage(ImageResource* img, int x, int y) {
 	drawImage(img, x, y, 1.0);
 }

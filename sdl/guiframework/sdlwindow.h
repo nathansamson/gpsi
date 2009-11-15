@@ -32,8 +32,10 @@ namespace sdlframework {
 	    void run(VSDLController*);
 
 		/***** API for controllers ******/
-		
+
 		void closeController(VSDLController*);
+		void openParentController(VSDLController*);
+		void openController(VSDLController*);
 		
 		void drawImage(ImageResource*, int, int);
 		void drawImage(ImageResource*, int, int, double);

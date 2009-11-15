@@ -23,6 +23,15 @@ namespace sdlframework {
 	void VSDLController::quit() {
 	}
 
+	void VSDLController::openParentController() {
+		fWindow->openParentController(this->fParentController);
+	}
+
+	void VSDLController::openController(VSDLController* c) {
+		c->fParentController = this;
+		fWindow->openController(c);
+	}
+
 
 
 }
