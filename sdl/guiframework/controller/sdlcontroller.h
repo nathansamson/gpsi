@@ -1,7 +1,7 @@
 #ifndef _SDLCONTROLLER_H_
 #define _SDLCONTROLLER_H_
 
-#include <SDL/SDL.h>
+#include "SDL.h"
 
 #include "guiframework/sdlwindow.h"
 

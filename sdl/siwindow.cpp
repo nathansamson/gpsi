@@ -1,5 +1,5 @@
 #include <iostream>
-#include <SDL/SDL.h>
+#include "SDL.h"
 
 #include "guiframework/sdlwindow.h"
 #include "guiframework/controller/splashcontroller.h"

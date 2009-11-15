@@ -2,8 +2,7 @@
 #define _BUTTON_H_
 
 #include <string>
-
-#include <SDL/SDL.h>
+#include "SDL.h"
 
 #include "guiframework/widgets/widget.h"
 

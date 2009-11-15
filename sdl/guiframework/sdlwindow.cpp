@@ -1,5 +1,6 @@
-#include <SDL/SDL.h>
 #include <iostream>
+
+#include "SDL.h"
 
 #include "guiframework/sdlwindow.h"
 #include "guiframework/controller/sdlcontroller.h"

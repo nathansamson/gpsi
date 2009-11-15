@@ -1,7 +1,7 @@
 #ifndef _WIDGET_H_
 #define _WIDGET_H_
 
-#include <SDL/SDL.h>
+#include "SDL.h"
 
 #include "guiframework/sdlwindow.h"
 

@@ -1,4 +1,4 @@
-#include <SDL/SDL.h>
+#include "SDL.h"
 
 #include "guiframework/controller/splashcontroller.h"
 #include "guiframework/resources/resourcemanager.h"

@@ -1,7 +1,7 @@
 #ifndef _IMAGERESOURCE_H_
 #define _IMAGERESOURCE_H_
 
-#include <SDL/SDL.h>
+#include "SDL.h"
 
 #include "guiframework/resources/resource.h"
 

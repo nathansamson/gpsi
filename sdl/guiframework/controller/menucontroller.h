@@ -2,7 +2,7 @@
 #define _MENUCONTROLLER_H_
 
 #include <list>
-#include <SDL/SDL.h>
+#include "SDL.h"
 
 #include "guiframework/controller/sdlcontroller.h"
 #include "guiframework/widgets/widget.h"

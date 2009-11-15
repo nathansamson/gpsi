@@ -2,7 +2,7 @@
 #define _SDLWINDOW_H_
 
 #include <string>
-#include <SDL/SDL.h>
+#include "SDL.h"
 
 #include "guiframework/resources/imageresource.h"
 

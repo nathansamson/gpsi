@@ -1,4 +1,4 @@
-INCLUDES = -I$(shell pwd)
+INCLUDES = -I$(shell pwd) -I`pkg-config --cflags sdl`
 CXXFLAGS = -Wall $(INCLUDES) -Werror -g
 LDFLAGS = `pkg-config --libs sdl`
 CXXSOURCES = $(shell find . -type f -name '*.cpp')
