@@ -19,11 +19,17 @@ namespace sdlframework {
 	}
 	
 	void MenuController::draw() {
+		if (fParentController) {
+			fParentController->draw();
+		}
 		int y = 0;
 		int x = 200;
 		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
 			(*it)->draw(x, y);
 			y += (*it)->getHeight();
+		}
+		if (fIsBackground) {
+			fWindow->drawRectangle(0, 0, 400, 300, 0, 0, 0, 0.3);
 		}
 	}
 	

@@ -40,6 +40,7 @@ namespace sdlframework {
 		void drawImage(ImageResource*, int, int);
 		void drawImage(ImageResource*, int, int, double);
 		void drawRectangle(int, int, int, int, int, int, int);
+		void drawRectangle(int, int, int, int, int, int, int, double);
 	protected:
 		VSDLController* fController;
 	private:

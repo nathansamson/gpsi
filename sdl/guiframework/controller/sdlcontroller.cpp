@@ -2,7 +2,7 @@
 
 namespace sdlframework {
 
-	VSDLController::VSDLController(SDLWindow* window) : fWindow(window) {
+	VSDLController::VSDLController(SDLWindow* window) : fParentController(NULL), fWindow(window), fIsBackground(false) {
 	}
 	
 	VSDLController::~VSDLController() {
@@ -32,6 +32,11 @@ namespace sdlframework {
 		fWindow->openController(c);
 	}
 
+	void VSDLController::background() {
+		fIsBackground = true;
+	}
 
-
+	void VSDLController::foreground() {
+		fIsBackground = false;
+	}
 }

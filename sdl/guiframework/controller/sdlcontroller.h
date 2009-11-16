@@ -18,9 +18,13 @@ namespace sdlframework {
 			virtual void quit();
 			void openParentController();
 			void openController(VSDLController*);
+
+			void background();
+			void foreground();
 		protected:
 			VSDLController* fParentController;
 			SDLWindow* fWindow;
+			bool fIsBackground;
 	};
 }
 

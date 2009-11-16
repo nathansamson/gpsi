@@ -1,6 +1,6 @@
-INCLUDES = -I$(shell pwd) -I`pkg-config --cflags sdl`
+INCLUDES = -I$(shell pwd) `pkg-config --cflags sdl SDL_gfx`
 CXXFLAGS = -Wall $(INCLUDES) -Werror -g
-LDFLAGS = `pkg-config --libs sdl`
+LDFLAGS = `pkg-config --libs sdl SDL_gfx`
 CXXSOURCES = $(shell find . -type f -name '*.cpp')
 CXXOBJECTS = $(patsubst %.cpp,%.o,$(CXXSOURCES))
 DEPFILES = $(patsubst %.cpp,%.d,$(CXXSOURCES))

@@ -37,6 +37,7 @@ namespace sisdl {
 	void SIWindow::cancelQuit(SDL_MouseButtonEvent e)
 	{
 		fController->openParentController();
+		fController->foreground();
 	}
 
 	void SIWindow::confirmQuit(SDL_MouseButtonEvent e)
@@ -49,6 +50,7 @@ namespace sisdl {
 		b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::cancelQuit));
 		quitConfirmation->addWidget(b);
 
+		fController->background();
 		fController->openController(quitConfirmation);
 	}
 

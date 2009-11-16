@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "SDL.h"
+#include "SDL_gfxPrimitives.h"
 
 #include "guiframework/sdlwindow.h"
 #include "guiframework/controller/sdlcontroller.h"
@@ -35,7 +36,7 @@ void SDLWindow::open(int xres, int yres, bool fs) {
 
 	atexit(SDL_Quit);
 
-	screen = SDL_SetVideoMode(xres, yres, 0, SDL_DOUBLEBUF);
+	screen = SDL_SetVideoMode(xres, yres, 32, SDL_DOUBLEBUF);
 	if (screen == NULL) {
 		throw SDLInitializationException(SDL_GetError());
 	}
@@ -137,9 +138,13 @@ void SDLWindow::drawRectangle(int x, int y, int w, int h, int r, int g, int b) {
 	dest.y = y;
 	dest.w = w;
 	dest.h = h;
-	
+
 
 	SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, r, g, b));
+}
+
+void SDLWindow::drawRectangle(int x, int y, int w, int h, int r, int g, int b, double op) {
+	boxRGBA(screen, x, y, x + w, y + h, r, g, b, op*255);
 }
 
 }
