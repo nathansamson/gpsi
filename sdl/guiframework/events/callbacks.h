@@ -1,6 +1,6 @@
 #include "SDL.h"
-#ifndef _EVENTS_H_
-#define _EVENTS_H_
+#ifndef INC_EVENTS_H
+#define INC_EVENTS_H
 
 
 namespace sdlframework {
@@ -11,4 +11,4 @@ namespace sdlframework {
 
 }
 
-#endif
+#endif // INC_EVENTS_H

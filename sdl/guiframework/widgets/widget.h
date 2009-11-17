@@ -1,5 +1,5 @@
-#ifndef _WIDGET_H_
-#define _WIDGET_H_
+#ifndef INC_WIDGET_H
+#define INC_WIDGET_H
 
 #include "SDL.h"
 
@@ -30,4 +30,4 @@ namespace sdlframework {
 	};
 }
 
-#endif //_WIDGET_H_
+#endif // INC_WIDGET_H

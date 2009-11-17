@@ -1,5 +1,5 @@
-#ifndef _SDLWINDOW_H_
-#define _SDLWINDOW_H_
+#ifndef INC_SDLWINDOW_H
+#define INC_SDLWINDOW_H
 
 #include <string>
 #include "SDL.h"
@@ -55,4 +55,4 @@ namespace sdlframework {
 
 }
 
-#endif // _SDLWINDOW_
+#endif // INC_SDLWINDOW_H

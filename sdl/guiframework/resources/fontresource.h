@@ -1,11 +1,12 @@
-#ifndef _FONTRESOURCE_H_
-#define _FONTRESOURCE_H_
+#ifndef INC_FONTRESOURCE_H
+#define INC_FONTRESOURCE_H
 
 #include "SDL_ttf.h"
 
 #include "./guiframework/resources/resource.h"
 
 namespace sdlframework {
+
 	class FontResource : public VResource {
 	public:
 		virtual ~FontResource();
@@ -18,4 +19,4 @@ namespace sdlframework {
 	};
 }
 
-#endif // _FONTRESOURCE_H_
+#endif // INC_FONTRESOURCE_H

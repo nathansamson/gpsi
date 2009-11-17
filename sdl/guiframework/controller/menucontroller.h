@@ -1,5 +1,5 @@
-#ifndef _MENUCONTROLLER_H_
-#define _MENUCONTROLLER_H_
+#ifndef INC_MENUCONTROLLER_H
+#define INC_MENUCONTROLLER_H
 
 #include <list>
 #include "SDL.h"

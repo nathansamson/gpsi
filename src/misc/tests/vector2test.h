@@ -10,33 +10,33 @@ namespace sitest {
 	using namespace si;
 
 	class Vector2Test : public CppUnit::TestFixture {
-		public:
-			void setUp();
-			void tearDown();
-			
-			//Tests
-			void testTrivialVectorOperations();
-			void testLength();
-			void testDotProduct();
-			void testNormalize();
-			
-			
-			// Operators
-			void testVectorAddition();
-			void testVectorSubtraction();
-			void testNegative();
-			void testScalarAddition();
-			void testScalarSubtraction();
-			void testScalarMultiplication();
-			void testScalarDivision();
-			void testComparison();
-			
-			
-			
-			static CppUnit::Test* suite();
-		private:
-			Vector2 v1, v2, v3, zero;
-			void assertVectorEquality(Vector2 v1, Vector2 v2);
+	public:
+		void setUp();
+		void tearDown();
+		
+		//Tests
+		void testTrivialVectorOperations();
+		void testLength();
+		void testDotProduct();
+		void testNormalize();
+		
+
+		// Operators
+		void testVectorAddition();
+		void testVectorSubtraction();
+		void testNegative();
+		void testScalarAddition();
+		void testScalarSubtraction();
+		void testScalarMultiplication();
+		void testScalarDivision();
+		void testComparison();
+
+
+
+		static CppUnit::Test* suite();
+	private:
+		Vector2 v1, v2, v3, zero;
+		void assertVectorEquality(Vector2 v1, Vector2 v2);
 	};
 	
 }

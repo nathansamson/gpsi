@@ -1,11 +1,12 @@
-#ifndef _IMAGERESOURCE_H_
-#define _IMAGERESOURCE_H_
+#ifndef INC_IMAGERESOURCE_H
+#define INC_IMAGERESOURCE_H
 
 #include "SDL.h"
 
 #include "guiframework/resources/resource.h"
 
 namespace sdlframework {
+
 	class ImageResource : public VResource {
 	public:
 		static ImageResource* open(std::string);
@@ -23,4 +24,4 @@ namespace sdlframework {
 	};
 }
 
-#endif // _IMAGERESOURCE_H_
+#endif // INC_IMAGERESOURCE_H

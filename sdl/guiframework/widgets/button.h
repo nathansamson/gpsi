@@ -1,5 +1,5 @@
-#ifndef _BUTTON_H_
-#define _BUTTON_H_
+#ifndef INC_BUTTON_H
+#define INC_BUTTON_H
 
 #include <string>
 #include <list>
@@ -12,6 +12,7 @@
 #include "guiframework/resources/stringfontresource.h"
 
 namespace sdlframework {
+
 	class Button : public VWidget {
 	public:
 		Button(SDLWindow*, std::string label);
@@ -44,4 +45,4 @@ namespace sdlframework {
 	};
 }
 
-#endif // _BUTTON_H_
+#endif // INC_BUTTON_H

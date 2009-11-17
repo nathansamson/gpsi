@@ -1,11 +1,12 @@
-#ifndef _STRINGFONTRESOURCE_H_
-#define _STRINGFONTRESOURCE_H_
+#ifndef INC_STRINGFONTRESOURCE_H
+#define INC_STRINGFONTRESOURCE_H
 
 #include "SDL.h"
 
 #include "guiframework/resources/resource.h"
 
 namespace sdlframework {
+
 	class StringFontResource : public VResource {
 	public:
 
@@ -21,4 +22,4 @@ namespace sdlframework {
 	};
 }
 
-#endif
+#endif // INC_STRINGFONTRESOURCE_H

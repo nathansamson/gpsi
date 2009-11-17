@@ -1,5 +1,5 @@
-#ifndef _EVENT_H_
-#define _EVENT_H_
+#ifndef INC_EVENT_H
+#define INC_EVENT_H
 
 #include <list>
 #include "SDL.h"
@@ -7,6 +7,7 @@
 #include "guiframework/events/callbacks.h"
 
 namespace sdlframework {
+
 	class MouseButtonEvent {
 	public:
 		~MouseButtonEvent();
@@ -18,4 +19,4 @@ namespace sdlframework {
 	};
 }
 
-#endif
+#endif // INC_EVENT_H

@@ -1,5 +1,5 @@
-#ifndef _SIWINDOW_H_
-#define _SIWINDOW_H_
+#ifndef INC_SIWINDOW_H
+#define INC_SIWINDOW_H
 
 #include "guiframework/sdlwindow.h"
 #include "guiframework/events/callbacks.h"
@@ -28,4 +28,4 @@ namespace sisdl {
 
 }
 
-#endif // _SIWINDOW_H_
+#endif // INC_SIWINDOW_H

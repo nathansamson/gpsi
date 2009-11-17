@@ -1,5 +1,5 @@
-#ifndef _RESOURCEMANAGER_H_
-#define _RESOURCEMANAGER_H_
+#ifndef INC_RESOURCEMANAGER_H
+#define INC_RESOURCEMANAGER_H
 
 #include <map>
 
@@ -9,6 +9,7 @@
 #include "guiframework/resources/stringfontresource.h"
 
 namespace sdlframework {
+
 	class ResourceManager {
 		public:
 			static ResourceManager manager();
@@ -30,4 +31,4 @@ namespace sdlframework {
 	};
 }
 
-#endif //_RESOURCEMANAGER_H_
+#endif // INC_RESOURCEMANAGER_H
