@@ -18,8 +18,7 @@ namespace sdlframework {
 		
 		temp = SDL_LoadBMP(("../data/"+name).c_str());
 		if (temp == NULL) {
-			// What to do now?
-			return NULL;
+			throw ResourceNotLoadedException(name, SDL_GetError());
 		}
 		
 		image = SDL_DisplayFormat(temp);

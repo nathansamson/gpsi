@@ -1,6 +1,7 @@
 #include "guiframework/resources/resourcemanager.h"
 
 namespace sdlframework {
+
 	ResourceManager::ResourceManager() {
 	}
 

@@ -16,16 +16,20 @@ namespace sisdl {
 			std::cerr << "Could not initialize SDL: " << e.getError() << std::endl;
 			return;
 		}
-		
-		MenuController* menu = new MenuController(this);
-		menu->addWidget(new Button(this, "My Shiny Button"));
-		menu->addWidget(new Button(this, "Another button"));
-		Button* b = new Button(this, "Quit");
-		b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::confirmQuit));
-		menu->addWidget(b);
 
-		VSDLController* controller = new SplashController(this, "splash.bmp", menu);
-		SDLWindow::run(controller);
+		try {
+			MenuController* menu = new MenuController(this);
+			menu->addWidget(new Button(this, "My Shiny Button"));
+			menu->addWidget(new Button(this, "Another button"));
+			Button* b = new Button(this, "Quit");
+			b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::confirmQuit));
+			menu->addWidget(b);
+	
+			VSDLController* controller = new SplashController(this, "splash.bmp", menu);
+			SDLWindow::run(controller);
+		} catch (ResourceNotLoadedException& e) {
+			std::cerr << "Could not load resource " << e.getResourceID() << " :" << e.getError() << std::endl;
+		}
 		close();
 	}
 

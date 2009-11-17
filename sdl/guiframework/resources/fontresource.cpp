@@ -11,7 +11,7 @@ namespace sdlframework {
 		if (font != NULL) {
 			return new FontResource(font, getID(fontName, size));
 		}
-		return NULL;
+		throw ResourceNotLoadedException(getID(fontName, size), TTF_GetError());
 	}
 
 	FontResource::FontResource(TTF_Font* font, std::string name)

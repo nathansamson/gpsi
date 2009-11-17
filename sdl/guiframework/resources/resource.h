@@ -5,6 +5,16 @@
 
 namespace sdlframework {
 
+	class ResourceNotLoadedException {
+	public:
+		ResourceNotLoadedException(std::string, std::string);
+		std::string getResourceID();
+		std::string getError();
+	private:
+		std::string fResourceID;
+		std::string fError;
+	};
+
 	class VResource {
 	public:
 		VResource(std::string);
