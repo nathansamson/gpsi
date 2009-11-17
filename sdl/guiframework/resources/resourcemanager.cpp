@@ -19,25 +19,25 @@ namespace sdlframework {
 	}
 	
 	ImageResource* ResourceManager::image(std::string name) {
-		if (!HasResource(name)) {
+		if (!hasResource(name)) {
 			ImageResource* res = ImageResource::open(name);
-			InsertResource(name, res);
+			insertResource(name, res);
 			
 			return res;
 		} else {
-			return static_cast<ImageResource*>(GetResource(name));
+			return static_cast<ImageResource*>(getResource(name));
 		}
 	}
 	
-	bool ResourceManager::HasResource(std::string name) {
+	bool ResourceManager::hasResource(std::string name) {
 		return fResourceList.find(name) != fResourceList.end();
 	}
 	
-	void ResourceManager::InsertResource(std::string name, VResource* res) {
+	void ResourceManager::insertResource(std::string name, VResource* res) {
 		fResourceList[name] = res;
 	}
 	
-	VResource* ResourceManager::GetResource(std::string name) {
+	VResource* ResourceManager::getResource(std::string name) {
 		VResource* res = fResourceList[name];
 		res->fRefCount++;
 		return res;

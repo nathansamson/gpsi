@@ -13,13 +13,13 @@ namespace sdlframework {
 			
 			void free(VResource* res);
 			
-			ImageResource* image(std::string name);
+			ImageResource* image(std::string);
 		private:
 			ResourceManager();
 			
-			bool HasResource(std::string);
-			void InsertResource(std::string, VResource*);
-			VResource* GetResource(std::string);
+			bool hasResource(std::string);
+			void insertResource(std::string, VResource*);
+			VResource* getResource(std::string);
 			
 			std::map<std::string, VResource*> fResourceList;
 			static ResourceManager fManager;
