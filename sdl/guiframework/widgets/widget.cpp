@@ -8,6 +8,9 @@ namespace sdlframework {
 
 	}
 
+	VWidget::~VWidget() {
+	}
+
 	void VWidget::setFill(bool fill) {
 		fFill = true;
 	}

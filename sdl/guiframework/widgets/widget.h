@@ -10,6 +10,7 @@ namespace sdlframework {
 	class VWidget {
 	public:
 		VWidget(SDLWindow*);
+		virtual ~VWidget();
 
 		virtual void draw(int, int) = 0;
 		virtual int getWidth() = 0;
