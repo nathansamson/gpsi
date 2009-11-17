@@ -1,9 +1,10 @@
 #include "guiframework/resources/stringfontresource.h"
+#include "guiframework/resources/fontresource.h"
 
 namespace sdlframework {
 
-	StringFontResource::StringFontResource(SDL_Surface* surface, std::string name)
-	                   : VResource(name), fSurface(surface) {
+	StringFontResource::StringFontResource(SDL_Surface* surface, std::string id)
+	                   : VResource(id), fSurface(surface) {
 	}
 
 	StringFontResource::~StringFontResource() {
@@ -20,6 +21,10 @@ namespace sdlframework {
 	
 	SDL_Surface* StringFontResource::getSurface() {
 		return fSurface;
+	}
+
+	std::string StringFontResource::getID(std::string text, FontResource* font) {
+		return text + font->getName();
 	}
 
 }
