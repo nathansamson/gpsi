@@ -46,6 +46,8 @@ namespace sdlframework {
 	protected:
 		VSDLController* fController;
 	private:
+		void freeController(VSDLController*);
+
 		VSDLController* fOldController;
 		SDL_Surface* screen;
 		bool fRunning;

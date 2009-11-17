@@ -89,7 +89,7 @@ void SDLWindow::run(VSDLController* controller) {
 			draw();
 			SDL_Delay(1);
 		} else {
-			delete fController;
+			freeController(fController);
 			fController = NULL;
 			screen = NULL;
 		}
@@ -169,6 +169,13 @@ void SDLWindow::drawRectangle(int x, int y, int w, int h, int r, int g, int b) {
 
 void SDLWindow::drawRectangle(int x, int y, int w, int h, int r, int g, int b, double op) {
 	boxRGBA(screen, x, y, x + w, y + h, r, g, b, op*255);
+}
+
+void SDLWindow::freeController(VSDLController* c) {
+	if (c->fParentController) {
+		freeController(c->fParentController);
+	}
+	delete c;
 }
 
 }
