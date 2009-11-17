@@ -9,6 +9,8 @@
 #include "guiframework/events/callbacks.h"
 #include "guiframework/events/event.h"
 
+#include "guiframework/resources/stringfontresource.h"
+
 namespace sdlframework {
 	class Button : public VWidget {
 	public:
@@ -32,6 +34,7 @@ namespace sdlframework {
 		int fWidth;
 		int fHeight;
 		bool fHover;
+		StringFontResource* fStringLabel;
 		SDL_Rect fBoundingBox;
 
 		int getRealWidth();

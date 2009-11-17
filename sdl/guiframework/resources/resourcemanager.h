@@ -5,6 +5,8 @@
 
 #include "guiframework/resources/resource.h"
 #include "guiframework/resources/imageresource.h"
+#include "guiframework/resources/fontresource.h"
+#include "guiframework/resources/stringfontresource.h"
 
 namespace sdlframework {
 	class ResourceManager {
@@ -14,6 +16,8 @@ namespace sdlframework {
 			void free(VResource* res);
 			
 			ImageResource* image(std::string);
+			FontResource* font(std::string, int);
+			StringFontResource* string(std::string, FontResource*);
 		private:
 			ResourceManager();
 			

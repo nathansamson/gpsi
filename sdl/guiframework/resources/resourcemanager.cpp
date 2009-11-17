@@ -28,6 +28,29 @@ namespace sdlframework {
 			return static_cast<ImageResource*>(getResource(name));
 		}
 	}
+
+	FontResource* ResourceManager::font(std::string name, int a) {
+		if (!hasResource(name)) {
+			FontResource* font = FontResource::open(name, a);
+			insertResource(name, font);
+			
+			return font;
+		} else {
+			return static_cast<FontResource*>(getResource(name));
+		}
+	}
+
+	StringFontResource* ResourceManager::string(std::string text, FontResource* font) {
+		if (!hasResource(text)) {
+			SDL_Surface* surf = font->string(text);
+			StringFontResource* p = new StringFontResource(surf, text);
+			insertResource(p->getName(), p);
+			
+			return p;
+		} else {
+			return static_cast<StringFontResource*>(getResource(text));
+		}
+	}
 	
 	bool ResourceManager::hasResource(std::string name) {
 		return fResourceList.find(name) != fResourceList.end();

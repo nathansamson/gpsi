@@ -24,7 +24,7 @@ $(TEST): $(CXXTESTOBJECTS)
 	$(CXX) $(LDTESTFLAGS) -o $@ $^
 	
 clean:
-	$(RM) $(CXXTESTOBJECTS) $(LIB) $(TEST) $(DEPFILES)
+	$(RM) $(CXXTESTOBJECTS) $(LIB) $(TEST) $(DEPFILES) $(shell find -name "*.d.*")
 	
 %.d: %.cpp
 	@set -e; rm -f $@; \

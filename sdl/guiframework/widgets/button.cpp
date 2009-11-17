@@ -1,12 +1,15 @@
 #include "guiframework/widgets/button.h"
-
-#include <iostream>
+#include "guiframework/resources/resourcemanager.h"
 
 namespace sdlframework {
 	Button::Button(SDLWindow* window, std::string label) : VWidget(window), fLabel(label), fWidth(0), fHeight(0), fHover(false) {
+		FontResource* font = ResourceManager::manager().font("../data/DejaVuSans-Bold.ttf", 24);
+		fStringLabel = ResourceManager::manager().string(label, font);
+		ResourceManager::manager().free(font);
 	}
 
 	Button::~Button() {
+		ResourceManager::manager().free(fStringLabel);
 	}
 
 	void Button::connectOnMouseClick(IMouseButtonCallback* e) {
@@ -38,6 +41,8 @@ namespace sdlframework {
 			} else {
 				fWindow->drawRectangle(x, y, getRealWidth(), getRealHeight()-10, 0, 255, 0);
 			}
+			fWindow->drawString(fStringLabel, x+10, y+5);
+
 			fBoundingBox.x = x;
 			fBoundingBox.y = y;
 			fBoundingBox.w = getRealWidth();
@@ -64,10 +69,10 @@ namespace sdlframework {
 	}
 
 	int Button::getRealWidth() {
-		return fLabel.length()*10;
+		return fStringLabel->getWidth() + 20;
 	}
 
 	int Button::getRealHeight() {
-		return 40;
+		return fStringLabel->getHeight() + 20;
 	}
 }

@@ -2,10 +2,12 @@
 
 #include "SDL.h"
 #include "SDL_gfxPrimitives.h"
+#include "SDL_ttf.h"
 
 #include "guiframework/sdlwindow.h"
 #include "guiframework/controller/sdlcontroller.h"
 #include "guiframework/resources/imageresource.h"
+#include "guiframework/resources/stringfontresource.h"
 
 namespace sdlframework {
 
@@ -40,11 +42,17 @@ void SDLWindow::open(int xres, int yres, bool fs) {
 	if (screen == NULL) {
 		throw SDLInitializationException(SDL_GetError());
 	}
+
+	if(TTF_Init() == -1) {
+		throw SDLInitializationException(TTF_GetError());
+	}
+
 }
 
 void SDLWindow::close() {
 	if (screen)
 		SDL_FreeSurface(screen);
+	TTF_Quit();
 }
 
 void SDLWindow::run(VSDLController* controller) {
@@ -130,6 +138,22 @@ void SDLWindow::drawImage(ImageResource* img, int x, int y, double scale) {
 	dest.h = img->getHeight() * scale;
 	
 	SDL_BlitSurface(img->getSurface(), &src, screen, &dest);
+}
+
+void SDLWindow::drawString(StringFontResource* string, int x, int y) {
+	SDL_Rect src, dest;
+	
+	src.x = 0;
+	src.y = 0;
+	src.w = string->getWidth();
+	src.h = string->getHeight();
+	
+	dest.x = x;
+	dest.y = y;
+	dest.w = string->getWidth();
+	dest.h = string->getHeight();
+	
+	SDL_BlitSurface(string->getSurface(), &src, screen, &dest);
 }
 
 void SDLWindow::drawRectangle(int x, int y, int w, int h, int r, int g, int b) {

@@ -1,6 +1,6 @@
-INCLUDES = -I$(shell pwd) `pkg-config --cflags sdl SDL_gfx`
+INCLUDES = -I$(shell pwd) `pkg-config --cflags sdl`
 CXXFLAGS = -Wall $(INCLUDES) -Werror -g
-LDFLAGS = `pkg-config --libs sdl SDL_gfx`
+LDFLAGS = `pkg-config --libs sdl` -lSDL_gfx -lSDL_ttf
 CXXSOURCES = $(shell find . -type f -name '*.cpp')
 CXXOBJECTS = $(patsubst %.cpp,%.o,$(CXXSOURCES))
 DEPFILES = $(patsubst %.cpp,%.d,$(CXXSOURCES))
@@ -12,10 +12,10 @@ all: $(EXE)
 
 $(EXE): $(CXXOBJECTS)
 	$(CXX) $(LDFLAGS) -o $@ $^
-	
+
 clean:
-	$(RM) $(CXXOBJECTS) $(EXE) $(DEPFILES)
-	
+	$(RM) $(CXXOBJECTS) $(EXE) $(DEPFILES) $(shell find -name "*.d.*") $(shell find -name "*~")
+
 %.d: %.cpp
 	@set -e; rm -f $@; \
 	$(CXX) -MM $(INCLUDES) $(CPPFLAGS) $< > $@.$$$$; \

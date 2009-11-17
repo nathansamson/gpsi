@@ -5,6 +5,7 @@
 #include "SDL.h"
 
 #include "guiframework/resources/imageresource.h"
+#include "guiframework/resources/stringfontresource.h"
 
 namespace sdlframework {
 
@@ -39,6 +40,7 @@ namespace sdlframework {
 		
 		void drawImage(ImageResource*, int, int);
 		void drawImage(ImageResource*, int, int, double);
+		void drawString(StringFontResource*, int, int);
 		void drawRectangle(int, int, int, int, int, int, int);
 		void drawRectangle(int, int, int, int, int, int, int, double);
 	protected:
