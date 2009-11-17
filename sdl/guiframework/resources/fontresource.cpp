@@ -19,7 +19,8 @@ namespace sdlframework {
 		return NULL;
 	}
 
-	FontResource::FontResource(TTF_Font* font, std::string name) : VResource(name), fFont(font) {
+	FontResource::FontResource(TTF_Font* font, std::string name)
+	             : VResource(name), fFont(font) {
 	}
 
 	FontResource::~FontResource() {

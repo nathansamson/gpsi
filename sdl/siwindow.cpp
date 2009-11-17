@@ -54,7 +54,9 @@ namespace sisdl {
 		fController->openController(quitConfirmation);
 	}
 
-	SIWindowMouseButtonCallback::SIWindowMouseButtonCallback(SIWindow* window, void (SIWindow::*fp)(SDL_MouseButtonEvent)) : fWindow(window), fFunction(fp) {
+	SIWindowMouseButtonCallback::SIWindowMouseButtonCallback(
+	       SIWindow* window, void (SIWindow::*fp)(SDL_MouseButtonEvent))
+	                            : fWindow(window), fFunction(fp) {
 	}
 
 	void SIWindowMouseButtonCallback::call(SDL_MouseButtonEvent e)

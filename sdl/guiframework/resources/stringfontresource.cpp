@@ -2,7 +2,8 @@
 
 namespace sdlframework {
 
-	StringFontResource::StringFontResource(SDL_Surface* surface, std::string name) : VResource(name), fSurface(surface) {
+	StringFontResource::StringFontResource(SDL_Surface* surface, std::string name)
+	                   : VResource(name), fSurface(surface) {
 	}
 
 	StringFontResource::~StringFontResource() {

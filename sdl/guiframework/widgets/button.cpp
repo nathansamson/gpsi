@@ -2,7 +2,9 @@
 #include "guiframework/resources/resourcemanager.h"
 
 namespace sdlframework {
-	Button::Button(SDLWindow* window, std::string label) : VWidget(window), fLabel(label), fWidth(0), fHeight(0), fHover(false) {
+	Button::Button(SDLWindow* window, std::string label)
+	       : VWidget(window), fLabel(label), fWidth(0),
+	         fHeight(0), fHover(false) {
 		FontResource* font = ResourceManager::manager().font("../data/DejaVuSans-Bold.ttf", 24);
 		fStringLabel = ResourceManager::manager().string(label, font);
 		ResourceManager::manager().free(font);

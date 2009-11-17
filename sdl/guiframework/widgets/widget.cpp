@@ -4,7 +4,8 @@ namespace sdlframework {
 	VWidget::VWidget() {
 	}
 
-	VWidget::VWidget(SDLWindow* window) : fWindow(window), fFill(false) {
+	VWidget::VWidget(SDLWindow* window)
+	        : fWindow(window), fFill(false) {
 
 	}
 

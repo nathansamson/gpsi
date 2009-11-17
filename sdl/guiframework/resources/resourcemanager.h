@@ -27,7 +27,7 @@ namespace sdlframework {
 			VResource* getResource(std::string);
 			
 			std::map<std::string, VResource*> fResourceList;
-			static ResourceManager fManager;
+			static ResourceManager fgManager;
 	};
 }
 

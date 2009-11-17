@@ -4,7 +4,8 @@
 
 namespace sdlframework {
 
-	ImageResource::ImageResource(std::string name, SDL_Surface* surface) : VResource(name), fImageSurface(surface) {
+	ImageResource::ImageResource(std::string name, SDL_Surface* surface)
+	              : VResource(name), fImageSurface(surface) {
 	}
 	
 	ImageResource::~ImageResource() {

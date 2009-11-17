@@ -5,7 +5,7 @@ namespace sdlframework {
 	}
 
 	ResourceManager ResourceManager::manager() {
-		return ResourceManager::fManager;
+		return ResourceManager::fgManager;
 	}
 	
 	void ResourceManager::free(VResource* res) {
@@ -66,5 +66,5 @@ namespace sdlframework {
 		return res;
 	}
 	
-	ResourceManager ResourceManager::fManager = ResourceManager();
+	ResourceManager ResourceManager::fgManager = ResourceManager();
 }
