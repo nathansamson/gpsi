@@ -12,9 +12,9 @@ namespace sdlframework {
 		virtual ~FontResource();
 
 		static FontResource* open(std::string, int);
-		SDL_Surface* string(std::string);
+		SDL_Surface* string(std::string, SDL_Color);
 
-		static std::string getID(std::string, int);		
+		static std::string getID(std::string, int);
 	private:
 		TTF_Font* fFont;
 		FontResource(TTF_Font*, std::string);

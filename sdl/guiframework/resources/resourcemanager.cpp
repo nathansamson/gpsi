@@ -42,18 +42,18 @@ namespace sdlframework {
 		}
 	}
 
-	StringFontResource* ResourceManager::string(std::string text, FontResource* font) {
-		std::string stringFontID = StringFontResource::getID(text, font);
+	StringFontResource* ResourceManager::string(std::string text, FontResource* font, SDL_Color c) {
+		std::string stringFontID = StringFontResource::getID(text, font, c);
 		if (!hasResource(stringFontID)) {
-			StringFontResource* stringFont = new StringFontResource(font->string(text), stringFontID);
+			StringFontResource* stringFont = new StringFontResource(font->string(text, c), stringFontID);
 			insertResource(stringFontID, stringFont);
-			
+
 			return stringFont;
 		} else {
 			return static_cast<StringFontResource*>(getResource(stringFontID));
 		}
 	}
-	
+
 	bool ResourceManager::hasResource(std::string id) {
 		return fResourceList.find(id) != fResourceList.end();
 	}

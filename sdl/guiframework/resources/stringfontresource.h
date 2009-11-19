@@ -20,7 +20,7 @@ namespace sdlframework {
 		
 		SDL_Surface* getSurface();
 
-		static std::string getID(std::string text, FontResource* font);
+		static std::string getID(std::string text, FontResource* font, SDL_Color c);
 	private:
 		SDL_Surface* fSurface;
 	};

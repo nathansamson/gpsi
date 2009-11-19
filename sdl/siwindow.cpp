@@ -5,6 +5,7 @@
 #include "guiframework/controller/splashcontroller.h"
 #include "guiframework/controller/menucontroller.h"
 #include "guiframework/widgets/button.h"
+#include "guiframework/widgets/label.h"
 #include "siwindow.h"
 
 namespace sisdl {
@@ -19,6 +20,8 @@ namespace sisdl {
 
 		try {
 			MenuController* menu = new MenuController(this);
+			SDL_Color c = {255, 255, 255};
+			menu->addWidget(new Label(this, "Sprotector", c));
 			menu->addWidget(new Button(this, "My Shiny Button"));
 			menu->addWidget(new Button(this, "Another button"));
 			Button* b = new Button(this, "Quit");

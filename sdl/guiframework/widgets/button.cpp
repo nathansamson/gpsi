@@ -6,7 +6,8 @@ namespace sdlframework {
 	       : VWidget(window), fLabel(label), fWidth(0),
 	         fHeight(0), fHover(false) {
 		FontResource* font = ResourceManager::manager().font("../data/DejaVuSans-Bold.ttf", 24);
-		fStringLabel = ResourceManager::manager().string(label, font);
+		SDL_Color c = {0, 0, 0};
+		fStringLabel = ResourceManager::manager().string(label, font, c);
 		ResourceManager::manager().free(font);
 	}
 

@@ -23,8 +23,7 @@ namespace sdlframework {
 		fFont = NULL;
 	}
 
-	SDL_Surface* FontResource::string(std::string text) {
-		SDL_Color c = {0, 0, 0};
+	SDL_Surface* FontResource::string(std::string text, SDL_Color c) {
 		return TTF_RenderText_Blended(fFont, text.c_str(), c);
 	}
 
