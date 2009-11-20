@@ -1,11 +1,11 @@
 #ifndef INC_SIWINDOW_H
 #define INC_SIWINDOW_H
 
-#include "guiframework/sdlwindow.h"
-#include "guiframework/events/callbacks.h"
+#include "zabbr/sdlwindow.h"
+#include "zabbr/events/callbacks.h"
 
 namespace sisdl {
-	using namespace sdlframework;
+	using namespace Zabbr;
 
 
 	class SIWindow : public  SDLWindow {

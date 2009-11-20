@@ -1,11 +1,11 @@
 #include <iostream>
 #include "SDL.h"
 
-#include "guiframework/sdlwindow.h"
-#include "guiframework/controller/splashcontroller.h"
-#include "guiframework/controller/menucontroller.h"
-#include "guiframework/widgets/button.h"
-#include "guiframework/widgets/label.h"
+#include "zabbr/sdlwindow.h"
+#include "zabbr/controller/splashcontroller.h"
+#include "zabbr/controller/menucontroller.h"
+#include "zabbr/widgets/button.h"
+#include "zabbr/widgets/label.h"
 #include "siwindow.h"
 
 namespace sisdl {
