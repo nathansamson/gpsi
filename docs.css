@@ -5,7 +5,7 @@ body, table, div, p, dl {
 	font-size: 12px;
 }
 
-#body {
+body {
 	max-width: 800px;
 }
 

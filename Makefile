@@ -1,4 +1,4 @@
-.PHONY: sdlgui zabbr lib test docs
+.PHONY: sdlgui zabbr lib test docs docsupload
 
 all: lib zabbr sdlgui
 
@@ -16,6 +16,9 @@ sdlgui: lib zabbr
 
 docs:
 	doxygen > /dev/null
+
+docsupload: docs
+	lftp -f docs-upload.lftp
 
 clean:
 	make -C zabbr clean
