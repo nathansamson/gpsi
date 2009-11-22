@@ -6,8 +6,8 @@
 
 #include "misc/vector2.h"
 
-namespace sitest {
-	using namespace si;
+namespace SITest {
+	using namespace SI;
 
 	class Vector2Test : public CppUnit::TestFixture {
 	public:

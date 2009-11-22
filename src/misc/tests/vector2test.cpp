@@ -2,9 +2,9 @@
 #include <cppunit/TestCaller.h>
 #include <cppunit/TestSuite.h>
 
-#include "vector2test.h"
+#include "misc/tests/vector2test.h"
 
-namespace sitest {
+namespace SITest {
 
 	#define VECTOR2_TEST(name) new CppUnit::TestCaller<Vector2Test>( \
 		                               #name, \

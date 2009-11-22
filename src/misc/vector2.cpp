@@ -1,7 +1,7 @@
-#include "vector2.h"
+#include "misc/vector2.h"
 #include <math.h>
 
-namespace si {
+namespace SI {
 
 	/**
 	 * Default constructor.

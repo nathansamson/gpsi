@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-namespace si {
+namespace SI {
 	/**
 	 * Class to represent a vector.
 	 *
