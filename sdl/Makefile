@@ -6,12 +6,12 @@ CXXOBJECTS = $(patsubst %.cpp,%.o,$(CXXSOURCES))
 DEPFILES = $(patsubst %.cpp,%.d,$(CXXSOURCES))
 EXE = sisdl
 
-.PHONY: all clean
+.PHONY: all clean ../zabbr/zabbr.a
 
 all: $(EXE)
 
-$(EXE): $(CXXOBJECTS)
-	$(CXX) -o $@ $^ $(LDFLAGS)
+$(EXE): $(CXXOBJECTS) ../zabbr/zabbr.a
+	$(CXX) -o $@ $(CXXOBJECTS) $(LDFLAGS)
 
 clean:
 	$(RM) $(CXXOBJECTS) $(EXE) $(DEPFILES) $(shell find -name "*.d.*") $(shell find -name "*~")
@@ -22,4 +22,8 @@ clean:
 	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
 	rm -f $@.$$$$
 
--include $(DEPFILES)
+ifeq (0, $(words $(findstring $(MAKECMDGOALS), $(NODEPS))))
+    #Chances are, these files don't exist.  GMake will create them and
+    #clean up automatically afterwards
+    -include $(DEPFILES)
+endif
