@@ -10,14 +10,17 @@ namespace SI {
 	*/
 	class VGameEntity {
 	public:
+		VGameEntity();
+		VGameEntity(Vector2 );
+	
 		virtual void visualize();
-		virtual void update(unsigned int) = 0;
+		virtual void update(int) = 0;
 		
-		Vector2 getLocation();
+		Vector2 getPosition();
 	protected:
 		void move(Vector2);
 	private:
-		Vector2 fLocation;
+		Vector2 fPosition;
 	};
 }
 

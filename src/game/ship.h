@@ -5,12 +5,11 @@
 #include "gameentity.h"
 
 namespace SI {
-	class Ship: VGameEntity {
+	class Ship: public VGameEntity {
 	public:
-		Ship(int);
-		virtual void update(unsigned int);
+		Ship(Vector2);
+		virtual void update(int);
 	private:
-		int fStrength;
 		Vector2 fSpeed;
 	};
 }

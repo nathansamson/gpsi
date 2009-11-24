@@ -1,10 +1,13 @@
 #include "ship.h"
 
 namespace SI {
-	Ship::Ship(int strength): fStrength(strength), fSpeed(1.0/1000, 0.0) {
+	Ship::Ship(Vector2 speed): fSpeed(speed) {
 	}
 	
-	void Ship::update(unsigned int ticks) {
+	void Ship::update(int ticks) {
+		if (ticks < 0) {
+			throw -ticks;
+		}
 		move(fSpeed * ticks);
 	}
 }
