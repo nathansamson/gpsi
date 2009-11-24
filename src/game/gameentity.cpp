@@ -6,6 +6,9 @@ namespace SI {
 	
 	VGameEntity::VGameEntity(Vector2 pos): fPosition(pos) {
 	}
+	
+	VGameEntity::~VGameEntity() {
+	}
 
 	Vector2 VGameEntity::getPosition() {
 		return fPosition;

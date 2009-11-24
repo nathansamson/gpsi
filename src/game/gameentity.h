@@ -12,12 +12,12 @@ namespace SI {
 	public:
 		VGameEntity();
 		VGameEntity(Vector2 );
+		virtual ~VGameEntity();
 	
 		virtual void visualize();
 		virtual void update(int) = 0;
 		
 		Vector2 getPosition();
-	protected:
 		void move(Vector2);
 	private:
 		Vector2 fPosition;
