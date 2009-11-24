@@ -8,7 +8,7 @@ namespace SITest {
 
 	#define VECTOR2_TEST(name) new CppUnit::TestCaller<Vector2Test>( \
 		                               #name, \
-		                               &sitest::Vector2Test::name) \
+		                               &Vector2Test::name) \
 
 	void Vector2Test::setUp() {
 		v1 = Vector2(3.14, 2.71);
