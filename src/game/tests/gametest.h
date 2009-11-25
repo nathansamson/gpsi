@@ -1,30 +1,31 @@
-#ifndef INC_SHIPTEST_H
+#ifndef INC_GAMETEST_H
 #define INC_SHIPTEST_H
 
 #include <cppunit/Test.h>
 #include <cppunit/TestFixture.h>
 
 #include "misc/vector2.h"
-#include "game/ship.h"
+#include "game/tests/test.h"
+#include "game/game.h"
 
 using namespace SI;
 
 namespace SITest {
 
-	class ShipTest {
+	class GameTest {
 	public:
 		void setUp();
 		void tearDown();
 		
-		void testUpdate();
-		void testNegativeUpdate();
+		void testSimpleGame();
 		
 		static CppUnit::Test* suite();
 	private:
-		Ship* fShip;
+		Game* fGame;
 	
 		void assertVectorEquality(Vector2, Vector2);
+		MockGameEntityFactory* fEntityFactory;
 	};
 }
 
-#endif //INC_SHIPTEST_H
+#endif //INC_GAMESHIP_H

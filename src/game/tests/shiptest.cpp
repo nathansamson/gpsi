@@ -4,6 +4,7 @@
 
 #include "game/ship.h"
 #include "shiptest.h"
+#include "game/tests/test.h"
 
 namespace SITest {
 	#define SHIP_TEST(name) new CppUnit::TestCaller<ShipTest>( \
@@ -35,9 +36,5 @@ namespace SITest {
 	void ShipTest::assertVectorEquality(Vector2 expected, Vector2 actual) {
 		CPPUNIT_ASSERT_DOUBLES_EQUAL(expected.getX(), actual.getX(), 0.0001);
 		CPPUNIT_ASSERT_DOUBLES_EQUAL(expected.getY(), actual.getY(), 0.0001);
-	}
-	
-	void MockShipDriver::update(int ticks) {
-		move(Vector2(1.0/100, 0) * ticks);
 	}
 }
