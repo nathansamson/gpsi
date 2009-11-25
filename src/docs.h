@@ -13,7 +13,7 @@
 */
 
 /**
- * \namespace si
+ * \namespace SI
  *
- * si is the namespace where all classes and functions are defined for the space-invaders library.
+ * SI is the namespace where all classes and functions are defined for the space-invaders library.
 */

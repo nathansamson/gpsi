@@ -6,7 +6,7 @@
 namespace SI {
 
 	/**
-	 * The basic of all game entities.
+	 * The base class of all game entities.
 	*/
 	class VGameEntity {
 	public:
@@ -21,6 +21,9 @@ namespace SI {
 	protected:
 		void move(Vector2);
 	private:
+		/**
+		 * The position of the center of the entity.
+		*/
 		Vector2 fPosition;
 	};
 }

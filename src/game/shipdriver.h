@@ -7,6 +7,9 @@
 namespace SI {
 	class Ship;
 
+	/**
+	 * A virtual ship driver.
+	*/
 	class VShipDriver {
 	public:
 		VShipDriver();
@@ -16,6 +19,9 @@ namespace SI {
 	protected:
 		void move(Vector2);
 	private:
+		/**
+		 * The ship to driver.
+		*/
 		Ship* fEntity;
 	};
 }
