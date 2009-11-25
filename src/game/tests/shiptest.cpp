@@ -11,7 +11,7 @@ namespace SITest {
 	                                   &ShipTest::name) \
 	
 	void ShipTest::setUp() {
-		fShip = new Ship(new MockShipController());
+		fShip = new Ship(new MockShipDriver());
 	}
 	
 	void ShipTest::tearDown() {
@@ -37,7 +37,7 @@ namespace SITest {
 		CPPUNIT_ASSERT_DOUBLES_EQUAL(expected.getY(), actual.getY(), 0.0001);
 	}
 	
-	void MockShipController::update(int ticks) {
+	void MockShipDriver::update(int ticks) {
 		move(Vector2(1.0/100, 0) * ticks);
 	}
 }

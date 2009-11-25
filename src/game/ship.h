@@ -2,18 +2,21 @@
 #define INC_SHIP_H
 
 #include "misc/vector2.h"
-#include "shipcontroller.h"
+#include "shipdriver.h"
 #include "gameentity.h"
 
 namespace SI {
+	class VShipDriver;
+
 	class Ship: public VGameEntity {
 	public:
-		Ship(VShipController*);
+		Ship(VShipDriver*);
 		virtual ~Ship();
 		
 		virtual void update(int);
+		friend class VShipDriver;
 	private:
-		VShipController* fMoveController;
+		VShipDriver* fShipDriver;
 	};
 }
 

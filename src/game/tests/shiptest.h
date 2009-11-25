@@ -10,7 +10,7 @@
 using namespace SI;
 
 namespace SITest {
-	class MockShipController: public SI::VShipController {
+	class MockShipDriver: public VShipDriver {
 	public:
 		virtual void update(int ticks);
 	};
