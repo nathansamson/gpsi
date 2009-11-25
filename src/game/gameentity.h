@@ -15,6 +15,10 @@ namespace SI {
 		virtual ~VGameEntity();
 	
 		virtual void visualize();
+		
+		/**
+		 * Update the state of the entity.
+		*/
 		virtual void update(int) = 0;
 		
 		Vector2 getPosition();
