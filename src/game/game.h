@@ -6,13 +6,24 @@
 #include "shipdriver.h"
 
 namespace SI {
+	/**
+	 * The Game class. All the logic of maintaining the state of the game,
+	 * is included in this class.
+	*/
 	class Game {
 	public:
 		Game(VShipDriver*, IGameEntityFactory*);
 		
 		void update(int);
 	private:
+		/**
+		 * A list of all entities in the game.
+		*/
 		std::list<VGameEntity*> fEntities;
+		
+		/**
+		 * The entity factory to create the entities.
+		*/
 		IGameEntityFactory* fEntityFactory;
 	};
 }

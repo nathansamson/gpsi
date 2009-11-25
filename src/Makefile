@@ -10,7 +10,7 @@ DEPFILES = $(patsubst %.cpp,%.d,$(CXXTESTSOURCES))
 LIB = libsi.so
 TEST = sitest
 
-.PHONY: all clean test docs
+.PHONY: all clean test
 
 all: $(LIB)
 

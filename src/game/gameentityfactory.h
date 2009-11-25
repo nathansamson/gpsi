@@ -5,6 +5,10 @@
 #include "game/ship.h"
 
 namespace SI {
+	/**
+	 * The Game Entity Factory. Classes that implement this interface
+	 * are responsible of creating the specific entity objects that can visualize themselves.
+	*/
 	class IGameEntityFactory {
 	public:
 		virtual Ship* createShip(VShipDriver*) = 0;

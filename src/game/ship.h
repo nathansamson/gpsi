@@ -8,6 +8,9 @@
 namespace SI {
 	class VShipDriver;
 
+	/**
+	 * The Ship class. A Ship represents a space ship in the space.
+	*/
 	class Ship: public VGameEntity {
 	public:
 		Ship(VShipDriver*);
@@ -16,6 +19,9 @@ namespace SI {
 		virtual void update(int);
 		friend class VShipDriver;
 	private:
+		/**
+		 * The ship driver.
+		*/
 		VShipDriver* fShipDriver;
 	};
 }
