@@ -8,6 +8,9 @@ namespace sisdl {
 	using namespace Zabbr;
 
 
+	/**
+	 * Space Invaders window.
+	*/
 	class SIWindow : public  SDLWindow {
 	public:
 		void run();
@@ -17,12 +20,21 @@ namespace sisdl {
 		void cancelQuit(SDL_MouseButtonEvent);
 	};
 
+	/**
+	 * Space Invaders window mouse button callback.
+	*/
 	class SIWindowMouseButtonCallback : public IMouseButtonCallback {
 	public:
 		SIWindowMouseButtonCallback(SIWindow*, void (SIWindow::*)(SDL_MouseButtonEvent));
 		virtual void call(SDL_MouseButtonEvent);
 	private:
+		/**
+		 * The attached window.
+		*/
 		SIWindow* fWindow;
+		/**
+		 * The attached member function.
+		*/
 		void (SIWindow::* fFunction)(SDL_MouseButtonEvent);
 	};
 
