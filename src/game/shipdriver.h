@@ -14,6 +14,9 @@ namespace SI {
 	public:
 		VShipDriver();
 
+		/**
+		 * Update the ship.
+		*/
 		virtual void update(int) = 0;
 		void bind(Ship*);
 	protected:

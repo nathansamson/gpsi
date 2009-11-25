@@ -11,6 +11,9 @@ namespace SI {
 	*/
 	class IGameEntityFactory {
 	public:
+		/**
+		 * Creates a Ship.
+		*/
 		virtual Ship* createShip(VShipDriver*) = 0;
 	};
 }
