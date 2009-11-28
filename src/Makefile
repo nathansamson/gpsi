@@ -1,5 +1,5 @@
 INCLUDES = -I$(shell pwd)
-CXXFLAGS = -Wall $(INCLUDES) -fPIC
+CXXFLAGS = -Wall $(INCLUDES) -fPIC -g
 LDFLAGS = 
 LDTESTFLAGS = `pkg-config --libs cppunit`
 CXXSOURCES = $(shell find . -type f -name '*.cpp' -not -wholename '*/tests/*')

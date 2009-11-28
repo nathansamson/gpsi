@@ -12,6 +12,13 @@ namespace SI {
 		fEntities.push_back(user);
 	}
 	
+	Game::~Game() {
+		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
+			delete (*it);
+		}
+		delete fEntityFactory;
+	}
+	
 	/**
 	 * Update the game state. All entities will be updated. Afterwards all entities will be visualized.
 	 *
