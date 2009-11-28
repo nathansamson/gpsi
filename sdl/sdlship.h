@@ -6,6 +6,9 @@
 #include "zabbr/sdlwindow.h"
 
 namespace SISDL {
+	/**
+	 * A Ship visualized by SDL.
+	*/
 	class SDLShip: public SI::Ship {
 	public:
 		SDLShip(SI::VShipDriver*, Zabbr::SDLWindow*);
@@ -13,7 +16,13 @@ namespace SISDL {
 		
 		virtual void visualize();
 	private:
+		/**
+		 * The image resource.
+		*/
 		Zabbr::ImageResource* fImage;
+		/**
+		 * The window.
+		*/
 		Zabbr::SDLWindow* fWindow;
 		
 		void positionToWindowCoords(int&, int&);

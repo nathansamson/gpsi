@@ -4,15 +4,27 @@
 #include "sdlinputdriver.h"
 
 namespace SISDL {
+	/**
+	 * The Keyboard driver.
+	*/
 	class SDLKeyboardInputDriver: public SDLInputDriver {
 	public:
 		virtual void update(int);
 		virtual void keyDown(SDL_KeyboardEvent);
 		virtual void keyRelease(SDL_KeyboardEvent);
 	private:
+		/**
+		 * True if key associated with left is pressed.
+		*/
 		bool fLeft;
+		/**
+		 * True if the key associated with right is pressed.
+		*/
 		bool fRight;
 		
+		/**
+		 * The current speed per tick of the ship.
+		*/
 		SI::Vector2 fSpeed;
 	};
 }

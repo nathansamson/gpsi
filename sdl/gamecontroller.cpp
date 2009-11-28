@@ -5,6 +5,11 @@
 #include "sdlkeyboardinputdriver.h"
 
 namespace SISDL {
+	/**
+	 * Public constructor
+	 *
+	 * @param w The Window
+	*/
 	GameController::GameController(Zabbr::SDLWindow* w): Zabbr::VSDLController(w),
 	                fGame(0), fTimeRemainder(0.0), fClosed(false) {
 		fInputDriver = new SDLKeyboardInputDriver();
@@ -12,10 +17,16 @@ namespace SISDL {
 		connectRequestQuit(new GameControllerEmptyCallback(this, &GameController::onRequestQuitGame));
 	}
 	
+	/**
+	 * Destructor;
+	*/
 	GameController::~GameController() {
 		delete fGame;
 	}
 	
+	/**
+	 * Draws the controller.
+	*/
 	void GameController::draw() {
 		if (fClosed) {
 			openParentController();
@@ -27,10 +38,20 @@ namespace SISDL {
 		fGame->update(ticks);
 	}
 	
+	/**
+	 * Method called by the window if a key is pressed.
+	 *
+	 * @param evnt The SDL_KeyboardEvent
+	*/
 	void GameController::keyDown(SDL_KeyboardEvent evnt) {
 		fInputDriver->keyDown(evnt);
 	}
 	
+	/**
+	 * Method called by the window if a key is released.
+	 *
+	 * @param evnt The SDL_KeyboardEvent
+	*/
 	void GameController::keyRelease(SDL_KeyboardEvent evnt) {
 		fInputDriver->keyRelease(evnt);
 		if (evnt.keysym.sym == SDLK_ESCAPE) {
@@ -38,6 +59,9 @@ namespace SISDL {
 		}
 	}
 	
+	/**
+	 * Method callback that is called when the controller is requested to quit.
+	*/
 	void GameController::onRequestQuitGame() {
 		fQuitConfirmation = new Zabbr::MenuController(fWindow);
 		Zabbr::Button* b = new Zabbr::Button(fWindow, "Resume game");
@@ -82,7 +106,7 @@ namespace SISDL {
 	/**
 	 * Constructor.
 	 *
-	 * @param window The SIWindow.
+	 * @param c The GameController.
 	 * @param fp The member pointer.
 	*/
 	GameControllerEmptyCallback::GameControllerEmptyCallback(
@@ -101,7 +125,7 @@ namespace SISDL {
 	/**
 	 * Constructor.
 	 *
-	 * @param window The SIWindow.
+	 * @param c The GameController.
 	 * @param fp The member pointer.
 	*/
 	GameControllerMouseButtonCallback::GameControllerMouseButtonCallback(

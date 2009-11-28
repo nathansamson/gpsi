@@ -17,7 +17,6 @@ namespace SISDL {
 
 		void onQuit(SDL_MouseButtonEvent);
 		void cancelQuit(SDL_MouseButtonEvent);
-		void confirmQuit(SDL_MouseButtonEvent);
 		void onQuitButtonClicked(SDL_MouseButtonEvent);
 		void onRequestQuitMainMenu();
 		

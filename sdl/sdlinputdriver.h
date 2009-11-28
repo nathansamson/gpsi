@@ -6,6 +6,9 @@
 #include "src/game/shipdriver.h"
 
 namespace SISDL {
+	/**
+	 * Virtual base class for SDL Input drivers.
+	*/
 	class SDLInputDriver: public SI::VShipDriver {
 	public:
 		virtual void keyDown(SDL_KeyboardEvent) = 0;
