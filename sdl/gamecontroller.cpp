@@ -31,9 +31,10 @@ namespace SISDL {
 		if (fClosed) {
 			openParentController();
 		}
+
 		double time = fTimer.reset();
 		int ticks = (time + fTimeRemainder) * 1000;
-		fTimeRemainder = (time + fTimeRemainder) * 1000 - ticks;
+		fTimeRemainder = ((time + fTimeRemainder) * 1000 - ticks) / 1000;
 		
 		fGame->update(ticks);
 	}

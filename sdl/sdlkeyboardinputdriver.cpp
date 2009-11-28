@@ -7,7 +7,7 @@ namespace SISDL {
 	 * Update the driver.
 	*/
 	void SDLKeyboardInputDriver::update(int ticks) {
-		const double max = 0.00003;
+		const double max = 0.01;
 		
 		if ((fLeft && fRight) || !(fLeft || fRight)) {
 			fSpeed *= 0;
