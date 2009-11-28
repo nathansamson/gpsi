@@ -6,9 +6,10 @@
 #include "zabbr/controller/menucontroller.h"
 #include "zabbr/widgets/button.h"
 #include "zabbr/widgets/label.h"
+#include "gamecontroller.h"
 #include "siwindow.h"
 
-namespace sisdl {
+namespace SISDL {
 	
 	/**
 	 * Run the Space Invaders window.
@@ -25,8 +26,13 @@ namespace sisdl {
 			MenuController* menu = new MenuController(this);
 			SDL_Color c = {255, 255, 255};
 			menu->addWidget(new Label(this, "Sprotector", c));
-			menu->addWidget(new Button(this, "My Shiny Button"));
+			
+			Button* start = new Button(this, "Start game");
+			start->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::startGame));
+			menu->addWidget(start);
+			
 			menu->addWidget(new Button(this, "Another button"));
+			
 			Button* b = new Button(this, "Quit");
 			b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::confirmQuit));
 			menu->addWidget(b);
@@ -77,6 +83,13 @@ namespace sisdl {
 
 		fController->background();
 		fController->openController(quitConfirmation);
+	}
+	
+	void SIWindow::startGame(SDL_MouseButtonEvent e) {
+		GameController* gameController = new GameController(this);
+		
+		fController->background();
+		fController->openController(gameController);
 	}
 
 	/**
