@@ -38,7 +38,7 @@ namespace SISDL {
 	 * @param y The y screen-coordinate
 	*/
 	void SDLShip::positionToWindowCoords(int& x, int& y) {
-		SI::Vector2 p ((getPosition() + SI::Vector2(4.0, 3.0)) * 50);
+		SI::Vector2 p ((getPosition() + SI::Vector2(4.0, 3.0)) * (fWindow->getXResolution()/8));
 		p -= SI::Vector2(fImage->getWidth() / 2, fImage->getHeight() / 2);
 		
 		x = p.getX();

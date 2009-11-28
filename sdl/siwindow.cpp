@@ -17,7 +17,7 @@ namespace SISDL {
 	*/
 	void SIWindow::run() {
 		try {
-			open(400, 300, false);
+			open(640, 480, false);
 		} catch (SDLInitializationException e) {
 			std::cerr << "Could not initialize SDL: " << e.getError() << std::endl;
 			return;
