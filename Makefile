@@ -22,6 +22,9 @@ docsupload: docs
 
 memcheck: sdlgui
 	LD_LIBRARY_PATH=./src valgrind --leak-check=full --suppressions=./sdl.sup ./sdl/sisdl
+	
+run: sdlgui
+	LD_LIBRARY_PATH=./src ./sdl/sisdl
 
 clean:
 	make -C zabbr clean
