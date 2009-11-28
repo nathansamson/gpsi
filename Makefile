@@ -1,4 +1,4 @@
-.PHONY: sdlgui zabbr lib test docs docsupload
+.PHONY: sdlgui zabbr lib test docs docsupload memcheck
 
 all: lib zabbr sdlgui
 
@@ -19,6 +19,9 @@ docs:
 
 docsupload: docs
 	lftp -f docs-upload.lftp
+
+memcheck: sdlgui
+	LD_LIBRARY_PATH=./src valgrind --leak-check=full --suppressions=./sdl.sup ./sdl/sisdl
 
 clean:
 	make -C zabbr clean
