@@ -34,8 +34,10 @@ namespace SISDL {
 			menu->addWidget(new Button(this, "Another button"));
 			
 			Button* b = new Button(this, "Quit");
-			b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::confirmQuit));
+			b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::onQuitButtonClicked));
 			menu->addWidget(b);
+			
+			menu->connectRequestQuit(new SIWindowEmptyCallback(this, &SIWindow::onRequestQuitMainMenu));
 	
 			VSDLController* controller = new SplashController(this, "splash.bmp", menu);
 			SDLWindow::run(controller);
@@ -46,7 +48,7 @@ namespace SISDL {
 	}
 
 	/**
-	 * Callback when the quit button is clicked.
+	 * Callback when the yes button in the quit confirmation dialog is clicked.
 	 *
 	 * @param e The Mouse Button Event.
 	*/
@@ -71,8 +73,12 @@ namespace SISDL {
 	 *
 	 * @param e The Mouse Button Event.
 	*/
-	void SIWindow::confirmQuit(SDL_MouseButtonEvent e)
+	void SIWindow::onQuitButtonClicked(SDL_MouseButtonEvent e)
 	{
+		fController->requestQuit();
+	}
+	
+	void SIWindow::onRequestQuitMainMenu() {
 		MenuController* quitConfirmation = new MenuController(this);
 		Button* b = new Button(this, "Yes");
 		b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::onQuit));
@@ -111,5 +117,24 @@ namespace SISDL {
 	void SIWindowMouseButtonCallback::call(SDL_MouseButtonEvent e)
 	{
 		(fWindow->*fFunction)(e);
+	}
+	
+	/**
+	 * Constructor.
+	 *
+	 * @param window The SIWindow.
+	 * @param fp The member pointer.
+	*/
+	SIWindowEmptyCallback::SIWindowEmptyCallback(
+	       SIWindow* window, void (SIWindow::*fp)())
+	                            : fWindow(window), fFunction(fp) {
+	}
+
+	/**
+	 * Call the callback with specific parameter.
+	*/
+	void SIWindowEmptyCallback::call()
+	{
+		(fWindow->*fFunction)();
 	}
 }

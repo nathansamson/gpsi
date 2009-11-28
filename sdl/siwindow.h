@@ -16,8 +16,10 @@ namespace SISDL {
 		void run();
 
 		void onQuit(SDL_MouseButtonEvent);
-		void confirmQuit(SDL_MouseButtonEvent);
 		void cancelQuit(SDL_MouseButtonEvent);
+		void confirmQuit(SDL_MouseButtonEvent);
+		void onQuitButtonClicked(SDL_MouseButtonEvent);
+		void onRequestQuitMainMenu();
 		
 		void startGame(SDL_MouseButtonEvent);
 	};
@@ -38,6 +40,24 @@ namespace SISDL {
 		 * The attached member function.
 		*/
 		void (SIWindow::* fFunction)(SDL_MouseButtonEvent);
+	};
+	
+	/**
+	 * Space Invaders window empty callback.
+	*/
+	class SIWindowEmptyCallback: public IEmptyCallback {
+	public:
+		SIWindowEmptyCallback(SIWindow*, void (SIWindow::*)());
+		virtual void call();
+	private:
+		/**
+		 * The attached window.
+		*/
+		SIWindow* fWindow;
+		/**
+		 * The attached member function.
+		*/
+		void (SIWindow::* fFunction)();
 	};
 
 }
