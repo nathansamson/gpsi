@@ -13,6 +13,7 @@ namespace SI {
 	class Game {
 	public:
 		Game(VShipDriver*, IGameEntityFactory*);
+		virtual ~Game();
 		
 		void update(int);
 	private:
