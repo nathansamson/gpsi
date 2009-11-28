@@ -4,7 +4,7 @@
 #include "zabbr/sdlwindow.h"
 #include "zabbr/events/callbacks.h"
 
-namespace sisdl {
+namespace SISDL {
 	using namespace Zabbr;
 
 
@@ -18,6 +18,8 @@ namespace sisdl {
 		void onQuit(SDL_MouseButtonEvent);
 		void confirmQuit(SDL_MouseButtonEvent);
 		void cancelQuit(SDL_MouseButtonEvent);
+		
+		void startGame(SDL_MouseButtonEvent);
 	};
 
 	/**
