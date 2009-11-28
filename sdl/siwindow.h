@@ -22,6 +22,8 @@ namespace SISDL {
 		void onRequestQuitMainMenu();
 		
 		void startGame(SDL_MouseButtonEvent);
+	private:
+		void setDataPath();
 	};
 
 	/**

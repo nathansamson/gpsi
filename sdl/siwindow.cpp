@@ -6,6 +6,7 @@
 #include "zabbr/controller/menucontroller.h"
 #include "zabbr/widgets/button.h"
 #include "zabbr/widgets/label.h"
+#include "zabbr/resources/resourcemanager.h"
 #include "gamecontroller.h"
 #include "siwindow.h"
 
@@ -21,6 +22,8 @@ namespace SISDL {
 			std::cerr << "Could not initialize SDL: " << e.getError() << std::endl;
 			return;
 		}
+		
+		setDataPath();
 
 		try {
 			MenuController* menu = new MenuController(this);
@@ -96,6 +99,10 @@ namespace SISDL {
 		
 		fController->background();
 		fController->openController(gameController);
+	}
+
+	void SIWindow::setDataPath() {
+		ResourceManager::fgDataPath = "./data/";
 	}
 
 	/**
