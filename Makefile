@@ -1,18 +1,20 @@
-.PHONY: sdlgui zabbr lib test docs docsupload memcheck
+export CXXFLAGS += -Werror -Wall
+
+.PHONY: sdlgui zabbr lib test docs docsupload memcheck run
 
 all: lib zabbr sdlgui
 
 lib:
-	make -C src all
+	$(MAKE) -C src all
 
 test:
-	make -C src test
+	$(MAKE) -C src test
 
 zabbr:
-	make -C zabbr all
+	$(MAKE) -C zabbr all
 
 sdlgui: lib zabbr
-	make -C sdl all
+	$(MAKE) -C sdl all
 
 docs:
 	doxygen > /dev/null
@@ -27,6 +29,6 @@ run: sdlgui
 	LD_LIBRARY_PATH=./src ./sdl/sisdl
 
 clean:
-	make -C zabbr clean
-	make -C sdl clean
-	make -C src clean
+	$(MAKE) -C zabbr clean
+	$(MAKE) -C sdl clean
+	$(MAKE) -C src clean
