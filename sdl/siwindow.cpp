@@ -81,6 +81,9 @@ namespace SISDL {
 		fController->requestQuit();
 	}
 	
+	/**
+	 * Callback called when a quit is requested in the main menu.
+	*/
 	void SIWindow::onRequestQuitMainMenu() {
 		MenuController* quitConfirmation = new MenuController(this);
 		Button* b = new Button(this, "Yes");
@@ -94,6 +97,9 @@ namespace SISDL {
 		fController->openController(quitConfirmation);
 	}
 	
+	/**
+	 * Callback to start the game.
+	*/
 	void SIWindow::startGame(SDL_MouseButtonEvent e) {
 		GameController* gameController = new GameController(this);
 		
@@ -101,6 +107,9 @@ namespace SISDL {
 		fController->openController(gameController);
 	}
 
+	/**
+	 * Sets the data path of the manager.
+	*/
 	void SIWindow::setDataPath() {
 		ResourceManager::fgDataPath = "./data/";
 	}

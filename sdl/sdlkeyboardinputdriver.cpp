@@ -3,6 +3,9 @@
 
 namespace SISDL {
 
+	/**
+	 * Update the driver.
+	*/
 	void SDLKeyboardInputDriver::update(int ticks) {
 		const double max = 0.00003;
 		
@@ -25,6 +28,11 @@ namespace SISDL {
 		move(fSpeed * ticks);
 	}
 	
+	/**
+	 * Callback for keypress.
+	 *
+	 * @param evnt The SDL_KeyboardEvent.
+	*/
 	void SDLKeyboardInputDriver::keyDown(SDL_KeyboardEvent evnt) {
 		if (evnt.keysym.sym == SDLK_LEFT) {
 			fLeft = true;
@@ -33,6 +41,11 @@ namespace SISDL {
 		}
 	}
 	
+	/**
+	 * Callback for keyrelease..
+	 *
+	 * @param evnt The SDL_KeyboardEvent.
+	*/
 	void SDLKeyboardInputDriver::keyRelease(SDL_KeyboardEvent evnt) {
 		if (evnt.keysym.sym == SDLK_LEFT) {
 			fLeft = false;
