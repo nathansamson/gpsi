@@ -33,6 +33,9 @@ namespace SISDL {
 	
 	void GameController::keyRelease(SDL_KeyboardEvent evnt) {
 		fInputDriver->keyRelease(evnt);
+		if (evnt.keysym.sym == SDLK_ESCAPE) {
+			requestQuit();
+		}
 	}
 	
 	void GameController::onRequestQuitGame() {
