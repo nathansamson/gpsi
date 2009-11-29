@@ -77,7 +77,6 @@ namespace SISDL {
 		b->connectOnMouseClick(new GameControllerMouseButtonCallback(this, &GameController::onCloseGame));
 		fQuitConfirmation->addWidget(b);
 
-		background();
 		openController(fQuitConfirmation);
 	}
 	

@@ -68,7 +68,6 @@ namespace SISDL {
 	void SIWindow::cancelQuit(SDL_MouseButtonEvent e)
 	{
 		fController->openParentController();
-		fController->foreground();
 	}
 
 	/**
@@ -93,7 +92,6 @@ namespace SISDL {
 		b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::cancelQuit));
 		quitConfirmation->addWidget(b);
 
-		fController->background();
 		fController->openController(quitConfirmation);
 	}
 	
@@ -103,7 +101,6 @@ namespace SISDL {
 	void SIWindow::startGame(SDL_MouseButtonEvent e) {
 		GameController* gameController = new GameController(this);
 		
-		fController->background();
 		fController->openController(gameController);
 	}
 
