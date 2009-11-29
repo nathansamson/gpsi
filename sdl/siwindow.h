@@ -13,7 +13,7 @@ namespace SISDL {
 	*/
 	class SIWindow : public  SDLWindow {
 	public:
-		void run();
+		void run(bool);
 
 		void onQuit(SDL_MouseButtonEvent);
 		void cancelQuit(SDL_MouseButtonEvent);

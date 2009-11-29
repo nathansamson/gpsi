@@ -14,8 +14,10 @@ namespace SISDL {
 	
 	/**
 	 * Run the Space Invaders window.
+	 *
+	 * @param game True if should run without menu and splash screen.
 	*/
-	void SIWindow::run() {
+	void SIWindow::run(bool game) {
 		try {
 			open(640, 480, false);
 		} catch (SDLInitializationException e) {
@@ -26,24 +28,28 @@ namespace SISDL {
 		setDataPath();
 
 		try {
-			MenuController* menu = new MenuController(this);
-			SDL_Color c = {255, 255, 255};
-			menu->addWidget(new Label(this, "Sprotector", c));
+			if (!game) {
+				MenuController* menu = new MenuController(this);
+				SDL_Color c = {255, 255, 255};
+				menu->addWidget(new Label(this, "Sprotector", c));
 			
-			Button* start = new Button(this, "Start game");
-			start->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::startGame));
-			menu->addWidget(start);
+				Button* start = new Button(this, "Start game");
+				start->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::startGame));
+				menu->addWidget(start);
 			
-			menu->addWidget(new Button(this, "Another button"));
+				menu->addWidget(new Button(this, "Another button"));
 			
-			Button* b = new Button(this, "Quit");
-			b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::onQuitButtonClicked));
-			menu->addWidget(b);
+				Button* b = new Button(this, "Quit");
+				b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::onQuitButtonClicked));
+				menu->addWidget(b);
 			
-			menu->connectRequestQuit(new SIWindowEmptyCallback(this, &SIWindow::onRequestQuitMainMenu));
+				menu->connectRequestQuit(new SIWindowEmptyCallback(this, &SIWindow::onRequestQuitMainMenu));
 	
-			VSDLController* controller = new SplashController(this, "splash.bmp", menu);
-			SDLWindow::run(controller);
+				VSDLController* controller = new SplashController(this, "splash.bmp", menu);
+				SDLWindow::run(controller);
+			} else {
+				SDLWindow::run(new GameController(this));
+			}
 		} catch (ResourceNotLoadedException& e) {
 			std::cerr << "Could not load resource " << e.getResourceID() << " :" << e.getError() << std::endl;
 		}
