@@ -9,6 +9,8 @@ namespace SISDL {
 	*/
 	class SDLKeyboardInputDriver: public SDLInputDriver {
 	public:
+		SDLKeyboardInputDriver();
+
 		virtual void update(int);
 		virtual void keyDown(SDL_KeyboardEvent);
 		virtual void keyRelease(SDL_KeyboardEvent);
