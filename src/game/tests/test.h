@@ -1,9 +1,12 @@
 #ifndef INC_TEST_H
 #define INC_TEST_H
 
+#include <vector>
+
 #include "game/shipdriver.h"
 #include "game/ship.h"
 #include "game/gameentityfactory.h"
+#include "game/enemydriverfactory.h"
 
 namespace SITest {
 	class MockShipDriver: public SI::VShipDriver {
@@ -17,6 +20,12 @@ namespace SITest {
 		
 		virtual void visualize();
 		bool fVisualized;
+	};
+	
+	class MockEnemyDriverFactory: public SI::IEnemyDriverFactory {
+	public:
+		virtual MockShipDriver* createEnemyDriver();
+		std::vector<SI::VShipDriver*> fDrivers;
 	};
 	
 	class MockGameEntityFactory: public SI::IGameEntityFactory {

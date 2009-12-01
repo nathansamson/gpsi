@@ -8,6 +8,7 @@ namespace SITest {
 	
 	SI::Ship* MockGameEntityFactory::createShip(SI::VShipDriver* driver, SI::Vector2 v) {
 		MockShip* fCreatedShip = new MockShip(driver, v);
+		fShips.push_back(fCreatedShip);
 		return fCreatedShip;
 	}
 	
@@ -16,5 +17,11 @@ namespace SITest {
 	
 	void MockShip::visualize() {
 		fVisualized = true;
+	}
+	
+	MockShipDriver* MockEnemyDriverFactory::createEnemyDriver() {
+		MockShipDriver* driver = new MockShipDriver();
+		fDrivers.push_back(driver);
+		return driver;
 	}
 }
