@@ -13,7 +13,7 @@ namespace SI {
 		fEntities.push_back(user);
 		
 		for (int i = 0; i < 5; i++) {
-			fEntities.push_back(entityFactory->createShip(enemyDriverFactory->createEnemyDriver(), Vector2(-3.0+i*(7.0/5), 2.0)));
+			fEntities.push_back(entityFactory->createShip(enemyDriverFactory->createEnemyDriver(), Vector2(-4.0+(i+1)*8.0/6, 2.5)));
 		}
 	}
 	
