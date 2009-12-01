@@ -12,7 +12,7 @@ namespace SITest {
 	                                   &ShipTest::name) \
 	
 	void ShipTest::setUp() {
-		fShip = new Ship(new MockShipDriver());
+		fShip = new Ship(new MockShipDriver(), Vector2(0, 0));
 	}
 	
 	void ShipTest::tearDown() {

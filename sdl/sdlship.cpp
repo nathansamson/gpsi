@@ -10,7 +10,7 @@ namespace SISDL {
 	 * @param driver The driver for the ship.
 	 * @param w The window
 	*/
-	SDLShip::SDLShip(SI::VShipDriver* driver, Zabbr::SDLWindow* w): SI::Ship(driver), fWindow(w) {
+	SDLShip::SDLShip(SI::VShipDriver* driver, SI::Vector2 v, Zabbr::SDLWindow* w): SI::Ship(driver, v), fWindow(w) {
 		fImage = Zabbr::ResourceManager::manager().image("stallaris_spaceship.png");
 	}
 	

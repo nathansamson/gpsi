@@ -15,7 +15,7 @@ namespace SISDL {
 	 *
 	 * @param driver The driver for the ship.
 	*/
-	SI::Ship* SDLEntityFactory::createShip(SI::VShipDriver* driver) {
-		return new SDLShip(driver, fWindow);
+	SI::Ship* SDLEntityFactory::createShip(SI::VShipDriver* driver, SI::Vector2 v) {
+		return new SDLShip(driver, v, fWindow);
 	}
 }

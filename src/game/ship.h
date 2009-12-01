@@ -13,7 +13,7 @@ namespace SI {
 	*/
 	class Ship: public VGameEntity {
 	public:
-		Ship(VShipDriver*);
+		Ship(VShipDriver*, Vector2);
 		virtual ~Ship();
 		
 		virtual void update(int);

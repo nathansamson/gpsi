@@ -11,7 +11,7 @@ namespace SI {
 	class VGameEntity {
 	public:
 		VGameEntity();
-		VGameEntity(Vector2 );
+		VGameEntity(Vector2);
 		virtual ~VGameEntity();
 	
 		virtual void visualize();
