@@ -1,5 +1,7 @@
 #include "zabbr/widgets/button.h"
 
+#include "game/synchronousenemydriverfactory.h"
+
 #include "gamecontroller.h"
 #include "sdlentityfactory.h"
 #include "sdlkeyboardinputdriver.h"
@@ -13,7 +15,7 @@ namespace SISDL {
 	GameController::GameController(Zabbr::SDLWindow* w): Zabbr::VSDLController(w),
 	                fGame(0), fTimeRemainder(0.0), fClosed(false) {
 		fInputDriver = new SDLKeyboardInputDriver();
-		fGame = new SI::Game(fInputDriver, new SDLEntityFactory(w));
+		fGame = new SI::Game(fInputDriver, new SDLEntityFactory(w), new SI::SynchronousEnemyDriverFactory(0.8));
 		connectRequestQuit(new GameControllerEmptyCallback(this, &GameController::onRequestQuitGame));
 	}
 	
