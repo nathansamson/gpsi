@@ -14,7 +14,7 @@ namespace SI {
 		/**
 		 * Creates a Ship.
 		*/
-		virtual Ship* createShip(VShipDriver*) = 0;
+		virtual Ship* createShip(VShipDriver*, Vector2) = 0;
 	};
 }
 

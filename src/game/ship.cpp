@@ -7,8 +7,9 @@ namespace SI {
 	 *
 	 * @param driver The driver for the ship. The ship manages the driver, 
 	 *        so the driver will be freed when the ship is descructed.
+	 * @param v The initial position of the ship.
 	*/
-	Ship::Ship(VShipDriver* driver): fShipDriver(driver) {
+	Ship::Ship(VShipDriver* driver, Vector2 v): VGameEntity(v), fShipDriver(driver) {
 		fShipDriver->bind(this);
 	}
 	

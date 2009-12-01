@@ -6,12 +6,12 @@ namespace SITest {
 		move(SI::Vector2(1.0/100, 0) * ticks);
 	}
 	
-	SI::Ship* MockGameEntityFactory::createShip(SI::VShipDriver* driver) {
-		fCreatedShip = new MockShip(driver);
+	SI::Ship* MockGameEntityFactory::createShip(SI::VShipDriver* driver, SI::Vector2 v) {
+		MockShip* fCreatedShip = new MockShip(driver, v);
 		return fCreatedShip;
 	}
 	
-	MockShip::MockShip(SI::VShipDriver* driver): SI::Ship(driver), fVisualized(false) {
+	MockShip::MockShip(SI::VShipDriver* driver, SI::Vector2 v): SI::Ship(driver, v), fVisualized(false) {
 	}
 	
 	void MockShip::visualize() {

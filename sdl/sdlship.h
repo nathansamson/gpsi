@@ -11,7 +11,7 @@ namespace SISDL {
 	*/
 	class SDLShip: public SI::Ship {
 	public:
-		SDLShip(SI::VShipDriver*, Zabbr::SDLWindow*);
+		SDLShip(SI::VShipDriver*, SI::Vector2, Zabbr::SDLWindow*);
 		virtual ~SDLShip();
 		
 		virtual void visualize();

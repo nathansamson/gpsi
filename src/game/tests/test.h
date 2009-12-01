@@ -13,7 +13,7 @@ namespace SITest {
 	
 	class MockShip: public SI::Ship {
 	public:
-		MockShip(SI::VShipDriver*);
+		MockShip(SI::VShipDriver*, SI::Vector2);
 		
 		virtual void visualize();
 		bool fVisualized;
@@ -21,8 +21,8 @@ namespace SITest {
 	
 	class MockGameEntityFactory: public SI::IGameEntityFactory {
 	public:
-		SI::Ship* createShip(SI::VShipDriver*);
-		MockShip* fCreatedShip;
+		SI::Ship* createShip(SI::VShipDriver*, SI::Vector2);
+		std::vector<MockShip*> fShips;
 	};
 }
 
