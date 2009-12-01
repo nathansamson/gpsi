@@ -12,7 +12,8 @@ namespace SITest {
 	
 	void GameTest::setUp() {
 		fEntityFactory = new MockGameEntityFactory();
-		fGame = new Game(new MockShipDriver(), fEntityFactory);
+		fEnemyDriverFactory = new MockEnemyDriverFactory();
+		fGame = new Game(new MockShipDriver(), fEntityFactory, fEnemyDriverFactory);
 	}
 	
 	void GameTest::tearDown() {
@@ -20,13 +21,20 @@ namespace SITest {
 	}
 	
 	void GameTest::testSimpleGame() {
-		CPPUNIT_ASSERT(fEntityFactory->fCreatedShip != 0);
-		CPPUNIT_ASSERT(!fEntityFactory->fCreatedShip->fVisualized);
-		fGame->update(1000);
-		CPPUNIT_ASSERT(fEntityFactory->fCreatedShip->fVisualized);
-		fEntityFactory->fCreatedShip->fVisualized = false;
-		assertVectorEquality(Vector2(10, 0), fEntityFactory->fCreatedShip->getPosition());
+		CPPUNIT_ASSERT(fEntityFactory->fShips[0] != 0);
+		CPPUNIT_ASSERT(!fEntityFactory->fShips[0]->fVisualized);
 		
+		for (int i = 1; i < 6; i++) {
+			CPPUNIT_ASSERT(!fEntityFactory->fShips[i]->fVisualized);
+			assertVectorEquality(Vector2(1.0+6.0/i, 2.0), fEntityFactory->fShips[i]->getPosition());
+		}
+		
+		fGame->update(1000);
+		CPPUNIT_ASSERT(fEntityFactory->fShips[0]->fVisualized);
+		fEntityFactory->fShips[0]->fVisualized = false;
+		assertVectorEquality(Vector2(10, -2.0), fEntityFactory->fShips[0]->getPosition());
+		
+		CPPUNIT_ASSERT(5 == (fEnemyDriverFactory->fDrivers.size()));
 	}
 	
 	CppUnit::Test* GameTest::suite() {

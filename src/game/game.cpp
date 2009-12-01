@@ -7,9 +7,14 @@ namespace SI {
 	 * @param userShipDriver The VShipDriver for the user ship.
 	 * @param entityFactory The Entity factory for this game.
 	*/
-	Game::Game(VShipDriver* userShipDriver, IGameEntityFactory* entityFactory) : fEntityFactory(entityFactory) {
-		Ship* user = entityFactory->createShip(userShipDriver);
+	Game::Game(VShipDriver* userShipDriver, IGameEntityFactory* entityFactory, IEnemyDriverFactory* enemyDriverFactory) 
+	     : fEntityFactory(entityFactory), fEnemyDriverFactory(enemyDriverFactory) {
+		Ship* user = entityFactory->createShip(userShipDriver, Vector2(0, -2.0));
 		fEntities.push_back(user);
+		
+		for (int i = 0; i < 5; i++) {
+			fEntities.push_back(entityFactory->createShip(enemyDriverFactory->createEnemyDriver(), Vector2(-3.0+i*(7.0/5), 2.0)));
+		}
 	}
 	
 	Game::~Game() {
@@ -17,6 +22,7 @@ namespace SI {
 			delete (*it);
 		}
 		delete fEntityFactory;
+		delete fEnemyDriverFactory;
 	}
 	
 	/**

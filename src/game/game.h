@@ -4,6 +4,7 @@
 #include <list>
 #include "gameentityfactory.h"
 #include "shipdriver.h"
+#include "enemydriverfactory.h"
 
 namespace SI {
 	/**
@@ -12,7 +13,7 @@ namespace SI {
 	*/
 	class Game {
 	public:
-		Game(VShipDriver*, IGameEntityFactory*);
+		Game(VShipDriver*, IGameEntityFactory*, IEnemyDriverFactory* enemyDriverFactory);
 		virtual ~Game();
 		
 		void update(int);
@@ -26,6 +27,11 @@ namespace SI {
 		 * The entity factory to create the entities.
 		*/
 		IGameEntityFactory* fEntityFactory;
+		
+		/**
+		 * The enemy driver factory.
+		*/
+		IEnemyDriverFactory* fEnemyDriverFactory;
 	};
 }
 
