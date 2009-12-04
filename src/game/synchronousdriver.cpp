@@ -8,11 +8,15 @@ namespace SI {
 	
 	void SynchronousDriver::update(int ticks) {
 		Vector2 step = Vector2(fDir*0.0002*ticks, -0.0001*ticks);
-		fMoved += step;
-		if (std::fabs(fMoved.getX()) > fXMargin) {
+		if (std::fabs((fMoved+step).getX()) >= fXMargin-1E-8) {
+			if (fDir == 1) {
+				step -= 2*Vector2((fMoved+step).getX()-fXMargin, 0.0);
+			} else {
+				step -= 2*Vector2((fMoved+step).getX()+fXMargin, 0.0);
+			}
 			fDir *= -1;
-			step -= step;
 		}
+		fMoved += step;
 		move(step);
 	}
 }
