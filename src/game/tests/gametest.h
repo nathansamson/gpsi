@@ -1,5 +1,5 @@
 #ifndef INC_GAMETEST_H
-#define INC_SHIPTEST_H
+#define INC_GAMETEST_H
 
 #include <cppunit/Test.h>
 #include <cppunit/TestFixture.h>
@@ -29,4 +29,4 @@ namespace SITest {
 	};
 }
 
-#endif //INC_GAMESHIP_H
+#endif //INC_GAMETEST_H
