@@ -1,3 +1,4 @@
+include Makefile.conf
 export CXXFLAGS += -Werror -Wall
 
 .PHONY: sdlgui zabbr lib test docs docsupload memcheck run
