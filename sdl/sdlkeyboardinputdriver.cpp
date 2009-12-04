@@ -26,6 +26,9 @@ namespace SISDL {
 		}
 		
 		move(fSpeed * ticks);
+		if (fFire) {
+			fire();
+		}
 	}
 	
 	/**
@@ -38,6 +41,8 @@ namespace SISDL {
 			fLeft = true;
 		} else if (evnt.keysym.sym == SDLK_RIGHT) {
 			fRight = true;
+		} else if (evnt.keysym.sym == SDLK_SPACE) {
+			fFire = true;
 		}
 	}
 	
@@ -51,6 +56,8 @@ namespace SISDL {
 			fLeft = false;
 		} else if (evnt.keysym.sym == SDLK_RIGHT) {
 			fRight = false;
+		} else if (evnt.keysym.sym == SDLK_SPACE) {
+			fFire = false;
 		}
 	}
 }

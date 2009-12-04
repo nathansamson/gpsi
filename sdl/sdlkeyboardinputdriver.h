@@ -21,6 +21,10 @@ namespace SISDL {
 		 * True if the key associated with right is pressed.
 		*/
 		bool fRight;
+		/**
+		 * True if the user requested a fire.
+		*/
+		bool fFire;
 		
 		/**
 		 * The current speed per tick of the ship.
