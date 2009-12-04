@@ -6,17 +6,20 @@ namespace SI {
 	 *
 	 * @param s The speed of the bullet.
 	 * @param pos The position of the bullet.
+	 * @param fac The factory of the bullet.
 	*/
-	Bullet::Bullet(Vector2 s, Vector2 pos): VGameEntity(pos), fSpeed(s) {
+	Bullet::Bullet(Vector2 s, Vector2 pos, IGameEntityFactory* fac): VGameEntity(pos, fac), fSpeed(s) {
 	}
 	
 	/**
 	 * Update the state of the bullet.
 	 *
 	 * @param ticks The number of ticks passed since last update.
+	 * @return An empty list of generated entities.
 	*/
-	void Bullet::update(int ticks) {
+	std::vector<VGameEntity*> Bullet::update(int ticks) {
 		move(fSpeed * ticks);
+		return std::vector<VGameEntity*>();
 	}
 	
 	/**

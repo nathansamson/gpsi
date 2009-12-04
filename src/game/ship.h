@@ -2,8 +2,8 @@
 #define INC_SHIP_H
 
 #include "misc/vector2.h"
-#include "shipdriver.h"
-#include "gameentity.h"
+#include "game/shipdriver.h"
+#include "game/gameentity.h"
 
 namespace SI {
 	class VShipDriver;
@@ -13,16 +13,32 @@ namespace SI {
 	*/
 	class Ship: public VGameEntity {
 	public:
-		Ship(VShipDriver*, Vector2);
+		Ship(VShipDriver*, Vector2, IGameEntityFactory*);
 		virtual ~Ship();
 		
-		virtual void update(int);
+		virtual std::vector<VGameEntity*> update(int);
 		friend class VShipDriver;
+	protected:
+		bool hasFired();
 	private:
+		void fire();
+		
+		/**
+		 * Request to fire.
+		*/
+		bool fRequestFire;
+	
 		/**
 		 * The ship driver.
 		*/
 		VShipDriver* fShipDriver;
+		
+		/**
+		 * The number of ticks passed since last fire.
+		*/
+		int fTicksSinceLastFire;
+		
+		static const int minTicksBetweenFire = 10000;
 	};
 }
 

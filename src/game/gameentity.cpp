@@ -1,18 +1,13 @@
 #include "gameentity.h"
 
-namespace SI {
-	/**
-	 * Public constructor.
-	*/
-	VGameEntity::VGameEntity(): fPosition(Vector2(0, 0)) {
-	}
-	
+namespace SI {	
 	/**
 	 * Public constructor.
 	 *
 	 * @param pos The initial position of the entity.
+	 * @param fac The factory that created this entity.
 	*/
-	VGameEntity::VGameEntity(Vector2 pos): fPosition(pos) {
+	VGameEntity::VGameEntity(Vector2 pos, IGameEntityFactory* fac): fEntityFactory(fac), fPosition(pos) {
 	}
 	
 	/**
