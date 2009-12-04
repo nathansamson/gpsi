@@ -9,6 +9,7 @@ namespace SISDL {
 	public:
 		SDLEntityFactory(Zabbr::SDLWindow*);
 		SI::Ship* createShip(SI::VShipDriver*, SI::Vector2);
+		SI::Bullet* createBullet(SI::Vector2, SI::Vector2);
 	private:
 		/**
 		 * The window to draw the widgets on.
