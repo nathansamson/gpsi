@@ -3,6 +3,7 @@
 
 #include "game/shipdriver.h"
 #include "game/ship.h"
+#include "game/bullet.h"
 
 namespace SI {
 	/**
@@ -15,6 +16,11 @@ namespace SI {
 		 * Creates a Ship.
 		*/
 		virtual Ship* createShip(VShipDriver*, Vector2) = 0;
+		
+		/**
+		 * Creates a bullet.
+		*/
+		virtual Bullet* createBullet(Vector2, Vector2) = 0;
 	};
 }
 

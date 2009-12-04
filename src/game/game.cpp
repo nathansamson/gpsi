@@ -31,8 +31,16 @@ namespace SI {
 	 * @param ticks The number of ticks passed since last update.
 	*/
 	void Game::update(int ticks) {
+		std::vector<VGameEntity*> newEnts;
 		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
-			(*it)->update(ticks);
+			std::vector<VGameEntity*> generated = (*it)->update(ticks);
+			for (std::vector<VGameEntity*>::iterator it2 = generated.begin(); it2 != generated.end(); it2++) {
+				newEnts.push_back((*it2));
+			}
+		}
+		
+		for (std::vector<VGameEntity*>::iterator it = newEnts.begin(); it != newEnts.end(); it++) {
+			fEntities.push_back((*it));
 		}
 		
 		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {

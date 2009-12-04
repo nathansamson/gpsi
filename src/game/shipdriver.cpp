@@ -25,4 +25,11 @@ namespace SI {
 	void VShipDriver::move(Vector2 v) {
 		fEntity->move(v);
 	}
+	
+	/**
+	 * Fire a weapon.
+	*/
+	void VShipDriver::fire() {
+		fEntity->fire();
+	}
 }

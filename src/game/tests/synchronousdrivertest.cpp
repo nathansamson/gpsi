@@ -11,7 +11,7 @@ namespace SITest {
 	
 	void SynchronousDriverTest::setUp() {
 		fDriver = new SI::SynchronousDriver(2.0);
-		fShip = new SITest::MockShip(fDriver, SI::Vector2(0.0, 0.0));
+		fShip = new SITest::MockShip(fDriver, SI::Vector2(0.0, 0.0), 0);
 	}
 	
 	void SynchronousDriverTest::tearDown() {

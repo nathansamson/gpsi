@@ -10,7 +10,7 @@ namespace SITest {
 	                                   &BulletTest::name) \
 	
 	void BulletTest::setUp() {
-		fBullet = new Bullet(Vector2(0.000, 0.001), Vector2(0.0, 0.0));
+		fBullet = new Bullet(Vector2(0.000, 0.001), Vector2(0.0, 0.0), 0);
 	}
 	
 	void BulletTest::tearDown() {

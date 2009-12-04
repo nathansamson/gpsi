@@ -21,6 +21,7 @@ namespace SI {
 		void bind(Ship*);
 	protected:
 		void move(Vector2);
+		void fire();
 	private:
 		/**
 		 * The ship to driver.

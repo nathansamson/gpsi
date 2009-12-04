@@ -11,9 +11,9 @@ namespace SI {
 	*/
 	class Bullet: public VGameEntity {
 	public:
-		Bullet(Vector2, Vector2);
+		Bullet(Vector2, Vector2, IGameEntityFactory*);
 		
-		virtual void update(int);
+		virtual std::vector<VGameEntity*> update(int);
 		virtual double getImpact();
 	private:
 		/**

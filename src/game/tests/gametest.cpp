@@ -1,6 +1,7 @@
 #include <cppunit/TestAssert.h>
 #include <cppunit/TestCaller.h>
 #include <cppunit/TestSuite.h>
+#include <iostream>
 
 #include "game/ship.h"
 #include "gametest.h"
@@ -35,6 +36,18 @@ namespace SITest {
 		assertVectorEquality(Vector2(10, -2.0), fEntityFactory->fShips[0]->getPosition());
 		
 		CPPUNIT_ASSERT(5 == (fEnemyDriverFactory->fDrivers.size()));
+		
+		fGame->update(MAGIC_FIRE_TICK);
+		CPPUNIT_ASSERT(fEntityFactory->fBullets[0] != 0);
+		CPPUNIT_ASSERT(fEntityFactory->fBullets[0]->fVisualized);
+		assertVectorEquality(fEntityFactory->fShips[0]->getPosition(), fEntityFactory->fBullets[0]->getPosition());
+
+		fGame->update(1);
+		CPPUNIT_ASSERT(fEntityFactory->fBullets[0]->fVisualized);
+		assertVectorEquality(Vector2((MAGIC_FIRE_TICK)*0.01+10, -1.999), fEntityFactory->fBullets[0]->getPosition());
+		
+		fGame->update(MAGIC_FIRE_TICK); // No firing, to short after the first one.
+		CPPUNIT_ASSERT_EQUAL(6, (int)fEntityFactory->fBullets.size()); // The AI's use the MockShipDriver
 	}
 	
 	CppUnit::Test* GameTest::suite() {
