@@ -31,15 +31,14 @@ namespace SI {
 	std::vector<VGameEntity*> Ship::update(int ticks) {
 		fShipDriver->update(ticks);
 		fTicksSinceLastFire += ticks;
+		std::vector<VGameEntity*> fire;
 		
 		if (hasFired()) {
-			fRequestFire = false;
 			fTicksSinceLastFire = 0;
-			std::vector<VGameEntity*> fire;
 			fire.push_back(fEntityFactory->createBullet(Vector2(0.000, 0.001), getPosition()));
-			return fire;
 		}
-		return std::vector<VGameEntity*>();
+		fRequestFire = false;
+		return fire;
 	}
 	
 	/**

@@ -48,6 +48,12 @@ namespace SITest {
 		
 		fGame->update(MAGIC_FIRE_TICK); // No firing, to short after the first one.
 		CPPUNIT_ASSERT_EQUAL(6, (int)fEntityFactory->fBullets.size()); // The AI's use the MockShipDriver
+		
+		fGame->update(10000);
+		CPPUNIT_ASSERT_EQUAL(6, (int)fEntityFactory->fBullets.size()); // The AI's use the MockShipDriver
+		
+		fGame->update(MAGIC_FIRE_TICK); // Fire again
+		CPPUNIT_ASSERT_EQUAL(12, (int)fEntityFactory->fBullets.size()); // The AI's use the MockShipDriver
 	}
 	
 	CppUnit::Test* GameTest::suite() {
