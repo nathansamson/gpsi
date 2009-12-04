@@ -9,6 +9,9 @@
 #include "game/enemydriverfactory.h"
 
 namespace SITest {
+	#define SITEST_ASSERT_VECTORS_EQUAL(e, a)  CPPUNIT_ASSERT_DOUBLES_EQUAL(e.getX(), a.getX(), 1E-10);\
+	                                           CPPUNIT_ASSERT_DOUBLES_EQUAL(e.getY(), a.getY(), 1E-10)
+
 	class MockShipDriver: public SI::VShipDriver {
 	public:
 		virtual void update(int ticks);
