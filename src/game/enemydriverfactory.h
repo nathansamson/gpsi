@@ -6,6 +6,7 @@
 namespace SI {
 	class IEnemyDriverFactory {
 	public:
+		virtual ~IEnemyDriverFactory() {}
 		virtual VShipDriver* createEnemyDriver() = 0;
 	};
 }

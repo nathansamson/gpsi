@@ -12,6 +12,8 @@ namespace SI {
 	*/
 	class IGameEntityFactory {
 	public:
+		virtual ~IGameEntityFactory() {}
+	
 		/**
 		 * Creates a Ship.
 		*/
