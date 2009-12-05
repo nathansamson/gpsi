@@ -1,8 +1,10 @@
 #include "sdlbullet.h"
 
 namespace SISDL {
-	SDLBullet::SDLBullet(SI::Vector2 speed, SI::Vector2 pos, SI::IGameEntityFactory* fac, Zabbr::SDLWindow* w):
-	           SI::Bullet(speed, pos, fac), fWindow(w) {
+	SDLBullet::SDLBullet(SI::Vector2 speed, SI::BulletType t,
+	                     SI::IGameEntityFactory* fac,
+	                     Zabbr::SDLWindow* w):
+	           SI::Bullet(speed, t, fac), fWindow(w) {
 	}
 	
 	void SDLBullet::visualize() {

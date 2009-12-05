@@ -45,7 +45,7 @@ namespace SISDL {
 			
 				menu->connectRequestQuit(new SIWindowEmptyCallback(this, &SIWindow::onRequestQuitMainMenu));
 	
-				VSDLController* controller = new SplashController(this, "splash.bmp", menu);
+				VSDLController* controller = new SplashController(this, "splash.png", menu);
 				SDLWindow::run(controller);
 			} else {
 				SDLWindow::run(new GameController(this));

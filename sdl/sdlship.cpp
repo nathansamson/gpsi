@@ -2,6 +2,7 @@
 
 #include "zabbr/resources/resourcemanager.h"
 #include "src/misc/vector2.h"
+#include "src/misc/boundingbox.h"
 
 namespace SISDL {
 	/**
@@ -10,8 +11,14 @@ namespace SISDL {
 	 * @param driver The driver for the ship.
 	 * @param w The window
 	*/
-	SDLShip::SDLShip(SI::VShipDriver* driver, SI::Vector2 v, SI::IGameEntityFactory* fac, Zabbr::SDLWindow* w): SI::Ship(driver, v, fac), fWindow(w) {
-		fImage = Zabbr::ResourceManager::manager().image("stallaris_spaceship.png");
+	SDLShip::SDLShip(SI::VShipDriver* driver, SI::Vector2 v,
+	                 SI::ShipType t, SI::IGameEntityFactory* fac,
+	                 Zabbr::SDLWindow* w):
+	         SI::Ship(driver, v, t, fac), fWindow(w) {
+	    SI::BoundingBoxDescription* bb = dynamic_cast<SI::BoundingBoxDescription*>(t.fBoundingShapeDesc);
+	    int width = bb->getWidth() / 8.0 * fWindow->getXResolution();
+	    int height = bb->getHeight() / 6.0 * fWindow->getYResolution();
+		fImage = Zabbr::ResourceManager::manager().image(t.fName+".png", width, height, true);
 	}
 	
 	/**
@@ -39,7 +46,7 @@ namespace SISDL {
 	*/
 	void SDLShip::positionToWindowCoords(int& x, int& y) {
 		SI::Vector2 p ((getPosition() + SI::Vector2(4.0, -3.0)) * (fWindow->getXResolution()/8));
-		p -= SI::Vector2(fImage->getWidth() / 2, -fImage->getHeight() / 2);
+		p -= SI::Vector2(fImage->getWidth() / 2, - fImage->getHeight() / 2);
 		
 		x = p.getX();
 		y = -p.getY();
