@@ -8,12 +8,17 @@
 namespace SI {
 	class VShipDriver;
 
+	struct ShipType {
+		IBoundingShapeDescription* fBoundingShapeDesc;
+		std::string fName;
+	};
+
 	/**
 	 * The Ship class. A Ship represents a space ship in the space.
 	*/
 	class Ship: public VGameEntity {
 	public:
-		Ship(VShipDriver*, Vector2, IGameEntityFactory*);
+		Ship(VShipDriver*, Vector2, ShipType, IGameEntityFactory*);
 		virtual ~Ship();
 		
 		virtual std::vector<VGameEntity*> update(int);

@@ -6,9 +6,12 @@ namespace SI {
 	 *
 	 * @param s The speed of the bullet.
 	 * @param pos The position of the bullet.
+	 * @param type the Bullet information.
 	 * @param fac The factory of the bullet.
 	*/
-	Bullet::Bullet(Vector2 s, Vector2 pos, IGameEntityFactory* fac): VGameEntity(pos, fac), fSpeed(s) {
+	Bullet::Bullet(Vector2 pos, BulletType type, IGameEntityFactory* fac):
+	        VGameEntity(pos, type.fBoundingShapeDesc, fac),
+	        fSpeed(type.fSpeed) {
 	}
 	
 	/**

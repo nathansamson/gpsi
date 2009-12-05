@@ -1,4 +1,5 @@
 #include "game.h"
+#include "misc/boundingbox.h"
 
 namespace SI {
 	/**
@@ -9,11 +10,19 @@ namespace SI {
 	*/
 	Game::Game(VShipDriver* userShipDriver, IGameEntityFactory* entityFactory, IEnemyDriverFactory* enemyDriverFactory) 
 	     : fEntityFactory(entityFactory), fEnemyDriverFactory(enemyDriverFactory) {
-		Ship* user = entityFactory->createShip(userShipDriver, Vector2(0, -2.0));
+	    ShipType userShipType;
+	    userShipType.fBoundingShapeDesc = new BoundingBoxDescription(0.80, 0.56);
+	    userShipType.fName = "X Wing";
+		Ship* user = entityFactory->createShip(userShipDriver, Vector2(0.0, -2.0), userShipType);
 		fEntities.push_back(user);
 		
+		ShipType enemyShipType;
+	    enemyShipType.fName = "Obi-Wan_starfighter";
+	    enemyShipType.fBoundingShapeDesc = new BoundingBoxDescription(0.80, 0.80);
 		for (int i = 0; i < 5; i++) {
-			fEntities.push_back(entityFactory->createShip(enemyDriverFactory->createEnemyDriver(), Vector2(-4.0+(i+1)*8.0/6, 2.5)));
+			fEntities.push_back(entityFactory->createShip(
+			            enemyDriverFactory->createEnemyDriver(),
+			            Vector2(-4.0+(i+1)*8.0/6, 2.5), enemyShipType));
 		}
 	}
 	

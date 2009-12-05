@@ -3,6 +3,7 @@
 #include <cppunit/TestSuite.h>
 
 #include "bullettest.h"
+#include "misc/boundingbox.h"
 
 namespace SITest {
 	#define BULLET_TEST(name) new CppUnit::TestCaller<BulletTest>( \
@@ -10,7 +11,10 @@ namespace SITest {
 	                                   &BulletTest::name) \
 	
 	void BulletTest::setUp() {
-		fBullet = new Bullet(Vector2(0.000, 0.001), Vector2(0.0, 0.0), 0);
+		BulletType b;
+		b.fSpeed = Vector2(0.000, 0.001);
+		b.fBoundingShapeDesc = new BoundingBoxDescription(0.1, 0.1);
+		fBullet = new Bullet(Vector2(0.0, 0.0), b, 0);
 	}
 	
 	void BulletTest::tearDown() {

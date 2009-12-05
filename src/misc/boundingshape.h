@@ -35,6 +35,14 @@ namespace SI {
 	};
 	
 	/**
+	 * Generic blueprint for a bounding shape.
+	*/
+	class IBoundingShapeDescription {
+	public:
+		virtual VBoundingShape* createShape() = 0;
+	};
+	
+	/**
 	 * Exception thrown when their is no algorithm found to check the intersection of 2 shapes.
 	*/
 	class UnresolvedIntersectionException {

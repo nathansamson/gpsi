@@ -20,6 +20,9 @@ namespace SITest {
 		void testWithUnresolved();
 
 		static CppUnit::Test* suite();
+	private:
+		BoundingBox* fOne;
+		BoundingBox* fTwo;
 	};
 	
 }

@@ -17,12 +17,12 @@ namespace SI {
 		/**
 		 * Creates a Ship.
 		*/
-		virtual Ship* createShip(VShipDriver*, Vector2) = 0;
+		virtual Ship* createShip(VShipDriver*, Vector2, ShipType) = 0;
 		
 		/**
 		 * Creates a bullet.
 		*/
-		virtual Bullet* createBullet(Vector2, Vector2) = 0;
+		virtual Bullet* createBullet(Vector2, BulletType) = 0;
 	};
 }
 

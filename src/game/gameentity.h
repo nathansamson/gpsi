@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "misc/vector2.h"
+#include "misc/boundingshape.h"
 
 namespace SI {
 	class IGameEntityFactory;
@@ -13,7 +14,7 @@ namespace SI {
 	*/
 	class VGameEntity {
 	public:
-		VGameEntity(Vector2, IGameEntityFactory*);
+		VGameEntity(Vector2, IBoundingShapeDescription*, IGameEntityFactory*);
 		virtual ~VGameEntity();
 	
 		virtual void visualize();
@@ -36,6 +37,11 @@ namespace SI {
 		 * The position of the center of the entity.
 		*/
 		Vector2 fPosition;
+		
+		/**
+		 * The bounding shape of the entity.
+		*/
+		VBoundingShape* fBoundingShape;
 	};
 }
 

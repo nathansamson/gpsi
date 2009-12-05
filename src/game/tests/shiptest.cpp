@@ -5,6 +5,7 @@
 #include "game/ship.h"
 #include "shiptest.h"
 #include "game/tests/test.h"
+#include "misc/boundingbox.h"
 
 namespace SITest {
 	#define SHIP_TEST(name) new CppUnit::TestCaller<ShipTest>( \
@@ -12,7 +13,9 @@ namespace SITest {
 	                                   &ShipTest::name) \
 	
 	void ShipTest::setUp() {
-		fShip = new Ship(new MockShipDriver(), Vector2(0, 0), 0);
+		ShipType s;
+		s.fBoundingShapeDesc = new BoundingBoxDescription(1.0, 1.0);
+		fShip = new Ship(new MockShipDriver(), Vector2(0, 0), s, 0);
 	}
 	
 	void ShipTest::tearDown() {

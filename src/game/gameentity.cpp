@@ -5,15 +5,20 @@ namespace SI {
 	 * Public constructor.
 	 *
 	 * @param pos The initial position of the entity.
+	 * @param bshape The bounding shape of the entity. The entity owns the bounding shape.
 	 * @param fac The factory that created this entity.
 	*/
-	VGameEntity::VGameEntity(Vector2 pos, IGameEntityFactory* fac): fEntityFactory(fac), fPosition(pos) {
+	VGameEntity::VGameEntity(Vector2 pos, IBoundingShapeDescription* bshape,
+	                         IGameEntityFactory* fac):
+	             fEntityFactory(fac), fPosition(pos), fBoundingShape(bshape->createShape()) {
+		fBoundingShape->setOffset(pos);
 	}
 	
 	/**
 	 * Desctructor.
 	*/
 	VGameEntity::~VGameEntity() {
+		delete fBoundingShape;
 	}
 
 	/**
@@ -31,6 +36,7 @@ namespace SI {
 	*/
 	void VGameEntity::move(Vector2 v) {
 		fPosition += v;
+		fBoundingShape->setOffset(fPosition);
 	}
 	
 	/**

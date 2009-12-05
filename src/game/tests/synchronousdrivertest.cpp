@@ -3,6 +3,7 @@
 #include <cppunit/TestSuite.h>
 
 #include "synchronousdrivertest.h"
+#include "misc/boundingbox.h"
 
 namespace SITest {
 	#define SYNCDRIVER_TEST(name) new CppUnit::TestCaller<SynchronousDriverTest>( \
@@ -11,7 +12,9 @@ namespace SITest {
 	
 	void SynchronousDriverTest::setUp() {
 		fDriver = new SI::SynchronousDriver(2.0);
-		fShip = new SITest::MockShip(fDriver, SI::Vector2(0.0, 0.0), 0);
+		ShipType t;
+		t.fBoundingShapeDesc = new BoundingBoxDescription(0.0, 0.0);
+		fShip = new SITest::MockShip(fDriver, SI::Vector2(0.0, 0.0), t, 0);
 	}
 	
 	void SynchronousDriverTest::tearDown() {
