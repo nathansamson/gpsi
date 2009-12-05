@@ -32,57 +32,51 @@ namespace SITest {
 		                               &BoundingBoxTest::name) \
 
 	void BoundingBoxTest::setUp() {
+		BoundingBoxDescription* fDescOne = new BoundingBoxDescription(1.0, 1.5);
+		BoundingBoxDescription* fDescTwo = new BoundingBoxDescription(2.0, 5.0);
+		fOne = new BoundingBox(fDescOne);
+		fTwo = new BoundingBox(fDescTwo);
+		delete fDescOne;
+		delete fDescTwo;
 	}
 	
 	void BoundingBoxTest::tearDown() {
+		delete fOne;
+		delete fTwo;
 	}
 	
 	void BoundingBoxTest::testDoNotIntersects() {
-		BoundingBox* one = new BoundingBox(1.0, 1.5);
-		one->setOffset(Vector2(0.0, 0.0));
+		fOne->setOffset(Vector2(0.0, 0.0));
+		fTwo->setOffset(Vector2(2.0, 3.0));
 		
-		BoundingBox* two = new BoundingBox(2.0, 5.0);
-		two->setOffset(Vector2(2.0, 3.0));
-		
-		CPPUNIT_ASSERT(!one->intersects(two));
-		CPPUNIT_ASSERT(!two->intersects(one));
-		
-		delete one;
-		delete two;
+		CPPUNIT_ASSERT(!fOne->intersects(fTwo));
+		CPPUNIT_ASSERT(!fTwo->intersects(fOne));
 	}
 	
 	void BoundingBoxTest::testDoIntersects() {
-		BoundingBox* one = new BoundingBox(1.0, 1.5);
-		one->setOffset(Vector2(2.0, 4.0));
+		fOne->setOffset(Vector2(2.0, 4.0));
+		fTwo->setOffset(Vector2(2.0, 3.0));
 		
-		BoundingBox* two = new BoundingBox(2.0, 5.0);
-		two->setOffset(Vector2(2.0, 3.0));
-		
-		CPPUNIT_ASSERT(one->intersects(two));
-		CPPUNIT_ASSERT(two->intersects(one));
-		
-		delete one;
-		delete two;
+		CPPUNIT_ASSERT(fOne->intersects(fTwo));
+		CPPUNIT_ASSERT(fTwo->intersects(fOne));
 	}
 	
 	void BoundingBoxTest::testWithUnresolved() {
-		BoundingBox* box = new BoundingBox(1.0, 1.0);
 		MockBoundingShape* mock = new MockBoundingShape();
 		
 		try {
-			mock->intersects(box);
+			mock->intersects(fOne);
 			CPPUNIT_FAIL("This should be skipped");
 		} catch (UnresolvedIntersectionException& e) {
 			CPPUNIT_ASSERT(mock == e.first);
-			CPPUNIT_ASSERT(box == e.second);
+			CPPUNIT_ASSERT(fOne == e.second);
 		} catch (...) {
 			CPPUNIT_FAIL("Unresolved exception problems should throw UnresolvedIntersectionException");
 		}
 		
-		box->intersects(mock);
+		fOne->intersects(mock);
 		CPPUNIT_ASSERT(!mock->fRecursive);
-		
-		delete box;
+
 		delete mock;
 	}
 	

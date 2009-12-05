@@ -5,13 +5,18 @@
 #include "game/gameentity.h"
 
 namespace SI {
+	struct BulletType {
+		Vector2 fSpeed;
+		IBoundingShapeDescription* fBoundingShapeDesc;
+	};
+
 	/**
 	 * A Bullet class.
 	 * The bullet is the simplest type of weapon in the game.
 	*/
 	class Bullet: public VGameEntity {
 	public:
-		Bullet(Vector2, Vector2, IGameEntityFactory*);
+		Bullet(Vector2, BulletType, IGameEntityFactory*);
 		
 		virtual std::vector<VGameEntity*> update(int);
 		virtual double getImpact();

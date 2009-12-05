@@ -4,11 +4,44 @@
 namespace SI {
 	/**
 	 * Public constructor.
+	*/
+	BoundingBoxDescription::BoundingBoxDescription(double w, double h): fW(w), fH(h) {
+	}
+	
+	/**
+	 * Creates the bounding box.
+	 *
+	 * @return A bounding box with the dimension given by this description.
+	*/
+	VBoundingShape* BoundingBoxDescription::createShape() {
+		return new BoundingBox(this);
+	}
+
+	/**
+	 * Returns the width of the bounding box.
+	 *
+	 * @return the width.
+	*/
+	double BoundingBoxDescription::getWidth() {
+		return fW;
+	}
+	
+	/**
+	 * Returns the height of the bounding box.
+	 *
+	 * @return the height.
+	*/
+	double BoundingBoxDescription::getHeight() {
+		return fW;
+	}
+
+	/**
+	 * Public constructor.
 	 *
 	 * @param w The width of the box.
 	 * @param h The height of the box.
 	*/
-	BoundingBox::BoundingBox(double w, double h): fW(w), fH(h) {
+	BoundingBox::BoundingBox(BoundingBoxDescription* d): fW(d->getWidth()), fH(d->getHeight()) {
 	}
 	
 	/**

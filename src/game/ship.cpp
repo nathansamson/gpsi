@@ -1,5 +1,6 @@
 #include "game/ship.h"
 #include "game/gameentityfactory.h"
+#include "misc/boundingbox.h"
 
 namespace SI {
 
@@ -8,10 +9,13 @@ namespace SI {
 	 *
 	 * @param driver The driver for the ship. The ship manages the driver, 
 	 *        so the driver will be freed when the ship is descructed.
-	 * @param v The initial position of the ship.
+	 * @param pos The initial position of the ship.
+	 * @param type The ship type.
 	 * @param fac The factory
 	*/
-	Ship::Ship(VShipDriver* driver, Vector2 v, IGameEntityFactory* fac): VGameEntity(v, fac), fRequestFire(false), fShipDriver(driver), fTicksSinceLastFire(minTicksBetweenFire) {
+	Ship::Ship(VShipDriver* driver, Vector2 pos, ShipType type, IGameEntityFactory* fac):
+	      VGameEntity(pos, type.fBoundingShapeDesc, fac), fRequestFire(false), fShipDriver(driver),
+	      fTicksSinceLastFire(minTicksBetweenFire) {
 		fShipDriver->bind(this);
 	}
 	
@@ -35,7 +39,10 @@ namespace SI {
 		
 		if (hasFired()) {
 			fTicksSinceLastFire = 0;
-			fire.push_back(fEntityFactory->createBullet(Vector2(0.000, 0.001), getPosition()));
+			BulletType bulletType;
+			bulletType.fBoundingShapeDesc = new BoundingBoxDescription(0.001, 0.001);
+			bulletType.fSpeed = Vector2(0.000, 0.001);
+			fire.push_back(fEntityFactory->createBullet(getPosition(), bulletType));
 		}
 		fRequestFire = false;
 		return fire;
