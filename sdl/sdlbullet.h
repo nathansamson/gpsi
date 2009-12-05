@@ -16,6 +16,10 @@ namespace SISDL {
 		virtual void visualize();
 	private:
 		void positionToWindowCoords(int&, int&);
+		
+		/**
+		 * The window of the sdlbullet. The sdl bullet draws on this window.
+		*/
 		Zabbr::SDLWindow* fWindow;
 	};
 }

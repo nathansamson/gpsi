@@ -4,9 +4,15 @@
 #include "game/shipdriver.h"
 
 namespace SI {
+	/**
+	 * Interface for enemy driver factories.
+	*/
 	class IEnemyDriverFactory {
 	public:
 		virtual ~IEnemyDriverFactory() {}
+		/**
+		 * Creates an enemy driver.
+		*/
 		virtual VShipDriver* createEnemyDriver() = 0;
 	};
 }

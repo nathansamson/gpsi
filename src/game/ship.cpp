@@ -43,6 +43,7 @@ namespace SI {
 			bulletType.fBoundingShapeDesc = new BoundingBoxDescription(0.001, 0.001);
 			bulletType.fSpeed = Vector2(0.000, 0.001);
 			fire.push_back(fEntityFactory->createBullet(getPosition(), bulletType));
+			delete bulletType.fBoundingShapeDesc;
 		}
 		fRequestFire = false;
 		return fire;

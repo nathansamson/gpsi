@@ -8,8 +8,18 @@
 namespace SI {
 	class VShipDriver;
 
+	/**
+	 * Description of a ship.
+	*/
 	struct ShipType {
+		/**
+		 * The bounding shape of the ship.
+		*/
 		IBoundingShapeDescription* fBoundingShapeDesc;
+		
+		/**
+		 * The name of the ship.
+		*/
 		std::string fName;
 	};
 

@@ -50,7 +50,7 @@ namespace SISDL {
 	}
 	
 	/**
-	 * Callback for keyrelease..
+	 * Callback for keyrelease.
 	 *
 	 * @param evnt The SDL_KeyboardEvent.
 	*/
