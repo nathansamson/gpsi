@@ -9,7 +9,10 @@ namespace SISDL {
 	 * Public constructor.
 	 *
 	 * @param driver The driver for the ship.
-	 * @param w The window
+	 * @param v The initial position.
+	 * @param t The ship type.
+	 * @param fac The Factory.
+ 	 * @param w The window.
 	*/
 	SDLShip::SDLShip(SI::VShipDriver* driver, SI::Vector2 v,
 	                 SI::ShipType t, SI::IGameEntityFactory* fac,

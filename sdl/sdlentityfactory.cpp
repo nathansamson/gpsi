@@ -26,7 +26,7 @@ namespace SISDL {
 	 * Creates a bullet
 	 *
 	 * @param pos The initial position of the bullet.
-	 * @param s The bounding shape.
+	 * @param t Bullet information
 	*/
 	SI::Bullet* SDLEntityFactory::createBullet(SI::Vector2 pos, SI::BulletType t) {
 		return new SDLBullet(pos, t, this, fWindow);

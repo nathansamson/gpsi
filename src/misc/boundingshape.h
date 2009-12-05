@@ -39,6 +39,11 @@ namespace SI {
 	*/
 	class IBoundingShapeDescription {
 	public:
+		/**
+		 * Creates the shape from the description.
+		 *
+		 * @return The bounding shape created from the blueprint.
+		*/
 		virtual VBoundingShape* createShape() = 0;
 	};
 	

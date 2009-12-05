@@ -4,6 +4,9 @@
 namespace SI {
 	/**
 	 * Public constructor.
+	 *
+	 * @param w The width of the bounding box.
+	 * @param h The height of the bounding box.
 	*/
 	BoundingBoxDescription::BoundingBoxDescription(double w, double h): fW(w), fH(h) {
 	}
@@ -38,8 +41,7 @@ namespace SI {
 	/**
 	 * Public constructor.
 	 *
-	 * @param w The width of the box.
-	 * @param h The height of the box.
+	 * @param d The bounding box description.
 	*/
 	BoundingBox::BoundingBox(BoundingBoxDescription* d): fW(d->getWidth()), fH(d->getHeight()) {
 	}

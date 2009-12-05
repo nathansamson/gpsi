@@ -7,6 +7,7 @@ namespace SI {
 	 *
 	 * @param userShipDriver The VShipDriver for the user ship.
 	 * @param entityFactory The Entity factory for this game.
+	 * @param enemyDriverFactory The factory to create enemy drivers.
 	*/
 	Game::Game(VShipDriver* userShipDriver, IGameEntityFactory* entityFactory, IEnemyDriverFactory* enemyDriverFactory) 
 	     : fEntityFactory(entityFactory), fEnemyDriverFactory(enemyDriverFactory) {
@@ -14,6 +15,7 @@ namespace SI {
 	    userShipType.fBoundingShapeDesc = new BoundingBoxDescription(0.80, 0.56);
 	    userShipType.fName = "X Wing";
 		Ship* user = entityFactory->createShip(userShipDriver, Vector2(0.0, -2.0), userShipType);
+		delete userShipType.fBoundingShapeDesc;
 		fEntities.push_back(user);
 		
 		ShipType enemyShipType;
@@ -24,6 +26,7 @@ namespace SI {
 			            enemyDriverFactory->createEnemyDriver(),
 			            Vector2(-4.0+(i+1)*8.0/6, 2.5), enemyShipType));
 		}
+		delete enemyShipType.fBoundingShapeDesc;
 	}
 	
 	Game::~Game() {

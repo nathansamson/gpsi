@@ -15,6 +15,7 @@ namespace SITest {
 		ShipType t;
 		t.fBoundingShapeDesc = new BoundingBoxDescription(0.0, 0.0);
 		fShip = new SITest::MockShip(fDriver, SI::Vector2(0.0, 0.0), t, 0);
+		delete t.fBoundingShapeDesc;
 	}
 	
 	void SynchronousDriverTest::tearDown() {

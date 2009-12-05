@@ -1,12 +1,23 @@
 #include "sdlbullet.h"
 
 namespace SISDL {
+	/**
+	 * Constructor.
+	 *
+	 * @param speed The speed of the bullet.
+	 * @param t The bullet type.
+	 * @param fac The factory.
+	 * @param w The window.
+	*/
 	SDLBullet::SDLBullet(SI::Vector2 speed, SI::BulletType t,
 	                     SI::IGameEntityFactory* fac,
 	                     Zabbr::SDLWindow* w):
 	           SI::Bullet(speed, t, fac), fWindow(w) {
 	}
 	
+	/**
+	 * Draws the bullet.
+	*/
 	void SDLBullet::visualize() {
 		int x, y;
 		positionToWindowCoords(x, y);

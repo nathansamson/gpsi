@@ -4,7 +4,6 @@ namespace SI {
 	/**
 	 * Public constructor.
 	 *
-	 * @param s The speed of the bullet.
 	 * @param pos The position of the bullet.
 	 * @param type the Bullet information.
 	 * @param fac The factory of the bullet.

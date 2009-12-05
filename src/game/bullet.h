@@ -5,8 +5,18 @@
 #include "game/gameentity.h"
 
 namespace SI {
+	/**
+	 * Description of a bullet.
+	*/
 	struct BulletType {
+		/**
+		 * The speed of the bullet.
+		*/
 		Vector2 fSpeed;
+		
+		/**
+		 * The bounding shape of the bullet.
+		*/
 		IBoundingShapeDescription* fBoundingShapeDesc;
 	};
 
