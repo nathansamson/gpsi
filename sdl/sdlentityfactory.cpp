@@ -15,18 +15,20 @@ namespace SISDL {
 	 * Creates a ship.
 	 *
 	 * @param driver The driver for the ship.
+	 * @param v The initial position.
+	 * @param t The type of the ship.
 	*/
-	SI::Ship* SDLEntityFactory::createShip(SI::VShipDriver* driver, SI::Vector2 v) {
-		return new SDLShip(driver, v, this, fWindow);
+	SI::Ship* SDLEntityFactory::createShip(SI::VShipDriver* driver, SI::Vector2 v, SI::ShipType t) {
+		return new SDLShip(driver, v, t, this, fWindow);
 	}
 	
 	/**
 	 * Creates a bullet
 	 *
-	 * @param speed The speed of the bullet
 	 * @param pos The initial position of the bullet.
+	 * @param s The bounding shape.
 	*/
-	SI::Bullet* SDLEntityFactory::createBullet(SI::Vector2 speed, SI::Vector2 pos) {
-		return new SDLBullet(speed, pos, this, fWindow);
+	SI::Bullet* SDLEntityFactory::createBullet(SI::Vector2 pos, SI::BulletType t) {
+		return new SDLBullet(pos, t, this, fWindow);
 	}
 }

@@ -3,7 +3,7 @@
 
 namespace SISDL {
 
-	SDLKeyboardInputDriver::SDLKeyboardInputDriver(): fLeft(false), fRight(false), fSpace(false), fSpeed(SI::Vector2(0, 0)) {
+	SDLKeyboardInputDriver::SDLKeyboardInputDriver(): fLeft(false), fRight(false), fFire(false), fSpeed(SI::Vector2(0, 0)) {
 	}
 
 	/**
