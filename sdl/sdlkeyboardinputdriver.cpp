@@ -3,6 +3,9 @@
 
 namespace SISDL {
 
+	SDLKeyboardInputDriver::SDLKeyboardInputDriver(): fLeft(false), fRight(false), fSpeed(SI::Vector2(0, 0)) {
+	}
+
 	/**
 	 * Update the driver.
 	*/
