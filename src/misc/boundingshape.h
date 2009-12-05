@@ -1,0 +1,63 @@
+#ifndef INC_BOUNDINGSHAPE_H
+#define INC_BOUNDINGSHAPE_H
+
+#include "misc/vector2.h"
+
+namespace SI {
+	/**
+	 * A generic bounding shape.
+	*/
+	class VBoundingShape {
+	public:
+		VBoundingShape();
+	
+		/**
+		 * Checks if 2 bounding shapes intersects with each other.
+		 *
+		 * @return True if the 2 bounding shapes intersects.
+		*/
+		virtual bool intersects(VBoundingShape*) = 0;
+		/**
+		 * Checks if 2 bounding shapes intersects with each other.
+		 *
+		 * @return True if the 2 bounding shapes intersects.
+		*/
+		virtual bool intersects(VBoundingShape*, bool) = 0;
+		
+		void setOffset(Vector2);
+	protected:
+
+		/**
+		 * The offset of the shape. The offset is always the center of the 
+		 * complete surrounding rectangular box of the bounding shape.
+		*/
+		Vector2 fOffset;
+	};
+	
+	/**
+	 * Exception thrown when their is no algorithm found to check the intersection of 2 shapes.
+	*/
+	class UnresolvedIntersectionException {
+	public:
+		/**
+		 * Public constructor.
+		 *
+		 * @param f The first shape.
+		 * @param s The second shape.
+		*/
+		UnresolvedIntersectionException(VBoundingShape* f, VBoundingShape* s):
+		     first(f), second(s) {
+		}
+		
+		/**
+		 * The first shape.
+		*/
+		VBoundingShape* first;
+		/**
+		 * The second shape.
+		*/
+		VBoundingShape* second;
+	};
+}
+
+#endif // INC_BOUNDINGSHAPE_H
