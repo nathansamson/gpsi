@@ -33,12 +33,15 @@ namespace SISDL {
 		if (fClosed) {
 			openParentController();
 		}
-
-		double time = fTimer.reset();
-		int ticks = (time + fTimeRemainder) * 1000;
-		fTimeRemainder = ((time + fTimeRemainder) * 1000 - ticks) / 1000;
+		if (!fTimer.isPaused()) {
+			double time = fTimer.reset();
+			int ticks = (time + fTimeRemainder) * 1000;
+			fTimeRemainder = ((time + fTimeRemainder) * 1000 - ticks) / 1000;
 		
-		fGame->update(ticks);
+			fGame->update(ticks);
+		} else {
+			fGame->update(0); // Let the entities draw themselves.
+		}
 	}
 	
 	/**
@@ -66,6 +69,7 @@ namespace SISDL {
 	 * Method callback that is called when the controller is requested to quit.
 	*/
 	void GameController::onRequestQuitGame() {
+		fTimer.pause();
 		fQuitConfirmation = new Zabbr::MenuController(fWindow);
 		Zabbr::Button* b = new Zabbr::Button(fWindow, "Resume game");
 		b->connectOnMouseClick(new GameControllerMouseButtonCallback(this, &GameController::onResumeGame));
@@ -87,6 +91,7 @@ namespace SISDL {
 	*/
 	void GameController::onResumeGame(SDL_MouseButtonEvent e) {
 		fQuitConfirmation->openParentController();
+		fTimer.unpause();
 	}
 	
 	/**
