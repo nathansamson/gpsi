@@ -14,7 +14,7 @@ namespace SI {
 	*/
 	class VGameEntity {
 	public:
-		VGameEntity(Vector2, IBoundingShapeDescription*, IGameEntityFactory*);
+		VGameEntity(Vector2, int, IBoundingShapeDescription*, IGameEntityFactory*);
 		virtual ~VGameEntity();
 	
 		virtual void visualize();
@@ -25,6 +25,7 @@ namespace SI {
 		virtual std::vector<VGameEntity*> update(int) = 0;
 		
 		Vector2 getPosition();
+		int getDirection();
 	protected:
 		void move(Vector2);
 		
@@ -37,6 +38,11 @@ namespace SI {
 		 * The position of the center of the entity.
 		*/
 		Vector2 fPosition;
+		
+		/**
+		 * The direction of the entity. 0 is up, moure is clockwise rotated. 360 is a full rotation (= 0).
+		*/
+		int fDirection;
 		
 		/**
 		 * The bounding shape of the entity.

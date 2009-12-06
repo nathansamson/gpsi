@@ -5,12 +5,14 @@ namespace SI {
 	 * Public constructor.
 	 *
 	 * @param pos The initial position of the entity.
+	 * @param dir The direction of the entity.
 	 * @param bshape The bounding shape of the entity. The entity owns the bounding shape.
 	 * @param fac The factory that created this entity.
 	*/
-	VGameEntity::VGameEntity(Vector2 pos, IBoundingShapeDescription* bshape,
+	VGameEntity::VGameEntity(Vector2 pos, int dir, IBoundingShapeDescription* bshape,
 	                         IGameEntityFactory* fac):
-	             fEntityFactory(fac), fPosition(pos), fBoundingShape(bshape->createShape()) {
+	             fEntityFactory(fac), fPosition(pos), fDirection(dir),
+	             fBoundingShape(bshape->createShape()) {
 		fBoundingShape->setOffset(pos);
 	}
 	
@@ -27,6 +29,15 @@ namespace SI {
 	*/
 	Vector2 VGameEntity::getPosition() {
 		return fPosition;
+	}
+	
+	/**
+	 * Returns the direction of the ship.
+	 *
+	 * A value of 0 means upwards directed. A higher value means it is rotated clockwise. A value of 360 is a full rotation.
+	*/
+	int VGameEntity::getDirection() {
+		return fDirection;
 	}
 	
 	/**

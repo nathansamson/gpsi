@@ -14,7 +14,7 @@ namespace SI {
 	    ShipType userShipType;
 	    userShipType.fBoundingShapeDesc = new BoundingBoxDescription(0.80, 0.56);
 	    userShipType.fName = "X Wing";
-		Ship* user = entityFactory->createShip(userShipDriver, Vector2(0.0, -2.0), userShipType);
+		Ship* user = entityFactory->createShip(userShipDriver, Vector2(0.0, -2.0), 0, userShipType);
 		delete userShipType.fBoundingShapeDesc;
 		fEntities.push_back(user);
 		
@@ -24,7 +24,7 @@ namespace SI {
 		for (int i = 0; i < 5; i++) {
 			fEntities.push_back(entityFactory->createShip(
 			            enemyDriverFactory->createEnemyDriver(),
-			            Vector2(-4.0+(i+1)*8.0/6, 2.5), enemyShipType));
+			            Vector2(-4.0+(i+1)*8.0/6, 2.5), 180, enemyShipType));
 		}
 		delete enemyShipType.fBoundingShapeDesc;
 	}

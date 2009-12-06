@@ -14,10 +14,10 @@ namespace SISDL {
 	 * @param fac The Factory.
  	 * @param w The window.
 	*/
-	SDLShip::SDLShip(SI::VShipDriver* driver, SI::Vector2 v,
+	SDLShip::SDLShip(SI::VShipDriver* driver, SI::Vector2 v, int dir,
 	                 SI::ShipType t, SI::IGameEntityFactory* fac,
 	                 Zabbr::SDLWindow* w):
-	         SI::Ship(driver, v, t, fac), fWindow(w) {
+	         SI::Ship(driver, v, dir, t, fac), fWindow(w) {
 	    SI::BoundingBoxDescription* bb = dynamic_cast<SI::BoundingBoxDescription*>(t.fBoundingShapeDesc);
 	    int width = bb->getWidth() / 8.0 * fWindow->getXResolution();
 	    int height = bb->getHeight() / 6.0 * fWindow->getYResolution();
