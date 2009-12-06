@@ -8,8 +8,8 @@ namespace SISDL {
 	class SDLEntityFactory: public SI::IGameEntityFactory {
 	public:
 		SDLEntityFactory(Zabbr::SDLWindow*);
-		SI::Ship* createShip(SI::VShipDriver*, SI::Vector2, int, SI::ShipType);
-		SI::Bullet* createBullet(SI::Vector2, int, SI::BulletType);
+		SI::Ship* createShip(SI::VShipDriver*, SI::Vector2, int, SI::EntityGroup*, SI::ShipType);
+		SI::Bullet* createBullet(SI::Vector2, int, SI::EntityGroup*, SI::BulletType);
 	private:
 		/**
 		 * The window to draw the widgets on.

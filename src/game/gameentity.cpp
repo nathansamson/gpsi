@@ -7,12 +7,13 @@ namespace SI {
 	 * @param pos The initial position of the entity.
 	 * @param dir The direction of the entity.
 	 * @param bshape The bounding shape of the entity. The entity owns the bounding shape.
+	 * @param group The group of the entity.
 	 * @param fac The factory that created this entity.
 	*/
 	VGameEntity::VGameEntity(Vector2 pos, int dir, IBoundingShapeDescription* bshape,
-	                         IGameEntityFactory* fac):
+	                         EntityGroup* group, IGameEntityFactory* fac):
 	             fEntityFactory(fac), fPosition(pos), fDirection(dir),
-	             fBoundingShape(bshape->createShape()) {
+	             fBoundingShape(bshape->createShape()), fGroup(group) {
 		fBoundingShape->setOffset(pos);
 	}
 	

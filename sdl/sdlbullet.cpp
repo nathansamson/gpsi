@@ -6,14 +6,15 @@ namespace SISDL {
 	 *
 	 * @param speed The speed of the bullet.
 	 * @param dir The direction of the bullet.
+	 * @param group The group of the bullet.
 	 * @param t The bullet type.
 	 * @param fac The factory.
 	 * @param w The window.
 	*/
-	SDLBullet::SDLBullet(SI::Vector2 speed, int dir, SI::BulletType t,
-	                     SI::IGameEntityFactory* fac,
+	SDLBullet::SDLBullet(SI::Vector2 speed, int dir, SI::EntityGroup* group,
+	                     SI::BulletType t, SI::IGameEntityFactory* fac,
 	                     Zabbr::SDLWindow* w):
-	           SI::Bullet(speed, dir, t, fac), fWindow(w) {
+	           SI::Bullet(speed, dir, group, t, fac), fWindow(w) {
 	}
 	
 	/**

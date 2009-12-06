@@ -11,11 +11,12 @@ namespace SI {
 	 *        so the driver will be freed when the ship is descructed.
 	 * @param pos The initial position of the ship.
 	 * @param dir The initial direction of the ship.
+	 * @param group The group of the entity
 	 * @param type The ship type.
 	 * @param fac The factory
 	*/
-	Ship::Ship(VShipDriver* driver, Vector2 pos, int dir, ShipType type, IGameEntityFactory* fac):
-	      VGameEntity(pos, dir, type.fBoundingShapeDesc, fac), fRequestFire(false), fShipDriver(driver),
+	Ship::Ship(VShipDriver* driver, Vector2 pos, int dir, EntityGroup* group, ShipType type, IGameEntityFactory* fac):
+	      VGameEntity(pos, dir, type.fBoundingShapeDesc, group, fac), fRequestFire(false), fShipDriver(driver),
 	      fTicksSinceLastFire(minTicksBetweenFire) {
 		fShipDriver->bind(this);
 	}
@@ -43,7 +44,7 @@ namespace SI {
 			BulletType bulletType;
 			bulletType.fBoundingShapeDesc = new BoundingBoxDescription(0.001, 0.001);
 			bulletType.fSpeed = Vector2(0.000, 0.001);
-			fire.push_back(fEntityFactory->createBullet(getPosition(), getDirection(), bulletType));
+			fire.push_back(fEntityFactory->createBullet(getPosition(), getDirection(), fGroup, bulletType));
 			delete bulletType.fBoundingShapeDesc;
 		}
 		fRequestFire = false;
