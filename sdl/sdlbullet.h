@@ -10,7 +10,7 @@ namespace SISDL {
 	*/
 	class SDLBullet: public SI::Bullet {
 	public:
-		SDLBullet(SI::Vector2, SI::BulletType, SI::IGameEntityFactory*,
+		SDLBullet(SI::Vector2, int, SI::BulletType, SI::IGameEntityFactory*,
 		          Zabbr::SDLWindow*);
 	
 		virtual void visualize();

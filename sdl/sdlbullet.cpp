@@ -5,14 +5,15 @@ namespace SISDL {
 	 * Constructor.
 	 *
 	 * @param speed The speed of the bullet.
+	 * @param dir The direction of the bullet.
 	 * @param t The bullet type.
 	 * @param fac The factory.
 	 * @param w The window.
 	*/
-	SDLBullet::SDLBullet(SI::Vector2 speed, SI::BulletType t,
+	SDLBullet::SDLBullet(SI::Vector2 speed, int dir, SI::BulletType t,
 	                     SI::IGameEntityFactory* fac,
 	                     Zabbr::SDLWindow* w):
-	           SI::Bullet(speed, t, fac), fWindow(w) {
+	           SI::Bullet(speed, dir, t, fac), fWindow(w) {
 	}
 	
 	/**

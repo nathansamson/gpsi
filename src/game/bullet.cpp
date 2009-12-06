@@ -5,11 +5,12 @@ namespace SI {
 	 * Public constructor.
 	 *
 	 * @param pos The position of the bullet.
+	 * @param dir The direction of the bullet.
 	 * @param type the Bullet information.
 	 * @param fac The factory of the bullet.
 	*/
-	Bullet::Bullet(Vector2 pos, BulletType type, IGameEntityFactory* fac):
-	        VGameEntity(pos, type.fBoundingShapeDesc, fac),
+	Bullet::Bullet(Vector2 pos, int dir, BulletType type, IGameEntityFactory* fac):
+	        VGameEntity(pos, dir, type.fBoundingShapeDesc, fac),
 	        fSpeed(type.fSpeed) {
 	}
 	
