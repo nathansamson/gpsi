@@ -32,6 +32,8 @@ namespace SI {
 		virtual ~Ship();
 		
 		virtual std::vector<VGameEntity*> update(int);
+		virtual void collide(VGameEntity*);
+		
 		friend class VShipDriver;
 	protected:
 		bool hasFired();
@@ -53,7 +55,7 @@ namespace SI {
 		*/
 		int fTicksSinceLastFire;
 		
-		static const int minTicksBetweenFire = 10000;
+		static const int minTicksBetweenFire = 1000;
 	};
 }
 

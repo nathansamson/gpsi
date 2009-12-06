@@ -12,8 +12,8 @@ namespace SI {
 	*/
 	VGameEntity::VGameEntity(Vector2 pos, int dir, IBoundingShapeDescription* bshape,
 	                         EntityGroup* group, IGameEntityFactory* fac):
-	             fEntityFactory(fac), fPosition(pos), fDirection(dir),
-	             fBoundingShape(bshape->createShape()), fGroup(group) {
+	             fEntityFactory(fac), fGroup(group), fPosition(pos), fDirection(dir),
+	             fBoundingShape(bshape->createShape()), fDead(false) {
 		fBoundingShape->setOffset(pos);
 	}
 	
@@ -39,6 +39,24 @@ namespace SI {
 	*/
 	int VGameEntity::getDirection() {
 		return fDirection;
+	}
+	
+	void VGameEntity::checkCollision(VGameEntity* o) {
+		if (fGroup == o->fGroup) {
+			return;
+		}
+		if (fBoundingShape->intersects(o->fBoundingShape)) {
+			this->collide(o);
+			o->collide(this);
+		}
+	}
+	
+	bool VGameEntity::isDead() {
+		return fDead;
+	}
+	
+	void VGameEntity::die() {
+		fDead = true;
 	}
 	
 	/**

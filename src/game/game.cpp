@@ -53,12 +53,27 @@ namespace SI {
 			}
 		}
 		
+		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
+			for (std::list<VGameEntity*>::iterator it2 = it; it2 != fEntities.end(); it2++) {
+				if (it != it2) {
+					(*it)->checkCollision((*it2));
+				}
+			}
+		}
+		
 		for (std::vector<VGameEntity*>::iterator it = newEnts.begin(); it != newEnts.end(); it++) {
 			fEntities.push_back((*it));
 		}
 		
-		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
-			(*it)->visualize();
+		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end();) {
+			std::list<VGameEntity*>::iterator next = it;
+			next++;
+			if (!(*it)->isDead()) {
+				(*it)->visualize();
+			} else {
+				fEntities.erase(it);
+			}
+			it = next;
 		}
 	}
 }

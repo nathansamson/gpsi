@@ -34,4 +34,8 @@ namespace SI {
 	double Bullet::getImpact() {
 		return 1.0;
 	}
+	
+	void Bullet::collide(VGameEntity* o) {
+		die();
+	}
 }
