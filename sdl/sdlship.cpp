@@ -21,7 +21,7 @@ namespace SISDL {
 	    SI::BoundingBoxDescription* bb = dynamic_cast<SI::BoundingBoxDescription*>(t.fBoundingShapeDesc);
 	    int width = bb->getWidth() / 8.0 * fWindow->getXResolution();
 	    int height = bb->getHeight() / 6.0 * fWindow->getYResolution();
-		fImage = Zabbr::ResourceManager::manager().image(t.fName+".png", width, height, true);
+		fImage = Zabbr::ResourceManager::manager().image(t.fName+".png", width, height, true, dir);
 	}
 	
 	/**
