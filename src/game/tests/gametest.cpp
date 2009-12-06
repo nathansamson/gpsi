@@ -24,9 +24,11 @@ namespace SITest {
 	void GameTest::testSimpleGame() {
 		CPPUNIT_ASSERT(fEntityFactory->fShips[0] != 0);
 		CPPUNIT_ASSERT(!fEntityFactory->fShips[0]->fVisualized);
+		CPPUNIT_ASSERT_EQUAL(0, fEntityFactory->fShips[0]->getDirection());
 		
 		for (int i = 1; i < 6; i++) {
 			CPPUNIT_ASSERT(!fEntityFactory->fShips[i]->fVisualized);
+			CPPUNIT_ASSERT_EQUAL(180, fEntityFactory->fShips[i]->getDirection());
 			assertVectorEquality(Vector2(-4.0+i*8.0/6, 2.5), fEntityFactory->fShips[i]->getPosition());
 		}
 		
@@ -40,6 +42,8 @@ namespace SITest {
 		fGame->update(MAGIC_FIRE_TICK);
 		CPPUNIT_ASSERT(fEntityFactory->fBullets[0] != 0);
 		CPPUNIT_ASSERT(fEntityFactory->fBullets[0]->fVisualized);
+		CPPUNIT_ASSERT_EQUAL(0, fEntityFactory->fBullets[0]->getDirection());
+		CPPUNIT_ASSERT_EQUAL(180, fEntityFactory->fBullets[1]->getDirection());
 		assertVectorEquality(fEntityFactory->fShips[0]->getPosition(), fEntityFactory->fBullets[0]->getPosition());
 
 		fGame->update(1);
