@@ -30,6 +30,7 @@ namespace SI {
 		
 		virtual std::vector<VGameEntity*> update(int);
 		virtual double getImpact();
+		virtual void collide(VGameEntity*);
 	private:
 		/**
 		 * The speed of the bullet. The speed of a bullet is a constant.

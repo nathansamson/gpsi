@@ -24,9 +24,15 @@ namespace SI {
 		 * Update the state of the entity.
 		*/
 		virtual std::vector<VGameEntity*> update(int) = 0;
+		/**
+		 * Collide with another entity.
+		*/
+		virtual void collide(VGameEntity*) = 0;
 		
 		Vector2 getPosition();
 		int getDirection();
+		void checkCollision(VGameEntity*);
+		bool isDead();
 	protected:
 		void move(Vector2);
 		
@@ -39,6 +45,7 @@ namespace SI {
 		 * The group of the entity.
 		*/
 		EntityGroup* fGroup;
+		void die();
 	private:
 		/**
 		 * The position of the center of the entity.
@@ -54,6 +61,11 @@ namespace SI {
 		 * The bounding shape of the entity.
 		*/
 		VBoundingShape* fBoundingShape;
+		
+		/**
+		 * Boolean to keep track if the entity is still alive.
+		*/
+		bool fDead;
 	};
 }
 

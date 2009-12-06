@@ -51,6 +51,18 @@ namespace SI {
 		return fire;
 	}
 	
+	void Ship::collide(VGameEntity* o) {
+		Bullet* b = dynamic_cast<Bullet*>(o);
+		if (b != 0) {
+			die();
+		} else {
+			Ship* s = dynamic_cast<Ship*>(o);
+			if (s != 0) {
+				die();
+			}
+		}
+	}
+	
 	/**
 	 * Instruction for the ShipDriver to fire.
 	 * It will only fire when the ship is at able to fire at this moment.
