@@ -16,11 +16,12 @@ namespace SISDL {
 	 *
 	 * @param driver The driver for the ship.
 	 * @param d The initial direction of the ship.
+	 * @param g The group of the entity.
 	 * @param v The initial position.
 	 * @param t The type of the ship.
 	*/
-	SI::Ship* SDLEntityFactory::createShip(SI::VShipDriver* driver, SI::Vector2 v, int d, SI::ShipType t) {
-		return new SDLShip(driver, v, d, t, this, fWindow);
+	SI::Ship* SDLEntityFactory::createShip(SI::VShipDriver* driver, SI::Vector2 v, int d, SI::EntityGroup* g, SI::ShipType t) {
+		return new SDLShip(driver, v, d, g, t, this, fWindow);
 	}
 	
 	/**
@@ -30,7 +31,7 @@ namespace SISDL {
 	 * @param dir The initial direction of the bullet.
 	 * @param t Bullet information
 	*/
-	SI::Bullet* SDLEntityFactory::createBullet(SI::Vector2 pos, int dir, SI::BulletType t) {
-		return new SDLBullet(pos, dir, t, this, fWindow);
+	SI::Bullet* SDLEntityFactory::createBullet(SI::Vector2 pos, int dir, SI::EntityGroup* g, SI::BulletType t) {
+		return new SDLBullet(pos, dir, g, t, this, fWindow);
 	}
 }

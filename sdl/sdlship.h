@@ -11,7 +11,7 @@ namespace SISDL {
 	*/
 	class SDLShip: public SI::Ship {
 	public:
-		SDLShip(SI::VShipDriver*, SI::Vector2, int, SI::ShipType,
+		SDLShip(SI::VShipDriver*, SI::Vector2, int, SI::EntityGroup*, SI::ShipType,
 		        SI::IGameEntityFactory*, Zabbr::SDLWindow*);
 		virtual ~SDLShip();
 		

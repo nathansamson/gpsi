@@ -5,6 +5,7 @@
 
 #include "misc/vector2.h"
 #include "misc/boundingshape.h"
+#include "game/entitygroup.h"
 
 namespace SI {
 	class IGameEntityFactory;
@@ -14,7 +15,7 @@ namespace SI {
 	*/
 	class VGameEntity {
 	public:
-		VGameEntity(Vector2, int, IBoundingShapeDescription*, IGameEntityFactory*);
+		VGameEntity(Vector2, int, IBoundingShapeDescription*, EntityGroup*, IGameEntityFactory*);
 		virtual ~VGameEntity();
 	
 		virtual void visualize();
@@ -33,6 +34,11 @@ namespace SI {
 		 * The entity factory that created this entity.
 		*/
 		IGameEntityFactory* fEntityFactory;
+		
+		/**
+		 * The group of the entity.
+		*/
+		EntityGroup* fGroup;
 	private:
 		/**
 		 * The position of the center of the entity.

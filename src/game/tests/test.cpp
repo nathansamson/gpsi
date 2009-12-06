@@ -10,31 +10,32 @@ namespace SITest {
 	}
 	
 	SI::Ship* MockGameEntityFactory::createShip(SI::VShipDriver* driver,
-	                                 SI::Vector2 v, int d, SI::ShipType t) {
-		MockShip* fCreatedShip = new MockShip(driver, v, d, t, this);
+	                                 SI::Vector2 v, int d, SI::EntityGroup* g,
+	                                 SI::ShipType t) {
+		MockShip* fCreatedShip = new MockShip(driver, v, d, g, t, this);
 		fShips.push_back(fCreatedShip);
 		return fCreatedShip;
 	}
 	
 	SI::Bullet* MockGameEntityFactory::createBullet(SI::Vector2 pos, int d,
-	                                   SI::BulletType t) {
-		MockBullet* createdBullet = new MockBullet(pos, d, t, this);
+	                                   SI::EntityGroup* g, SI::BulletType t) {
+		MockBullet* createdBullet = new MockBullet(pos, d, g, t, this);
 		fBullets.push_back(createdBullet);
 		return createdBullet;
 	}
 	
 	MockShip::MockShip(SI::VShipDriver* driver, SI::Vector2 v, int d,
-	                   SI::ShipType t, SI::IGameEntityFactory* f):
-	          SI::Ship(driver, v, d, t, f), fVisualized(false) {
+	                   SI::EntityGroup* g, SI::ShipType t, SI::IGameEntityFactory* f):
+	          SI::Ship(driver, v, d, g, t, f), fVisualized(false) {
 	}
 	
 	void MockShip::visualize() {
 		fVisualized = true;
 	}
 	
-	MockBullet::MockBullet(SI::Vector2 pos, int d,
+	MockBullet::MockBullet(SI::Vector2 pos, int d, SI::EntityGroup* g,
 	                       SI::BulletType t, SI::IGameEntityFactory* f): 
-	            SI::Bullet(pos, d, t, f), fVisualized(false) {
+	            SI::Bullet(pos, d, g, t, f), fVisualized(false) {
 	}
 	
 	void MockBullet::visualize() {

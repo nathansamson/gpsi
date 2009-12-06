@@ -11,20 +11,22 @@ namespace SI {
 	*/
 	Game::Game(VShipDriver* userShipDriver, IGameEntityFactory* entityFactory, IEnemyDriverFactory* enemyDriverFactory) 
 	     : fEntityFactory(entityFactory), fEnemyDriverFactory(enemyDriverFactory) {
+	    EntityGroup* users = new EntityGroup("Users");
 	    ShipType userShipType;
 	    userShipType.fBoundingShapeDesc = new BoundingBoxDescription(0.80, 0.56);
 	    userShipType.fName = "X Wing";
-		Ship* user = entityFactory->createShip(userShipDriver, Vector2(0.0, -2.0), 0, userShipType);
+		Ship* user = entityFactory->createShip(userShipDriver, Vector2(0.0, -2.0), 0, users, userShipType);
 		delete userShipType.fBoundingShapeDesc;
 		fEntities.push_back(user);
 		
+		EntityGroup* ais = new EntityGroup("AI's");
 		ShipType enemyShipType;
 	    enemyShipType.fName = "Obi-Wan_starfighter";
 	    enemyShipType.fBoundingShapeDesc = new BoundingBoxDescription(0.80, 0.80);
 		for (int i = 0; i < 5; i++) {
 			fEntities.push_back(entityFactory->createShip(
 			            enemyDriverFactory->createEnemyDriver(),
-			            Vector2(-4.0+(i+1)*8.0/6, 2.5), 180, enemyShipType));
+			            Vector2(-4.0+(i+1)*8.0/6, 2.5), 180, ais, enemyShipType));
 		}
 		delete enemyShipType.fBoundingShapeDesc;
 	}

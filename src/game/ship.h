@@ -28,7 +28,7 @@ namespace SI {
 	*/
 	class Ship: public VGameEntity {
 	public:
-		Ship(VShipDriver*, Vector2, int, ShipType, IGameEntityFactory*);
+		Ship(VShipDriver*, Vector2, int, EntityGroup*, ShipType, IGameEntityFactory*);
 		virtual ~Ship();
 		
 		virtual std::vector<VGameEntity*> update(int);
