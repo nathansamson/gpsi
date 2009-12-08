@@ -34,16 +34,16 @@ namespace SISDL {
 				menu->addWidget(new Label(this, "Sprotector", c));
 			
 				Button* start = new Button(this, "Start game");
-				start->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::startGame));
+				start->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::startGame));
 				menu->addWidget(start);
 			
 				menu->addWidget(new Button(this, "Another button"));
 			
 				Button* b = new Button(this, "Quit");
-				b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::onQuitButtonClicked));
+				b->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::onQuitButtonClicked));
 				menu->addWidget(b);
 			
-				menu->connectRequestQuit(new SIWindowEmptyCallback(this, &SIWindow::onRequestQuitMainMenu));
+				menu->connectRequestQuit(new ClassCallback0<SIWindow>(this, &SIWindow::onRequestQuitMainMenu));
 	
 				VSDLController* controller = new SplashController(this, "splash.png", menu);
 				SDLWindow::run(controller);
@@ -92,10 +92,10 @@ namespace SISDL {
 	void SIWindow::onRequestQuitMainMenu() {
 		MenuController* quitConfirmation = new MenuController(this);
 		Button* b = new Button(this, "Yes");
-		b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::onQuit));
+		b->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::onQuit));
 		quitConfirmation->addWidget(b);
 		b = new Button(this, "No");
-		b->connectOnMouseClick(new SIWindowMouseButtonCallback(this, &SIWindow::cancelQuit));
+		b->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::cancelQuit));
 		quitConfirmation->addWidget(b);
 
 		fController->openController(quitConfirmation);
@@ -115,45 +115,5 @@ namespace SISDL {
 	*/
 	void SIWindow::setDataPath() {
 		ResourceManager::fgDataPath = "./data/";
-	}
-
-	/**
-	 * Constructor.
-	 *
-	 * @param window The SIWindow.
-	 * @param fp The member pointer.
-	*/
-	SIWindowMouseButtonCallback::SIWindowMouseButtonCallback(
-	       SIWindow* window, void (SIWindow::*fp)(SDL_MouseButtonEvent))
-	                            : fWindow(window), fFunction(fp) {
-	}
-
-	/**
-	 * Call the callback with specific parameter.
-	 *
-	 * @param e The SDL_MouseButtonEvent
-	*/
-	void SIWindowMouseButtonCallback::call(SDL_MouseButtonEvent e)
-	{
-		(fWindow->*fFunction)(e);
-	}
-	
-	/**
-	 * Constructor.
-	 *
-	 * @param window The SIWindow.
-	 * @param fp The member pointer.
-	*/
-	SIWindowEmptyCallback::SIWindowEmptyCallback(
-	       SIWindow* window, void (SIWindow::*fp)())
-	                            : fWindow(window), fFunction(fp) {
-	}
-
-	/**
-	 * Call the callback with specific parameter.
-	*/
-	void SIWindowEmptyCallback::call()
-	{
-		(fWindow->*fFunction)();
 	}
 }

@@ -54,40 +54,4 @@ namespace SISDL {
 		*/
 		bool fClosed;
 	};
-	
-	/**
-	 * GameController window empty callback.
-	*/
-	class GameControllerEmptyCallback: public Zabbr::IEmptyCallback {
-	public:
-		GameControllerEmptyCallback(GameController*, void (GameController::*)());
-		virtual void call();
-	private:
-		/**
-		 * The attached game controller.
-		*/
-		GameController* fGameController;
-		/**
-		 * The attached member function.
-		*/
-		void (GameController::* fFunction)();
-	};
-	
-	/**
-	 * GameController window mouse button callback.
-	*/
-	class GameControllerMouseButtonCallback: public Zabbr::IMouseButtonCallback {
-	public:
-		GameControllerMouseButtonCallback(GameController*, void (GameController::*)(SDL_MouseButtonEvent));
-		virtual void call(SDL_MouseButtonEvent);
-	private:
-		/**
-		 * The attached game controller.
-		*/
-		GameController* fGameController;
-		/**
-		 * The attached member function.
-		*/
-		void (GameController::* fFunction)(SDL_MouseButtonEvent);
-	};
 }
