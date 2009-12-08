@@ -1,4 +1,5 @@
 #include "zabbr/widgets/button.h"
+#include "zabbr/events/callbacks.h"
 
 #include "game/synchronousenemydriverfactory.h"
 
@@ -16,7 +17,7 @@ namespace SISDL {
 	                fGame(0), fTimeRemainder(0.0), fClosed(false) {
 		fInputDriver = new SDLKeyboardInputDriver();
 		fGame = new SI::Game(fInputDriver, new SDLEntityFactory(w), new SI::SynchronousEnemyDriverFactory(0.8));
-		connectRequestQuit(new GameControllerEmptyCallback(this, &GameController::onRequestQuitGame));
+		connectRequestQuit(new Zabbr::ClassCallback0<GameController>(this, &GameController::onRequestQuitGame));
 	}
 	
 	/**
@@ -72,15 +73,15 @@ namespace SISDL {
 		fTimer.pause();
 		fQuitConfirmation = new Zabbr::MenuController(fWindow);
 		Zabbr::Button* b = new Zabbr::Button(fWindow, "Resume game");
-		b->connectOnMouseClick(new GameControllerMouseButtonCallback(this, &GameController::onResumeGame));
+		b->connectOnMouseClick(new Zabbr::ClassCallback1<GameController, SDL_MouseButtonEvent>(this, &GameController::onResumeGame));
 		fQuitConfirmation->addWidget(b);
 
 		b = new Zabbr::Button(fWindow, "Quit Game");
-		b->connectOnMouseClick(new GameControllerMouseButtonCallback(this, &GameController::onQuitGame));
+		b->connectOnMouseClick(new Zabbr::ClassCallback1<GameController, SDL_MouseButtonEvent>(this, &GameController::onQuitGame));
 		fQuitConfirmation->addWidget(b);
 		
 		b = new Zabbr::Button(fWindow, "Close game");
-		b->connectOnMouseClick(new GameControllerMouseButtonCallback(this, &GameController::onCloseGame));
+		b->connectOnMouseClick(new Zabbr::ClassCallback1<GameController, SDL_MouseButtonEvent>(this, &GameController::onCloseGame));
 		fQuitConfirmation->addWidget(b);
 
 		openController(fQuitConfirmation);
@@ -108,45 +109,5 @@ namespace SISDL {
 	*/
 	void GameController::onCloseGame(SDL_MouseButtonEvent e) {
 		fQuitConfirmation->quit();
-	}
-	
-	/**
-	 * Constructor.
-	 *
-	 * @param c The GameController.
-	 * @param fp The member pointer.
-	*/
-	GameControllerEmptyCallback::GameControllerEmptyCallback(
-	       GameController* c, void (GameController::*fp)())
-	                            : fGameController(c), fFunction(fp) {
-	}
-
-	/**
-	 * Call the callback with specific parameter.
-	*/
-	void GameControllerEmptyCallback::call()
-	{
-		(fGameController->*fFunction)();
-	}
-	
-	/**
-	 * Constructor.
-	 *
-	 * @param c The GameController.
-	 * @param fp The member pointer.
-	*/
-	GameControllerMouseButtonCallback::GameControllerMouseButtonCallback(
-	       GameController* c, void (GameController::*fp)(SDL_MouseButtonEvent))
-	                            : fGameController(c), fFunction(fp) {
-	}
-
-	/**
-	 * Call the callback with specific parameter.
-	 *
-	 * @param e The SDL_MouseButtonEvent
-	*/
-	void GameControllerMouseButtonCallback::call(SDL_MouseButtonEvent e)
-	{
-		(fGameController->*fFunction)(e);
 	}
 }

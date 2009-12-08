@@ -24,43 +24,6 @@ namespace SISDL {
 	private:
 		void setDataPath();
 	};
-
-	/**
-	 * Space Invaders window mouse button callback.
-	*/
-	class SIWindowMouseButtonCallback : public IMouseButtonCallback {
-	public:
-		SIWindowMouseButtonCallback(SIWindow*, void (SIWindow::*)(SDL_MouseButtonEvent));
-		virtual void call(SDL_MouseButtonEvent);
-	private:
-		/**
-		 * The attached window.
-		*/
-		SIWindow* fWindow;
-		/**
-		 * The attached member function.
-		*/
-		void (SIWindow::* fFunction)(SDL_MouseButtonEvent);
-	};
-	
-	/**
-	 * Space Invaders window empty callback.
-	*/
-	class SIWindowEmptyCallback: public IEmptyCallback {
-	public:
-		SIWindowEmptyCallback(SIWindow*, void (SIWindow::*)());
-		virtual void call();
-	private:
-		/**
-		 * The attached window.
-		*/
-		SIWindow* fWindow;
-		/**
-		 * The attached member function.
-		*/
-		void (SIWindow::* fFunction)();
-	};
-
 }
 
 #endif // INC_SIWINDOW_H
