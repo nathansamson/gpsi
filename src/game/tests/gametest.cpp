@@ -32,10 +32,10 @@ namespace SITest {
 			assertVectorEquality(Vector2(-4.0+i*8.0/6, 2.5), fEntityFactory->fShips[i]->getPosition());
 		}
 		
-		fGame->update(1000);
+		fGame->update(100);
 		CPPUNIT_ASSERT(fEntityFactory->fShips[0]->fVisualized);
 		fEntityFactory->fShips[0]->fVisualized = false;
-		assertVectorEquality(Vector2(10, -2.0), fEntityFactory->fShips[0]->getPosition());
+		assertVectorEquality(Vector2(1, -2.0), fEntityFactory->fShips[0]->getPosition());
 		
 		CPPUNIT_ASSERT(5 == (fEnemyDriverFactory->fDrivers.size()));
 		
@@ -48,12 +48,12 @@ namespace SITest {
 
 		fGame->update(1);
 		CPPUNIT_ASSERT(fEntityFactory->fBullets[0]->fVisualized);
-		assertVectorEquality(Vector2((MAGIC_FIRE_TICK)*0.01+10, -1.999), fEntityFactory->fBullets[0]->getPosition());
+		assertVectorEquality(Vector2((MAGIC_FIRE_TICK)*0.01+1, -1.999), fEntityFactory->fBullets[0]->getPosition());
 		
 		fGame->update(MAGIC_FIRE_TICK); // No firing, to short after the first one.
 		CPPUNIT_ASSERT_EQUAL(6, (int)fEntityFactory->fBullets.size()); // The AI's use the MockShipDriver
 		
-		fGame->update(10000);
+		fGame->update(1000);
 		CPPUNIT_ASSERT_EQUAL(6, (int)fEntityFactory->fBullets.size()); // The AI's use the MockShipDriver
 		
 		fGame->update(MAGIC_FIRE_TICK); // Fire again
