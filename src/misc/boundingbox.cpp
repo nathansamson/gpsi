@@ -12,6 +12,14 @@ namespace SI {
 	}
 	
 	/**
+	 * Public copy constructor.
+	 *
+	 * @param BBDesc The original description.
+	*/
+	BoundingBoxDescription::BoundingBoxDescription(const BoundingBoxDescription& BBDesc): fW(BBDesc.fW), fH(BBDesc.fH) {
+	}
+	
+	/**
 	 * Creates the bounding box.
 	 *
 	 * @return A bounding box with the dimension given by this description.

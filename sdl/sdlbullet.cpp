@@ -14,16 +14,19 @@ namespace SISDL {
 	SDLBullet::SDLBullet(SI::Vector2 speed, int dir, SI::EntityGroup* group,
 	                     SI::BulletType t, SI::IGameEntityFactory* fac,
 	                     Zabbr::SDLWindow* w):
-	           SI::Bullet(speed, dir, group, t, fac), fWindow(w) {
+	           SI::Bullet(speed, dir, group, t, fac), fWindow(w), fBoundingBoxDesc(*dynamic_cast<SI::BoundingBoxDescription*>(t.fBoundingShapeDesc)) {
+//		fBoundingBoxDesc = *dynamic_cast<SI::BoundingBoxDescription*>(t.fBoundingShapeDesc);
 	}
 	
 	/**
 	 * Draws the bullet.
 	*/
 	void SDLBullet::visualize() {
+		int w = fBoundingBoxDesc.getWidth() / 8.0 * fWindow->getXResolution();
+		int h = fBoundingBoxDesc.getHeight() / 6.0 * fWindow->getYResolution();
 		int x, y;
 		positionToWindowCoords(x, y);
-		fWindow->drawRectangle(x, y, 10, 10, 0, 0, 255);
+		fWindow->drawRectangle(x, y, w, h, 0, 0, 255);
 	}
 	
 	/**
