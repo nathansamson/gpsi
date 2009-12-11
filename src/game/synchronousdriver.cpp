@@ -1,4 +1,5 @@
 #include <cmath>
+#include <cstdlib>
 
 #include "game/synchronousdriver.h"
 
@@ -9,6 +10,7 @@ namespace SI {
 	 * @param xMargin The minimal distance to the border.
 	*/
 	SynchronousDriver::SynchronousDriver(double xMargin): fXMargin(xMargin), fMoved(0.0, 0.0), fDir(1) {
+		std::srand(time(0));
 	}
 	
 	/**
@@ -17,6 +19,8 @@ namespace SI {
 	 * @param ticks Ticks passed since last update.
 	*/
 	void SynchronousDriver::update(int ticks) {
+		if (ticks == 0) return;
+	
 		Vector2 step = Vector2(fDir*0.0002*ticks, -0.0001*ticks);
 		if (std::fabs((fMoved+step).getX()) >= fXMargin-1E-8) {
 			if (fDir == 1) {
@@ -28,5 +32,9 @@ namespace SI {
 		}
 		fMoved += step;
 		move(step);
+		
+		if (std::rand() % (25000 / ticks) == 0) {
+			fire();
+		} 
 	}
 }
