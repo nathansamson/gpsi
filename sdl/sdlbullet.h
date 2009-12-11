@@ -2,7 +2,8 @@
 #define INC_SDLBULLET_H
 
 #include "zabbr/sdlwindow.h"
-#include "game/bullet.h"
+#include "src/game/bullet.h"
+#include "src/misc/boundingbox.h"
 
 namespace SISDL {
 	/**
@@ -21,6 +22,8 @@ namespace SISDL {
 		 * The window of the sdlbullet. The sdl bullet draws on this window.
 		*/
 		Zabbr::SDLWindow* fWindow;
+		
+		SI::BoundingBoxDescription fBoundingBoxDesc;
 	};
 }
 

@@ -12,6 +12,7 @@ namespace SI {
 	class BoundingBoxDescription: public IBoundingShapeDescription {
 	public:
 		BoundingBoxDescription(double, double);
+		BoundingBoxDescription(const BoundingBoxDescription&);
 		virtual VBoundingShape* createShape();
 		
 		double getWidth();

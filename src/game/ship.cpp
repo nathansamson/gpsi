@@ -42,7 +42,7 @@ namespace SI {
 		if (hasFired()) {
 			fTicksSinceLastFire = 0;
 			BulletType bulletType;
-			bulletType.fBoundingShapeDesc = new BoundingBoxDescription(0.001, 0.001);
+			bulletType.fBoundingShapeDesc = new BoundingBoxDescription(0.15, 0.15);
 			bulletType.fSpeed = Vector2(0.000, 0.001 * ((getDirection() == 0) ? 1 : -1));
 			fire.push_back(fEntityFactory->createBullet(getPosition(), getDirection(), fGroup, bulletType));
 			delete bulletType.fBoundingShapeDesc;
