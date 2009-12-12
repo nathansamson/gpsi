@@ -6,6 +6,10 @@
 #include "game/bullet.h"
 
 namespace SI {
+	struct ShipType;
+	class VShipDriver;
+	class Ship;
+
 	/**
 	 * The Game Entity Factory. Classes that implement this interface
 	 * are responsible of creating the specific entity objects that can visualize themselves.
