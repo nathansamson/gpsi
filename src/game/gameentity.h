@@ -31,6 +31,7 @@ namespace SI {
 		
 		Vector2 getPosition();
 		int getDirection();
+		EntityGroup* getGroup();
 		void checkCollision(VGameEntity*);
 		bool isDead();
 	protected:

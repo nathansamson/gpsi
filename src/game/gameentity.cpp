@@ -41,6 +41,10 @@ namespace SI {
 		return fDirection;
 	}
 	
+	EntityGroup* VGameEntity::getGroup() {
+		return fGroup;
+	}
+	
 	void VGameEntity::checkCollision(VGameEntity* o) {
 		if (fGroup == o->fGroup) {
 			return;
