@@ -1,12 +1,16 @@
 #ifndef INC_SHIP_H
 #define INC_SHIP_H
 
+#include <vector>
+
 #include "misc/vector2.h"
 #include "game/shipdriver.h"
 #include "game/gameentity.h"
+#include "game/weapons/weapon.h"
 
 namespace SI {
 	class VShipDriver;
+	class VWeapon;
 
 	/**
 	 * Description of a ship.
@@ -35,8 +39,6 @@ namespace SI {
 		virtual void collide(VGameEntity*);
 		
 		friend class VShipDriver;
-	protected:
-		bool hasFired();
 	private:
 		void fire();
 		
@@ -51,11 +53,14 @@ namespace SI {
 		VShipDriver* fShipDriver;
 		
 		/**
-		 * The number of ticks passed since last fire.
+		 * The index of the current active weapon. (the index of the vector fWeapons)
 		*/
-		int fTicksSinceLastFire;
+		int fActiveWeapon;
 		
-		static const int minTicksBetweenFire = 1000;
+		/**
+		 * The list of weapons on this ship.
+		*/
+		std::vector<VWeapon*> fWeapons;
 	};
 }
 

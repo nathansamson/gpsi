@@ -6,6 +6,7 @@
 #include "game/tests/gametest.h"
 #include "game/tests/synchronousdrivertest.h"
 #include "game/tests/bullettest.h"
+#include "game/weapons/tests/guntest.h"
 
 int main(int argc, char* argv[]) {
 	CppUnit::TextTestRunner runner;
@@ -15,6 +16,7 @@ int main(int argc, char* argv[]) {
 	runner.addTest(SITest::GameTest::suite());
 	runner.addTest(SITest::SynchronousDriverTest::suite());
 	runner.addTest(SITest::BulletTest::suite());
+	runner.addTest(SITest::GunTest::suite());
 	runner.run();
 	return 0;
 }
