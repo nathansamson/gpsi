@@ -27,6 +27,7 @@ namespace SITest {
 		IGameEntityFactory* fEntityFactory;
 		Ship* fShip;
 		Gun* fGun;
+		EntityGroup* fEntityGroup;
 	};
 }
 
