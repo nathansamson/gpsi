@@ -22,6 +22,7 @@ namespace SITest {
 		static CppUnit::Test* suite();
 	private:
 		Ship* fShip;
+		IGameEntityFactory* fEntityFactory;
 	
 		void assertVectorEquality(Vector2, Vector2);
 	};
