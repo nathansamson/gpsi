@@ -17,7 +17,12 @@ namespace SI {
 		virtual ~Game();
 		
 		void update(int);
+		
+		bool isAIDead();
+		bool isUserDead();
 	private:
+		bool hasEntitiesInGroup(EntityGroup*);
+	
 		/**
 		 * A list of all entities in the game.
 		*/
@@ -32,6 +37,16 @@ namespace SI {
 		 * The enemy driver factory.
 		*/
 		IEnemyDriverFactory* fEnemyDriverFactory;
+		
+		/**
+		 * The user group.
+		*/
+		EntityGroup* fUserGroup;
+		
+		/**
+		 * The AI group.
+		*/
+		EntityGroup* fAIGroup;
 	};
 }
 

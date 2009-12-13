@@ -23,6 +23,9 @@ namespace SI {
 	*/
 	std::vector<VGameEntity*> Bullet::update(int ticks) {
 		move(fSpeed * ticks);
+		if (getPosition().getY() > 3.0 || getPosition().getY() < -3.0) {
+			die();
+		}
 		return std::vector<VGameEntity*>();
 	}
 	

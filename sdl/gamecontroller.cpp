@@ -1,5 +1,6 @@
 #include "zabbr/widgets/button.h"
 #include "zabbr/events/callbacks.h"
+#include "zabbr/resources/resourcemanager.h"
 
 #include "game/synchronousenemydriverfactory.h"
 
@@ -15,8 +16,7 @@ namespace SISDL {
 	*/
 	GameController::GameController(Zabbr::SDLWindow* w): Zabbr::VSDLController(w),
 	                fGame(0), fTimeRemainder(0.0), fClosed(false) {
-		fInputDriver = new SDLKeyboardInputDriver();
-		fGame = new SI::Game(fInputDriver, new SDLEntityFactory(w), new SI::SynchronousEnemyDriverFactory(0.8));
+		startGame();
 		connectRequestQuit(new Zabbr::ClassCallback0<GameController>(this, &GameController::onRequestQuitGame));
 	}
 	
@@ -35,13 +35,33 @@ namespace SISDL {
 			openParentController();
 		}
 		if (!fTimer.isPaused()) {
-			double time = fTimer.reset();
-			int ticks = (time + fTimeRemainder) * 1000;
-			fTimeRemainder = ((time + fTimeRemainder) * 1000 - ticks) / 1000;
-		
-			fGame->update(ticks);
+			if (!fGame->isUserDead() && !fGame->isAIDead()) {
+				double time = fTimer.reset();
+				int ticks = (time + fTimeRemainder) * 1000;
+				fTimeRemainder = ((time + fTimeRemainder) * 1000 - ticks) / 1000;
+			
+				fGame->update(ticks);
+			}
 		} else {
 			fGame->update(0); // Let the entities draw themselves.
+		}
+		
+		if (fGame->isUserDead()) {
+			fGame->update(0);
+			Zabbr::FontResource* font = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 40);
+			SDL_Color white = {255, 255, 255};
+			Zabbr::StringFontResource* string = Zabbr::ResourceManager::manager().string("Game Over.", font, white);
+			fWindow->drawSurface(string, fWindow->getXResolution()/2-string->getWidth()/2,
+			                             fWindow->getYResolution()/2-string->getHeight()/2);
+			return;
+		} else if (fGame->isAIDead()) {
+			fGame->update(0);
+			Zabbr::FontResource* font = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 40);
+			SDL_Color white = {255, 255, 255};
+			Zabbr::StringFontResource* string = Zabbr::ResourceManager::manager().string("You win!", font, white);
+			fWindow->drawSurface(string, fWindow->getXResolution()/2-string->getWidth()/2,
+			                             fWindow->getYResolution()/2-string->getHeight()/2);
+			return;
 		}
 	}
 	
@@ -63,6 +83,11 @@ namespace SISDL {
 		fInputDriver->keyRelease(evnt);
 		if (evnt.keysym.sym == SDLK_ESCAPE) {
 			requestQuit();
+		} else if (evnt.keysym.sym == SDLK_RETURN) {
+			if (fGame->isUserDead() || fGame->isAIDead()) {
+				fTimer.reset();
+				startGame();
+			}
 		}
 	}
 	
@@ -109,5 +134,10 @@ namespace SISDL {
 	*/
 	void GameController::onCloseGame(SDL_MouseButtonEvent e) {
 		fQuitConfirmation->quit();
+	}
+	
+	void GameController::startGame() {
+		fInputDriver = new SDLKeyboardInputDriver();
+		fGame = new SI::Game(fInputDriver, new SDLEntityFactory(fWindow), new SI::SynchronousEnemyDriverFactory(0.8));
 	}
 }

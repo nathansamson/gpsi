@@ -24,6 +24,8 @@ namespace SISDL {
 		void onQuitGame(SDL_MouseButtonEvent);
 		void onCloseGame(SDL_MouseButtonEvent);
 	private:
+		void startGame();
+	
 		/**
 		 * The game
 		*/

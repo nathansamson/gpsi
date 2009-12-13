@@ -1,5 +1,6 @@
 #include "game.h"
 #include "misc/boundingbox.h"
+#include <typeinfo>
 
 namespace SI {
 	/**
@@ -11,22 +12,22 @@ namespace SI {
 	*/
 	Game::Game(VShipDriver* userShipDriver, IGameEntityFactory* entityFactory, IEnemyDriverFactory* enemyDriverFactory) 
 	     : fEntityFactory(entityFactory), fEnemyDriverFactory(enemyDriverFactory) {
-	    EntityGroup* users = new EntityGroup("Users");
-	    ShipType userShipType;
-	    userShipType.fBoundingShapeDesc = new BoundingBoxDescription(0.80, 0.56);
-	    userShipType.fName = "X Wing";
-		Ship* user = entityFactory->createShip(userShipDriver, Vector2(0.0, -2.0), 0, users, userShipType);
+		fUserGroup = new EntityGroup("Users");
+		ShipType userShipType;
+		userShipType.fBoundingShapeDesc = new BoundingBoxDescription(0.80, 0.56);
+		userShipType.fName = "X Wing";
+		Ship* user = entityFactory->createShip(userShipDriver, Vector2(0.0, -2.0), 0, fUserGroup, userShipType);
 		delete userShipType.fBoundingShapeDesc;
 		fEntities.push_back(user);
 		
-		EntityGroup* ais = new EntityGroup("AI's");
+		fAIGroup = new EntityGroup("AI's");
 		ShipType enemyShipType;
-	    enemyShipType.fName = "Obi-Wan_starfighter";
-	    enemyShipType.fBoundingShapeDesc = new BoundingBoxDescription(0.80, 0.80);
+		enemyShipType.fName = "Obi-Wan_starfighter";
+		enemyShipType.fBoundingShapeDesc = new BoundingBoxDescription(0.80, 0.80);
 		for (int i = 0; i < 5; i++) {
 			fEntities.push_back(entityFactory->createShip(
 			            enemyDriverFactory->createEnemyDriver(),
-			            Vector2(-4.0+(i+1)*8.0/6, 2.5), 180, ais, enemyShipType));
+			            Vector2(-4.0+(i+1)*8.0/6, 2.5), 180, fAIGroup, enemyShipType));
 		}
 		delete enemyShipType.fBoundingShapeDesc;
 	}
@@ -37,6 +38,8 @@ namespace SI {
 		}
 		delete fEntityFactory;
 		delete fEnemyDriverFactory;
+		delete fUserGroup;
+		delete fAIGroup;
 	}
 	
 	/**
@@ -75,5 +78,22 @@ namespace SI {
 			}
 			it = next;
 		}
+	}
+	
+	bool Game::isUserDead() {
+		return !hasEntitiesInGroup(fUserGroup);
+	}
+	
+	bool Game::isAIDead() {
+		return !hasEntitiesInGroup(fAIGroup);
+	}
+	
+	bool Game::hasEntitiesInGroup(EntityGroup* g) {
+		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
+			if ((*it)->getGroup() == g) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

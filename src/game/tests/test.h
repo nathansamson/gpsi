@@ -19,6 +19,16 @@ namespace SITest {
 		virtual void update(int ticks);
 	};
 	
+	class PeaceMockShipDriver: public SI::VShipDriver {
+	public:
+		virtual void update(int ticks);
+	};
+	
+	class DeadlyMockShipDriver: public SI::VShipDriver {
+	public:
+		virtual void update(int ticks);
+	};
+	
 	class MockShip: public SI::Ship {
 	public:
 		MockShip(SI::VShipDriver*, SI::Vector2, int, SI::EntityGroup*, SI::ShipType, SI::IGameEntityFactory*);
@@ -39,6 +49,16 @@ namespace SITest {
 	public:
 		virtual MockShipDriver* createEnemyDriver();
 		std::vector<SI::VShipDriver*> fDrivers;
+	};
+	
+	class PeaceMockEnemyDriverFactory: public SI::IEnemyDriverFactory {
+	public:
+		virtual PeaceMockShipDriver* createEnemyDriver();
+	};
+	
+	class DeadlyMockEnemyDriverFactory: public SI::IEnemyDriverFactory {
+	public:
+		virtual DeadlyMockShipDriver* createEnemyDriver();
 	};
 	
 	class MockGameEntityFactory: public SI::IGameEntityFactory {
