@@ -9,6 +9,13 @@ namespace SITest {
 		}
 	}
 	
+	void PeaceMockShipDriver::update(int ticks) {
+	}
+	
+	void DeadlyMockShipDriver::update(int ticks) {
+		fire();
+	}
+	
 	SI::Ship* MockGameEntityFactory::createShip(SI::VShipDriver* driver,
 	                                 SI::Vector2 v, int d, SI::EntityGroup* g,
 	                                 SI::ShipType t) {
@@ -46,5 +53,13 @@ namespace SITest {
 		MockShipDriver* driver = new MockShipDriver();
 		fDrivers.push_back(driver);
 		return driver;
+	}
+	
+	PeaceMockShipDriver* PeaceMockEnemyDriverFactory::createEnemyDriver() {
+		return new PeaceMockShipDriver();
+	}
+	
+	DeadlyMockShipDriver* DeadlyMockEnemyDriverFactory::createEnemyDriver() {
+		return new DeadlyMockShipDriver();
 	}
 }

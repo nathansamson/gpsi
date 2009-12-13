@@ -18,6 +18,8 @@ namespace SITest {
 		void tearDown();
 		
 		void testSimpleGame();
+		void testUserDies();
+		void testComputerDies();
 		
 		static CppUnit::Test* suite();
 	private:
@@ -25,7 +27,6 @@ namespace SITest {
 	
 		void assertVectorEquality(Vector2, Vector2);
 		MockGameEntityFactory* fEntityFactory;
-		MockEnemyDriverFactory* fEnemyDriverFactory;
 	};
 }
 

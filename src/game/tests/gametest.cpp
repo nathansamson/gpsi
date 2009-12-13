@@ -12,9 +12,6 @@ namespace SITest {
 	                                   &GameTest::name) \
 	
 	void GameTest::setUp() {
-		fEntityFactory = new MockGameEntityFactory();
-		fEnemyDriverFactory = new MockEnemyDriverFactory();
-		fGame = new Game(new MockShipDriver(), fEntityFactory, fEnemyDriverFactory);
 	}
 	
 	void GameTest::tearDown() {
@@ -22,6 +19,10 @@ namespace SITest {
 	}
 	
 	void GameTest::testSimpleGame() {
+		fEntityFactory = new MockGameEntityFactory();
+		MockEnemyDriverFactory* fEnemyDriverFactory = new MockEnemyDriverFactory();
+		fGame = new Game(new MockShipDriver(), fEntityFactory, fEnemyDriverFactory);
+	
 		CPPUNIT_ASSERT(fEntityFactory->fShips[0] != 0);
 		CPPUNIT_ASSERT(!fEntityFactory->fShips[0]->fVisualized);
 		CPPUNIT_ASSERT_EQUAL(0, fEntityFactory->fShips[0]->getDirection());
@@ -60,9 +61,41 @@ namespace SITest {
 		CPPUNIT_ASSERT_EQUAL(12, (int)fEntityFactory->fBullets.size()); // The AI's use the MockShipDriver
 	}
 	
+	void GameTest::testUserDies() {
+		fEntityFactory = new MockGameEntityFactory();
+		DeadlyMockEnemyDriverFactory* enemyDriverFactory = new DeadlyMockEnemyDriverFactory();
+		fGame = new Game(new PeaceMockShipDriver(), fEntityFactory, enemyDriverFactory);
+	
+		CPPUNIT_ASSERT(!fGame->isAIDead());
+		CPPUNIT_ASSERT(!fGame->isUserDead());
+		
+		fGame->update(1); // Shoot
+		fGame->update(4500); // Bullet arrives by user.
+		
+		CPPUNIT_ASSERT(fGame->isUserDead());
+		CPPUNIT_ASSERT(!fGame->isAIDead());
+	}
+	
+	void GameTest::testComputerDies() {
+		fEntityFactory = new MockGameEntityFactory();
+		PeaceMockEnemyDriverFactory* enemyDriverFactory = new PeaceMockEnemyDriverFactory();
+		fGame = new Game(new DeadlyMockShipDriver(), fEntityFactory, enemyDriverFactory);
+	
+		CPPUNIT_ASSERT(!fGame->isAIDead());
+		CPPUNIT_ASSERT(!fGame->isUserDead());
+		
+		fGame->update(1); // Shoot
+		fGame->update(4500); // Bullet arrives by enemy.
+		
+		CPPUNIT_ASSERT(fGame->isAIDead());
+		CPPUNIT_ASSERT(!fGame->isUserDead());
+	}
+	
 	CppUnit::Test* GameTest::suite() {
 		CppUnit::TestSuite *suiteOfTests = new CppUnit::TestSuite("Game test");
 		suiteOfTests->addTest(GAME_TEST(testSimpleGame));
+		suiteOfTests->addTest(GAME_TEST(testUserDies));
+		suiteOfTests->addTest(GAME_TEST(testComputerDies));
 		return suiteOfTests;
 	}
 	
