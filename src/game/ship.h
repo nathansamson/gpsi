@@ -7,6 +7,7 @@
 #include "game/shipdriver.h"
 #include "game/gameentity.h"
 #include "game/weapons/weapon.h"
+#include "game/bullet.h"
 
 namespace SI {
 	class VShipDriver;
@@ -61,6 +62,8 @@ namespace SI {
 		 * The list of weapons on this ship.
 		*/
 		std::vector<VWeapon*> fWeapons;
+		
+		BulletType fBulletType;
 	};
 }
 

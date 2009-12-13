@@ -20,10 +20,9 @@ namespace SI {
 	      VGameEntity(pos, dir, type.fBoundingShapeDesc, group, fac), fRequestFire(false), fShipDriver(driver) {
 		fShipDriver->bind(this);
 		fActiveWeapon = 0;
-		BulletType bulletType;
-		bulletType.fBoundingShapeDesc = new BoundingBoxDescription(0.15, 0.15);
-		bulletType.fSpeed = Vector2(0.000, 0.001 * ((getDirection() == 0) ? 1 : -1));
-		fWeapons.push_back(new Gun(500, fEntityFactory, this, Vector2(0.0, 0.0), bulletType));
+		fBulletType.fBoundingShapeDesc = new BoundingBoxDescription(0.15, 0.15);
+		fBulletType.fSpeed = Vector2(0.000, 0.001 * ((getDirection() == 0) ? 1 : -1));
+		fWeapons.push_back(new Gun(500, fEntityFactory, this, Vector2(0.0, 0.0), fBulletType));
 	}
 	
 	/**
@@ -31,6 +30,10 @@ namespace SI {
 	*/
 	Ship::~Ship() {
 		delete fShipDriver;
+		for (std::vector<VWeapon*>::iterator it = fWeapons.begin(); it != fWeapons.end(); it++) {
+			delete *it;
+		}
+		delete fBulletType.fBoundingShapeDesc;
 	}
 	
 	/**
