@@ -15,7 +15,7 @@ namespace SITest {
 	void ShipTest::setUp() {
 		ShipType s;
 		s.fBoundingShapeDesc = new BoundingBoxDescription(1.0, 1.0);
-		fShip = new Ship(new MockShipDriver(), Vector2(0, 0), 0, 0, s, 0);
+		fShip = new Ship(new MockShipDriver(), Vector2(0, 0), 0, 0, s, new MockGameEntityFactory());
 		delete s.fBoundingShapeDesc;
 	}
 	

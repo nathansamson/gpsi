@@ -23,8 +23,7 @@ namespace SI {
 		BulletType bulletType;
 		bulletType.fBoundingShapeDesc = new BoundingBoxDescription(0.15, 0.15);
 		bulletType.fSpeed = Vector2(0.000, 0.001 * ((getDirection() == 0) ? 1 : -1));
-		if (fEntityFactory)
-			fWeapons.push_back(new Gun(500, fEntityFactory, this, Vector2(0.0, 0.0), bulletType));
+		fWeapons.push_back(new Gun(500, fEntityFactory, this, Vector2(0.0, 0.0), bulletType));
 	}
 	
 	/**
@@ -52,6 +51,8 @@ namespace SI {
 				VGameEntity* p = fWeapons[fActiveWeapon]->fire();
 				if (p) fire.push_back(p);
 			}
+			VGameEntity* p = fWeapons[fActiveWeapon]->fire();
+			if (p) fire.push_back(p);
 		}
 		fRequestFire = false;
 		return fire;
