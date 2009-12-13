@@ -1,0 +1,13 @@
+<level>
+	<name>First level</name>
+	<ships>
+		<ship name="Obi-Wan_starfighter">
+			<boundingshape type="boundingbox" w="0.8" h="0.8" />
+		</ship>
+	</ships>
+	<enemies>
+		<row y="2.5" shiptype="Obi-Wan_starfighter" count="5" margin="0.0" align="center" driver="syncdriver" />
+		<row y="2.0" shiptype="Obi-Wan_starfighter" count="5" margin="0.0" align="center" driver="syncdriver" />
+		<row y="1.5" shiptype="Obi-Wan_starfighter" count="5" margin="0.0" align="center" driver="syncdriver" />
+	</enemies>
+</level>
