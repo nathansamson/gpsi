@@ -24,6 +24,7 @@ namespace SITest {
 	private:
 		SI::Ship* fShip;
 		SI::SynchronousDriver* fDriver;
+		SI::IGameEntityFactory* fEntityFactory;
 	};
 }
 

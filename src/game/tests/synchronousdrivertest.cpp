@@ -10,30 +10,50 @@ namespace SITest {
 	                                   #name, \
 	                                   &SynchronousDriverTest::name) \
 	
+	void clearSideEffects(std::vector<VGameEntity*> sideEffects) {
+		for (std::vector<VGameEntity*>::iterator it = sideEffects.begin(); it != sideEffects.end(); it++) {
+			delete (*it);
+		}
+	}
+	
 	void SynchronousDriverTest::setUp() {
 		fDriver = new SI::SynchronousDriver(2.0);
 		ShipType t;
 		t.fBoundingShapeDesc = new BoundingBoxDescription(0.0, 0.0);
-		fShip = new SITest::MockShip(fDriver, SI::Vector2(0.0, 0.0), 0, 0, t, new MockGameEntityFactory());
+		fEntityFactory = new MockGameEntityFactory();
+		fShip = new SITest::MockShip(fDriver, SI::Vector2(0.0, 0.0), 0, 0, t, fEntityFactory);
 		delete t.fBoundingShapeDesc;
 	}
 	
 	void SynchronousDriverTest::tearDown() {
 		delete fShip;
+		delete fEntityFactory;
 	}
 	
 	void SynchronousDriverTest::testMoveNormal() {
-		fShip->update(10);
+		std::vector<VGameEntity*> sideEffects;
+		sideEffects = fShip->update(10);
+		clearSideEffects(sideEffects);
 		SITEST_ASSERT_VECTORS_EQUAL(Vector2(0.002, -0.001), fShip->getPosition());
-		fShip->update(10000-10);
+		
+		sideEffects = fShip->update(10000-10);
+		clearSideEffects(sideEffects);
 		SITEST_ASSERT_VECTORS_EQUAL(Vector2(2.0, -1.0), fShip->getPosition());
-		fShip->update(10);
+		
+		sideEffects = fShip->update(10);
+		clearSideEffects(sideEffects);
 		SITEST_ASSERT_VECTORS_EQUAL(Vector2(1.998, -1.001), fShip->getPosition());
-		fShip->update(10000-10);
+		
+		sideEffects = fShip->update(10000-10);
+		clearSideEffects(sideEffects);
 		SITEST_ASSERT_VECTORS_EQUAL(Vector2(0.00, -2.000), fShip->getPosition());
-		fShip->update(10000+10);
+		
+		sideEffects = fShip->update(10000+10);
+		clearSideEffects(sideEffects);
 		SITEST_ASSERT_VECTORS_EQUAL(Vector2(-1.998, -3.001), fShip->getPosition());
-		fShip->update(20000);
+		
+		sideEffects = fShip->update(20000);
+		clearSideEffects(sideEffects);
 		SITEST_ASSERT_VECTORS_EQUAL(Vector2(1.998, -5.001), fShip->getPosition());
 	}
 	
