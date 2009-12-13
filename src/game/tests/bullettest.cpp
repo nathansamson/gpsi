@@ -14,7 +14,7 @@ namespace SITest {
 		BulletType b;
 		b.fSpeed = Vector2(0.000, 0.001);
 		b.fBoundingShapeDesc = new BoundingBoxDescription(0.1, 0.1);
-		fBullet = new Bullet(Vector2(0.0, 0.0), 0, 0, b, 0);
+		fBullet = new Bullet(Vector2(0.0, 0.0), 0, 0, b, new MockGameEntityFactory());
 		delete b.fBoundingShapeDesc;
 	}
 	
