@@ -1,6 +1,7 @@
 #include "game.h"
+#include "game/levelreader.h"
+#include "game/builtinenemydriverfactory.h"
 #include "misc/boundingbox.h"
-#include <typeinfo>
 
 namespace SI {
 	/**
@@ -10,8 +11,10 @@ namespace SI {
 	 * @param entityFactory The Entity factory for this game.
 	 * @param enemyDriverFactory The factory to create enemy drivers.
 	*/
-	Game::Game(VShipDriver* userShipDriver, IGameEntityFactory* entityFactory, IEnemyDriverFactory* enemyDriverFactory) 
-	     : fEntityFactory(entityFactory), fEnemyDriverFactory(enemyDriverFactory) {
+	Game::Game(VShipDriver* userShipDriver, IGameEntityFactory* entityFactory,
+	           std::string levelDirectory, std::string firstLevel,
+	           IEnemyDriverFactory* fac) 
+	     : fEntityFactory(entityFactory), fEnemyDriverFactory(fac) {
 		fUserGroup = new EntityGroup("Users");
 		ShipType userShipType;
 		userShipType.fBoundingShapeDesc = new BoundingBoxDescription(0.80, 0.56);
@@ -21,15 +24,11 @@ namespace SI {
 		fEntities.push_back(user);
 		
 		fAIGroup = new EntityGroup("AI's");
-		ShipType enemyShipType;
-		enemyShipType.fName = "Obi-Wan_starfighter";
-		enemyShipType.fBoundingShapeDesc = new BoundingBoxDescription(0.80, 0.80);
-		for (int i = 0; i < 5; i++) {
-			fEntities.push_back(entityFactory->createShip(
-			            enemyDriverFactory->createEnemyDriver(),
-			            Vector2(-4.0+(i+1)*8.0/6, 2.5), 180, fAIGroup, enemyShipType));
+		LevelReader level = LevelReader(levelDirectory+firstLevel, entityFactory, fAIGroup, fEnemyDriverFactory);
+		std::vector<Ship*> ships = level.getShips();
+		for (std::vector<Ship*>::iterator it = ships.begin(); it != ships.end(); it++) {
+			fEntities.push_back((*it));
 		}
-		delete enemyShipType.fBoundingShapeDesc;
 	}
 	
 	Game::~Game() {
@@ -74,6 +73,7 @@ namespace SI {
 			if (!(*it)->isDead()) {
 				(*it)->visualize();
 			} else {
+				delete (*it);
 				fEntities.erase(it);
 			}
 			it = next;

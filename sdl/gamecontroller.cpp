@@ -2,8 +2,6 @@
 #include "zabbr/events/callbacks.h"
 #include "zabbr/resources/resourcemanager.h"
 
-#include "game/synchronousenemydriverfactory.h"
-
 #include "gamecontroller.h"
 #include "sdlentityfactory.h"
 #include "sdlkeyboardinputdriver.h"
@@ -138,6 +136,6 @@ namespace SISDL {
 	
 	void GameController::startGame() {
 		fInputDriver = new SDLKeyboardInputDriver();
-		fGame = new SI::Game(fInputDriver, new SDLEntityFactory(fWindow), new SI::SynchronousEnemyDriverFactory(0.8));
+		fGame = new SI::Game(fInputDriver, new SDLEntityFactory(fWindow), "data/levels/", "firstlevel.silvl");
 	}
 }
