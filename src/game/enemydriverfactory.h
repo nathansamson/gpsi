@@ -13,7 +13,7 @@ namespace SI {
 		/**
 		 * Creates an enemy driver.
 		*/
-		virtual VShipDriver* createEnemyDriver() = 0;
+		virtual VShipDriver* createEnemyDriver(std::string) = 0;
 	};
 }
 

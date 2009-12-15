@@ -1,10 +1,12 @@
-INCLUDES = -I$(shell pwd)
+INCLUDES = -I$(shell pwd) -I../
 CXXFLAGS += $(INCLUDES) -fPIC
 LDFLAGS = 
 LDTESTFLAGS = `pkg-config --libs cppunit`
-CXXSOURCES = $(shell find . -type f -name '*.cpp' -not -wholename '*/tests/*')
+TINYXMLSRCS = $(shell find ../tinyxml -type f -name '*.cpp')
+TINYXMLOBJECTS = $(patsubst %.cpp,%.o,$(TINYXMLSRCS))
+CXXSOURCES = $(shell find . -type f -name '*.cpp' -not -wholename '*/tests/*') $(TINYXMLSRCS)
 CXXOBJECTS = $(patsubst %.cpp,%.o,$(CXXSOURCES))
-CXXTESTSOURCES = $(shell find . -type f -name '*.cpp')
+CXXTESTSOURCES = $(shell find . -type f -name '*.cpp') $(TINYXMLSRCS)
 CXXTESTOBJECTS = $(patsubst %.cpp,%.o,$(CXXTESTSOURCES))
 DEPFILES = $(patsubst %.cpp,%.d,$(CXXTESTSOURCES))
 LIB = libsi.so

@@ -12,6 +12,8 @@ namespace SITest {
 	                                   &GameTest::name) \
 	
 	void GameTest::setUp() {
+		fEnemyDriverFactory = new TestEnemyDriverFactory();
+		fEntityFactory = new MockGameEntityFactory();
 	}
 	
 	void GameTest::tearDown() {
@@ -19,9 +21,8 @@ namespace SITest {
 	}
 	
 	void GameTest::testSimpleGame() {
-		fEntityFactory = new MockGameEntityFactory();
-		MockEnemyDriverFactory* fEnemyDriverFactory = new MockEnemyDriverFactory();
-		fGame = new Game(new MockShipDriver(), fEntityFactory, fEnemyDriverFactory);
+		fGame = new Game(new MockShipDriver(), fEntityFactory,
+		                 "testlevels/", "test1.silvl", fEnemyDriverFactory);
 	
 		CPPUNIT_ASSERT(fEntityFactory->fShips[0] != 0);
 		CPPUNIT_ASSERT(!fEntityFactory->fShips[0]->fVisualized);
@@ -62,9 +63,8 @@ namespace SITest {
 	}
 	
 	void GameTest::testUserDies() {
-		fEntityFactory = new MockGameEntityFactory();
-		DeadlyMockEnemyDriverFactory* enemyDriverFactory = new DeadlyMockEnemyDriverFactory();
-		fGame = new Game(new PeaceMockShipDriver(), fEntityFactory, enemyDriverFactory);
+		fGame = new Game(new PeaceMockShipDriver(), fEntityFactory,
+		                 "testlevels/", "testuserdies.silvl", fEnemyDriverFactory);
 	
 		CPPUNIT_ASSERT(!fGame->isAIDead());
 		CPPUNIT_ASSERT(!fGame->isUserDead());
@@ -77,9 +77,8 @@ namespace SITest {
 	}
 	
 	void GameTest::testComputerDies() {
-		fEntityFactory = new MockGameEntityFactory();
-		PeaceMockEnemyDriverFactory* enemyDriverFactory = new PeaceMockEnemyDriverFactory();
-		fGame = new Game(new DeadlyMockShipDriver(), fEntityFactory, enemyDriverFactory);
+		fGame = new Game(new DeadlyMockShipDriver(), fEntityFactory,
+		                 "testlevels/", "testcomputerdies.silvl", fEnemyDriverFactory);
 	
 		CPPUNIT_ASSERT(!fGame->isAIDead());
 		CPPUNIT_ASSERT(!fGame->isUserDead());

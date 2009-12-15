@@ -49,17 +49,18 @@ namespace SITest {
 		fVisualized = true;
 	}
 	
-	MockShipDriver* MockEnemyDriverFactory::createEnemyDriver() {
-		MockShipDriver* driver = new MockShipDriver();
+	SI::VShipDriver* TestEnemyDriverFactory::createEnemyDriver(std::string name) {
+		SI::VShipDriver* driver;
+		if (name == "mockdriver") {
+			driver = new MockShipDriver();
+		} else if (name == "peacedriver") {
+			driver = new PeaceMockShipDriver();
+		} else if (name == "deadlydriver") {
+			driver = new DeadlyMockShipDriver();
+		} else {
+			driver = SI::BuiltinEnemyDriverFactory::createEnemyDriver(name);
+		}
 		fDrivers.push_back(driver);
 		return driver;
-	}
-	
-	PeaceMockShipDriver* PeaceMockEnemyDriverFactory::createEnemyDriver() {
-		return new PeaceMockShipDriver();
-	}
-	
-	DeadlyMockShipDriver* DeadlyMockEnemyDriverFactory::createEnemyDriver() {
-		return new DeadlyMockShipDriver();
 	}
 }

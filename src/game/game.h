@@ -2,9 +2,11 @@
 #define INC_GAME_H
 
 #include <list>
+#include <string>
+
 #include "gameentityfactory.h"
 #include "shipdriver.h"
-#include "enemydriverfactory.h"
+#include "builtinenemydriverfactory.h"
 
 namespace SI {
 	/**
@@ -13,7 +15,7 @@ namespace SI {
 	*/
 	class Game {
 	public:
-		Game(VShipDriver*, IGameEntityFactory*, IEnemyDriverFactory* enemyDriverFactory);
+		Game(VShipDriver*, IGameEntityFactory*, std::string, std::string, IEnemyDriverFactory* = new BuiltinEnemyDriverFactory());
 		virtual ~Game();
 		
 		void update(int);
