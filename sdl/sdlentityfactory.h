@@ -8,7 +8,7 @@ namespace SISDL {
 	class SDLEntityFactory: public SI::IGameEntityFactory {
 	public:
 		SDLEntityFactory(Zabbr::SDLWindow*);
-		SI::Ship* createShip(SI::VShipDriver*, SI::Vector2, int, SI::EntityGroup*, SI::ShipType);
+		SI::Ship* createShip(SI::VShipDriver*, SI::Vector2, int, SI::EntityGroup*, SI::Weaponery*, SI::ShipType);
 		SI::Bullet* createBullet(SI::Vector2, int, SI::EntityGroup*, SI::BulletType);
 	private:
 		/**

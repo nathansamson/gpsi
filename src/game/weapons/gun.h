@@ -8,11 +8,15 @@
 namespace SI {
 	class Gun: public VWeapon {
 	public:
-		Gun(int, IGameEntityFactory*, Ship*, Vector2, BulletType);
+		Gun(int, IGameEntityFactory*, Vector2, BulletType*);
+		
+		virtual Gun* addWeaponToShip(Ship*);
 		
 		virtual VGameEntity* fire();
 	private:
-		BulletType fBulletType;
+		Gun(const Gun&, Ship*);
+	
+		BulletType* fBulletType;
 		Vector2 fOffset;
 	};
 }

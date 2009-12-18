@@ -1,7 +1,6 @@
 #include "game/ship.h"
 #include "game/gameentityfactory.h"
 #include "misc/boundingbox.h"
-#include "game/weapons/gun.h"
 
 namespace SI {
 
@@ -16,13 +15,13 @@ namespace SI {
 	 * @param type The ship type.
 	 * @param fac The factory
 	*/
-	Ship::Ship(VShipDriver* driver, Vector2 pos, int dir, EntityGroup* group, ShipType type, IGameEntityFactory* fac):
-	      VGameEntity(pos, dir, type.fBoundingShapeDesc, group, fac), fRequestFire(false), fShipDriver(driver) {
+	Ship::Ship(VShipDriver* driver, Vector2 pos, int dir, EntityGroup* group, ShipType type, IGameEntityFactory* fac, Weaponery* weaponery):
+	      VGameEntity(pos, dir, type.fBoundingShapeDesc, group, fac), fRequestFire(false), fShipDriver(driver), fWeaponery(weaponery) {
 		fShipDriver->bind(this);
 		fActiveWeapon = 0;
-		fBulletType.fBoundingShapeDesc = new BoundingBoxDescription(0.15, 0.15);
-		fBulletType.fSpeed = Vector2(0.000, 0.001 * ((getDirection() == 0) ? 1 : -1));
-		fWeapons.push_back(new Gun(500, fEntityFactory, this, Vector2(0.0, 0.0), fBulletType));
+		for (std::vector<std::string>::iterator it = type.fWeapons.begin(); it != type.fWeapons.end(); it++) {
+			fWeapons.push_back(fWeaponery->getWeapon((*it), this));
+		}
 	}
 	
 	/**
@@ -33,7 +32,6 @@ namespace SI {
 		for (std::vector<VWeapon*>::iterator it = fWeapons.begin(); it != fWeapons.end(); it++) {
 			delete *it;
 		}
-		delete fBulletType.fBoundingShapeDesc;
 	}
 	
 	/**
@@ -54,8 +52,6 @@ namespace SI {
 				VGameEntity* p = fWeapons[fActiveWeapon]->fire();
 				if (p) fire.push_back(p);
 			}
-			VGameEntity* p = fWeapons[fActiveWeapon]->fire();
-			if (p) fire.push_back(p);
 		}
 		fRequestFire = false;
 		return fire;

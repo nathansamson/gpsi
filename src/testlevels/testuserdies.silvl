@@ -1,11 +1,34 @@
 <level>
 	<name>First level</name>
+	<ammo>
+		<bullet id="normal-bullet">
+			<speed>0.001</speed>
+			<boundingshape type="boundingbox" w="0.1" h="0.1" />
+		</bullet>
+	</ammo>
+	<weapons>
+		<weapon type="gun" id="normal-gun">
+			<coolingofftime>500</coolingofftime>
+			<xoffset>0.4</xoffset>
+			<ammo>normal-bullet</ammo>
+		</weapon>
+	</weapons>
 	<ships>
 		<ship name="Obi-Wan_starfighter">
 			<boundingshape type="boundingbox" w="0.8" h="0.8" />
+			<weapons>
+				<weapon name="normal-gun" />
+			</weapons>
+		</ship>
+		<ship name="X Wing">
+			<boundingshape type="boundingbox" w="0.8" h="0.56" />
+			<weapons>
+				<weapon name="normal-gun" />
+			</weapons>
 		</ship>
 	</ships>
 	<enemies>
 		<row y="2.5" shiptype="Obi-Wan_starfighter" count="5" margin="0.0" align="center" driver="deadlydriver" />
 	</enemies>
+	<usership shiptype="X Wing" />
 </level>

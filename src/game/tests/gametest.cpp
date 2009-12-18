@@ -47,7 +47,7 @@ namespace SITest {
 		CPPUNIT_ASSERT_EQUAL(0, fEntityFactory->fBullets[0]->getDirection());
 		CPPUNIT_ASSERT_EQUAL(180, fEntityFactory->fBullets[1]->getDirection());
 		assertVectorEquality(fEntityFactory->fShips[0]->getPosition(), fEntityFactory->fBullets[0]->getPosition());
-
+		
 		fGame->update(1);
 		CPPUNIT_ASSERT(fEntityFactory->fBullets[0]->fVisualized);
 		assertVectorEquality(Vector2((MAGIC_FIRE_TICK)*0.01+1, -1.999), fEntityFactory->fBullets[0]->getPosition());

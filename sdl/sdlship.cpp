@@ -17,8 +17,8 @@ namespace SISDL {
 	SDLShip::SDLShip(SI::VShipDriver* driver, SI::Vector2 v, int dir,
 	                 SI::EntityGroup* group,
 	                 SI::ShipType t, SI::IGameEntityFactory* fac,
-	                 Zabbr::SDLWindow* w):
-	         SI::Ship(driver, v, dir, group, t, fac), fWindow(w) {
+	                 SI::Weaponery* weaponery, Zabbr::SDLWindow* w):
+	         SI::Ship(driver, v, dir, group, t, fac, weaponery), fWindow(w) {
 	    SI::BoundingBoxDescription* bb = dynamic_cast<SI::BoundingBoxDescription*>(t.fBoundingShapeDesc);
 	    int width = bb->getWidth() / 8.0 * fWindow->getXResolution();
 	    int height = bb->getHeight() / 6.0 * fWindow->getYResolution();

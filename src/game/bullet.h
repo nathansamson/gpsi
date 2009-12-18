@@ -2,22 +2,19 @@
 #define INC_BULLET_H
 
 #include "misc/vector2.h"
+#include "game/ammotype.h"
 #include "game/gameentity.h"
 
 namespace SI {
 	/**
 	 * Description of a bullet.
 	*/
-	struct BulletType {
+	class BulletType: public AmmoType {
+	public:
 		/**
 		 * The speed of the bullet.
 		*/
 		Vector2 fSpeed;
-		
-		/**
-		 * The bounding shape of the bullet.
-		*/
-		IBoundingShapeDescription* fBoundingShapeDesc;
 	};
 
 	/**
@@ -26,7 +23,7 @@ namespace SI {
 	*/
 	class Bullet: public VGameEntity {
 	public:
-		Bullet(Vector2, int, EntityGroup*, BulletType, IGameEntityFactory*);
+		Bullet(Vector2, int, EntityGroup*, BulletType*, IGameEntityFactory*);
 		
 		virtual std::vector<VGameEntity*> update(int);
 		virtual double getImpact();

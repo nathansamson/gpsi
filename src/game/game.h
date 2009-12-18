@@ -7,6 +7,7 @@
 #include "gameentityfactory.h"
 #include "shipdriver.h"
 #include "builtinenemydriverfactory.h"
+#include "game/weaponery.h"
 
 namespace SI {
 	/**
@@ -49,6 +50,11 @@ namespace SI {
 		 * The AI group.
 		*/
 		EntityGroup* fAIGroup;
+
+		/**
+		 * The weaponery.
+		*/
+		Weaponery* fWeaponery;
 	};
 }
 

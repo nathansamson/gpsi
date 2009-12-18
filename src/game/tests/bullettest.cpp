@@ -11,11 +11,11 @@ namespace SITest {
 	                                   &BulletTest::name) \
 	
 	void BulletTest::setUp() {
-		BulletType b;
-		b.fSpeed = Vector2(0.000, 0.001);
-		b.fBoundingShapeDesc = new BoundingBoxDescription(0.1, 0.1);
+		BulletType* b = new BulletType();
+		b->fSpeed = Vector2(0.000, 0.001);
+		b->fBoundingShapeDesc = new BoundingBoxDescription(0.1, 0.1);
 		fBullet = new Bullet(Vector2(0.0, 0.0), 0, 0, b, 0);
-		delete b.fBoundingShapeDesc;
+		delete b;
 	}
 	
 	void BulletTest::tearDown() {

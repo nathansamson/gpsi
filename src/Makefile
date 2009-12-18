@@ -1,9 +1,7 @@
 INCLUDES = -I$(shell pwd) -I../
-CXXFLAGS += $(INCLUDES) -fPIC
-LDFLAGS = 
-LDTESTFLAGS = `pkg-config --libs cppunit`
-TINYXMLSRCS = $(shell find ../tinyxml -type f -name '*.cpp')
-TINYXMLOBJECTS = $(patsubst %.cpp,%.o,$(TINYXMLSRCS))
+CXXFLAGS += $(INCLUDES) -fPIC -DTIXML_USE_TICPP
+LDFLAGS = -L../tinyxml/ -lticpp
+LDTESTFLAGS = $(LDFLAGS) `pkg-config --libs cppunit`
 CXXSOURCES = $(shell find . -type f -name '*.cpp' -not -wholename '*/tests/*') $(TINYXMLSRCS)
 CXXOBJECTS = $(patsubst %.cpp,%.o,$(CXXSOURCES))
 CXXTESTSOURCES = $(shell find . -type f -name '*.cpp') $(TINYXMLSRCS)
@@ -23,7 +21,7 @@ test: $(TEST)
 	./$(TEST)
 
 $(TEST): $(CXXTESTOBJECTS)
-	$(CXX) $(LDTESTFLAGS) -o $@ $^
+	$(CXX) -o $@ $^ $(LDTESTFLAGS)
 	
 clean:
 	$(RM) $(CXXTESTOBJECTS) $(LIB) $(TEST) $(DEPFILES) $(shell find -name "*.d.*")

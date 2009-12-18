@@ -1,9 +1,16 @@
 #include "game/weapons/weapon.h"
 
 namespace SI {
-	VWeapon::VWeapon(int ticksBetweenFire, IGameEntityFactory* entityFactory, Ship* ship):
-	         fEntityFactory(entityFactory), fShip(ship),
-	         fTicksBetweenFire(ticksBetweenFire), fTicksSinceLastFire(ticksBetweenFire) {
+	VWeapon::VWeapon(int ticksBetweenFire, IGameEntityFactory* entityFactory):
+	         fEntityFactory(entityFactory), fShip(0),
+	         fTicksBetweenFire(ticksBetweenFire),
+	         fTicksSinceLastFire(ticksBetweenFire) {
+	}
+	
+	VWeapon::VWeapon(const VWeapon& weapon, Ship* ship):
+	         fEntityFactory(weapon.fEntityFactory), fShip(ship),
+	         fTicksBetweenFire(weapon.fTicksBetweenFire),
+	         fTicksSinceLastFire(weapon.fTicksBetweenFire) {
 	}
 	
 	/**
@@ -21,13 +28,17 @@ namespace SI {
 		fTicksSinceLastFire += ticks;
 	}
 	
+	bool VWeapon::isBlueprint() {
+		return fShip == 0;
+	}
+	
 	/**
 	 * Checks if the weapon is ready to fire.
 	 *
 	 * @return True if the weapon can fire.
 	*/
 	bool VWeapon::canFire() {
-		return (fTicksSinceLastFire >= fTicksBetweenFire);
+		return (!isBlueprint() && fTicksSinceLastFire >= fTicksBetweenFire);
 	}
 	
 	/**

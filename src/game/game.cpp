@@ -14,18 +14,13 @@ namespace SI {
 	Game::Game(VShipDriver* userShipDriver, IGameEntityFactory* entityFactory,
 	           std::string levelDirectory, std::string firstLevel,
 	           IEnemyDriverFactory* fac) 
-	     : fEntityFactory(entityFactory), fEnemyDriverFactory(fac) {
+	     : fEntityFactory(entityFactory), fEnemyDriverFactory(fac), fWeaponery(new Weaponery()) {
+	    LevelReader level = LevelReader(levelDirectory+firstLevel, entityFactory, fEnemyDriverFactory, fWeaponery);
 		fUserGroup = new EntityGroup("Users");
-		ShipType userShipType;
-		userShipType.fBoundingShapeDesc = new BoundingBoxDescription(0.80, 0.56);
-		userShipType.fName = "X Wing";
-		Ship* user = entityFactory->createShip(userShipDriver, Vector2(0.0, -2.0), 0, fUserGroup, userShipType);
-		delete userShipType.fBoundingShapeDesc;
-		fEntities.push_back(user);
+		fEntities.push_back(level.getUserShip(userShipDriver, fUserGroup));
 		
 		fAIGroup = new EntityGroup("AI's");
-		LevelReader level = LevelReader(levelDirectory+firstLevel, entityFactory, fAIGroup, fEnemyDriverFactory);
-		std::vector<Ship*> ships = level.getShips();
+		std::vector<Ship*> ships = level.getEnemyShips(fAIGroup);
 		for (std::vector<Ship*>::iterator it = ships.begin(); it != ships.end(); it++) {
 			fEntities.push_back((*it));
 		}
@@ -37,6 +32,7 @@ namespace SI {
 		}
 		delete fEntityFactory;
 		delete fEnemyDriverFactory;
+		delete fWeaponery;
 		delete fUserGroup;
 		delete fAIGroup;
 	}

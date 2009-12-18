@@ -7,11 +7,12 @@
 #include "game/shipdriver.h"
 #include "game/gameentity.h"
 #include "game/weapons/weapon.h"
-#include "game/bullet.h"
+#include "game/weaponery.h"
 
 namespace SI {
 	class VShipDriver;
 	class VWeapon;
+	class Weaponery;
 
 	/**
 	 * Description of a ship.
@@ -26,6 +27,11 @@ namespace SI {
 		 * The name of the ship.
 		*/
 		std::string fName;
+		
+		/**
+		 * A list of names of weapons of the ship.
+		*/
+		std::vector<std::string> fWeapons;
 	};
 
 	/**
@@ -33,7 +39,7 @@ namespace SI {
 	*/
 	class Ship: public VGameEntity {
 	public:
-		Ship(VShipDriver*, Vector2, int, EntityGroup*, ShipType, IGameEntityFactory*);
+		Ship(VShipDriver*, Vector2, int, EntityGroup*, ShipType, IGameEntityFactory*, Weaponery*);
 		virtual ~Ship();
 		
 		virtual std::vector<VGameEntity*> update(int);
@@ -62,8 +68,11 @@ namespace SI {
 		 * The list of weapons on this ship.
 		*/
 		std::vector<VWeapon*> fWeapons;
-		
-		BulletType fBulletType;
+	
+		/**
+		 * The weaponery of the ship.
+		*/
+		Weaponery* fWeaponery;
 	};
 }
 
