@@ -4,11 +4,13 @@
 #include "game/shipdriver.h"
 #include "game/ship.h"
 #include "game/bullet.h"
+#include "game/weaponery.h"
 
 namespace SI {
 	struct ShipType;
 	class VShipDriver;
 	class Ship;
+	class Weaponery;
 
 	/**
 	 * The Game Entity Factory. Classes that implement this interface
@@ -21,12 +23,12 @@ namespace SI {
 		/**
 		 * Creates a Ship.
 		*/
-		virtual Ship* createShip(VShipDriver*, Vector2, int, EntityGroup*, ShipType) = 0;
+		virtual Ship* createShip(VShipDriver*, Vector2, int, EntityGroup*, Weaponery*, ShipType) = 0;
 		
 		/**
 		 * Creates a bullet.
 		*/
-		virtual Bullet* createBullet(Vector2, int, EntityGroup*, BulletType) = 0;
+		virtual Bullet* createBullet(Vector2, int, EntityGroup*, BulletType*) = 0;
 	};
 }
 

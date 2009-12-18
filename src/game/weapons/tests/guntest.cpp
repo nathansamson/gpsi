@@ -15,11 +15,14 @@ namespace SITest {
 		fEntityFactory = new MockGameEntityFactory();
 		ShipType shiptype;
 		shiptype.fBoundingShapeDesc = new BoundingBoxDescription(1.0, 1.0);
-		fBulletType.fSpeed = Vector2(0.0, 0.01);
-		fBulletType.fBoundingShapeDesc = new BoundingBoxDescription(0.1, 0.1);
+		fBulletType = new BulletType;
+		fBulletType->fSpeed = Vector2(0.0, 0.01);
+		fBulletType->fBoundingShapeDesc = new BoundingBoxDescription(0.1, 0.1);
 		fEntityGroup = new EntityGroup("group");
-		fShip = new Ship(new MockShipDriver(), Vector2(0, 0), 0, fEntityGroup, shiptype, fEntityFactory);
-		fGun = new Gun(500, fEntityFactory, fShip, Vector2(1.0, 0.5), fBulletType);
+		fShip = new Ship(new MockShipDriver(), Vector2(0, 0), 0, fEntityGroup, shiptype, fEntityFactory, 0);
+		Gun* blueprint = new Gun(500, fEntityFactory, Vector2(1.0, 0.5), fBulletType);
+		fGun = blueprint->addWeaponToShip(fShip);
+		delete blueprint;
 		delete shiptype.fBoundingShapeDesc;
 	}
 	
@@ -28,7 +31,7 @@ namespace SITest {
 		delete fGun;
 		delete fShip;
 		delete fEntityFactory;
-		delete fBulletType.fBoundingShapeDesc;
+		delete fBulletType;
 	}
 	
 	void GunTest::testConstruction() {

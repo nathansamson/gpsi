@@ -16,7 +16,7 @@ namespace SITest {
 		ShipType s;
 		s.fBoundingShapeDesc = new BoundingBoxDescription(1.0, 1.0);
 		fEntityFactory = new MockGameEntityFactory();
-		fShip = new Ship(new MockShipDriver(), Vector2(0, 0), 0, 0, s, fEntityFactory);
+		fShip = new Ship(new MockShipDriver(), Vector2(0, 0), 0, 0, s, fEntityFactory, 0);
 		delete s.fBoundingShapeDesc;
 	}
 	

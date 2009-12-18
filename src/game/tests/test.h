@@ -32,7 +32,8 @@ namespace SITest {
 	
 	class MockShip: public SI::Ship {
 	public:
-		MockShip(SI::VShipDriver*, SI::Vector2, int, SI::EntityGroup*, SI::ShipType, SI::IGameEntityFactory*);
+		MockShip(SI::VShipDriver*, SI::Vector2, int, SI::EntityGroup*,
+		         SI::Weaponery*, SI::ShipType, SI::IGameEntityFactory*);
 		
 		virtual void visualize();
 		bool fVisualized;
@@ -40,7 +41,7 @@ namespace SITest {
 	
 	class MockBullet: public SI::Bullet {
 	public:
-		MockBullet(SI::Vector2, int, SI::EntityGroup*, SI::BulletType, SI::IGameEntityFactory*);
+		MockBullet(SI::Vector2, int, SI::EntityGroup*, SI::BulletType*, SI::IGameEntityFactory*);
 		
 		virtual void visualize();
 		bool fVisualized;
@@ -55,8 +56,8 @@ namespace SITest {
 	
 	class MockGameEntityFactory: public SI::IGameEntityFactory {
 	public:
-		SI::Ship* createShip(SI::VShipDriver*, SI::Vector2, int, SI::EntityGroup*, SI::ShipType);	
-		SI::Bullet* createBullet(SI::Vector2, int, SI::EntityGroup*, SI::BulletType);
+		SI::Ship* createShip(SI::VShipDriver*, SI::Vector2, int, SI::EntityGroup*, SI::Weaponery*, SI::ShipType);	
+		SI::Bullet* createBullet(SI::Vector2, int, SI::EntityGroup*, SI::BulletType*);
 		
 		std::vector<MockShip*> fShips;
 		std::vector<MockBullet*> fBullets;

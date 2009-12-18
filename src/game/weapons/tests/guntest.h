@@ -23,7 +23,7 @@ namespace SITest {
 		
 		static CppUnit::Test* suite();
 	private:
-		BulletType fBulletType;
+		BulletType* fBulletType;
 		IGameEntityFactory* fEntityFactory;
 		Ship* fShip;
 		Gun* fGun;

@@ -10,9 +10,9 @@ namespace SI {
 	 * @param type the Bullet information.
 	 * @param fac The factory of the bullet.
 	*/
-	Bullet::Bullet(Vector2 pos, int dir, EntityGroup* group, BulletType type, IGameEntityFactory* fac):
-	        VGameEntity(pos, dir, type.fBoundingShapeDesc, group, fac),
-	        fSpeed(type.fSpeed) {
+	Bullet::Bullet(Vector2 pos, int dir, EntityGroup* group, BulletType* type, IGameEntityFactory* fac):
+	        VGameEntity(pos, dir, type->fBoundingShapeDesc, group, fac),
+	        fSpeed(type->fSpeed * ((dir == 0) ? 1 : -1)) {
 	}
 	
 	/**

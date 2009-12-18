@@ -1,8 +1,20 @@
 #include "game/weapons/gun.h"
 
 namespace SI {
-	Gun::Gun(int ticksBetweenFire, IGameEntityFactory* fac, Ship* ship, Vector2 offset, BulletType type):
-	     VWeapon(ticksBetweenFire, fac, ship), fBulletType(type), fOffset(-offset) {
+	Gun::Gun(int ticksBetweenFire, IGameEntityFactory* fac, Vector2 offset, BulletType* type):
+	     VWeapon(ticksBetweenFire, fac), fBulletType(type), fOffset(-offset) {
+	}
+	
+	Gun::Gun(const Gun& gun, Ship* ship): VWeapon(gun, ship),
+	     fBulletType(gun.fBulletType), fOffset(gun.fOffset) {
+	}
+	
+	Gun* Gun::addWeaponToShip(Ship* ship) {
+		if (isBlueprint()) {
+			return new Gun(*this, ship);
+		} else {
+			return 0;
+		}
 	}
 	
 	VGameEntity* Gun::fire() {

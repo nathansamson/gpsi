@@ -12,12 +12,17 @@ namespace SI {
 	*/
 	class VWeapon {
 	public:
-		VWeapon(int, IGameEntityFactory*, Ship*);
 		virtual ~VWeapon();
+	
+		virtual VWeapon* addWeaponToShip(Ship*) = 0;
 	
 		virtual VGameEntity* fire() = 0;
 		void update(int);
 	protected:
+		VWeapon(int, IGameEntityFactory*);
+		VWeapon(const VWeapon&, Ship*);
+		
+		bool isBlueprint();
 		void resetTime();
 		bool canFire();
 		IGameEntityFactory* fEntityFactory;

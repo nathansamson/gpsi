@@ -20,8 +20,8 @@ namespace SISDL {
 	 * @param v The initial position.
 	 * @param t The type of the ship.
 	*/
-	SI::Ship* SDLEntityFactory::createShip(SI::VShipDriver* driver, SI::Vector2 v, int d, SI::EntityGroup* g, SI::ShipType t) {
-		return new SDLShip(driver, v, d, g, t, this, fWindow);
+	SI::Ship* SDLEntityFactory::createShip(SI::VShipDriver* driver, SI::Vector2 v, int d, SI::EntityGroup* g, SI::Weaponery* w, SI::ShipType t) {
+		return new SDLShip(driver, v, d, g, t, this, w, fWindow);
 	}
 	
 	/**

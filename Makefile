@@ -3,12 +3,15 @@ export CXXFLAGS += -Werror -Wall
 
 .PHONY: sdlgui zabbr lib test docs docsupload memcheck run
 
-all: lib zabbr sdlgui
+all: ticpp lib zabbr sdlgui
+
+ticpp:
+	$(MAKE) -C tinyxml all
 
 lib:
 	$(MAKE) -C src all
 
-test:
+test: ticpp
 	$(MAKE) -C src test
 
 zabbr:
@@ -30,6 +33,7 @@ run: sdlgui
 	LD_LIBRARY_PATH=./src ./sdl/sisdl
 
 clean:
+	$(MAKE) -C tinyxml clean
 	$(MAKE) -C zabbr clean
 	$(MAKE) -C sdl clean
 	$(MAKE) -C src clean

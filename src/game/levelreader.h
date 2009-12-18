@@ -2,24 +2,33 @@
 #define INC_LEVELREADER_H
 
 #include <string>
+#include <map>
 #include <vector>
 
-#include "tinyxml/tinyxml.h"
+#include "tinyxml/ticpp.h"
 #include "game/gameentityfactory.h"
 #include "game/enemydriverfactory.h"
+#include "game/weaponery.h"
 
 namespace SI {
 	class LevelReader {
 	public:
-		LevelReader(std::string, IGameEntityFactory*, EntityGroup*, IEnemyDriverFactory*);
-		~LevelReader() {}
+		LevelReader(std::string, IGameEntityFactory*, IEnemyDriverFactory*, Weaponery*);
+		~LevelReader();
 		
-		std::vector<Ship*> getShips();
+		std::vector<Ship*> getEnemyShips(EntityGroup*);
+		Ship* getUserShip(VShipDriver*, EntityGroup*);
 	private:
-		TiXmlDocument fLevel;
+		static void parseBoundingShape(IBoundingShapeDescription*&, ticpp::Element*);
+		void parseAmmo();
+		void parseWeapons();
+		std::map<std::string, ShipType> parseShipTypes();
+
+		ticpp::Document fLevel;
 		IGameEntityFactory* fEntityFactory;
-		EntityGroup* fEnemyGroup;
 		IEnemyDriverFactory* fEnemyDriverFactory;
+		Weaponery* fWeaponery;
+		std::map<std::string, ShipType> fShipTypes;
 	};
 }
 
