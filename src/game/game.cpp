@@ -1,4 +1,4 @@
-#include "game.h"
+#include "game/game.h"
 #include "game/levelreader.h"
 #include "game/builtinenemydriverfactory.h"
 #include "misc/boundingbox.h"
