@@ -47,6 +47,7 @@ namespace SI {
 		double length() const;
 		double dotProduct(const Vector2&) const;
 		void normalize();
+		Vector2 rotate(int);
 		
 		Vector2 operator+(const Vector2&) const;
 		Vector2& operator+=(const Vector2&);

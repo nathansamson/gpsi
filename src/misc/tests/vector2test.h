@@ -19,6 +19,7 @@ namespace SITest {
 		void testLength();
 		void testDotProduct();
 		void testNormalize();
+		void testRotation();
 		
 
 		// Operators
