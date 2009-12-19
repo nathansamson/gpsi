@@ -2,6 +2,16 @@ cmake_minimum_required (VERSION 2.6)
 project (GPSI)
 
 set(CMAKE_MODULE_PATH "${GPSI_SOURCE_DIR}")
+option(DEBUG "Set true if debug should be used" false)
+
+if(DEBUG AND NOT CMAKE_BUILD_TYPE)
+	set (CMAKE_BUILD_TYPE "debugall")
+	message(STATUS "debug")
+else(NOT CMAKE_BUILD_TYPE)
+	set (CMAKE_BUILD_TYPE "release")
+	message(STATUS "release")
+endif
+
 
 add_definitions (-DTIXML_USE_TICPP -Wall -Werror -pedantic)
 
