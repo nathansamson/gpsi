@@ -4,9 +4,9 @@
 #include <list>
 #include <string>
 
-#include "gameentityfactory.h"
-#include "shipdriver.h"
-#include "builtinenemydriverfactory.h"
+#include "game/gameentityfactory.h"
+#include "game/shipdriver.h"
+#include "game/builtinenemydriverfactory.h"
 #include "game/weaponery.h"
 
 namespace SI {
