@@ -31,6 +31,11 @@ namespace SITest {
 		return createdBullet;
 	}
 	
+	SI::ClusterBomb* MockGameEntityFactory::createClusterBomb(SI::Vector2 pos, int d,
+	                                   SI::EntityGroup* g, SI::ClusterBombType* t) {
+		return 0;
+	}
+	
 	MockShip::MockShip(SI::VShipDriver* driver, SI::Vector2 v, int d,
 	                   SI::EntityGroup* g, SI::Weaponery* w, SI::ShipType t, SI::IGameEntityFactory* f):
 	          SI::Ship(driver, v, d, g, t, f, w), fVisualized(false) {

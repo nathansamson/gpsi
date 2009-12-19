@@ -11,6 +11,7 @@ add_executable (sisdl
                   ./siwindow.cpp
                   ./gamecontroller.cpp
                   ./sdlbullet.cpp
+                  ./sdlclusterbomb.cpp
                   ./sdlentityfactory.cpp
                   ./sdlkeyboardinputdriver.cpp
 )

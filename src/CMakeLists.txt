@@ -11,10 +11,12 @@ add_library (si SHARED
                ./game/levelreader.cpp
                ./game/weapons/weapon.cpp
                ./game/weapons/gun.cpp
+               ./game/weapons/clusterbombcannon.cpp
                ./game/shipdriver.cpp
                ./game/weaponery.cpp
                ./game/ship.cpp
                ./game/builtinenemydriverfactory.cpp
+               ./game/clusterbomb.cpp
                ./misc/boundingshape.cpp
                ./misc/boundingbox.cpp
                ./misc/vector2.cpp
