@@ -17,6 +17,5 @@ int main(int argc, char* argv[]) {
 	runner.addTest(SITest::SynchronousDriverTest::suite());
 	runner.addTest(SITest::BulletTest::suite());
 	runner.addTest(SITest::GunTest::suite());
-	runner.run();
-	return 0;
+	return !runner.run("", false);
 }

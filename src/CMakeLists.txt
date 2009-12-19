@@ -35,3 +35,7 @@ add_executable (sitest
 )
 target_link_libraries (sitest si ticpp cppunit)
 add_test(sitest ${EXECUTABLE_OUTPUT_PATH}/sitest)
+
+execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
+                                ${CMAKE_SOURCE_DIR}/src/testlevels
+                                ${CMAKE_BINARY_DIR}/src/testlevels)
