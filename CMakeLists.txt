@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.6)
 project (GPSI)
 
 set(CMAKE_MODULE_PATH "${GPSI_SOURCE_DIR}")
-option(DEBUG "Set true if debug should be used" false)
+option(DEBUG "Set true if debug should be used")
 
 if(DEBUG AND NOT CMAKE_BUILD_TYPE)
 	set (CMAKE_BUILD_TYPE "debugall")
@@ -10,7 +10,7 @@ if(DEBUG AND NOT CMAKE_BUILD_TYPE)
 else(NOT CMAKE_BUILD_TYPE)
 	set (CMAKE_BUILD_TYPE "release")
 	message(STATUS "release")
-endif
+endif()
 
 
 add_definitions (-DTIXML_USE_TICPP -Wall -Werror -pedantic)
@@ -33,4 +33,6 @@ else()
 	message(STATUS "SDL TTF Found: ${SDLTTF_FOUND}")
 	message(STATUS "SDL Image Found: ${SDLIMAGE_FOUND}")
 	message(STATUS "SDL Gfx Found: ${SDLGFX_FOUND}")
+	
+	message(FATAL_ERROR "One of the required SDL libs is not found.")
 endif()
