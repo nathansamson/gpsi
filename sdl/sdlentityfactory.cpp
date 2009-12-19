@@ -1,6 +1,7 @@
 #include "sdlentityfactory.h"
 #include "sdlship.h"
 #include "sdlbullet.h"
+#include "sdlclusterbomb.h"
 
 namespace SISDL {
 	/**
@@ -33,5 +34,17 @@ namespace SISDL {
 	*/
 	SI::Bullet* SDLEntityFactory::createBullet(SI::Vector2 pos, int dir, SI::EntityGroup* g, SI::BulletType* t) {
 		return new SDLBullet(pos, dir, g, t, this, fWindow);
+	}
+	
+	/**
+	 * Creates a cluster bomb
+	 *
+	 * @param pos The initial position of the cluster bomb.
+	 * @param dir The initial direction of the cluster bomb.
+	 * @param t Cluster bomb information
+	*/
+	SI::ClusterBomb* SDLEntityFactory::createClusterBomb(SI::Vector2 pos, int dir,
+	                  SI::EntityGroup* g, SI::ClusterBombType* t) {
+		return new SDLClusterBomb(pos, dir, g, t, this, fWindow);
 	}
 }

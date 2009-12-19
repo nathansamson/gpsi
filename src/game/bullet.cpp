@@ -12,7 +12,7 @@ namespace SI {
 	*/
 	Bullet::Bullet(Vector2 pos, int dir, EntityGroup* group, BulletType* type, IGameEntityFactory* fac):
 	        VGameEntity(pos, dir, type->fBoundingShapeDesc, group, fac),
-	        fSpeed(type->fSpeed * ((dir == 0) ? 1 : -1)) {
+	        fSpeed(type->fSpeed.rotate(dir)) {
 	}
 	
 	/**

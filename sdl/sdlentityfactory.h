@@ -10,6 +10,7 @@ namespace SISDL {
 		SDLEntityFactory(Zabbr::SDLWindow*);
 		SI::Ship* createShip(SI::VShipDriver*, SI::Vector2, int, SI::EntityGroup*, SI::Weaponery*, SI::ShipType);
 		SI::Bullet* createBullet(SI::Vector2, int, SI::EntityGroup*, SI::BulletType*);
+		SI::ClusterBomb* createClusterBomb(SI::Vector2, int, SI::EntityGroup*, SI::ClusterBombType*);
 	private:
 		/**
 		 * The window to draw the widgets on.

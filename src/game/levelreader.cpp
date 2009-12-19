@@ -4,6 +4,7 @@
 #include "game/ship.h"
 #include "game/synchronousdriver.h"
 #include "game/weapons/gun.h"
+#include "game/weapons/clusterbombcannon.h"
 #include "misc/boundingbox.h"
 
 namespace SI {
@@ -40,16 +41,39 @@ namespace SI {
 	void LevelReader::parseAmmo() {
 		ticpp::Element* ammoNode = fLevel.FirstChild("level")->FirstChild("ammo")->ToElement();
 		
-		// Bullets
-		ticpp::Iterator<ticpp::Element> bulletNode("bullet");
-		for (bulletNode = bulletNode.begin(ammoNode); bulletNode != bulletNode.end(); bulletNode++) {
-			BulletType* bullet = new BulletType();
-			parseBoundingShape(bullet->fBoundingShapeDesc,
-			                   bulletNode->FirstChild("boundingshape")->ToElement());
-			double ySpeed;
-			bulletNode->FirstChild("speed")->ToElement()->GetText(&ySpeed);
-			bullet->fSpeed = Vector2(0.0, ySpeed);
-			fWeaponery->addAmmo(bulletNode->GetAttribute("id"), bullet);
+		
+		{// Bullets
+			ticpp::Iterator<ticpp::Element> bulletNode("bullet");
+			for (bulletNode = bulletNode.begin(ammoNode); bulletNode != bulletNode.end(); bulletNode++) {
+				BulletType* bullet = new BulletType();
+				parseBoundingShape(bullet->fBoundingShapeDesc,
+					               bulletNode->FirstChild("boundingshape")->ToElement());
+				double ySpeed;
+				bulletNode->FirstChild("speed")->ToElement()->GetText(&ySpeed);
+				bullet->fSpeed = Vector2(0.0, ySpeed);
+				fWeaponery->addAmmo(bulletNode->GetAttribute("id"), bullet);
+			}
+		}
+		
+		{
+			// Cluster bombs
+			ticpp::Iterator<ticpp::Element> clusterNode("clusterbomb");
+			for (clusterNode = clusterNode.begin(ammoNode); clusterNode != clusterNode.end(); clusterNode++) {
+				ClusterBombType* cluster = new ClusterBombType();
+				parseBoundingShape(cluster->fBoundingShapeDesc,
+					               clusterNode->FirstChild("boundingshape")->ToElement());
+				double ySpeed;
+				clusterNode->FirstChild("speed")->ToElement()->GetText(&ySpeed);
+				cluster->fSpeed = Vector2(0.0, ySpeed);
+				clusterNode->FirstChild("maxticksalive")->ToElement()->GetText(&cluster->fMaxTicksAlive);
+				
+				clusterNode->FirstChild("bullets")->ToElement()->GetText(&cluster->fBullets);
+				cluster->fBulletType = fWeaponery->getAmmoType<BulletType>(
+				                         clusterNode->FirstChild("bullet-type")
+				                                    ->ToElement()->GetText());
+				
+				fWeaponery->addAmmo(clusterNode->GetAttribute("id"), cluster);
+			}
 		}
 	}
 	
@@ -58,7 +82,8 @@ namespace SI {
 		ticpp::Iterator<ticpp::Element> weaponNode("weapon");
 		for (weaponNode = weaponNode.begin(weaponsNode); weaponNode != weaponNode.end(); weaponNode++) {
 			VWeapon* weapon = 0;
-			if (weaponNode->GetAttribute("type") == "gun") {
+			std::string weaponType = weaponNode->GetAttribute("type");
+			if (weaponType == "gun") {
 				int coolingOffTime;
 				weaponNode->FirstChild("coolingofftime")->ToElement()->GetText(&coolingOffTime);
 				double xOffset;
@@ -68,6 +93,14 @@ namespace SI {
 				                               ->ToElement()->GetText());
 				weapon = new Gun(coolingOffTime, fEntityFactory,
 				                 Vector2(xOffset, 0.0), bullet);
+			} else if (weaponType == "cluster-bomb-cannon") {
+				int coolingOffTime;
+				weaponNode->FirstChild("coolingofftime")->ToElement()->GetText(&coolingOffTime);
+				
+				ClusterBombType* ammo = fWeaponery->getAmmoType<ClusterBombType>(
+				                             weaponNode->FirstChild("ammo")
+				                                       ->ToElement()->GetText());
+				weapon = new ClusterBombCannon(coolingOffTime, fEntityFactory, ammo);
 			}
 			fWeaponery->addWeapon(weaponNode->GetAttribute("id"), weapon);
 		}
@@ -83,7 +116,11 @@ namespace SI {
 			ticpp::Element* boundingshape = (*shipTypeNode).FirstChild("boundingshape")->ToElement();
 			parseBoundingShape(shipType.fBoundingShapeDesc, boundingshape);
 			
-			shipType.fWeapons.push_back("normal-gun");
+			ticpp::Element* weaponsNode = shipTypeNode->FirstChild("weapons")->ToElement();
+			ticpp::Iterator<ticpp::Element> weaponNode("weapon");
+			for (weaponNode = weaponNode.begin(weaponsNode); weaponNode != weaponNode.end(); weaponNode++) {
+				shipType.fWeapons.push_back(weaponNode->GetAttribute("name"));
+			}
 			
 			shipTypes[shipType.fName] = shipType;
 		}

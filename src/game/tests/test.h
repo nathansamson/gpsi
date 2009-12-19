@@ -58,6 +58,7 @@ namespace SITest {
 	public:
 		SI::Ship* createShip(SI::VShipDriver*, SI::Vector2, int, SI::EntityGroup*, SI::Weaponery*, SI::ShipType);	
 		SI::Bullet* createBullet(SI::Vector2, int, SI::EntityGroup*, SI::BulletType*);
+		SI::ClusterBomb* createClusterBomb(SI::Vector2, int, SI::EntityGroup*, SI::ClusterBombType*);
 		
 		std::vector<MockShip*> fShips;
 		std::vector<MockBullet*> fBullets;

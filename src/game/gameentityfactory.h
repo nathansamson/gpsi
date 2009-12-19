@@ -4,6 +4,7 @@
 #include "game/shipdriver.h"
 #include "game/ship.h"
 #include "game/bullet.h"
+#include "game/clusterbomb.h"
 #include "game/weaponery.h"
 
 namespace SI {
@@ -29,6 +30,11 @@ namespace SI {
 		 * Creates a bullet.
 		*/
 		virtual Bullet* createBullet(Vector2, int, EntityGroup*, BulletType*) = 0;
+		
+		/**
+		 * Creates a cluster bomb.
+		*/
+		virtual ClusterBomb* createClusterBomb(Vector2, int, EntityGroup*, ClusterBombType*) = 0;
 	};
 }
 
