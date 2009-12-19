@@ -42,6 +42,16 @@ namespace SITest {
 		CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, v1.dotProduct(zero), 1E-9);
 	}
 	
+	void Vector2Test::testRotation() {
+		assertVectorEquality(-v1, v1.rotate(180));
+		assertVectorEquality(v1, v1.rotate(0));
+		
+		Vector2 rotated = Vector2(-0.5626, 4.109397368);
+		assertVectorEquality(rotated, v1.rotate(57));
+		assertVectorEquality(v1.rotate(57+360), v1.rotate(57));
+		assertVectorEquality(v1.rotate(360-57), v1.rotate(-57));
+	}
+	
 	void Vector2Test::testNormalize() {
 		v1.normalize();
 		CPPUNIT_ASSERT_DOUBLES_EQUAL(0.757039809, v1.getX(), 1E-9);
@@ -117,6 +127,7 @@ namespace SITest {
 		suiteOfTests->addTest(VECTOR2_TEST(testLength));
 		suiteOfTests->addTest(VECTOR2_TEST(testDotProduct));
 		suiteOfTests->addTest(VECTOR2_TEST(testNormalize));
+		suiteOfTests->addTest(VECTOR2_TEST(testRotation));
 		suiteOfTests->addTest(VECTOR2_TEST(testVectorAddition));
 		suiteOfTests->addTest(VECTOR2_TEST(testVectorSubtraction));
 		suiteOfTests->addTest(VECTOR2_TEST(testNegative));

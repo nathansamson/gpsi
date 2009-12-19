@@ -1,6 +1,8 @@
 #include "misc/vector2.h"
 #include <math.h>
 
+#define PI 3.14159265
+
 namespace SI {
 
 	/**
@@ -68,6 +70,14 @@ namespace SI {
 		double l = length();
 		fX /= l;
 		fY /= l;
+	}
+	
+	Vector2 Vector2::rotate(int degrees) {
+		double sinTheta = sin(degrees * PI / 180);
+		double cosTheta = cos(degrees * PI / 180);
+		
+		return Vector2(fX * cosTheta - fY * sinTheta,
+		               fX * sinTheta + fY * cosTheta);
 	}
 	
 	/**
