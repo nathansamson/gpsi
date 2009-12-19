@@ -31,7 +31,7 @@ namespace SISDL {
 	 * @param dir The initial direction of the bullet.
 	 * @param t Bullet information
 	*/
-	SI::Bullet* SDLEntityFactory::createBullet(SI::Vector2 pos, int dir, SI::EntityGroup* g, SI::BulletType t) {
+	SI::Bullet* SDLEntityFactory::createBullet(SI::Vector2 pos, int dir, SI::EntityGroup* g, SI::BulletType* t) {
 		return new SDLBullet(pos, dir, g, t, this, fWindow);
 	}
 }

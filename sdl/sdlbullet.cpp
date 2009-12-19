@@ -12,9 +12,9 @@ namespace SISDL {
 	 * @param w The window.
 	*/
 	SDLBullet::SDLBullet(SI::Vector2 speed, int dir, SI::EntityGroup* group,
-	                     SI::BulletType t, SI::IGameEntityFactory* fac,
+	                     SI::BulletType* t, SI::IGameEntityFactory* fac,
 	                     Zabbr::SDLWindow* w):
-	           SI::Bullet(speed, dir, group, t, fac), fWindow(w), fBoundingBoxDesc(*dynamic_cast<SI::BoundingBoxDescription*>(t.fBoundingShapeDesc)) {
+	           SI::Bullet(speed, dir, group, t, fac), fWindow(w), fBoundingBoxDesc(*dynamic_cast<SI::BoundingBoxDescription*>(t->fBoundingShapeDesc)) {
 //		fBoundingBoxDesc = *dynamic_cast<SI::BoundingBoxDescription*>(t.fBoundingShapeDesc);
 	}
 	
