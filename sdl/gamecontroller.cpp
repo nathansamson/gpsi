@@ -69,7 +69,7 @@ namespace SISDL {
 	 * @param evnt The SDL_KeyboardEvent
 	*/
 	void GameController::keyDown(SDL_KeyboardEvent evnt) {
-		fInputDriver->keyDown(evnt);
+		if (!fGame->isUserDead()) fInputDriver->keyDown(evnt);
 	}
 	
 	/**
@@ -78,7 +78,7 @@ namespace SISDL {
 	 * @param evnt The SDL_KeyboardEvent
 	*/
 	void GameController::keyRelease(SDL_KeyboardEvent evnt) {
-		fInputDriver->keyRelease(evnt);
+		if (!fGame->isUserDead()) fInputDriver->keyRelease(evnt);
 		if (evnt.keysym.sym == SDLK_ESCAPE) {
 			requestQuit();
 		} else if (evnt.keysym.sym == SDLK_RETURN) {
