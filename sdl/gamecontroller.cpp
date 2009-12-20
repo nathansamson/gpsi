@@ -68,7 +68,7 @@ namespace SISDL {
 	 *
 	 * @param evnt The SDL_KeyboardEvent
 	*/
-	void GameController::keyDown(SDL_KeyboardEvent evnt) {
+	void GameController::keyPress(SDL_KeyboardEvent evnt) {
 		if (!fGame->isUserDead()) fInputDriver->keyDown(evnt);
 	}
 	
