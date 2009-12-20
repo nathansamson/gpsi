@@ -16,7 +16,7 @@ namespace SISDL {
 		virtual ~GameController();
 	
 		virtual void draw();
-		virtual void keyDown(SDL_KeyboardEvent);
+		virtual void keyPress(SDL_KeyboardEvent);
 		virtual void keyRelease(SDL_KeyboardEvent);
 		
 		void onRequestQuitGame();
