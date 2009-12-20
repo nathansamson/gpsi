@@ -20,6 +20,7 @@ add_library (si SHARED
                ./misc/boundingshape.cpp
                ./misc/boundingbox.cpp
                ./misc/vector2.cpp
+               ./misc/highscores.cpp
            )
 
 add_executable (sitest
@@ -32,6 +33,7 @@ add_executable (sitest
                  ./tests/main.cpp
                  ./misc/tests/vector2test.cpp
                  ./misc/tests/boundingboxtest.cpp
+                 ./misc/tests/highscorestest.cpp
 )
 target_link_libraries (sitest si ticpp cppunit)
 add_test(sitest ${EXECUTABLE_OUTPUT_PATH}/sitest)
@@ -39,3 +41,8 @@ add_test(sitest ${EXECUTABLE_OUTPUT_PATH}/sitest)
 execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
                                 ${CMAKE_SOURCE_DIR}/src/testlevels
                                 ${CMAKE_BINARY_DIR}/src/testlevels)
+
+execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/src/misc/tests)
+execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
+                                ${CMAKE_SOURCE_DIR}/src/misc/tests/highscores
+                                ${CMAKE_BINARY_DIR}/src/misc/tests/highscores)

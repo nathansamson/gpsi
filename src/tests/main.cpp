@@ -2,6 +2,7 @@
 
 #include "misc/tests/vector2test.h"
 #include "misc/tests/boundingboxtest.h"
+#include "misc/tests/highscorestest.h"
 #include "game/tests/shiptest.h"
 #include "game/tests/gametest.h"
 #include "game/tests/synchronousdrivertest.h"
@@ -17,5 +18,6 @@ int main(int argc, char* argv[]) {
 	runner.addTest(SITest::SynchronousDriverTest::suite());
 	runner.addTest(SITest::BulletTest::suite());
 	runner.addTest(SITest::GunTest::suite());
+	runner.addTest(SITest::HighscoresTest::suite());
 	return !runner.run("", false);
 }
