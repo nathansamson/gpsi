@@ -16,4 +16,5 @@ int main(int argc, char* argv[]) {
 	win->run(demo.getValue());
 
 	delete win;
+	return 0;
 }
