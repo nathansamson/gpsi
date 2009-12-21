@@ -38,3 +38,10 @@ else()
 	
 	message(FATAL_ERROR "One of the required SDL libs is not found.")
 endif()
+
+find_package(Doxygen)
+IF (DOXYGEN_FOUND)
+	configure_file(${GPSI_SOURCE_DIR}/Doxyfile.conf.in ${GPSI_BINARY_DIR}/Doxyfile.conf)
+	add_custom_target(doc ${DOXYGEN_EXECUTABLE} Doxyfile.conf)
+ENDIF()
+
