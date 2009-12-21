@@ -31,7 +31,7 @@ namespace SISDL {
 			if (!game) {
 				MenuController* menu = new MenuController(this);
 				SDL_Color c = {255, 255, 255};
-				menu->addWidget(new Label(this, "Sprotector", c));
+				menu->addWidget(new Label(this, "/Space/ Invaders", c, "fonts/orbitron-black.ttf", 64));
 			
 				Button* start = new Button(this, "Start game");
 				start->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::startGame));
