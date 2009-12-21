@@ -12,7 +12,6 @@ namespace SITest {
 	                                   &GameTest::name) \
 	
 	void GameTest::setUp() {
-		fEnemyDriverFactory = new TestEnemyDriverFactory();
 		fEntityFactory = new MockGameEntityFactory();
 	}
 	
@@ -21,8 +20,9 @@ namespace SITest {
 	}
 	
 	void GameTest::testSimpleGame() {
-		fGame = new Game(new MockShipDriver(), fEntityFactory,
-		                 "testlevels/", "test1.silvl", fEnemyDriverFactory);
+		fDriverFactory = new TestDriverFactory("mock");
+		fGame = new Game(fEntityFactory, "testlevels/", "test1.silvl",
+		                  new MockGameVisualizer(), fDriverFactory);
 	
 		CPPUNIT_ASSERT(fEntityFactory->fShips[0] != 0);
 		CPPUNIT_ASSERT(!fEntityFactory->fShips[0]->fVisualized);
@@ -39,7 +39,7 @@ namespace SITest {
 		fEntityFactory->fShips[0]->fVisualized = false;
 		assertVectorEquality(Vector2(1, -2.0), fEntityFactory->fShips[0]->getPosition());
 		
-		CPPUNIT_ASSERT(5 == (fEnemyDriverFactory->fDrivers.size()));
+		CPPUNIT_ASSERT(5 == (fDriverFactory->fDrivers.size()));
 		
 		fGame->update(MAGIC_FIRE_TICK);
 		CPPUNIT_ASSERT(fEntityFactory->fBullets[0] != 0);
@@ -63,8 +63,9 @@ namespace SITest {
 	}
 	
 	void GameTest::testUserDies() {
-		fGame = new Game(new PeaceMockShipDriver(), fEntityFactory,
-		                 "testlevels/", "testuserdies.silvl", fEnemyDriverFactory);
+		fDriverFactory = new TestDriverFactory("peace");
+		fGame = new Game(fEntityFactory, "testlevels/", "testuserdies.silvl",
+		                 new MockGameVisualizer(), fDriverFactory);
 	
 		CPPUNIT_ASSERT(!fGame->isAIDead());
 		CPPUNIT_ASSERT(!fGame->isUserDead());
@@ -77,8 +78,9 @@ namespace SITest {
 	}
 	
 	void GameTest::testComputerDies() {
-		fGame = new Game(new DeadlyMockShipDriver(), fEntityFactory,
-		                 "testlevels/", "testcomputerdies.silvl", fEnemyDriverFactory);
+		fDriverFactory = new TestDriverFactory("deadly");
+		fGame = new Game(fEntityFactory, "testlevels/", "testcomputerdies.silvl",
+		                 new MockGameVisualizer(), fDriverFactory);
 	
 		CPPUNIT_ASSERT(!fGame->isAIDead());
 		CPPUNIT_ASSERT(!fGame->isUserDead());

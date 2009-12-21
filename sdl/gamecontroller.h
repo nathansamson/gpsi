@@ -4,6 +4,8 @@
 #include "src/game/game.h"
 
 #include "sdlinputdriver.h"
+#include "sdldriverfactory.h"
+#include "sdlgamevisualizer.h"
 
 namespace SISDL {
 	
@@ -55,5 +57,8 @@ namespace SISDL {
 		 * Flag to see if we should close.
 		*/
 		bool fClosed;
+		
+		SDLGameVisualizer* fGameVisualizer;
+		SDLDriverFactory* fDriverFactory;
 	};
 }

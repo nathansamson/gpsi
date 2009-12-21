@@ -5,11 +5,13 @@ set(CMAKE_MODULE_PATH "${GPSI_SOURCE_DIR}")
 option(DEBUG "Set true if debug should be used")
 
 if(DEBUG AND NOT CMAKE_BUILD_TYPE)
-	set (CMAKE_BUILD_TYPE "debugall")
-	message(STATUS "debug")
-else(NOT CMAKE_BUILD_TYPE)
-	set (CMAKE_BUILD_TYPE "release")
-	message(STATUS "release")
+	set (CMAKE_BUILD_TYPE "Debug")
+	message(STATUS "Build type: Debug")
+elseif(NOT CMAKE_BUILD_TYPE)
+	set (CMAKE_BUILD_TYPE "Release")
+	message(STATUS "Build type: Release")
+else()
+	message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 endif()
 
 

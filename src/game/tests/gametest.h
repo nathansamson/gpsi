@@ -27,7 +27,7 @@ namespace SITest {
 	
 		void assertVectorEquality(Vector2, Vector2);
 		MockGameEntityFactory* fEntityFactory;
-		TestEnemyDriverFactory* fEnemyDriverFactory;
+		TestDriverFactory* fDriverFactory;
 	};
 }
 

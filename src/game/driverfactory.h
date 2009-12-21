@@ -1,5 +1,5 @@
-#ifndef INC_ENEMYDRIVERFACTORY_H
-#define INC_ENEMYDRIVERFACTORY_H
+#ifndef INC_DRIVERFACTORY_H
+#define INC_DRIVERFACTORY_H
 
 #include "game/shipdriver.h"
 
@@ -7,9 +7,12 @@ namespace SI {
 	/**
 	 * Interface for enemy driver factories.
 	*/
-	class IEnemyDriverFactory {
+	class IDriverFactory {
 	public:
-		virtual ~IEnemyDriverFactory() {}
+		virtual ~IDriverFactory() {}
+		
+		virtual VShipDriver* createUserDriver() = 0;
+		
 		/**
 		 * Creates an enemy driver.
 		*/

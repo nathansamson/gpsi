@@ -9,10 +9,10 @@
 
 namespace SI {
 	LevelReader::LevelReader(std::string fileName, IGameEntityFactory* fac,
-	                         IEnemyDriverFactory* enemyDriverFactory,
+	                         IDriverFactory* driverFactory,
 	                         Weaponery* weaponery):
 	             fLevel(fileName.c_str()), fEntityFactory(fac),
-	             fEnemyDriverFactory(enemyDriverFactory),
+	             fDriverFactory(driverFactory),
 	             fWeaponery(weaponery) {
 		fLevel.LoadFile();
 		
@@ -149,7 +149,7 @@ namespace SI {
 				pos = Vector2(i*(8.0-2*margin)/(count+1) + offset -4.0 + margin, y);
 				
 				enemies.push_back(fEntityFactory->createShip(
-				                     fEnemyDriverFactory->createEnemyDriver(
+				                     fDriverFactory->createEnemyDriver(
 				                         rowElement->GetAttribute("driver")),
 				                         pos, 180, enemyGroup, fWeaponery,
 				                         shipType));
@@ -158,11 +158,23 @@ namespace SI {
 		return enemies;
 	}
 	
-	Ship* LevelReader::getUserShip(VShipDriver* driver, EntityGroup* userGroup) {
+	Ship* LevelReader::getUserShip(EntityGroup* userGroup) {
 		ticpp::Element* shipNode = fLevel.FirstChild("level")->FirstChild("usership")->ToElement();
 		ShipType shipType = fShipTypes[shipNode->GetAttribute("shiptype")];
-		return fEntityFactory->createShip(driver,
+		return fEntityFactory->createShip(fDriverFactory->createUserDriver(),
 				                         Vector2(0, -2.0), 0, userGroup, fWeaponery,
 				                         shipType);
+	}
+	
+	std::string LevelReader::getLevelName() {
+		return fLevel.FirstChild("level")->FirstChild("name")->ToElement()->GetText();
+	}
+	
+	std::string LevelReader::getNextLevel() {
+		try {
+			return fLevel.FirstChild("level")->FirstChild("next")->ToElement()->GetText();
+		} catch (...) {
+			return "";
+		}
 	}
 }

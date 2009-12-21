@@ -1,6 +1,6 @@
 #include "game/game.h"
 #include "game/levelreader.h"
-#include "game/builtinenemydriverfactory.h"
+#include "game/builtindriverfactory.h"
 #include "misc/boundingbox.h"
 
 namespace SI {
@@ -11,19 +11,14 @@ namespace SI {
 	 * @param entityFactory The Entity factory for this game.
 	 * @param enemyDriverFactory The factory to create enemy drivers.
 	*/
-	Game::Game(VShipDriver* userShipDriver, IGameEntityFactory* entityFactory,
+	Game::Game(IGameEntityFactory* entityFactory,
 	           std::string levelDirectory, std::string firstLevel,
-	           IEnemyDriverFactory* fac) 
-	     : fEntityFactory(entityFactory), fEnemyDriverFactory(fac), fWeaponery(new Weaponery()) {
-	    LevelReader level = LevelReader(levelDirectory+firstLevel, entityFactory, fEnemyDriverFactory, fWeaponery);
-		fUserGroup = new EntityGroup("Users");
-		fEntities.push_back(level.getUserShip(userShipDriver, fUserGroup));
+	           IGameVisualizer* gameVis, IDriverFactory* fac) 
+	     : fEntityFactory(entityFactory), fDriverFactory(fac),
+	       fWeaponery(new Weaponery()), fGameVisualizer(gameVis),
+	       fLevelDirectory(levelDirectory) {
 		
-		fAIGroup = new EntityGroup("AI's");
-		std::vector<Ship*> ships = level.getEnemyShips(fAIGroup);
-		for (std::vector<Ship*>::iterator it = ships.begin(); it != ships.end(); it++) {
-			fEntities.push_back((*it));
-		}
+		startLevel(firstLevel);
 	}
 	
 	Game::~Game() {
@@ -31,7 +26,7 @@ namespace SI {
 			delete (*it);
 		}
 		delete fEntityFactory;
-		delete fEnemyDriverFactory;
+		delete fDriverFactory;
 		delete fWeaponery;
 		delete fUserGroup;
 		delete fAIGroup;
@@ -43,6 +38,11 @@ namespace SI {
 	 * @param ticks The number of ticks passed since last update.
 	*/
 	void Game::update(int ticks) {
+		if (fGameVisualizer->inNonGamePhase()) {
+			fGameVisualizer->draw();
+			return;
+		}
+		
 		std::vector<VGameEntity*> newEnts;
 		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
 			std::vector<VGameEntity*> generated = (*it)->update(ticks);
@@ -74,6 +74,19 @@ namespace SI {
 			}
 			it = next;
 		}
+		
+		if (isUserDead()) {
+			fGameVisualizer->userDies();
+		} else if (isAIDead()) {
+			if (fNextLevel != "") {
+				startLevel(fNextLevel);
+				fGameVisualizer->levelChange(fCurrentLevel);
+			} else {
+				fCurrentLevel = "";
+				fGameVisualizer->userWins();
+			}
+		}
+		fGameVisualizer->draw();
 	}
 	
 	bool Game::isUserDead() {
@@ -84,6 +97,10 @@ namespace SI {
 		return !hasEntitiesInGroup(fAIGroup);
 	}
 	
+	bool Game::isPlaying() {
+		return !((fCurrentLevel == "" && isAIDead()) || (isUserDead()));
+	}
+	
 	bool Game::hasEntitiesInGroup(EntityGroup* g) {
 		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
 			if ((*it)->getGroup() == g) {
@@ -91,5 +108,25 @@ namespace SI {
 			}
 		}
 		return false;
+	}
+	
+	void Game::startLevel(std::string levelName) {
+		for (std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
+			delete (*it);
+		}
+		fEntities.clear();
+		
+		
+		LevelReader level = LevelReader(fLevelDirectory+levelName, fEntityFactory, fDriverFactory, fWeaponery);
+		fUserGroup = new EntityGroup("Users");
+		fEntities.push_back(level.getUserShip(fUserGroup));
+		
+		fAIGroup = new EntityGroup("AI's");
+		std::vector<Ship*> ships = level.getEnemyShips(fAIGroup);
+		for (std::vector<Ship*>::iterator it = ships.begin(); it != ships.end(); it++) {
+			fEntities.push_back((*it));
+		}
+		fCurrentLevel = level.getLevelName();
+		fNextLevel = level.getNextLevel();
 	}
 }

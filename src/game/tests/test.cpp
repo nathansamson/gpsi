@@ -54,7 +54,22 @@ namespace SITest {
 		fVisualized = true;
 	}
 	
-	SI::VShipDriver* TestEnemyDriverFactory::createEnemyDriver(std::string name) {
+	TestDriverFactory::TestDriverFactory(std::string type): fType(type) {
+	}
+	
+	SI::VShipDriver* TestDriverFactory::createUserDriver() {
+		if (fType == "mock") {
+			return new MockShipDriver();
+		} else if (fType == "deadly") {
+			return new DeadlyMockShipDriver();
+		} else if (fType == "peace") {
+			return new PeaceMockShipDriver();
+		} else {
+			return 0; // This should never happen, and should lead to a crash very soon
+		}
+	}
+	
+	SI::VShipDriver* TestDriverFactory::createEnemyDriver(std::string name) {
 		SI::VShipDriver* driver;
 		if (name == "mockdriver") {
 			driver = new MockShipDriver();
@@ -63,7 +78,7 @@ namespace SITest {
 		} else if (name == "deadlydriver") {
 			driver = new DeadlyMockShipDriver();
 		} else {
-			driver = SI::BuiltinEnemyDriverFactory::createEnemyDriver(name);
+			driver = SI::BuiltinDriverFactory::createEnemyDriver(name);
 		}
 		fDrivers.push_back(driver);
 		return driver;

@@ -14,7 +14,9 @@ add_executable (sisdl
                   ./sdlclusterbomb.cpp
                   ./sdlentityfactory.cpp
                   ./sdlkeyboardinputdriver.cpp
-)
+                  ./sdlgamevisualizer.cpp
+                  ./sdldriverfactory.cpp)
+
 target_link_libraries (sisdl si ticpp zabbr
                              ${SDL_LIBRARY}
                              ${SDLIMAGE_LIBRARY}
