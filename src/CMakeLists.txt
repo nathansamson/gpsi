@@ -15,7 +15,7 @@ add_library (si SHARED
                ./game/shipdriver.cpp
                ./game/weaponery.cpp
                ./game/ship.cpp
-               ./game/builtinenemydriverfactory.cpp
+               ./game/builtindriverfactory.cpp
                ./game/clusterbomb.cpp
                ./misc/boundingshape.cpp
                ./misc/boundingbox.cpp

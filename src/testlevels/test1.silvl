@@ -1,5 +1,6 @@
 <level>
 	<name>First level</name>
+	<next>second.silvl</next>
 	<ammo>
 		<bullet id="normal-bullet">
 			<speed>0.001</speed>

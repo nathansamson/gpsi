@@ -1,4 +1,4 @@
-#include "game/builtinenemydriverfactory.h"
+#include "game/builtindriverfactory.h"
 #include "game/synchronousdriver.h"
 
 namespace SI {
@@ -7,7 +7,7 @@ namespace SI {
 	 *
 	 * @return A driver.
 	*/
-	VShipDriver* BuiltinEnemyDriverFactory::createEnemyDriver(std::string name) {
+	VShipDriver* BuiltinDriverFactory::createEnemyDriver(std::string name) {
 		if (name == "syncdriver") {
 			return new SynchronousDriver(1.5);
 		} else {

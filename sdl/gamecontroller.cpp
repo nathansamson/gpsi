@@ -5,6 +5,7 @@
 #include "gamecontroller.h"
 #include "sdlentityfactory.h"
 #include "sdlkeyboardinputdriver.h"
+#include "sdldriverfactory.h"
 
 namespace SISDL {
 	/**
@@ -32,34 +33,15 @@ namespace SISDL {
 		if (fClosed) {
 			openParentController();
 		}
+		
 		if (!fTimer.isPaused()) {
-			if (!fGame->isUserDead() && !fGame->isAIDead()) {
-				double time = fTimer.reset();
-				int ticks = (time + fTimeRemainder) * 1000;
-				fTimeRemainder = ((time + fTimeRemainder) * 1000 - ticks) / 1000;
-			
-				fGame->update(ticks);
-			}
+			double time = fTimer.reset();
+			int ticks = (time + fTimeRemainder) * 1000;
+			fTimeRemainder = ((time + fTimeRemainder) * 1000 - ticks) / 1000;
+		
+			fGame->update(ticks);
 		} else {
 			fGame->update(0); // Let the entities draw themselves.
-		}
-		
-		if (fGame->isUserDead()) {
-			fGame->update(0);
-			Zabbr::FontResource* font = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 40);
-			SDL_Color white = {255, 255, 255};
-			Zabbr::StringFontResource* string = Zabbr::ResourceManager::manager().string("Game Over.", font, white);
-			fWindow->drawSurface(string, fWindow->getXResolution()/2-string->getWidth()/2,
-			                             fWindow->getYResolution()/2-string->getHeight()/2);
-			return;
-		} else if (fGame->isAIDead()) {
-			fGame->update(0);
-			Zabbr::FontResource* font = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 40);
-			SDL_Color white = {255, 255, 255};
-			Zabbr::StringFontResource* string = Zabbr::ResourceManager::manager().string("You win!", font, white);
-			fWindow->drawSurface(string, fWindow->getXResolution()/2-string->getWidth()/2,
-			                             fWindow->getYResolution()/2-string->getHeight()/2);
-			return;
 		}
 	}
 	
@@ -69,6 +51,8 @@ namespace SISDL {
 	 * @param evnt The SDL_KeyboardEvent
 	*/
 	void GameController::keyPress(SDL_KeyboardEvent evnt) {
+		fGameVisualizer->keyPress(evnt);
+		fInputDriver = fDriverFactory->getUserDriver();
 		if (!fGame->isUserDead()) fInputDriver->keyDown(evnt);
 	}
 	
@@ -78,13 +62,18 @@ namespace SISDL {
 	 * @param evnt The SDL_KeyboardEvent
 	*/
 	void GameController::keyRelease(SDL_KeyboardEvent evnt) {
+		fInputDriver = fDriverFactory->getUserDriver();
 		if (!fGame->isUserDead()) fInputDriver->keyRelease(evnt);
 		if (evnt.keysym.sym == SDLK_ESCAPE) {
 			requestQuit();
 		} else if (evnt.keysym.sym == SDLK_RETURN) {
-			if (fGame->isUserDead() || fGame->isAIDead()) {
-				fTimer.reset();
-				startGame();
+			if (!fGame->isPlaying()) {
+				// TODO: Show a menu to choose what to do
+				
+				// Play new game
+				// Go to main menu
+				// Quit
+				fClosed = true; // Return to parent controller.
 			}
 		}
 	}
@@ -135,7 +124,10 @@ namespace SISDL {
 	}
 	
 	void GameController::startGame() {
-		fInputDriver = new SDLKeyboardInputDriver();
-		fGame = new SI::Game(fInputDriver, new SDLEntityFactory(fWindow), "data/levels/", "firstlevel.silvl");
+		fGameVisualizer = new SDLGameVisualizer(fWindow);
+		fDriverFactory = new SDLDriverFactory();
+		fGame = new SI::Game(new SDLEntityFactory(fWindow),
+		                     "data/levels/", "firstlevel.silvl",
+		                     fGameVisualizer, fDriverFactory);
 	}
 }

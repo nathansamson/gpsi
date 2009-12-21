@@ -6,8 +6,8 @@
 #include "game/shipdriver.h"
 #include "game/ship.h"
 #include "game/gameentityfactory.h"
-#include "game/enemydriverfactory.h"
-#include "game/builtinenemydriverfactory.h"
+#include "game/builtindriverfactory.h"
+#include "game/gamevisualizer.h"
 
 namespace SITest {
 	#define SITEST_ASSERT_VECTORS_EQUAL(e, a)  CPPUNIT_ASSERT_DOUBLES_EQUAL(e.getX(), a.getX(), 1E-10);\
@@ -47,11 +47,16 @@ namespace SITest {
 		bool fVisualized;
 	};
 	
-	class TestEnemyDriverFactory: public SI::BuiltinEnemyDriverFactory {
+	class TestDriverFactory: public SI::BuiltinDriverFactory {
 	public:
-		virtual ~TestEnemyDriverFactory() {}
+		TestDriverFactory(std::string userType);
+		virtual ~TestDriverFactory() {}
+		
+		virtual SI::VShipDriver* createUserDriver();
 		virtual SI::VShipDriver* createEnemyDriver(std::string);
 		std::vector<SI::VShipDriver*> fDrivers;
+	private:
+		std::string fType;
 	};
 	
 	class MockGameEntityFactory: public SI::IGameEntityFactory {
@@ -62,6 +67,14 @@ namespace SITest {
 		
 		std::vector<MockShip*> fShips;
 		std::vector<MockBullet*> fBullets;
+	};
+	
+	class MockGameVisualizer: public SI::IGameVisualizer {
+		virtual void draw() {}
+		virtual bool inNonGamePhase() { return false; }
+		virtual void userDies() {}
+		virtual void userWins() {}
+		virtual void levelChange(std::string) {}
 	};
 }
 

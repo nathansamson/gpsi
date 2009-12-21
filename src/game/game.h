@@ -6,8 +6,9 @@
 
 #include "game/gameentityfactory.h"
 #include "game/shipdriver.h"
-#include "game/builtinenemydriverfactory.h"
+#include "game/driverfactory.h"
 #include "game/weaponery.h"
+#include "game/gamevisualizer.h"
 
 namespace SI {
 	/**
@@ -16,15 +17,19 @@ namespace SI {
 	*/
 	class Game {
 	public:
-		Game(VShipDriver*, IGameEntityFactory*, std::string, std::string, IEnemyDriverFactory* = new BuiltinEnemyDriverFactory());
+		Game(IGameEntityFactory*, std::string, std::string,
+		     IGameVisualizer*, IDriverFactory*);
 		virtual ~Game();
 		
 		void update(int);
 		
 		bool isAIDead();
 		bool isUserDead();
+		
+		bool isPlaying();
 	private:
 		bool hasEntitiesInGroup(EntityGroup*);
+		void startLevel(std::string);
 	
 		/**
 		 * A list of all entities in the game.
@@ -37,9 +42,9 @@ namespace SI {
 		IGameEntityFactory* fEntityFactory;
 		
 		/**
-		 * The enemy driver factory.
+		 * The driver factory.
 		*/
-		IEnemyDriverFactory* fEnemyDriverFactory;
+		IDriverFactory* fDriverFactory;
 		
 		/**
 		 * The user group.
@@ -55,6 +60,26 @@ namespace SI {
 		 * The weaponery.
 		*/
 		Weaponery* fWeaponery;
+		
+		/**
+		 * The game visualizer.
+		*/
+		IGameVisualizer* fGameVisualizer;
+		
+		/**
+		 * The directory of levels.
+		*/
+		std::string fLevelDirectory;
+		
+		/**
+		 * The name of the current level.
+		*/
+		std::string fCurrentLevel;
+		
+		/**
+		 * The filename of the next level.
+		*/
+		std::string fNextLevel;
 	};
 }
 
