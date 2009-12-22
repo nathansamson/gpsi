@@ -90,7 +90,7 @@ namespace SI {
 	}
 	
 	bool Game::isUserDead() {
-		return !hasEntitiesInGroup(fUserGroup);
+		return !hasShipsInGroup(fUserGroup);
 	}
 	
 	bool Game::isAIDead() {
@@ -99,6 +99,15 @@ namespace SI {
 	
 	bool Game::isPlaying() {
 		return !((fCurrentLevel == "" && isAIDead()) || (isUserDead()));
+	}
+	
+	bool Game::hasShipsInGroup(EntityGroup* g) {
+		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
+			if ((*it)->getGroup() == g && dynamic_cast<Ship*>(*it) != 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	bool Game::hasEntitiesInGroup(EntityGroup* g) {
