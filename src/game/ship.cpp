@@ -15,10 +15,11 @@ namespace SI {
 	 * @param type The ship type.
 	 * @param fac The factory
 	*/
-	Ship::Ship(VShipDriver* driver, Vector2 pos, int dir, EntityGroup* group, ShipType type, IGameEntityFactory* fac, Weaponery* weaponery):
+	Ship::Ship(VShipDriver* driver, Vector2 pos, int dir, EntityGroup* group,
+	           ShipType type, IGameEntityFactory* fac, Weaponery* weaponery):
 	      VGameEntity(pos, dir, type.fBoundingShapeDesc, group, fac),
 	      fRequestFire(false), fShipDriver(driver), fWeaponery(weaponery),
-	      fShipType(type), fCurrentSpeed (0.0, 0.0) {
+	      fShipType(type), fCurrentSpeed (0.0, 0.0), fHP(type.fHitPoints) {
 		fShipDriver->bind(this);
 		fActiveWeapon = 0;
 		for (std::vector<std::string>::iterator it = type.fWeapons.begin(); it != type.fWeapons.end(); it++) {
@@ -62,13 +63,19 @@ namespace SI {
 	void Ship::collide(VGameEntity* o) {
 		Bullet* b = dynamic_cast<Bullet*>(o);
 		if (b != 0) {
-			die();
+			fHP -= b->getImpact();
+			if (fHP <= 0.0) {
+				die();
+			}
 		} else {
-			Ship* s = dynamic_cast<Ship*>(o);
-			if (s != 0) {
+			if (dynamic_cast<Ship*>(o) != 0) {
 				die();
 			}
 		}
+	}
+	
+	double Ship::getHealth() {
+		return fHP * 1.0 / fShipType.fHitPoints;
 	}
 	
 	void Ship::move(Vector2& movement, int ticks) {

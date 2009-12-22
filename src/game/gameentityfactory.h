@@ -22,9 +22,14 @@ namespace SI {
 		virtual ~IGameEntityFactory() {}
 	
 		/**
-		 * Creates a Ship.
+		 * Creates a user Ship.
 		*/
-		virtual Ship* createShip(VShipDriver*, Vector2, int, EntityGroup*, Weaponery*, ShipType) = 0;
+		virtual Ship* createUserShip(VShipDriver*, Vector2, int, EntityGroup*, Weaponery*, ShipType) = 0;
+	
+		/**
+		 * Creates an AI Ship.
+		*/
+		virtual Ship* createAIShip(VShipDriver*, Vector2, int, EntityGroup*, Weaponery*, ShipType) = 0;
 		
 		/**
 		 * Creates a bullet.

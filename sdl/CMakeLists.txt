@@ -7,6 +7,7 @@ include_directories (${GPSI_SOURCE_DIR}/src
 
 add_executable (sisdl
                   ./sdlship.cpp
+                  ./sdlusership.cpp
                   ./main.cpp
                   ./siwindow.cpp
                   ./gamecontroller.cpp

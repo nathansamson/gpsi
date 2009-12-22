@@ -123,6 +123,7 @@ namespace SI {
 			}
 			shipType.fMaxSpeed = parseVector(shipTypeNode->FirstChild("maxspeed")->ToElement());
 			shipType.fMaxAbsSpeedDiff = parseVector(shipTypeNode->FirstChild("maxspeeddiff")->ToElement());
+			shipType.fHitPoints = shipTypeNode->GetAttribute<int>("hitpoints");
 			
 			shipTypes[shipType.fName] = shipType;
 		}
@@ -157,7 +158,7 @@ namespace SI {
 				}
 				pos = Vector2(i*(8.0-2*margin)/(count+1) + offset -4.0 + margin, y);
 				
-				enemies.push_back(fEntityFactory->createShip(
+				enemies.push_back(fEntityFactory->createAIShip(
 				                     fDriverFactory->createEnemyDriver(
 				                         rowElement->GetAttribute("driver")),
 				                         pos, 180, enemyGroup, fWeaponery,
@@ -170,7 +171,7 @@ namespace SI {
 	Ship* LevelReader::getUserShip(EntityGroup* userGroup) {
 		ticpp::Element* shipNode = fLevel.FirstChild("level")->FirstChild("usership")->ToElement();
 		ShipType shipType = fShipTypes[shipNode->GetAttribute("shiptype")];
-		return fEntityFactory->createShip(fDriverFactory->createUserDriver(),
+		return fEntityFactory->createUserShip(fDriverFactory->createUserDriver(),
 				                         Vector2(0, -2.0), 0, userGroup, fWeaponery,
 				                         shipType);
 	}
