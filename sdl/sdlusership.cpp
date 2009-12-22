@@ -20,9 +20,9 @@ namespace SISDL {
 		std::stringstream ss;
 		ss << static_cast<int>(getHealth()*100);
 		
-		std::string healthString = "Health: ";
+		std::string healthString;
 		ss >> healthString;
-		healthString += "/100";
+		healthString = "Health: " + healthString + "/100";
 		
 		SDL_Color textColor = {0, 255, 0};
 		if (getHealth() < 0.35) {
