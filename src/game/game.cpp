@@ -18,6 +18,8 @@ namespace SI {
 	       fWeaponery(new Weaponery()), fGameVisualizer(gameVis),
 	       fLevelDirectory(levelDirectory) {
 		
+		fUserGroup = new EntityGroup("Users");
+		fAIGroup = new EntityGroup("AI's");
 		startLevel(firstLevel);
 	}
 	
@@ -103,6 +105,10 @@ namespace SI {
 		return !((fCurrentLevel == "" && isAIDead()) || (isUserDead()));
 	}
 	
+	int Game::getUserScore() {
+		return fUserGroup->getScore();
+	}
+	
 	bool Game::enemyShipsCrossLine() {
 		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
 			if ((*it)->getGroup() == fAIGroup && dynamic_cast<Ship*>(*it) != 0) {
@@ -141,10 +147,8 @@ namespace SI {
 		
 		
 		LevelReader level = LevelReader(fLevelDirectory+levelName, fEntityFactory, fDriverFactory, fWeaponery);
-		fUserGroup = new EntityGroup("Users");
 		fEntities.push_back(level.getUserShip(fUserGroup));
 		
-		fAIGroup = new EntityGroup("AI's");
 		std::vector<Ship*> ships = level.getEnemyShips(fAIGroup);
 		for (std::vector<Ship*>::iterator it = ships.begin(); it != ships.end(); it++) {
 			fEntities.push_back((*it));

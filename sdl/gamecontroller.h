@@ -2,6 +2,7 @@
 #include "zabbr/controller/menucontroller.h"
 #include "zabbr/misc/stopwatch.h"
 #include "src/game/game.h"
+#include "zabbr/resources/resourcemanager.h"
 
 #include "sdlinputdriver.h"
 #include "sdldriverfactory.h"
@@ -60,5 +61,7 @@ namespace SISDL {
 		
 		SDLGameVisualizer* fGameVisualizer;
 		SDLDriverFactory* fDriverFactory;
+		Zabbr::FontResource* fFont;
+		Zabbr::StringFontResource* fScoreText;
 	};
 }

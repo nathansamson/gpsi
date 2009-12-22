@@ -12,11 +12,18 @@ namespace SI {
 		EntityGroup(std::string);
 		
 		std::string getName();
+		void increaseScore(int);
+		int getScore();
 	private:
 		/**
 		 * The name of the group.
 		*/
 		std::string fName;
+		
+		/**
+		 * The score of the group.
+		*/
+		int fScore;
 	};
 }
 
