@@ -34,6 +34,7 @@ namespace SI {
 		EntityGroup* getGroup();
 		void checkCollision(VGameEntity*);
 		bool isDead();
+		bool crossesLine(double);
 	protected:
 		void move(Vector2);
 		

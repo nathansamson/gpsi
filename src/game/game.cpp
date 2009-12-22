@@ -90,7 +90,7 @@ namespace SI {
 	}
 	
 	bool Game::isUserDead() {
-		return !hasShipsInGroup(fUserGroup);
+		return (!hasShipsInGroup(fUserGroup) || enemyShipsCrossLine());
 	}
 	
 	bool Game::isAIDead() {
@@ -99,6 +99,17 @@ namespace SI {
 	
 	bool Game::isPlaying() {
 		return !((fCurrentLevel == "" && isAIDead()) || (isUserDead()));
+	}
+	
+	bool Game::enemyShipsCrossLine() {
+		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
+			if ((*it)->getGroup() == fAIGroup && dynamic_cast<Ship*>(*it) != 0) {
+				if ((*it)->crossesLine(-1.5)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	bool Game::hasShipsInGroup(EntityGroup* g) {

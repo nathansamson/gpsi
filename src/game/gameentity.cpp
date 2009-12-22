@@ -1,4 +1,5 @@
-#include "gameentity.h"
+#include "game/gameentity.h"
+#include "misc/boundingbox.h"
 
 namespace SI {	
 	/**
@@ -77,5 +78,14 @@ namespace SI {
 	 * Visualize the entity. The VGameEntity will do nothing.
 	*/
 	void VGameEntity::visualize() {
+	}
+	
+	bool VGameEntity::crossesLine(double y) {
+		BoundingBoxDescription boxDesc(8, 0.01); // Create a line
+		BoundingBox* box = new BoundingBox(&boxDesc);
+		box->setOffset(Vector2(-4.0, y));
+		bool crosses = box->intersects(fBoundingShape);
+		delete box;
+		return crosses;
 	}
 }
