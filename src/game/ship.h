@@ -32,6 +32,10 @@ namespace SI {
 		 * A list of names of weapons of the ship.
 		*/
 		std::vector<std::string> fWeapons;
+		
+		SI::Vector2 fMaxSpeed;
+		
+		SI::Vector2 fMaxAbsSpeedDiff;
 	};
 
 	/**
@@ -44,6 +48,7 @@ namespace SI {
 		
 		virtual std::vector<VGameEntity*> update(int);
 		virtual void collide(VGameEntity*);
+		void move(Vector2&, int);
 		
 		friend class VShipDriver;
 	private:
@@ -73,6 +78,10 @@ namespace SI {
 		 * The weaponery of the ship.
 		*/
 		Weaponery* fWeaponery;
+		
+		ShipType fShipType;
+		
+		Vector2 fCurrentSpeed;
 	};
 }
 

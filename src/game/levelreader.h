@@ -21,6 +21,7 @@ namespace SI {
 		std::string getLevelName();
 		std::string getNextLevel();
 	private:
+		Vector2 parseVector(ticpp::Element*);
 		static void parseBoundingShape(IBoundingShapeDescription*&, ticpp::Element*);
 		void parseAmmo();
 		void parseWeapons();

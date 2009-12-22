@@ -10,25 +10,15 @@ namespace SISDL {
 	 * Update the driver.
 	*/
 	void SDLKeyboardInputDriver::update(int ticks) {
-		const double max = 0.01;
-		
 		if ((fLeft && fRight) || !(fLeft || fRight)) {
 			fSpeed *= 0;
 		} else if (fLeft) {
-			fSpeed -= SI::Vector2(max/500, 0.0);
+			fSpeed = SI::Vector2(-1.0, 0.0);
 		} else if (fRight) {
-			fSpeed += SI::Vector2(max/500, 0.0); 
+			fSpeed = SI::Vector2(1.0, 0.0); 
 		}
 		
-		if (std::fabs(fSpeed.getX()) > max) {
-			if (fLeft) {
-				fSpeed.setX(-max);
-			} else {
-				fSpeed.setX(max);
-			}
-		}
-		
-		move(fSpeed * ticks);
+		move(fSpeed * ticks, ticks);
 		if (fFire) {
 			fire();
 		}
