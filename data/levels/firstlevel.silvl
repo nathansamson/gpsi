@@ -15,7 +15,7 @@
 		</weapon>
 	</weapons>
 	<ships>
-		<ship name="Obi-Wan_starfighter">
+		<ship name="Obi-Wan_starfighter" hitpoints="1">
 			<boundingshape type="boundingbox" w="0.8" h="0.8" />
 			<weapons>
 				<weapon name="normal-gun" />
@@ -23,7 +23,7 @@
 			<maxspeed x="0.05" y="0.01" />
 			<maxspeeddiff x="0.05" y="0.01" />
 		</ship>
-		<ship name="X Wing">
+		<ship name="X Wing" hitpoints="10">
 			<boundingshape type="boundingbox" w="0.8" h="0.56"/>
 			<weapons>
 				<weapon name="normal-gun" />

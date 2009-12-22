@@ -16,7 +16,15 @@ namespace SITest {
 		fire();
 	}
 	
-	SI::Ship* MockGameEntityFactory::createShip(SI::VShipDriver* driver,
+	SI::Ship* MockGameEntityFactory::createAIShip(SI::VShipDriver* driver,
+	                                 SI::Vector2 v, int d, SI::EntityGroup* g,
+	                                 SI::Weaponery* w, SI::ShipType t) {
+		MockShip* fCreatedShip = new MockShip(driver, v, d, g, w, t, this);
+		fShips.push_back(fCreatedShip);
+		return fCreatedShip;
+	}
+	
+	SI::Ship* MockGameEntityFactory::createUserShip(SI::VShipDriver* driver,
 	                                 SI::Vector2 v, int d, SI::EntityGroup* g,
 	                                 SI::Weaponery* w, SI::ShipType t) {
 		MockShip* fCreatedShip = new MockShip(driver, v, d, g, w, t, this);

@@ -25,7 +25,7 @@
 		</weapon>
 	</weapons>
 	<ships>
-		<ship name="Obi-Wan_starfighter">
+		<ship name="Obi-Wan_starfighter" hitpoints="2">
 			<boundingshape type="boundingbox" w="0.8" h="0.8" />
 			<weapons>
 				<weapon name="normal-gun" />
@@ -33,7 +33,7 @@
 			<maxspeed x="0.05" y="0.01" />
 			<maxspeeddiff x="0.05" y="0.01" />
 		</ship>
-		<ship name="X Wing">
+		<ship name="X Wing" hitpoints="7">
 			<boundingshape type="boundingbox" w="0.8" h="0.56"/>
 			<weapons>
 				<weapon name="cluster-bomb-cannon" />

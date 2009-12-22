@@ -36,6 +36,8 @@ namespace SI {
 		SI::Vector2 fMaxSpeed;
 		
 		SI::Vector2 fMaxAbsSpeedDiff;
+		
+		int fHitPoints;
 	};
 
 	/**
@@ -49,6 +51,7 @@ namespace SI {
 		virtual std::vector<VGameEntity*> update(int);
 		virtual void collide(VGameEntity*);
 		void move(Vector2&, int);
+		double getHealth();
 		
 		friend class VShipDriver;
 	private:
@@ -82,6 +85,8 @@ namespace SI {
 		ShipType fShipType;
 		
 		Vector2 fCurrentSpeed;
+		
+		double fHP;
 	};
 }
 

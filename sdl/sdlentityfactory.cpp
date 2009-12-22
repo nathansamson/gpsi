@@ -1,5 +1,6 @@
 #include "sdlentityfactory.h"
 #include "sdlship.h"
+#include "sdlusership.h"
 #include "sdlbullet.h"
 #include "sdlclusterbomb.h"
 
@@ -11,9 +12,9 @@ namespace SISDL {
 	*/
 	SDLEntityFactory::SDLEntityFactory(Zabbr::SDLWindow* w): fWindow(w) {
 	}
-
+	
 	/**
-	 * Creates a ship.
+	 * Creates a user ship.
 	 *
 	 * @param driver The driver for the ship.
 	 * @param d The initial direction of the ship.
@@ -21,7 +22,20 @@ namespace SISDL {
 	 * @param v The initial position.
 	 * @param t The type of the ship.
 	*/
-	SI::Ship* SDLEntityFactory::createShip(SI::VShipDriver* driver, SI::Vector2 v, int d, SI::EntityGroup* g, SI::Weaponery* w, SI::ShipType t) {
+	SI::Ship* SDLEntityFactory::createUserShip(SI::VShipDriver* driver, SI::Vector2 v, int d, SI::EntityGroup* g, SI::Weaponery* w, SI::ShipType t) {
+		return new SDLUserShip(driver, v, d, g, t, this, w, fWindow);
+	}
+
+	/**
+	 * Creates an AI ship.
+	 *
+	 * @param driver The driver for the ship.
+	 * @param d The initial direction of the ship.
+	 * @param g The group of the entity.
+	 * @param v The initial position.
+	 * @param t The type of the ship.
+	*/
+	SI::Ship* SDLEntityFactory::createAIShip(SI::VShipDriver* driver, SI::Vector2 v, int d, SI::EntityGroup* g, SI::Weaponery* w, SI::ShipType t) {
 		return new SDLShip(driver, v, d, g, t, this, w, fWindow);
 	}
 	

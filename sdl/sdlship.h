@@ -17,15 +17,16 @@ namespace SISDL {
 		virtual ~SDLShip();
 		
 		virtual void visualize();
+	protected:
+		/**
+		 * The window.
+		*/
+		Zabbr::SDLWindow* fWindow;
 	private:
 		/**
 		 * The image resource.
 		*/
 		Zabbr::ImageResource* fImage;
-		/**
-		 * The window.
-		*/
-		Zabbr::SDLWindow* fWindow;
 		
 		void positionToWindowCoords(int&, int&);
 	};

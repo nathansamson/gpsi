@@ -61,7 +61,8 @@ namespace SITest {
 	
 	class MockGameEntityFactory: public SI::IGameEntityFactory {
 	public:
-		SI::Ship* createShip(SI::VShipDriver*, SI::Vector2, int, SI::EntityGroup*, SI::Weaponery*, SI::ShipType);	
+		SI::Ship* createUserShip(SI::VShipDriver*, SI::Vector2, int, SI::EntityGroup*, SI::Weaponery*, SI::ShipType);	
+		SI::Ship* createAIShip(SI::VShipDriver*, SI::Vector2, int, SI::EntityGroup*, SI::Weaponery*, SI::ShipType);	
 		SI::Bullet* createBullet(SI::Vector2, int, SI::EntityGroup*, SI::BulletType*);
 		SI::ClusterBomb* createClusterBomb(SI::Vector2, int, SI::EntityGroup*, SI::ClusterBombType*);
 		
