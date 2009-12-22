@@ -30,8 +30,8 @@ namespace SI {
 			}
 			fDir *= -1;
 		}
+		move(step, ticks);
 		fMoved += step;
-		move(step);
 		
 		if (std::rand() % (25000 / ticks) == 0) {
 			fire();

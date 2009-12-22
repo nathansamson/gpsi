@@ -80,6 +80,22 @@ namespace SI {
 		               fX * sinTheta + fY * cosTheta);
 	}
 	
+	void Vector2::inBounds(Vector2 maxBound, Vector2 minBound) {
+		if (fX > maxBound.fX) {
+			fX = maxBound.fX;
+		}
+		if (fY > maxBound.fY) {
+			fY = maxBound.fY;
+		}
+		
+		if (fX < minBound.fX) {
+			fX = minBound.fX;
+		}
+		if (fY < minBound.fY) {
+			fY = minBound.fY;
+		}
+	}
+	
 	/**
 	 * The + operator.
 	 *

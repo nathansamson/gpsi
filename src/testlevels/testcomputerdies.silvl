@@ -19,12 +19,16 @@
 			<weapons>
 				<weapon name="normal-gun" />
 			</weapons>
+			<maxspeed x="0.05" y="0.01" />
+			<maxspeeddiff x="0.05" y="0.01" />
 		</ship>
 		<ship name="X Wing">
 			<boundingshape type="boundingbox" w="0.8" h="0.56" />
 			<weapons>
 				<weapon name="normal-gun" />
 			</weapons>
+			<maxspeed x="0.05" y="0.01" />
+			<maxspeeddiff x="0.05" y="0.01" />
 		</ship>
 	</ships>
 	<enemies>

@@ -22,8 +22,8 @@ namespace SI {
 	 *
 	 * @param v The offset of the movement.
 	*/
-	void VShipDriver::move(Vector2 v) {
-		fEntity->move(v);
+	void VShipDriver::move(Vector2 v, int ticks) {
+		fEntity->move(v, ticks);
 	}
 	
 	/**

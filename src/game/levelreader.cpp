@@ -121,10 +121,19 @@ namespace SI {
 			for (weaponNode = weaponNode.begin(weaponsNode); weaponNode != weaponNode.end(); weaponNode++) {
 				shipType.fWeapons.push_back(weaponNode->GetAttribute("name"));
 			}
+			shipType.fMaxSpeed = parseVector(shipTypeNode->FirstChild("maxspeed")->ToElement());
+			shipType.fMaxAbsSpeedDiff = parseVector(shipTypeNode->FirstChild("maxspeeddiff")->ToElement());
 			
 			shipTypes[shipType.fName] = shipType;
 		}
 		return shipTypes;
+	}
+
+	Vector2 LevelReader::parseVector(ticpp::Element* vectorNode) {
+		Vector2 vector;
+		vector.setX(vectorNode->GetAttribute<double>("x"));
+		vector.setY(vectorNode->GetAttribute<double>("y"));
+		return vector;
 	}
 
 	std::vector<Ship*> LevelReader::getEnemyShips(EntityGroup* enemyGroup) {
