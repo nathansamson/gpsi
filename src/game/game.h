@@ -29,6 +29,7 @@ namespace SI {
 		bool isPlaying();
 	private:
 		bool hasEntitiesInGroup(EntityGroup*);
+		bool hasShipsInGroup(EntityGroup*);
 		void startLevel(std::string);
 	
 		/**
