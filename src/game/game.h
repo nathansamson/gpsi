@@ -30,6 +30,7 @@ namespace SI {
 	private:
 		bool hasEntitiesInGroup(EntityGroup*);
 		bool hasShipsInGroup(EntityGroup*);
+		bool enemyShipsCrossLine();
 		void startLevel(std::string);
 	
 		/**
