@@ -17,6 +17,7 @@ namespace SI {
 
 		void addAmmo(std::string, AmmoType*);
 		void addWeapon(std::string, VWeapon*);
+		void clear();
 
 		VWeapon* getWeapon(std::string id, Ship* ship);
 

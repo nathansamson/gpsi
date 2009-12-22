@@ -9,6 +9,7 @@ namespace SI {
 	class Gun: public VWeapon {
 	public:
 		Gun(int, IGameEntityFactory*, Vector2, BulletType*);
+		virtual  ~Gun();
 		
 		virtual Gun* addWeaponToShip(Ship*);
 		

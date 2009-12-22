@@ -9,6 +9,9 @@ namespace SI {
 	     fBulletType(gun.fBulletType), fOffset(gun.fOffset) {
 	}
 	
+	Gun::~Gun() {
+	}
+	
 	Gun* Gun::addWeaponToShip(Ship* ship) {
 		if (isBlueprint()) {
 			return new Gun(*this, ship);
