@@ -133,6 +133,7 @@ namespace SI {
 	}
 	
 	void Game::startLevel(std::string levelName) {
+		fWeaponery->clear();
 		for (std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
 			delete (*it);
 		}
