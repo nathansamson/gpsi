@@ -1,6 +1,7 @@
+#include <sstream>
+
 #include "zabbr/widgets/button.h"
 #include "zabbr/events/callbacks.h"
-#include "zabbr/resources/resourcemanager.h"
 
 #include "gamecontroller.h"
 #include "sdlentityfactory.h"
@@ -17,6 +18,7 @@ namespace SISDL {
 	                fGame(0), fTimeRemainder(0.0), fClosed(false) {
 		startGame();
 		connectRequestQuit(new Zabbr::ClassCallback0<GameController>(this, &GameController::onRequestQuitGame));
+		fFont = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 18);
 	}
 	
 	/**
@@ -24,6 +26,8 @@ namespace SISDL {
 	*/
 	GameController::~GameController() {
 		delete fGame;
+		delete fGameVisualizer;
+		Zabbr::ResourceManager::manager().free(fFont);
 	}
 	
 	/**
@@ -43,6 +47,14 @@ namespace SISDL {
 		} else {
 			fGame->update(0); // Let the entities draw themselves.
 		}
+		SDL_Color white = {255, 255, 255};
+		std::stringstream ssScoreText;
+		ssScoreText << fGame->getUserScore();
+		std::string scoreText;
+		ssScoreText >> scoreText;
+		fScoreText = Zabbr::ResourceManager::manager().string(scoreText, fFont, white);
+		fWindow->drawSurface(fScoreText, 10, 10);
+		Zabbr::ResourceManager::manager().free(fScoreText);
 	}
 	
 	/**

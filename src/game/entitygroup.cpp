@@ -6,7 +6,7 @@ namespace SI {
 	 *
 	 * @param name The name of the group.
 	*/
-	EntityGroup::EntityGroup(std::string name): fName(name) {
+	EntityGroup::EntityGroup(std::string name): fName(name), fScore(0) {
 	}
 	
 	/**
@@ -16,5 +16,13 @@ namespace SI {
 	*/
 	std::string EntityGroup::getName() {
 		return fName;
+	}
+	
+	int EntityGroup::getScore() {
+		return fScore;
+	}
+	
+	void EntityGroup::increaseScore(int update) {
+		fScore += update;
 	}
 }

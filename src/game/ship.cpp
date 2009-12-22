@@ -53,7 +53,10 @@ namespace SI {
 		if (fRequestFire) {
 			if (fActiveWeapon < (int)fWeapons.size() && fWeapons[fActiveWeapon] != 0) {
 				VGameEntity* p = fWeapons[fActiveWeapon]->fire();
-				if (p) fire.push_back(p);
+				if (p) {
+					fire.push_back(p);
+					fGroup->increaseScore(-100);
+				}
 			}
 		}
 		fRequestFire = false;
@@ -65,6 +68,7 @@ namespace SI {
 		if (b != 0) {
 			fHP -= b->getImpact();
 			if (fHP <= 0.0) {
+				b->getGroup()->increaseScore(500);
 				die();
 			}
 		} else {

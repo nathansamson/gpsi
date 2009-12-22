@@ -27,6 +27,7 @@ namespace SI {
 		bool isUserDead();
 		
 		bool isPlaying();
+		int getUserScore();
 	private:
 		bool hasEntitiesInGroup(EntityGroup*);
 		bool hasShipsInGroup(EntityGroup*);
