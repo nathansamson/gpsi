@@ -43,24 +43,26 @@ namespace SI {
 			return;
 		}
 		
-		std::vector<VGameEntity*> newEnts;
-		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
-			std::vector<VGameEntity*> generated = (*it)->update(ticks);
-			for (std::vector<VGameEntity*>::iterator it2 = generated.begin(); it2 != generated.end(); it2++) {
-				newEnts.push_back((*it2));
-			}
-		}
-		
-		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
-			for (std::list<VGameEntity*>::iterator it2 = it; it2 != fEntities.end(); it2++) {
-				if (it != it2) {
-					(*it)->checkCollision((*it2));
+		if (ticks != 0) {	
+			std::vector<VGameEntity*> newEnts;
+			for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
+				std::vector<VGameEntity*> generated = (*it)->update(ticks);
+				for (std::vector<VGameEntity*>::iterator it2 = generated.begin(); it2 != generated.end(); it2++) {
+					newEnts.push_back((*it2));
 				}
 			}
-		}
 		
-		for (std::vector<VGameEntity*>::iterator it = newEnts.begin(); it != newEnts.end(); it++) {
-			fEntities.push_back((*it));
+			for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
+				for (std::list<VGameEntity*>::iterator it2 = it; it2 != fEntities.end(); it2++) {
+					if (it != it2) {
+						(*it)->checkCollision((*it2));
+					}
+				}
+			}
+		
+			for (std::vector<VGameEntity*>::iterator it = newEnts.begin(); it != newEnts.end(); it++) {
+				fEntities.push_back((*it));
+			}
 		}
 		
 		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end();) {
