@@ -53,7 +53,7 @@ namespace SITest {
 		virtual ~TestDriverFactory() {}
 		
 		virtual SI::VShipDriver* createUserDriver();
-		virtual SI::VShipDriver* createEnemyDriver(std::string);
+		virtual SI::VShipDriver* createEnemyDriver(std::string, std::map<std::string, std::string>);
 		std::vector<SI::VShipDriver*> fDrivers;
 	private:
 		std::string fType;
