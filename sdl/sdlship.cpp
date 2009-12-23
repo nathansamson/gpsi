@@ -10,8 +10,11 @@ namespace SISDL {
 	 *
 	 * @param driver The driver for the ship.
 	 * @param v The initial position.
+	 * @param dir The direction of the ship
+	 * @param group The group of the entity.
 	 * @param t The ship type.
 	 * @param fac The Factory.
+	 * @param weaponery The weaponery of the ship.
  	 * @param w The window.
 	*/
 	SDLShip::SDLShip(SI::VShipDriver* driver, SI::Vector2 v, int dir,

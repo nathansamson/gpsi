@@ -6,6 +6,9 @@
 #include "game/bullet.h"
 
 namespace SI {
+	/**
+	 * A Gun weapon.
+	*/
 	class Gun: public VWeapon {
 	public:
 		Gun(int, IGameEntityFactory*, Vector2, BulletType*);
@@ -17,7 +20,14 @@ namespace SI {
 	private:
 		Gun(const Gun&, Ship*);
 	
+		/**
+		 * The type of the bullet.
+		*/
 		BulletType* fBulletType;
+		
+		/**
+		 * The offset to the ship.
+		*/
 		Vector2 fOffset;
 	};
 }

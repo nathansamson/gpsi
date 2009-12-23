@@ -37,7 +37,6 @@ namespace SI {
 		BoundingBox(BoundingBoxDescription*);
 	
 		virtual bool intersects(VBoundingShape*);
-		bool intersectsVerbose(VBoundingShape*);
 	protected:
 		virtual bool intersects(VBoundingShape*, bool);
 	private:

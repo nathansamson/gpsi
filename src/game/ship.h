@@ -30,10 +30,19 @@ namespace SI {
 		*/
 		std::vector<std::string> fWeapons;
 		
+		/**
+		 * The maximum speed of the ship.
+		*/
 		SI::Vector2 fMaxSpeed;
 		
+		/**
+		 * The maximum diff of speed.
+		*/
 		SI::Vector2 fMaxAbsSpeedDiff;
 		
+		/**
+		 * Total hitpoints of the game.
+		*/
 		int fHitPoints;
 	};
 
@@ -79,10 +88,19 @@ namespace SI {
 		*/
 		Weaponery* fWeaponery;
 		
+		/**
+		 * The type of the ship.
+		*/
 		ShipType fShipType;
 		
+		/**
+		 * The current speed of the ship.
+		*/
 		Vector2 fCurrentSpeed;
 		
+		/**
+		 * The current Health Points of the ship.
+		*/
 		double fHP;
 	};
 }

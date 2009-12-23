@@ -135,6 +135,9 @@ namespace SISDL {
 		fQuitConfirmation->quit();
 	}
 	
+	/**
+	 * Start a new game.
+	*/
 	void GameController::startGame() {
 		fGameVisualizer = new SDLGameVisualizer(fWindow);
 		fDriverFactory = new SDLDriverFactory();

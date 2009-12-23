@@ -23,6 +23,9 @@ namespace SISDL {
 		*/
 		Zabbr::SDLWindow* fWindow;
 		
+		/**
+		 * The bounding box of the bomb.
+		*/
 		SI::BoundingBoxDescription fBoundingBoxDesc;
 	};
 }

@@ -2,6 +2,9 @@
 #include "zabbr/resources/resourcemanager.h"
 
 namespace SISDL {
+	/**
+	 * A SDL User ship. (it draws also the health)
+	*/
 	class SDLUserShip: public SDLShip {
 	public:
 		SDLUserShip(SI::VShipDriver*, SI::Vector2, int,
@@ -12,7 +15,14 @@ namespace SISDL {
 	
 		virtual void visualize();
 	private:
+		/**
+		 * The font that is being used.
+		*/
 		Zabbr::FontResource* fFont;
+		
+		/**
+		 * The string of the current health.
+		*/
 		Zabbr::StringFontResource* fHealthText;
 	};
 }

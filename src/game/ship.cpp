@@ -14,6 +14,7 @@ namespace SI {
 	 * @param group The group of the entity
 	 * @param type The ship type.
 	 * @param fac The factory
+	 * @param weaponery The weapon depot.
 	*/
 	Ship::Ship(VShipDriver* driver, Vector2 pos, int dir, EntityGroup* group,
 	           ShipType type, IGameEntityFactory* fac, Weaponery* weaponery):
@@ -63,6 +64,11 @@ namespace SI {
 		return fire;
 	}
 	
+	/**
+	 * Collide the ship with another entity.
+	 *
+	 * @param o The other entity.
+	*/
 	void Ship::collide(VGameEntity* o) {
 		Bullet* b = dynamic_cast<Bullet*>(o);
 		if (b != 0) {
@@ -78,10 +84,19 @@ namespace SI {
 		}
 	}
 	
+	/**
+	 * Returns the health of the ship.
+	*/
 	double Ship::getHealth() {
 		return fHP * 1.0 / fShipType.fHitPoints;
 	}
 	
+	/**
+	 * Move the ship.
+	 *
+	 * @param movement The total movement, it is possible that the resulted movement is not not the same as given, but the ship will try to get at it.
+	 * @param ticks The number of ticks
+	*/
 	void Ship::move(Vector2& movement, int ticks) {
 		Vector2 maxSpeed = ticks * fShipType.fMaxSpeed;
 		movement.inBounds(maxSpeed, -maxSpeed);

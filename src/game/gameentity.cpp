@@ -42,10 +42,21 @@ namespace SI {
 		return fDirection;
 	}
 	
+	/**
+	 * Returns the group of the entity.
+	 *
+	 * @return The group of the entity.
+	*/
 	EntityGroup* VGameEntity::getGroup() {
 		return fGroup;
 	}
 	
+	/**
+	 * Collides the entity with another object.
+	 * If they collide, the collide() functions will be called of the 2 entities.
+	 *
+	 * @param o
+	*/
 	void VGameEntity::checkCollision(VGameEntity* o) {
 		if (fGroup == o->fGroup) {
 			return;
@@ -56,10 +67,18 @@ namespace SI {
 		}
 	}
 	
+	/**
+	 * Checks if the entity is dead.
+	 *
+	 * @return True if the entity is dead.
+	*/
 	bool VGameEntity::isDead() {
 		return fDead;
 	}
 	
+	/**
+	 * Let the entity die.
+	*/
 	void VGameEntity::die() {
 		fDead = true;
 	}
@@ -80,6 +99,13 @@ namespace SI {
 	void VGameEntity::visualize() {
 	}
 	
+	/**
+	 * Checks if an entity crosses a given line (parallel with the x-axis)
+	 *
+	 * @param y The y-coordinate of the line.
+	 *
+	 * @return True if the entity crosses the line.
+	*/
 	bool VGameEntity::crossesLine(double y) {
 		BoundingBoxDescription boxDesc(8, 0.01); // Create a line
 		BoundingBox* box = new BoundingBox(&boxDesc);

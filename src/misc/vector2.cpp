@@ -72,6 +72,13 @@ namespace SI {
 		fY /= l;
 	}
 	
+	/**
+	 * Rotate the vector.
+	 *
+	 * @param degrees The angle to rotate (in degrees)
+	 *
+	 * @return The rotated vector.
+	*/
 	Vector2 Vector2::rotate(int degrees) {
 		double sinTheta = sin(degrees * PI / 180);
 		double cosTheta = cos(degrees * PI / 180);
@@ -80,6 +87,12 @@ namespace SI {
 		               fX * sinTheta + fY * cosTheta);
 	}
 	
+	/**
+	 * Put the X and Y values of the vector between specific bounds.
+	 *
+	 * @param maxBound The maxBound.
+	 * @param minBound The minBound.
+	*/
 	void Vector2::inBounds(Vector2 maxBound, Vector2 minBound) {
 		if (fX > maxBound.fX) {
 			fX = maxBound.fX;

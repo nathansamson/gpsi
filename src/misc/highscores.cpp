@@ -9,6 +9,12 @@ bool highscoreComp(std::pair<std::string, int> a,
 }
 
 namespace SI {
+	/**
+	 * Public constructor.
+	 *
+	 * @param fileName the filename to load highscores.
+	 * @param maxEntries the maximum of entries in the list.
+	*/
 	Highscores::Highscores(std::string fileName, unsigned int maxEntries): fMaxEntries(maxEntries) {
 		ticpp::Document highscores(fileName);
 		try {
@@ -32,9 +38,18 @@ namespace SI {
 		}
 	}
 	
+	/**
+	 * Destructor.
+	*/
 	Highscores::~Highscores() {
 	}
 	
+	/**
+	 * Checks if a given score comes in the highscore list.
+	 *
+	 * @param score The score.
+	 * @return True if score is a new high score, false if not.
+	*/
 	bool Highscores::isHighscore(int score) {
 		if (fList.size() < fMaxEntries) {
 			return true;
@@ -43,6 +58,16 @@ namespace SI {
 		}
 	}
 	
+	/**
+	 * Insert a new highscore in the list.
+	 *
+	 * @param name The name of the winner.
+	 * @param score The score of the winner.
+	 * @param context The number of entries around the new highscore.
+	 * @param entries The number of best entries.
+	 *
+	 * @return A highscore list with entries best entries and context entries before and after the new highscore.
+	*/
 	Highscores::HighscoreList Highscores::setHighscore(std::string name, int score,
 	                                       int context, int entries) {
 		
@@ -89,6 +114,13 @@ namespace SI {
 		return subset;
 	}
 	
+	/**
+	 * Get the best highscore.
+	 *
+	 * @param entries The number of entries in the list.
+	 *
+	 * @return The list of best highscores.
+	*/
 	Highscores::HighscoreList Highscores::getBestHighscores(int entries) {
 		HighscoreList subset;
 		entries = std::min(entries, (int)fList.size());
@@ -100,6 +132,11 @@ namespace SI {
 		return subset;
 	}
 	
+	/**
+	 * Save the highscore to a file.
+	 *
+	 * @param fileName The filename to save the highscores file.
+	*/
 	void Highscores::save(std::string fileName) {
 		ticpp::Document high(fileName);
 		ticpp::Element root = ticpp::Element("highscores");

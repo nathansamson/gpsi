@@ -66,34 +66,6 @@ namespace SI {
 		return intersects(other, true);
 	}
 	
-	bool BoundingBox::intersectsVerbose(VBoundingShape* o) {
-		if (typeid (*o) == typeid(*this)) {
-			std::cout << "BOX" << std::endl;
-			BoundingBox* other = static_cast<BoundingBox*>(o);
-			double thisX = fOffset.getX() - fW / 2;
-			double thisY = fOffset.getY() - fH / 2;
-			
-			double otherX = other->fOffset.getX() - other->fW / 2;
-			double otherY = other->fOffset.getY() - other->fH / 2;
-			
-			std::cout << thisX << " " << thisY << " " << fW << " " << fH << std::endl;
-			
-			if (thisX + fW < otherX || thisY + fH < otherY ||
-			    otherX + other->fW < thisX || otherY + other->fH < thisY) {
-				return false;
-			} else {
-				return true;
-			}
-		} else {
-			throw -1;
-			/*if (recursive) {
-				return o->intersects(this, false);
-			} else {
-				throw UnresolvedIntersectionException(o, this);
-			}*/
-		}
-	}
-	
 	/**
 	 * Checks if the box intersects with another shape.
 	 *

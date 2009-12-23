@@ -1,12 +1,24 @@
 #include "game/weapons/weapon.h"
 
 namespace SI {
+	/**
+	 * Constructor.
+	 *
+	 * @param ticksBetweenFire ticks between fire.
+	 * @param entityFactory The entity factory.
+	*/
 	VWeapon::VWeapon(int ticksBetweenFire, IGameEntityFactory* entityFactory):
 	         fEntityFactory(entityFactory), fShip(0),
 	         fTicksBetweenFire(ticksBetweenFire),
 	         fTicksSinceLastFire(ticksBetweenFire) {
 	}
-	
+
+	/**
+	 * Attach the weapon to a ship.
+	 *
+	 * @param weapon The original weapon
+	 * @param ship The ship.
+	*/	
 	VWeapon::VWeapon(const VWeapon& weapon, Ship* ship):
 	         fEntityFactory(weapon.fEntityFactory), fShip(ship),
 	         fTicksBetweenFire(weapon.fTicksBetweenFire),
@@ -28,6 +40,9 @@ namespace SI {
 		fTicksSinceLastFire += ticks;
 	}
 	
+	/**
+	 * checks if the weapon is blueprint.
+	*/
 	bool VWeapon::isBlueprint() {
 		return fShip == 0;
 	}

@@ -2,6 +2,18 @@
 #include "sdlusership.h"
 
 namespace SISDL {
+	/**
+	 * Constructor.
+	 *
+	 * @param driver The driver.
+	 * @param v The position
+	 * @param dir The direction
+	 * @param group The group
+	 * @param t The ship type
+	 * @param fac The entity factory.
+	 * @param weaponery The weaponery
+	 * @param w The SDLWindow
+	*/
 	SDLUserShip::SDLUserShip(SI::VShipDriver* driver, SI::Vector2 v, int dir,
 	                 SI::EntityGroup* group,
 	                 SI::ShipType t, SI::IGameEntityFactory* fac,
@@ -13,6 +25,9 @@ namespace SISDL {
 		Zabbr::ResourceManager::manager().free(fFont);
 	}
 
+	/**
+	 * Draws the ship on the screen.
+	*/
 	void SDLUserShip::visualize() {
 		SDLShip::visualize();
 		

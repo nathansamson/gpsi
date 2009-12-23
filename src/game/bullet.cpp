@@ -38,6 +38,11 @@ namespace SI {
 		return 1.0;
 	}
 	
+	/**
+	 * Collide the bullet with another entity.
+	 *
+	 * @param o The other entity.
+	*/
 	void Bullet::collide(VGameEntity* o) {
 		die();
 	}

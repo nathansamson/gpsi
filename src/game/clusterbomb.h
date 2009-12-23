@@ -6,14 +6,35 @@
 #include "game/gameentity.h"
 
 namespace SI {
+	/**
+	 * A cluster bomb type.
+	*/
 	class ClusterBombType: public AmmoType {
 	public:
+		/**
+		 * The speed of the bomb.
+		*/
 		Vector2 fSpeed;
+		
+		/**
+		 * The type of the bullets.
+		*/
 		BulletType* fBulletType;
+		
+		/**
+		 * The number of bullets in the bomb.
+		*/
 		int fBullets;
+		
+		/**
+		 * The time the bomb will be alive (before it explodes)
+		*/
 		int fMaxTicksAlive;
 	};
 	
+	/**
+	 * A cluster bomb projectile.
+	*/
 	class ClusterBomb: public VGameEntity {
 	public:
 		ClusterBomb(Vector2, int, EntityGroup*, ClusterBombType*, IGameEntityFactory*);
@@ -22,8 +43,19 @@ namespace SI {
 		virtual double getImpact();
 		virtual void collide(VGameEntity*);
 	private:
+		/**
+		 * The type of the cluster bomb.
+		*/
 		ClusterBombType* fClusterBombType;
+		
+		/**
+		 * The time the bomb is alive.
+		*/
 		int fTicksAlive;
+		
+		/**
+		 * Flag to see if the bomb is exploded.
+		*/
 		bool fExploded;
 	};
 }

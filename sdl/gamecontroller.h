@@ -59,9 +59,24 @@ namespace SISDL {
 		*/
 		bool fClosed;
 		
+		/**
+		 * The game visualizer.
+		*/
 		SDLGameVisualizer* fGameVisualizer;
+		
+		/**
+		 * The driver factory.
+		*/
 		SDLDriverFactory* fDriverFactory;
+		
+		/**
+		 * The font.
+		*/
 		Zabbr::FontResource* fFont;
+		
+		/**
+		 * The text of the score.
+		*/
 		Zabbr::StringFontResource* fScoreText;
 	};
 }

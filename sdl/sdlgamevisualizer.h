@@ -7,6 +7,9 @@
 #include "resources/resourcemanager.h"
 
 namespace SISDL {
+	/**
+	 * SDL Implementation of game visualizer.
+	*/
 	class SDLGameVisualizer: public SI::IGameVisualizer {
 	public:
 		SDLGameVisualizer(Zabbr::SDLWindow*);
@@ -23,8 +26,14 @@ namespace SISDL {
 		*/
 		Zabbr::SDLWindow* fWindow;
 		
+		/**
+		 * Flag to see if we are in non game phase.
+		*/
 		bool fInNonGamePhase;
 		
+		/**
+		 * The status text.
+		*/
 		Zabbr::StringFontResource* fStatusText;
 		
 		void showString(std::string);

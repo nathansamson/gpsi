@@ -14,8 +14,19 @@ namespace SI {
 	public:
 		virtual ~VWeapon();
 	
+	
+		/**
+		 * Attach the weapon to a ship.
+		 *
+		 * @return The complete and attached weapon.
+		*/
 		virtual VWeapon* addWeaponToShip(Ship*) = 0;
 	
+		/**
+		 * Fire off the weapon.
+		 *
+		 * @return a Projectile (or 0 if the weapon is not able to fire at this moment)
+		*/
 		virtual VGameEntity* fire() = 0;
 		void update(int);
 	protected:
@@ -25,6 +36,10 @@ namespace SI {
 		bool isBlueprint();
 		void resetTime();
 		bool canFire();
+		
+		/**
+		 * The entity factory.
+		*/
 		IGameEntityFactory* fEntityFactory;
 		
 		/**
