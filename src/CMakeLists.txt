@@ -23,26 +23,28 @@ add_library (si SHARED
                ./misc/highscores.cpp
            )
 
-add_executable (sitest
-                 ./game/tests/bullettest.cpp
-                 ./game/tests/shiptest.cpp
-                 ./game/tests/gametest.cpp
-                 ./game/tests/synchronousdrivertest.cpp
-                 ./game/tests/test.cpp
-                 ./game/weapons/tests/guntest.cpp
-                 ./tests/main.cpp
-                 ./misc/tests/vector2test.cpp
-                 ./misc/tests/boundingboxtest.cpp
-                 ./misc/tests/highscorestest.cpp
-)
-target_link_libraries (sitest si ticpp cppunit)
-add_test(sitest ${EXECUTABLE_OUTPUT_PATH}/sitest)
+if(CPPUNIT_FOUND)
+	add_executable (sitest
+		             ./game/tests/bullettest.cpp
+		             ./game/tests/shiptest.cpp
+		             ./game/tests/gametest.cpp
+		             ./game/tests/synchronousdrivertest.cpp
+		             ./game/tests/test.cpp
+		             ./game/weapons/tests/guntest.cpp
+		             ./tests/main.cpp
+		             ./misc/tests/vector2test.cpp
+		             ./misc/tests/boundingboxtest.cpp
+		             ./misc/tests/highscorestest.cpp
+	)
+	target_link_libraries (sitest si ticpp ${CPPUNIT_LIBRARY})
+	add_test(sitest ${EXECUTABLE_OUTPUT_PATH}/sitest)
 
-execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
-                                ${CMAKE_SOURCE_DIR}/src/testlevels
-                                ${CMAKE_BINARY_DIR}/src/testlevels)
+	execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
+		                            ${CMAKE_SOURCE_DIR}/src/testlevels
+		                            ${CMAKE_BINARY_DIR}/src/testlevels)
 
-execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/src/misc/tests)
-execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
-                                ${CMAKE_SOURCE_DIR}/src/misc/tests/highscores
-                                ${CMAKE_BINARY_DIR}/src/misc/tests/highscores)
+	execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/src/misc/tests)
+	execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
+		                            ${CMAKE_SOURCE_DIR}/src/misc/tests/highscores
+		                            ${CMAKE_BINARY_DIR}/src/misc/tests/highscores)
+endif()

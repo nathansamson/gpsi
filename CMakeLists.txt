@@ -19,7 +19,12 @@ add_definitions (-DTIXML_USE_TICPP -Wall -Werror -pedantic)
 
 add_subdirectory (tinyxml)
 include_directories (${GPSI_SOURCE_DIR})
-enable_testing ()
+include(FindCPPUnit)
+if(CPPUNIT_FOUND)
+	enable_testing ()
+else()
+	message(WARNING " CPPUnit not found, will not build/run tests.")
+endif()
 add_subdirectory (src)
 
 include(FindSDL)
