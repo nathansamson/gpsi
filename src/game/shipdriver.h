@@ -2,7 +2,6 @@
 #define INC_SHIPDRIVER_H
 
 #include "misc/vector2.h"
-#include "ship.h"
 
 namespace SI {
 	class Ship;

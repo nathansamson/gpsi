@@ -10,9 +10,6 @@
 #include "game/weaponery.h"
 
 namespace SI {
-	class VShipDriver;
-	class VWeapon;
-	class Weaponery;
 
 	/**
 	 * Description of a ship.

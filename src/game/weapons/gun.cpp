@@ -1,4 +1,6 @@
 #include "game/weapons/gun.h"
+#include "game/gameentity.h"
+#include "game/gameentityfactory.h"
 
 namespace SI {
 	Gun::Gun(int ticksBetweenFire, IGameEntityFactory* fac, Vector2 offset, BulletType* type):

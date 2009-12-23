@@ -1,4 +1,5 @@
-#include "shipdriver.h"
+#include "game/ship.h"
+#include "game/shipdriver.h"
 
 namespace SI {
 

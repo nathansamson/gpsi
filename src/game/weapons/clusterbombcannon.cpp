@@ -1,3 +1,5 @@
+#include "game/gameentity.h"
+#include "game/gameentityfactory.h"
 #include "game/weapons/clusterbombcannon.h"
 
 namespace SI {
