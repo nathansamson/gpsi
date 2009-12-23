@@ -158,9 +158,14 @@ namespace SI {
 				}
 				pos = Vector2(i*(8.0-2*margin)/(count+1) + offset -4.0 + margin, y);
 				
+				ticpp::Iterator<ticpp::Attribute> attribute;
+				std::map<std::string, std::string> attributeMap;
+				for(attribute = attribute.begin(rowElement.Get()); attribute != attribute.end(); attribute++) {
+					attributeMap[(*attribute).Name()] = (*attribute).Value();
+				}
 				enemies.push_back(fEntityFactory->createAIShip(
 				                     fDriverFactory->createEnemyDriver(
-				                         rowElement->GetAttribute("driver")),
+				                         rowElement->GetAttribute("driver"), attributeMap),
 				                         pos, 180, enemyGroup, fWeaponery,
 				                         shipType));
 			}

@@ -1,6 +1,7 @@
 #ifndef INC_DRIVERFACTORY_H
 #define INC_DRIVERFACTORY_H
 
+#include <map>
 #include "game/shipdriver.h"
 
 namespace SI {
@@ -16,7 +17,7 @@ namespace SI {
 		/**
 		 * Creates an enemy driver.
 		*/
-		virtual VShipDriver* createEnemyDriver(std::string) = 0;
+		virtual VShipDriver* createEnemyDriver(std::string, std::map<std::string, std::string>) = 0;
 	};
 }
 

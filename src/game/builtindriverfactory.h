@@ -12,7 +12,7 @@ namespace SI {
 	class BuiltinDriverFactory: public IDriverFactory {
 	public:
 		virtual ~BuiltinDriverFactory() {}
-		virtual VShipDriver* createEnemyDriver(std::string);
+		virtual VShipDriver* createEnemyDriver(std::string, std::map<std::string, std::string>);
 	};
 }
 

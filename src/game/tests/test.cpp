@@ -77,7 +77,7 @@ namespace SITest {
 		}
 	}
 	
-	SI::VShipDriver* TestDriverFactory::createEnemyDriver(std::string name) {
+	SI::VShipDriver* TestDriverFactory::createEnemyDriver(std::string name,  std::map<std::string, std::string> map) {
 		SI::VShipDriver* driver;
 		if (name == "mockdriver") {
 			driver = new MockShipDriver();
@@ -86,7 +86,7 @@ namespace SITest {
 		} else if (name == "deadlydriver") {
 			driver = new DeadlyMockShipDriver();
 		} else {
-			driver = SI::BuiltinDriverFactory::createEnemyDriver(name);
+			driver = SI::BuiltinDriverFactory::createEnemyDriver(name, map);
 		}
 		fDrivers.push_back(driver);
 		return driver;
