@@ -56,3 +56,7 @@ if(AA_FOUND)
 else()
 	message(STATUS "AA not found, will not build AA interface")
 endif()
+
+execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
+		                            ${CMAKE_SOURCE_DIR}/data
+		                            ${CMAKE_BINARY_DIR}/data)

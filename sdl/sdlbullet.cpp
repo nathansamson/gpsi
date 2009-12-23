@@ -1,3 +1,6 @@
+#include "zabbr/resources/resourcemanager.h"
+#include "src/misc/boundingbox.h"
+
 #include "sdlbullet.h"
 
 namespace SISDL {
@@ -14,19 +17,24 @@ namespace SISDL {
 	SDLBullet::SDLBullet(SI::Vector2 speed, int dir, SI::EntityGroup* group,
 	                     SI::BulletType* t, SI::IGameEntityFactory* fac,
 	                     Zabbr::SDLWindow* w):
-	           SI::Bullet(speed, dir, group, t, fac), fWindow(w), fBoundingBoxDesc(*dynamic_cast<SI::BoundingBoxDescription*>(t->fBoundingShapeDesc)) {
-//		fBoundingBoxDesc = *dynamic_cast<SI::BoundingBoxDescription*>(t.fBoundingShapeDesc);
+	           SI::Bullet(speed, dir, group, t, fac), fWindow(w) {
+		SI::BoundingBoxDescription* bb = dynamic_cast<SI::BoundingBoxDescription*>(t->fBoundingShapeDesc);
+	    int width = bb->getWidth() / 8.0 * fWindow->getXResolution();
+	    int height = bb->getHeight() / 6.0 * fWindow->getYResolution();
+		fImage = Zabbr::ResourceManager::manager().image("bullet.png", width, height, true, dir);
+	}
+	
+	SDLBullet::~SDLBullet() {
+		Zabbr::ResourceManager::manager().free(fImage);
 	}
 	
 	/**
 	 * Draws the bullet.
 	*/
 	void SDLBullet::visualize() {
-		int w = fBoundingBoxDesc.getWidth() / 8.0 * fWindow->getXResolution();
-		int h = fBoundingBoxDesc.getHeight() / 6.0 * fWindow->getYResolution();
 		int x, y;
 		positionToWindowCoords(x, y);
-		fWindow->drawRectangle(x, y, w, h, 0, 0, 255);
+		fWindow->drawSurface(fImage, x, y);
 	}
 	
 	/**
