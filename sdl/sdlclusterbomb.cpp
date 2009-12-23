@@ -1,4 +1,7 @@
+#include "zabbr/resources/resourcemanager.h"
 #include "sdl/sdlclusterbomb.h"
+#include "src/misc/boundingbox.h"
+
 
 namespace SISDL {
 	/**
@@ -14,19 +17,20 @@ namespace SISDL {
 	SDLClusterBomb::SDLClusterBomb(SI::Vector2 pos, int dir, SI::EntityGroup* group,
 	                     SI::ClusterBombType* t, SI::IGameEntityFactory* fac,
 	                     Zabbr::SDLWindow* w):
-	           SI::ClusterBomb(pos, dir, group, t, fac), fWindow(w),
-	                      fBoundingBoxDesc(*dynamic_cast<SI::BoundingBoxDescription*>(t->fBoundingShapeDesc)) {
+	           SI::ClusterBomb(pos, dir, group, t, fac), fWindow(w) {
+		SI::BoundingBoxDescription* bb = dynamic_cast<SI::BoundingBoxDescription*>(t->fBoundingShapeDesc);
+	    int width = bb->getWidth() / 8.0 * fWindow->getXResolution();
+	    int height = bb->getHeight() / 6.0 * fWindow->getYResolution();
+		fImage = Zabbr::ResourceManager::manager().image("clusterbomb.png", width, height, true, dir);
 	}
 	
 	/**
 	 * Draws the cluster bomb.
 	*/
 	void SDLClusterBomb::visualize() {
-		int w = fBoundingBoxDesc.getWidth() / 8.0 * fWindow->getXResolution();
-		int h = fBoundingBoxDesc.getHeight() / 6.0 * fWindow->getYResolution();
 		int x, y;
 		positionToWindowCoords(x, y);
-		fWindow->drawRectangle(x, y, w, h, 0, 255, 255);
+		fWindow->drawSurface(fImage, x, y);
 	}
 	
 	/**

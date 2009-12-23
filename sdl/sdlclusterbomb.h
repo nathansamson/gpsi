@@ -2,8 +2,9 @@
 #define INC_SDLCLUSTERBOMB_H
 
 #include "zabbr/sdlwindow.h"
+#include "zabbr/resources/imageresource.h"
+
 #include "src/game/clusterbomb.h"
-#include "src/misc/boundingbox.h"
 
 namespace SISDL {
 	/**
@@ -24,9 +25,9 @@ namespace SISDL {
 		Zabbr::SDLWindow* fWindow;
 		
 		/**
-		 * The bounding box of the bomb.
+		 * The image resource.
 		*/
-		SI::BoundingBoxDescription fBoundingBoxDesc;
+		Zabbr::ImageResource* fImage;
 	};
 }
 

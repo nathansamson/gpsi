@@ -2,8 +2,8 @@
 #define INC_SDLBULLET_H
 
 #include "zabbr/sdlwindow.h"
+#include "zabbr/resources/imageresource.h"
 #include "src/game/bullet.h"
-#include "src/misc/boundingbox.h"
 
 namespace SISDL {
 	/**
@@ -13,6 +13,7 @@ namespace SISDL {
 	public:
 		SDLBullet(SI::Vector2, int, SI::EntityGroup*, SI::BulletType*,
 		          SI::IGameEntityFactory*, Zabbr::SDLWindow*);
+		virtual ~SDLBullet();
 	
 		virtual void visualize();
 	private:
@@ -24,9 +25,9 @@ namespace SISDL {
 		Zabbr::SDLWindow* fWindow;
 		
 		/**
-		 * The bounding box of the bullet.
+		 * The image resource.
 		*/
-		SI::BoundingBoxDescription fBoundingBoxDesc;
+		Zabbr::ImageResource* fImage;
 	};
 }
 

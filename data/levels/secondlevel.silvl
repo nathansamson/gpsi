@@ -3,7 +3,7 @@
 	<ammo>
 		<bullet id="normal-bullet">
 			<speed>0.001</speed>
-			<boundingshape type="boundingbox" w="0.1" h="0.1" />
+			<boundingshape type="boundingbox" w="0.050" h="0.2" />
 		</bullet>
 		<clusterbomb id="cluster-bomb">
 			<speed>0.0005</speed>
