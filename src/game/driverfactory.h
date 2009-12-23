@@ -12,6 +12,9 @@ namespace SI {
 	public:
 		virtual ~IDriverFactory() {}
 		
+		/**
+		 * Creates a user driver.
+		*/
 		virtual VShipDriver* createUserDriver() = 0;
 		
 		/**

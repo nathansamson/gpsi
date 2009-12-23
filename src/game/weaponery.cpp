@@ -8,6 +8,9 @@ namespace SI {
 		clear();
 	}
 	
+	/**
+	 * Clear all weapons in the Weaponery.
+	*/
 	void Weaponery::clear() {
 		for (std::map<std::string, VWeapon*>::iterator it = fWeapons.begin(); it != fWeapons.end(); it++) {
 			delete (*it).second;

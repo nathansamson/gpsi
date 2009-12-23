@@ -5,11 +5,17 @@
 #include "sdlkeyboardinputdriver.h"
 
 namespace SISDL {
+	/**
+	 * The SDL Driver factory.
+	*/
 	class SDLDriverFactory: public SI::BuiltinDriverFactory {
 	public:
 		virtual SI::VShipDriver* createUserDriver();
 		SDLInputDriver* getUserDriver();
 	private:
+		/**
+		 * The current user driver.
+		*/
 		SDLInputDriver* fCurUserDriver;
 	};
 }

@@ -7,9 +7,11 @@ namespace SI {
 	/**
 	 * Constructor.
 	 *
-	 * @param userShipDriver The VShipDriver for the user ship.
 	 * @param entityFactory The Entity factory for this game.
-	 * @param enemyDriverFactory The factory to create enemy drivers.
+	 * @param levelDirectory The directory where to find levels.
+	 * @param firstLevel The filename of the first level.
+	 * @param gameVis The game visualizer.
+	 * @param fac The factory to create drivers.
 	*/
 	Game::Game(IGameEntityFactory* entityFactory,
 	           std::string levelDirectory, std::string firstLevel,
@@ -93,22 +95,48 @@ namespace SI {
 		fGameVisualizer->draw();
 	}
 	
+	/**
+	 * Checks if the user is dead.
+	 *
+	 * @return True if the user loses, false if he is still alive.
+	*/
 	bool Game::isUserDead() {
 		return (!hasShipsInGroup(fUserGroup) || enemyShipsCrossLine());
 	}
 	
+	/**
+	 * Checks if the AI is dead.
+	 *
+	 * @return True if the AI loses, false if he is still alive.
+	*/
 	bool Game::isAIDead() {
 		return !hasEntitiesInGroup(fAIGroup);
 	}
 	
+	/**
+	 * Checks if the game is still running.
+	 * When their are no new levels, and the user or the AI is dead this is false.
+	 *
+	 * @return True if the game is still running, false if not.
+	*/
 	bool Game::isPlaying() {
 		return !((fCurrentLevel == "" && isAIDead()) || (isUserDead()));
 	}
 	
+	/**
+	 * Returns the score of the user player.
+	 *
+	 * @return The score of the user.
+	*/
 	int Game::getUserScore() {
 		return fUserGroup->getScore();
 	}
 	
+	/**
+	 * Checks if the enemy ships crosses the 'user' line.
+	 *
+	 * @return True if the enemy crosses this line, false if not.
+	*/
 	bool Game::enemyShipsCrossLine() {
 		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
 			if ((*it)->getGroup() == fAIGroup && dynamic_cast<Ship*>(*it) != 0) {
@@ -120,6 +148,13 @@ namespace SI {
 		return false;
 	}
 	
+	/**
+	 * Checks if a group has still ships.
+	 *
+	 * @param g The group.
+	 *
+	 * @return true if the group has still ships.
+	*/
 	bool Game::hasShipsInGroup(EntityGroup* g) {
 		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
 			if ((*it)->getGroup() == g && dynamic_cast<Ship*>(*it) != 0) {
@@ -129,6 +164,13 @@ namespace SI {
 		return false;
 	}
 	
+	/**
+	 * Checks if a group has still entities.
+	 *
+	 * @param g The group.
+	 *
+	 * @return true if the group has still entities.
+	*/
 	bool Game::hasEntitiesInGroup(EntityGroup* g) {
 		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
 			if ((*it)->getGroup() == g) {
@@ -138,6 +180,11 @@ namespace SI {
 		return false;
 	}
 	
+	/**
+	 * Start a new level.
+	 *
+	 * @param levelName The (file name) of the new level.
+	*/
 	void Game::startLevel(std::string levelName) {
 		fWeaponery->clear();
 		for (std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {

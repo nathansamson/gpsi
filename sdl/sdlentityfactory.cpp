@@ -17,9 +17,10 @@ namespace SISDL {
 	 * Creates a user ship.
 	 *
 	 * @param driver The driver for the ship.
+	 * @param v The initial position.
 	 * @param d The initial direction of the ship.
 	 * @param g The group of the entity.
-	 * @param v The initial position.
+	 * @param w The weaponery of th entity.
 	 * @param t The type of the ship.
 	*/
 	SI::Ship* SDLEntityFactory::createUserShip(SI::VShipDriver* driver, SI::Vector2 v, int d, SI::EntityGroup* g, SI::Weaponery* w, SI::ShipType t) {
@@ -30,9 +31,10 @@ namespace SISDL {
 	 * Creates an AI ship.
 	 *
 	 * @param driver The driver for the ship.
+	 * @param v The initial position.
 	 * @param d The initial direction of the ship.
 	 * @param g The group of the entity.
-	 * @param v The initial position.
+	 * @param w The weaponery of th entity.
 	 * @param t The type of the ship.
 	*/
 	SI::Ship* SDLEntityFactory::createAIShip(SI::VShipDriver* driver, SI::Vector2 v, int d, SI::EntityGroup* g, SI::Weaponery* w, SI::ShipType t) {
@@ -44,6 +46,7 @@ namespace SISDL {
 	 *
 	 * @param pos The initial position of the bullet.
 	 * @param dir The initial direction of the bullet.
+	 * @param g The group of the bullet.
 	 * @param t Bullet information
 	*/
 	SI::Bullet* SDLEntityFactory::createBullet(SI::Vector2 pos, int dir, SI::EntityGroup* g, SI::BulletType* t) {
@@ -55,6 +58,7 @@ namespace SISDL {
 	 *
 	 * @param pos The initial position of the cluster bomb.
 	 * @param dir The initial direction of the cluster bomb.
+	 * @param g The group of the bomb.
 	 * @param t Cluster bomb information
 	*/
 	SI::ClusterBomb* SDLEntityFactory::createClusterBomb(SI::Vector2 pos, int dir,

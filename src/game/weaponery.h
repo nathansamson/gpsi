@@ -9,6 +9,9 @@
 namespace SI {
 	class Ship;
 
+	/**
+	 * A Weaponery. This is a weapon depot.
+	*/
 	class Weaponery {
 	public:
 		virtual ~Weaponery();
@@ -23,13 +26,22 @@ namespace SI {
 		 * Returns an ammo type.
 		 *
 		 * @param id The ID of the ammo.
+		 *
+		 * @return A ammotype of type T*.
 		*/
 		template<typename T>
 		T* getAmmoType(std::string id) {
 			return dynamic_cast<T*>(fAmmo[id]);
 		}
 	private:
+		/**
+		 * A map of all ammo.
+		*/
 		std::map<std::string, AmmoType*> fAmmo;
+		
+		/**
+		 * A map of all weapons.
+		*/
 		std::map<std::string, VWeapon*> fWeapons;
 	};
 }

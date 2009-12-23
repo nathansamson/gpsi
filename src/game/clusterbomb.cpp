@@ -2,12 +2,28 @@
 #include "game/gameentityfactory.h"
 
 namespace SI {
+	/**
+	 * Public constructor.
+	 *
+	 * @param pos The position of the cluster bomb.
+	 * @param dir The direction of the bomb.
+	 * @param group The group of the cluster bomb.
+	 * @param type The type of the cluster bomb.
+	 * @param fac The entity factory of the bomb.
+	*/
 	ClusterBomb::ClusterBomb(Vector2 pos, int dir, EntityGroup* group,
 	                         ClusterBombType* type, IGameEntityFactory* fac):
 	    VGameEntity(pos, dir, type->fBoundingShapeDesc, group, fac),
 	    fClusterBombType(type), fTicksAlive(0), fExploded(false) {
 	}
 	
+	/**
+	 * Update the clusterbomb. It will move itself, or explode.
+	 *
+	 * @param ticks The number of ticks passed since last update.
+	 *
+	 * @return A list of other bombs.
+	*/
 	std::vector<VGameEntity*> ClusterBomb::update(int ticks) {
 		fTicksAlive += ticks;
 		if (fTicksAlive > fClusterBombType->fMaxTicksAlive) {
@@ -30,10 +46,20 @@ namespace SI {
 		}
 	}
 	
+	/**
+	 * Get the impact of the projectile.
+	 *
+	 * @return the impact.
+	*/
 	double ClusterBomb::getImpact() {
 		return 0.0;
 	}
-	
+
+	/**
+	 * Collide with another entity. The bomb will explode.
+	 *
+	 * @param other The other entity.
+	*/	
 	void ClusterBomb::collide(VGameEntity* other) {
 		fExploded = true;
 	}

@@ -8,6 +8,14 @@
 #include "misc/boundingbox.h"
 
 namespace SI {
+	/**
+	 * Constructor
+	 *
+	 * @param fileName The full filename.
+	 * @param fac The entity factory.
+	 * @param driverFactory The driver factory;
+	 * @param weaponery The weaponery
+	*/
 	LevelReader::LevelReader(std::string fileName, IGameEntityFactory* fac,
 	                         IDriverFactory* driverFactory,
 	                         Weaponery* weaponery):
@@ -21,12 +29,21 @@ namespace SI {
 		fShipTypes = parseShipTypes();
 	}
 	
+	/**
+	 * Desctructor.
+	*/
 	LevelReader::~LevelReader() {
 		for (std::map<std::string, ShipType>::iterator it = fShipTypes.begin(); it != fShipTypes.end(); it++) {
 			delete (*it).second.fBoundingShapeDesc;
 		}
 	}
 	
+	/**
+	 * Parse bounding shape.
+	 *
+	 * @param shape The resulting shape.
+	 * @param boundingshape The element to parse.
+	*/
 	void LevelReader::parseBoundingShape(IBoundingShapeDescription*& shape,
 	                                     ticpp::Element* boundingshape) {
 		if (boundingshape->GetAttribute("type") == "boundingbox") {
@@ -38,6 +55,9 @@ namespace SI {
 		}
 	}
 	
+	/**
+	 * Parse the ammo list.
+	*/
 	void LevelReader::parseAmmo() {
 		ticpp::Element* ammoNode = fLevel.FirstChild("level")->FirstChild("ammo")->ToElement();
 		
@@ -77,6 +97,9 @@ namespace SI {
 		}
 	}
 	
+	/**
+	 * Parse the weapon list.
+	*/
 	void LevelReader::parseWeapons() {
 		ticpp::Element* weaponsNode = fLevel.FirstChild("level")->FirstChild("weapons")->ToElement();
 		ticpp::Iterator<ticpp::Element> weaponNode("weapon");
@@ -106,6 +129,11 @@ namespace SI {
 		}
 	}
 
+	/**
+	 * Parse the ship types.
+	 *
+	 * @return A map with ID's and shiptypes.
+	*/
 	std::map<std::string, ShipType> LevelReader::parseShipTypes() {
 		std::map<std::string, ShipType> shipTypes;
 		ticpp::Element* shipsNode = fLevel.FirstChild("level")->FirstChild("ships")->ToElement();
@@ -130,6 +158,13 @@ namespace SI {
 		return shipTypes;
 	}
 
+	/**
+	 * Parse a a vector
+	 *
+	 * @param vectorNode The vector node.
+	 *
+	 * @return The vector
+	*/
 	Vector2 LevelReader::parseVector(ticpp::Element* vectorNode) {
 		Vector2 vector;
 		vector.setX(vectorNode->GetAttribute<double>("x"));
@@ -137,6 +172,13 @@ namespace SI {
 		return vector;
 	}
 
+	/**
+	 * Returns a list of enemy ships in this level.
+	 *
+	 * @param enemyGroup The enemy group.
+	 *
+	 * @return A list of enemy ships.
+	*/
 	std::vector<Ship*> LevelReader::getEnemyShips(EntityGroup* enemyGroup) {
 		std::vector<Ship*> enemies;
 		ticpp::Element* enemiesNode = fLevel.FirstChild("level")->FirstChild("enemies")->ToElement();
@@ -173,6 +215,13 @@ namespace SI {
 		return enemies;
 	}
 	
+	/**
+	 * Returns the user ship of the level
+	 *
+	 * @param userGroup The group of the user.
+	 *
+	 * @return The user ship.
+	*/
 	Ship* LevelReader::getUserShip(EntityGroup* userGroup) {
 		ticpp::Element* shipNode = fLevel.FirstChild("level")->FirstChild("usership")->ToElement();
 		ShipType shipType = fShipTypes[shipNode->GetAttribute("shiptype")];
@@ -181,10 +230,20 @@ namespace SI {
 				                         shipType);
 	}
 	
+	/**
+	 * Returns the name of the level.
+	 *
+	 * @return The name of the level.
+	*/
 	std::string LevelReader::getLevelName() {
 		return fLevel.FirstChild("level")->FirstChild("name")->ToElement()->GetText();
 	}
-	
+
+	/**
+	 * Returns the filename of the next level.
+	 *
+	 * @return Filename of the next level or the empty string if their is no next level.
+	*/	
 	std::string LevelReader::getNextLevel() {
 		try {
 			return fLevel.FirstChild("level")->FirstChild("next")->ToElement()->GetText();

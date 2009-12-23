@@ -18,10 +18,20 @@ namespace SI {
 		return fName;
 	}
 	
+	/**
+	 * Returns the score of the group.
+	 *
+	 * @return the score of the group.
+	*/
 	int EntityGroup::getScore() {
 		return fScore;
 	}
 	
+	/**
+	 * Increase (or decrease) the score of the group.
+	 *
+	 * @param update The change.
+	*/
 	void EntityGroup::increaseScore(int update) {
 		fScore += update;
 	}

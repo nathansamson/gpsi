@@ -23,6 +23,9 @@ namespace SISDL {
 		*/
 		Zabbr::SDLWindow* fWindow;
 		
+		/**
+		 * The bounding box of the bullet.
+		*/
 		SI::BoundingBoxDescription fBoundingBoxDesc;
 	};
 }
