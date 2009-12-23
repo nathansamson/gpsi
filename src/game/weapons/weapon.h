@@ -1,11 +1,11 @@
 #ifndef INC_WEAPON_H
 #define INC_WEAPON_H
 
-#include "game/gameentityfactory.h"
-#include "game/ship.h"
+#include "game/gameentity.h"
 
 namespace SI {
 	class Ship;
+	class IGameEntityFactory;
 	
 	/**
 	 * Base class for all weapons.

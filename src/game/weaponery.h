@@ -3,13 +3,11 @@
 
 #include <map>
 
-#include "game/ship.h"
 #include "game/weapons/weapon.h"
-#include "game/bullet.h"
+#include "game/ammotype.h"
 
 namespace SI {
 	class Ship;
-	class VWeapon;
 
 	class Weaponery {
 	public:

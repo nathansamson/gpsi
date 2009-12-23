@@ -8,10 +8,6 @@
 #include "game/weaponery.h"
 
 namespace SI {
-	struct ShipType;
-	class VShipDriver;
-	class Ship;
-	class Weaponery;
 
 	/**
 	 * The Game Entity Factory. Classes that implement this interface
