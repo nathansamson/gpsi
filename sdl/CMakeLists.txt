@@ -11,6 +11,7 @@ add_executable (sisdl
                   ./main.cpp
                   ./siwindow.cpp
                   ./gamecontroller.cpp
+                  ./highscorecontroller.cpp
                   ./sdlbullet.cpp
                   ./sdlclusterbomb.cpp
                   ./sdlentityfactory.cpp
