@@ -15,7 +15,9 @@ namespace SISDL {
 		SDLClusterBomb(SI::Vector2, int, SI::EntityGroup*, SI::ClusterBombType*,
 		          SI::IGameEntityFactory*, Zabbr::SDLWindow*);
 	
+		virtual std::vector<VGameEntity*> update(int);
 		virtual void visualize();
+		virtual bool isVisible();
 	private:
 		void positionToWindowCoords(int&, int&);
 		
@@ -28,6 +30,11 @@ namespace SISDL {
 		 * The image resource.
 		*/
 		Zabbr::ImageResource* fImage;
+		
+		/**
+		 * Number of ticks passed since dead.
+		*/
+		int ticksSinceDead;
 	};
 }
 

@@ -88,7 +88,6 @@ namespace SI {
 		}
 		
 		HighscoreList subset;
-		std::cout << pos << std::endl;
 		if (pos < entries) {
 			// the context is bad, so we will fill with 2 * context + entries + 1
 			entries = 2 * context + entries + 1;

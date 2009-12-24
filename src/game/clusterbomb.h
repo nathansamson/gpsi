@@ -3,7 +3,7 @@
 
 #include "game/ammotype.h"
 #include "game/bullet.h"
-#include "game/gameentity.h"
+#include "game/projectile.h"
 
 namespace SI {
 	/**
@@ -35,7 +35,7 @@ namespace SI {
 	/**
 	 * A cluster bomb projectile.
 	*/
-	class ClusterBomb: public VGameEntity {
+	class ClusterBomb: public IProjectile {
 	public:
 		ClusterBomb(Vector2, int, EntityGroup*, ClusterBombType*, IGameEntityFactory*);
 		

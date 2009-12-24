@@ -11,7 +11,7 @@ namespace SI {
 	 * @param fac The factory of the bullet.
 	*/
 	Bullet::Bullet(Vector2 pos, int dir, EntityGroup* group, BulletType* type, IGameEntityFactory* fac):
-	        VGameEntity(pos, dir, type->fBoundingShapeDesc, group, fac),
+	        IProjectile(pos, dir, type->fBoundingShapeDesc, group, fac),
 	        fSpeed(type->fSpeed.rotate(dir)) {
 	}
 	
@@ -22,6 +22,9 @@ namespace SI {
 	 * @return An empty list of generated entities.
 	*/
 	std::vector<VGameEntity*> Bullet::update(int ticks) {
+		if (isDead()) {
+			return std::vector<VGameEntity*>();
+		}
 		move(fSpeed * ticks);
 		if (getPosition().getY() > 3.0 || getPosition().getY() < -3.0) {
 			die();
