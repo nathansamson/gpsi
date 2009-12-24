@@ -104,7 +104,7 @@ namespace SI {
 		ticpp::Element* weaponsNode = fLevel.FirstChild("level")->FirstChild("weapons")->ToElement();
 		ticpp::Iterator<ticpp::Element> weaponNode("weapon");
 		for (weaponNode = weaponNode.begin(weaponsNode); weaponNode != weaponNode.end(); weaponNode++) {
-			VWeapon* weapon = 0;
+			VWeaponBlueprint* weapon = 0;
 			std::string weaponType = weaponNode->GetAttribute("type");
 			if (weaponType == "gun") {
 				int coolingOffTime;
@@ -114,7 +114,7 @@ namespace SI {
 				BulletType* bullet = fWeaponery->getAmmoType<BulletType>(
 				                     weaponNode->FirstChild("ammo")
 				                               ->ToElement()->GetText());
-				weapon = new Gun(coolingOffTime, fEntityFactory,
+				weapon = new GunBlueprint(coolingOffTime, fEntityFactory,
 				                 Vector2(xOffset, 0.0), bullet);
 			} else if (weaponType == "cluster-bomb-cannon") {
 				int coolingOffTime;
@@ -123,7 +123,7 @@ namespace SI {
 				ClusterBombType* ammo = fWeaponery->getAmmoType<ClusterBombType>(
 				                             weaponNode->FirstChild("ammo")
 				                                       ->ToElement()->GetText());
-				weapon = new ClusterBombCannon(coolingOffTime, fEntityFactory, ammo);
+				weapon = new ClusterBombCannonBlueprint(coolingOffTime, fEntityFactory, ammo);
 			}
 			fWeaponery->addWeapon(weaponNode->GetAttribute("id"), weapon);
 		}

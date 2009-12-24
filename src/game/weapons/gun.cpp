@@ -11,21 +11,11 @@ namespace SI {
 	 * @param offset Offset to the ship.
 	 * @param type The bullet type.
 	*/
-	Gun::Gun(int ticksBetweenFire, IGameEntityFactory* fac, Vector2 offset, BulletType* type):
-	     VWeapon(ticksBetweenFire, fac), fBulletType(type), fOffset(-offset) {
+	GunBlueprint::GunBlueprint(int ticksBetweenFire, IGameEntityFactory* fac, Vector2 offset, BulletType* type):
+	     VWeaponBlueprint(ticksBetweenFire, fac), fBulletType(type), fOffset(-offset) {
 	}
 	
-	/**
-	 * Constructor.
-	 *
-	 * @param gun THe gun blueprint.
-	 * @param ship The ship.
-	*/
-	Gun::Gun(const Gun& gun, Ship* ship): VWeapon(gun, ship),
-	     fBulletType(gun.fBulletType), fOffset(gun.fOffset) {
-	}
-	
-	Gun::~Gun() {
+	GunBlueprint::~GunBlueprint() {
 	}
 	
 	/**
@@ -35,12 +25,21 @@ namespace SI {
 	 *
 	 * @return A Gun.
 	*/
-	Gun* Gun::addWeaponToShip(Ship* ship) {
-		if (isBlueprint()) {
-			return new Gun(*this, ship);
-		} else {
-			return 0;
-		}
+	Gun* GunBlueprint::attachWeaponToShip(Ship* ship) {
+		return new Gun(*this, ship);
+	}
+	
+	/**
+	 * Constructor.
+	 *
+	 * @param blueprint THe gun blueprint.
+	 * @param ship The ship.
+	*/
+	Gun::Gun(const GunBlueprint& blueprint, Ship* ship): VWeapon(blueprint, ship),
+	     fBulletType(blueprint.fBulletType), fOffset(blueprint.fOffset) {
+	}
+	
+	Gun::~Gun() {
 	}
 
 	/**

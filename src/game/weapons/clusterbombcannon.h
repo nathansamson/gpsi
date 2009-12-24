@@ -5,19 +5,34 @@
 #include "game/clusterbomb.h"
 
 namespace SI {
+	class ClusterBombCannonBlueprint;
+	
 	/**
 	 * A cluster bomb.
 	*/
 	class ClusterBombCannon: public VWeapon {
 	public:
-		ClusterBombCannon(int, IGameEntityFactory*, ClusterBombType*);
-		
-		virtual ClusterBombCannon* addWeaponToShip(Ship*);
-		
+		ClusterBombCannon(const ClusterBombCannonBlueprint&, Ship*);
+	
 		virtual VGameEntity* fire();
-	private:
-		ClusterBombCannon(const ClusterBombCannon&, Ship*);
+	private:	
+		/**
+		 * The type of the bomb.
+		*/
+		ClusterBombType* fBombType;
+	};
+
+	/**
+	 * A cluster bomb blueprint.
+	*/
+	class ClusterBombCannonBlueprint: public VWeaponBlueprint {
+	public:
+		ClusterBombCannonBlueprint(int, IGameEntityFactory*, ClusterBombType*);
+	
+		virtual ClusterBombCannon* attachWeaponToShip(Ship*);
 		
+		friend class ClusterBombCannon;
+	private:		
 		/**
 		 * The type of the bomb.
 		*/
