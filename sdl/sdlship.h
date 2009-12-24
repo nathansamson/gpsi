@@ -16,7 +16,9 @@ namespace SISDL {
 				SI::Weaponery*, Zabbr::SDLWindow*);
 		virtual ~SDLShip();
 		
+		virtual std::vector<VGameEntity*> update(int);
 		virtual void visualize();
+		virtual bool isVisible();
 	protected:
 		/**
 		 * The window.
@@ -29,6 +31,11 @@ namespace SISDL {
 		Zabbr::ImageResource* fImage;
 		
 		void positionToWindowCoords(int&, int&);
+		
+		/**
+		 * Number of ticks passed since dead.
+		*/
+		int ticksSinceDead;
 	};
 }
 

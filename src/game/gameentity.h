@@ -29,6 +29,11 @@ namespace SI {
 		*/
 		virtual void collide(VGameEntity*) = 0;
 		
+		/**
+		 * Check if the entity is still visible (after it died)
+		*/
+		virtual bool isVisible();
+		
 		Vector2 getPosition();
 		int getDirection();
 		EntityGroup* getGroup();

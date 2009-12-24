@@ -45,6 +45,9 @@ namespace SI {
 	 * @return A list of generated entities in this update.
 	*/
 	std::vector<VGameEntity*> Ship::update(int ticks) {
+		if (isDead()) {
+			return std::vector<VGameEntity*>();
+		}
 		fShipDriver->update(ticks);
 		for(std::vector<VWeapon*>::iterator it = fWeapons.begin(); it != fWeapons.end(); it++) {
 			(*it)->update(ticks);
@@ -70,11 +73,10 @@ namespace SI {
 	 * @param o The other entity.
 	*/
 	void Ship::collide(VGameEntity* o) {
-		Bullet* b = dynamic_cast<Bullet*>(o);
-		if (b != 0) {
-			fHP -= b->getImpact();
+		if (IProjectile* p = dynamic_cast<IProjectile*>(o)) {
+			fHP -= p->getImpact();
 			if (fHP <= 0.0) {
-				b->getGroup()->increaseScore(500);
+				p->getGroup()->increaseScore(500);
 				die();
 			}
 		} else {

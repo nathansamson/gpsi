@@ -99,6 +99,10 @@ namespace SI {
 	void VGameEntity::visualize() {
 	}
 	
+	bool VGameEntity::isVisible() {
+		return false;
+	}
+	
 	/**
 	 * Checks if an entity crosses a given line (parallel with the x-axis)
 	 *

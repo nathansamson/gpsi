@@ -17,7 +17,7 @@ namespace SISDL {
 	SDLClusterBomb::SDLClusterBomb(SI::Vector2 pos, int dir, SI::EntityGroup* group,
 	                     SI::ClusterBombType* t, SI::IGameEntityFactory* fac,
 	                     Zabbr::SDLWindow* w):
-	           SI::ClusterBomb(pos, dir, group, t, fac), fWindow(w) {
+	           SI::ClusterBomb(pos, dir, group, t, fac), fWindow(w), ticksSinceDead(0) {
 		SI::BoundingBoxDescription* bb = dynamic_cast<SI::BoundingBoxDescription*>(t->fBoundingShapeDesc);
 	    int width = bb->getWidth() / 8.0 * fWindow->getXResolution();
 	    int height = bb->getHeight() / 6.0 * fWindow->getYResolution();
@@ -31,6 +31,33 @@ namespace SISDL {
 		int x, y;
 		positionToWindowCoords(x, y);
 		fWindow->drawSurface(fImage, x, y);
+		
+		if (isDead()) {
+			fWindow->drawRectangle(x, y, fImage->getWidth(), fImage->getHeight(), 0, 0, 0, 1.0 / (100.0 / ticksSinceDead));
+		}
+	}
+	
+	/**
+	 * Updates the SDL entity.
+	 *
+	 * @param ticks The ticks passed since last update.
+	 *
+	 * @return a list of new entities.
+	*/
+	std::vector<SI::VGameEntity*> SDLClusterBomb::update(int ticks) {
+		if (isDead()) {
+			ticksSinceDead += ticks;
+		}
+		return ClusterBomb::update(ticks);
+	}
+	
+	/**
+	 * Checks if the SDL entity is still visible.
+	 *
+	 * @return True if the entity is still visible, false if not.
+	*/
+	bool SDLClusterBomb::isVisible() {
+		return ticksSinceDead < 100;
 	}
 	
 	/**

@@ -57,9 +57,14 @@ namespace SI {
 			}
 		
 			for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end(); it++) {
+				if ((*it)->isDead()) {
+					continue;
+				}
 				for (std::list<VGameEntity*>::iterator it2 = it; it2 != fEntities.end(); it2++) {
-					if (it != it2) {
-						(*it)->checkCollision((*it2));
+					if (!(*it2)->isDead()) {
+						if (*it2 != *it) {
+							(*it)->checkCollision((*it2));
+						}
 					}
 				}
 			}
@@ -72,7 +77,7 @@ namespace SI {
 		for(std::list<VGameEntity*>::iterator it = fEntities.begin(); it != fEntities.end();) {
 			std::list<VGameEntity*>::iterator next = it;
 			next++;
-			if (!(*it)->isDead()) {
+			if ((!(*it)->isDead()) || (*it)->isVisible()) {
 				(*it)->visualize();
 			} else {
 				delete (*it);

@@ -3,7 +3,7 @@
 
 #include "misc/vector2.h"
 #include "game/ammotype.h"
-#include "game/gameentity.h"
+#include "game/projectile.h"
 
 namespace SI {
 	/**
@@ -21,7 +21,7 @@ namespace SI {
 	 * A Bullet class.
 	 * The bullet is the simplest type of weapon in the game.
 	*/
-	class Bullet: public VGameEntity {
+	class Bullet: public IProjectile {
 	public:
 		Bullet(Vector2, int, EntityGroup*, BulletType*, IGameEntityFactory*);
 		

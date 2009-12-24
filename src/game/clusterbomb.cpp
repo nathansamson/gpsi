@@ -13,7 +13,7 @@ namespace SI {
 	*/
 	ClusterBomb::ClusterBomb(Vector2 pos, int dir, EntityGroup* group,
 	                         ClusterBombType* type, IGameEntityFactory* fac):
-	    VGameEntity(pos, dir, type->fBoundingShapeDesc, group, fac),
+	    IProjectile(pos, dir, type->fBoundingShapeDesc, group, fac),
 	    fClusterBombType(type), fTicksAlive(0), fExploded(false) {
 	}
 	
@@ -25,6 +25,9 @@ namespace SI {
 	 * @return A list of other bombs.
 	*/
 	std::vector<VGameEntity*> ClusterBomb::update(int ticks) {
+		if (isDead()) {
+			return std::vector<VGameEntity*>();
+		}
 		fTicksAlive += ticks;
 		if (fTicksAlive > fClusterBombType->fMaxTicksAlive) {
 			fExploded = true;
