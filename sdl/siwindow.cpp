@@ -4,6 +4,7 @@
 #include "zabbr/sdlwindow.h"
 #include "zabbr/panels/splashpanel.h"
 #include "zabbr/panels/menupanel.h"
+#include "zabbr/panels/dialogpanel.h"
 #include "zabbr/widgets/button.h"
 #include "zabbr/widgets/label.h"
 #include "zabbr/resources/resourcemanager.h"
@@ -57,26 +58,6 @@ namespace SISDL {
 	}
 
 	/**
-	 * Callback when the yes button in the quit confirmation dialog is clicked.
-	 *
-	 * @param e The Mouse Button Event.
-	*/
-	void SIWindow::onQuit(SDL_MouseButtonEvent e)
-	{
-		fPanel->quit();
-	}
-
-	/**
-	 * Callback when the quit is canceled.
-	 *
-	 * @param e The Mouse Button Event.
-	*/
-	void SIWindow::cancelQuit(SDL_MouseButtonEvent e)
-	{
-		fPanel->openParentPanel();
-	}
-
-	/**
 	 * Callback when the quit is confirmed.
 	 *
 	 * @param e The Mouse Button Event.
@@ -90,15 +71,26 @@ namespace SISDL {
 	 * Callback called when a quit is requested in the main menu.
 	*/
 	void SIWindow::onRequestQuitMainMenu() {
-		MenuPanel* quitConfirmation = new MenuPanel(this);
-		Button* b = new Button(this, "Yes");
-		b->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::onQuit));
-		quitConfirmation->addWidget(b);
-		b = new Button(this, "No");
-		b->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::cancelQuit));
-		quitConfirmation->addWidget(b);
+		std::vector<std::pair<int, std::string> > responseIDs;
+		responseIDs.push_back(std::pair<int, std::string>(0, "No"));
+		responseIDs.push_back(std::pair<int, std::string>(1, "Yes"));
+		DialogPanel* quitConfirmation = new DialogPanel(this, "Are you sure you want to quit?", responseIDs);
+		quitConfirmation->connectOnResponse(new ClassCallback1<SIWindow, int>(this, &SIWindow::onQuitConfirmationResponse));
 
 		fPanel->openPanel(quitConfirmation);
+	}
+	
+	/**
+	 * Callback when the quit confirmation responds.
+	 *
+	 * @param response The response ID.
+	*/
+	void SIWindow::onQuitConfirmationResponse(int response) {
+		if (response == 0) {
+			fPanel->openParentPanel();
+		} else {
+			fPanel->quit();
+		}
 	}
 	
 	/**

@@ -15,10 +15,9 @@ namespace SISDL {
 	public:
 		void run(bool);
 
-		void onQuit(SDL_MouseButtonEvent);
-		void cancelQuit(SDL_MouseButtonEvent);
 		void onQuitButtonClicked(SDL_MouseButtonEvent);
 		void onRequestQuitMainMenu();
+		void onQuitConfirmationResponse(int);
 		
 		void startGame(SDL_MouseButtonEvent);
 	private:
