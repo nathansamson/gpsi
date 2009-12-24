@@ -52,7 +52,7 @@ ENDIF()
 
 include(FindAA)
 if(AA_FOUND)
-	add_subdirectory(aa)
+	#add_subdirectory(aa)
 else()
 	message(STATUS "AA not found, will not build AA interface")
 endif()
