@@ -1,16 +1,19 @@
-#include "zabbr/controller/sdlcontroller.h"
+#ifndef INC_HIGHSCORE_PANEL
+#define INC_HIGHSCORE_PANEL
+
+#include "zabbr/panels/sdlpanel.h"
 #include "zabbr/widgets/textinput.h"
 
 #include "src/misc/highscores.h"
 
 namespace SISDL {
 	/**
-	 * A controller to draw highscores and insert a new highscore
+	 * A panel to draw highscores and insert a new highscore
 	*/
-	class HighscoreController: public Zabbr::VSDLController {
+	class HighscorePanel: public Zabbr::VSDLPanel {
 	public:
-		HighscoreController(Zabbr::SDLWindow*, int);		
-		virtual ~HighscoreController();
+		HighscorePanel(Zabbr::SDLWindow*, int);		
+		virtual ~HighscorePanel();
 
 		virtual void draw();
 		virtual void keyRelease(SDL_KeyboardEvent evnt);
@@ -54,3 +57,5 @@ namespace SISDL {
 		SDL_Surface* highscoreListSurface;
 	};
 }
+
+#endif // INC_HIGHSCORE_PANEL

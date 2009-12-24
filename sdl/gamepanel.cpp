@@ -4,8 +4,8 @@
 #include "zabbr/events/callbacks.h"
 #include "zabbr/resources/resourcemanager.h"
 
-#include "gamecontroller.h"
-#include "highscorecontroller.h"
+#include "gamepanel.h"
+#include "highscorepanel.h"
 #include "sdlentityfactory.h"
 #include "sdlkeyboardinputdriver.h"
 #include "sdldriverfactory.h"
@@ -17,28 +17,28 @@ namespace SISDL {
 	 *
 	 * @param w The Window
 	*/
-	GameController::GameController(Zabbr::SDLWindow* w): Zabbr::VSDLController(w),
+	GamePanel::GamePanel(Zabbr::SDLWindow* w): Zabbr::VSDLPanel(w),
 	                fGame(0), fTimeRemainder(0.0), fClosed(false) {
 		startGame();
-		connectRequestQuit(new Zabbr::ClassCallback0<GameController>(this, &GameController::onRequestQuitGame));
+		connectRequestQuit(new Zabbr::ClassCallback0<GamePanel>(this, &GamePanel::onRequestQuitGame));
 		fFont = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 18);
 	}
 	
 	/**
 	 * Destructor;
 	*/
-	GameController::~GameController() {
+	GamePanel::~GamePanel() {
 		delete fGame;
 		delete fGameVisualizer;
 		Zabbr::ResourceManager::manager().free(fFont);
 	}
 	
 	/**
-	 * Draws the controller.
+	 * Draws the panel.
 	*/
-	void GameController::draw() {
+	void GamePanel::draw() {
 		if (fClosed && !fIsBackground) {
-			openParentController();
+			openParentPanel();
 		}
 		
 		if (!fTimer.isPaused()) {
@@ -65,7 +65,7 @@ namespace SISDL {
 	 *
 	 * @param evnt The SDL_KeyboardEvent
 	*/
-	void GameController::keyPress(SDL_KeyboardEvent evnt) {
+	void GamePanel::keyPress(SDL_KeyboardEvent evnt) {
 		fGameVisualizer->keyPress(evnt);
 		fInputDriver = fDriverFactory->getUserDriver();
 		if (!fGame->isUserDead()) fInputDriver->keyDown(evnt);
@@ -76,7 +76,7 @@ namespace SISDL {
 	 *
 	 * @param evnt The SDL_KeyboardEvent
 	*/
-	void GameController::keyRelease(SDL_KeyboardEvent evnt) {
+	void GamePanel::keyRelease(SDL_KeyboardEvent evnt) {
 		fInputDriver = fDriverFactory->getUserDriver();
 		if (!fGame->isUserDead()) fInputDriver->keyRelease(evnt);
 		if (evnt.keysym.sym == SDLK_ESCAPE) {
@@ -88,61 +88,61 @@ namespace SISDL {
 				// Play new game
 				// Go to main menu
 				// Quit
-				fClosed = true; // Return to parent controller.
-				openController(new HighscoreController(fWindow, fGame->getUserScore()));
+				fClosed = true; // Return to parent panel.
+				openPanel(new HighscorePanel(fWindow, fGame->getUserScore()));
 			}
 		}
 	}
 	
 	/**
-	 * Method callback that is called when the controller is requested to quit.
+	 * Method callback that is called when the panel is requested to quit.
 	*/
-	void GameController::onRequestQuitGame() {
+	void GamePanel::onRequestQuitGame() {
 		fTimer.pause();
-		fQuitConfirmation = new Zabbr::MenuController(fWindow);
+		fQuitConfirmation = new Zabbr::MenuPanel(fWindow);
 		Zabbr::Button* b = new Zabbr::Button(fWindow, "Resume game");
-		b->connectOnMouseClick(new Zabbr::ClassCallback1<GameController, SDL_MouseButtonEvent>(this, &GameController::onResumeGame));
+		b->connectOnMouseClick(new Zabbr::ClassCallback1<GamePanel, SDL_MouseButtonEvent>(this, &GamePanel::onResumeGame));
 		fQuitConfirmation->addWidget(b);
 
 		b = new Zabbr::Button(fWindow, "Quit Game");
-		b->connectOnMouseClick(new Zabbr::ClassCallback1<GameController, SDL_MouseButtonEvent>(this, &GameController::onQuitGame));
+		b->connectOnMouseClick(new Zabbr::ClassCallback1<GamePanel, SDL_MouseButtonEvent>(this, &GamePanel::onQuitGame));
 		fQuitConfirmation->addWidget(b);
 		
 		b = new Zabbr::Button(fWindow, "Close game");
-		b->connectOnMouseClick(new Zabbr::ClassCallback1<GameController, SDL_MouseButtonEvent>(this, &GameController::onCloseGame));
+		b->connectOnMouseClick(new Zabbr::ClassCallback1<GamePanel, SDL_MouseButtonEvent>(this, &GamePanel::onCloseGame));
 		fQuitConfirmation->addWidget(b);
 
-		openController(fQuitConfirmation);
+		openPanel(fQuitConfirmation);
 	}
 	
 	/**
 	 * Resume game callback.
 	*/
-	void GameController::onResumeGame(SDL_MouseButtonEvent e) {
-		fQuitConfirmation->openParentController();
+	void GamePanel::onResumeGame(SDL_MouseButtonEvent e) {
+		fQuitConfirmation->openParentPanel();
 		fTimer.unpause();
 	}
 	
 	/**
 	 * Quit game callback.
 	*/
-	void GameController::onQuitGame(SDL_MouseButtonEvent e) {
-		fQuitConfirmation->openParentController();
+	void GamePanel::onQuitGame(SDL_MouseButtonEvent e) {
+		fQuitConfirmation->openParentPanel();
 		fClosed = true;
-		openController(new HighscoreController(fWindow, fGame->getUserScore()));
+		openPanel(new HighscorePanel(fWindow, fGame->getUserScore()));
 	}
 	
 	/**
 	 * Close game callback.
 	*/
-	void GameController::onCloseGame(SDL_MouseButtonEvent e) {
+	void GamePanel::onCloseGame(SDL_MouseButtonEvent e) {
 		fQuitConfirmation->quit();
 	}
 	
 	/**
 	 * Start a new game.
 	*/
-	void GameController::startGame() {
+	void GamePanel::startGame() {
 		fGameVisualizer = new SDLGameVisualizer(fWindow);
 		fDriverFactory = new SDLDriverFactory();
 		fGame = new SI::Game(new SDLEntityFactory(fWindow),

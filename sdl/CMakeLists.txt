@@ -10,8 +10,8 @@ add_executable (sisdl
                   ./sdlusership.cpp
                   ./main.cpp
                   ./siwindow.cpp
-                  ./gamecontroller.cpp
-                  ./highscorecontroller.cpp
+                  ./gamepanel.cpp
+                  ./highscorepanel.cpp
                   ./sdlbullet.cpp
                   ./sdlclusterbomb.cpp
                   ./sdlentityfactory.cpp
