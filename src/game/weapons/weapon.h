@@ -6,6 +6,32 @@
 namespace SI {
 	class Ship;
 	class IGameEntityFactory;
+	class VWeapon;
+	
+	class VWeaponBlueprint {
+	public:
+		VWeaponBlueprint(int, IGameEntityFactory*);
+		virtual ~VWeaponBlueprint();
+		
+		/**
+		 * Attach the weapon to a ship.
+		 *
+		 * @return The complete and attached weapon.
+		*/
+		virtual VWeapon* attachWeaponToShip(Ship*) = 0;
+		
+		friend class VWeapon;
+	private:
+		/**
+		 * The entity factory.
+		*/
+		IGameEntityFactory* fEntityFactory;
+	
+		/**
+		 * The minimal number of ticks between 2 shots.
+		*/
+		int fTicksBetweenFire;
+	};
 	
 	/**
 	 * Base class for all weapons.
@@ -13,14 +39,6 @@ namespace SI {
 	class VWeapon {
 	public:
 		virtual ~VWeapon();
-	
-	
-		/**
-		 * Attach the weapon to a ship.
-		 *
-		 * @return The complete and attached weapon.
-		*/
-		virtual VWeapon* addWeaponToShip(Ship*) = 0;
 	
 		/**
 		 * Fire off the weapon.
@@ -30,22 +48,20 @@ namespace SI {
 		virtual VGameEntity* fire() = 0;
 		void update(int);
 	protected:
-		VWeapon(int, IGameEntityFactory*);
-		VWeapon(const VWeapon&, Ship*);
-		
-		bool isBlueprint();
+		VWeapon(const VWeaponBlueprint&, Ship*);
+
 		void resetTime();
 		bool canFire();
-		
-		/**
-		 * The entity factory.
-		*/
-		IGameEntityFactory* fEntityFactory;
 		
 		/**
 		 * The ship.
 		*/
 		Ship* fShip;
+		
+		/**
+		 * The entity factory.
+		*/
+		IGameEntityFactory* fEntityFactory;
 	private:
 		/**
 		 * The minimal number of ticks between 2 shots.

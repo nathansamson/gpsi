@@ -12,7 +12,7 @@ namespace SI {
 	 * Clear all weapons in the Weaponery.
 	*/
 	void Weaponery::clear() {
-		for (std::map<std::string, VWeapon*>::iterator it = fWeapons.begin(); it != fWeapons.end(); it++) {
+		for (std::map<std::string, VWeaponBlueprint*>::iterator it = fWeapons.begin(); it != fWeapons.end(); it++) {
 			delete (*it).second;
 		}
 		
@@ -30,7 +30,7 @@ namespace SI {
 	 * @return A new weapon, the ship will own the weapon.
 	*/
 	VWeapon* Weaponery::getWeapon(std::string id, Ship* ship) {
-		return fWeapons[id]->addWeaponToShip(ship);
+		return fWeapons[id]->attachWeaponToShip(ship);
 	}
 
 	/**
@@ -49,7 +49,7 @@ namespace SI {
 	 * @param id The ID of the weapon.
 	 * @param weapon The blueprint of the weapon. This function owns the weapon. 
 	*/
-	void Weaponery::addWeapon(std::string id, VWeapon* weapon) {
+	void Weaponery::addWeapon(std::string id, VWeaponBlueprint* weapon) {
 		fWeapons[id] = weapon;
 	}
 }

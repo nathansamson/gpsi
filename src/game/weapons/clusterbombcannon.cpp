@@ -10,18 +10,8 @@ namespace SI {
 	 * @param fac The entity factory.
 	 * @param type The type of the clusterbomb.
 	*/
-	ClusterBombCannon::ClusterBombCannon(int ticksBetweenFire, IGameEntityFactory* fac, ClusterBombType* type):
-	        VWeapon(ticksBetweenFire, fac), fBombType(type) {
-	}
-	
-	/**
-	 * Constructor.
-	 *
-	 * @param cannon The original cannon.
-	 * @param ship The ship
-	*/
-	ClusterBombCannon::ClusterBombCannon(const ClusterBombCannon& cannon, Ship* ship):
-	        VWeapon(cannon, ship), fBombType(cannon.fBombType) {
+	ClusterBombCannonBlueprint::ClusterBombCannonBlueprint(int ticksBetweenFire, IGameEntityFactory* fac, ClusterBombType* type):
+	        VWeaponBlueprint(ticksBetweenFire, fac), fBombType(type) {
 	}
 	
 	/**
@@ -31,8 +21,18 @@ namespace SI {
 	 *
 	 * @return A new cannon that can fire.
 	*/
-	ClusterBombCannon* ClusterBombCannon::addWeaponToShip(Ship* ship) {
+	ClusterBombCannon* ClusterBombCannonBlueprint::attachWeaponToShip(Ship* ship) {
 		return new ClusterBombCannon(*this, ship);
+	}
+	
+	/**
+	 * Constructor.
+	 *
+	 * @param blueprint The blueprint of the cannon.
+	 * @param ship The ship
+	*/
+	ClusterBombCannon::ClusterBombCannon(const ClusterBombCannonBlueprint& blueprint, Ship* ship):
+	        VWeapon(blueprint, ship), fBombType(blueprint.fBombType) {
 	}
 	
 	/**

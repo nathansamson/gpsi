@@ -17,7 +17,7 @@ namespace SI {
 		virtual ~Weaponery();
 
 		void addAmmo(std::string, AmmoType*);
-		void addWeapon(std::string, VWeapon*);
+		void addWeapon(std::string, VWeaponBlueprint*);
 		void clear();
 
 		VWeapon* getWeapon(std::string id, Ship* ship);
@@ -42,7 +42,7 @@ namespace SI {
 		/**
 		 * A map of all weapons.
 		*/
-		std::map<std::string, VWeapon*> fWeapons;
+		std::map<std::string, VWeaponBlueprint*> fWeapons;
 	};
 }
 

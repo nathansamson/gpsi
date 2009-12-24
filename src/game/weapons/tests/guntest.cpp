@@ -20,8 +20,8 @@ namespace SITest {
 		fBulletType->fBoundingShapeDesc = new BoundingBoxDescription(0.1, 0.1);
 		fEntityGroup = new EntityGroup("group");
 		fShip = new Ship(new MockShipDriver(), Vector2(0, 0), 0, fEntityGroup, shiptype, fEntityFactory, 0);
-		Gun* blueprint = new Gun(500, fEntityFactory, Vector2(1.0, 0.5), fBulletType);
-		fGun = blueprint->addWeaponToShip(fShip);
+		GunBlueprint* blueprint = new GunBlueprint(500, fEntityFactory, Vector2(1.0, 0.5), fBulletType);
+		fGun = blueprint->attachWeaponToShip(fShip);
 		delete blueprint;
 		delete shiptype.fBoundingShapeDesc;
 	}

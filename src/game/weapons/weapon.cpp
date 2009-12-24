@@ -7,22 +7,23 @@ namespace SI {
 	 * @param ticksBetweenFire ticks between fire.
 	 * @param entityFactory The entity factory.
 	*/
-	VWeapon::VWeapon(int ticksBetweenFire, IGameEntityFactory* entityFactory):
-	         fEntityFactory(entityFactory), fShip(0),
-	         fTicksBetweenFire(ticksBetweenFire),
-	         fTicksSinceLastFire(ticksBetweenFire) {
+	VWeaponBlueprint::VWeaponBlueprint(int ticksBetweenFire, IGameEntityFactory* entityFactory):
+	         fEntityFactory(entityFactory), fTicksBetweenFire(ticksBetweenFire) {
+	}
+	
+	VWeaponBlueprint::~VWeaponBlueprint() {
 	}
 
 	/**
 	 * Attach the weapon to a ship.
 	 *
-	 * @param weapon The original weapon
+	 * @param blueprint The original weapon
 	 * @param ship The ship.
 	*/	
-	VWeapon::VWeapon(const VWeapon& weapon, Ship* ship):
-	         fEntityFactory(weapon.fEntityFactory), fShip(ship),
-	         fTicksBetweenFire(weapon.fTicksBetweenFire),
-	         fTicksSinceLastFire(weapon.fTicksBetweenFire) {
+	VWeapon::VWeapon(const VWeaponBlueprint& blueprint, Ship* ship):
+	         fShip(ship), fEntityFactory(blueprint.fEntityFactory),
+	         fTicksBetweenFire(blueprint.fTicksBetweenFire),
+	         fTicksSinceLastFire(blueprint.fTicksBetweenFire) {
 	}
 	
 	/**
@@ -41,19 +42,12 @@ namespace SI {
 	}
 	
 	/**
-	 * checks if the weapon is blueprint.
-	*/
-	bool VWeapon::isBlueprint() {
-		return fShip == 0;
-	}
-	
-	/**
 	 * Checks if the weapon is ready to fire.
 	 *
 	 * @return True if the weapon can fire.
 	*/
 	bool VWeapon::canFire() {
-		return (!isBlueprint() && fTicksSinceLastFire >= fTicksBetweenFire);
+		return (fTicksSinceLastFire >= fTicksBetweenFire);
 	}
 	
 	/**
@@ -62,6 +56,4 @@ namespace SI {
 	void VWeapon::resetTime() {
 		fTicksSinceLastFire = 0;
 	}
-	
-	
 }
