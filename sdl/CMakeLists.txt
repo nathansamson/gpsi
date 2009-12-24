@@ -1,5 +1,6 @@
 include_directories (${GPSI_SOURCE_DIR}/src
                      ${GPSI_SOURCE_DIR}/zabbr
+                     ${GPSI_SOURCE_DIR}/tclap
                      ${SDL_INCLUDE_DIR}
                      ${SDLIMAGE_INCLUDE_DIR}
                      ${SDLTTF_INCLUDE_DIR}
