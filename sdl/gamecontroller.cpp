@@ -2,13 +2,16 @@
 
 #include "zabbr/widgets/button.h"
 #include "zabbr/events/callbacks.h"
+#include "zabbr/resources/resourcemanager.h"
 
 #include "gamecontroller.h"
+#include "highscorecontroller.h"
 #include "sdlentityfactory.h"
 #include "sdlkeyboardinputdriver.h"
 #include "sdldriverfactory.h"
 
 namespace SISDL {
+
 	/**
 	 * Public constructor
 	 *
@@ -34,7 +37,7 @@ namespace SISDL {
 	 * Draws the controller.
 	*/
 	void GameController::draw() {
-		if (fClosed) {
+		if (fClosed && !fIsBackground) {
 			openParentController();
 		}
 		
@@ -86,6 +89,7 @@ namespace SISDL {
 				// Go to main menu
 				// Quit
 				fClosed = true; // Return to parent controller.
+				openController(new HighscoreController(fWindow, fGame->getUserScore()));
 			}
 		}
 	}
@@ -125,7 +129,7 @@ namespace SISDL {
 	void GameController::onQuitGame(SDL_MouseButtonEvent e) {
 		fQuitConfirmation->openParentController();
 		fClosed = true;
-		//fController->openParentParentController();
+		openController(new HighscoreController(fWindow, fGame->getUserScore()));
 	}
 	
 	/**

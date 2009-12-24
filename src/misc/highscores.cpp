@@ -119,7 +119,6 @@ namespace SI {
 			}
 			
 			for (int i = contextLeft; i <= contextRight; i++) {
-				std::cout << i << std::endl;
 				subset[i] = fList[i-1];
 			}
 		}
