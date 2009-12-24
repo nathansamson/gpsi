@@ -2,12 +2,12 @@
 #include "SDL.h"
 
 #include "zabbr/sdlwindow.h"
-#include "zabbr/controller/splashcontroller.h"
-#include "zabbr/controller/menucontroller.h"
+#include "zabbr/panels/splashpanel.h"
+#include "zabbr/panels/menupanel.h"
 #include "zabbr/widgets/button.h"
 #include "zabbr/widgets/label.h"
 #include "zabbr/resources/resourcemanager.h"
-#include "gamecontroller.h"
+#include "gamepanel.h"
 #include "siwindow.h"
 
 namespace SISDL {
@@ -29,7 +29,7 @@ namespace SISDL {
 
 		try {
 			if (!game) {
-				MenuController* menu = new MenuController(this);
+				MenuPanel* menu = new MenuPanel(this);
 				SDL_Color c = {255, 255, 255};
 				menu->addWidget(new Label(this, "/Space/ Invaders", c, "fonts/orbitron-black.ttf", 64));
 			
@@ -45,10 +45,10 @@ namespace SISDL {
 			
 				menu->connectRequestQuit(new ClassCallback0<SIWindow>(this, &SIWindow::onRequestQuitMainMenu));
 	
-				VSDLController* controller = new SplashController(this, "splash.png", menu);
+				VSDLPanel* controller = new SplashPanel(this, "splash.png", menu);
 				SDLWindow::run(controller);
 			} else {
-				SDLWindow::run(new GameController(this));
+				SDLWindow::run(new GamePanel(this));
 			}
 		} catch (ResourceNotLoadedException& e) {
 			std::cerr << "Could not load resource " << e.getResourceID() << " :" << e.getError() << std::endl;
@@ -63,7 +63,7 @@ namespace SISDL {
 	*/
 	void SIWindow::onQuit(SDL_MouseButtonEvent e)
 	{
-		fController->quit();
+		fPanel->quit();
 	}
 
 	/**
@@ -73,7 +73,7 @@ namespace SISDL {
 	*/
 	void SIWindow::cancelQuit(SDL_MouseButtonEvent e)
 	{
-		fController->openParentController();
+		fPanel->openParentPanel();
 	}
 
 	/**
@@ -83,14 +83,14 @@ namespace SISDL {
 	*/
 	void SIWindow::onQuitButtonClicked(SDL_MouseButtonEvent e)
 	{
-		fController->requestQuit();
+		fPanel->requestQuit();
 	}
 	
 	/**
 	 * Callback called when a quit is requested in the main menu.
 	*/
 	void SIWindow::onRequestQuitMainMenu() {
-		MenuController* quitConfirmation = new MenuController(this);
+		MenuPanel* quitConfirmation = new MenuPanel(this);
 		Button* b = new Button(this, "Yes");
 		b->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::onQuit));
 		quitConfirmation->addWidget(b);
@@ -98,16 +98,16 @@ namespace SISDL {
 		b->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::cancelQuit));
 		quitConfirmation->addWidget(b);
 
-		fController->openController(quitConfirmation);
+		fPanel->openPanel(quitConfirmation);
 	}
 	
 	/**
 	 * Callback to start the game.
 	*/
 	void SIWindow::startGame(SDL_MouseButtonEvent e) {
-		GameController* gameController = new GameController(this);
+		GamePanel* gamePanel = new GamePanel(this);
 		
-		fController->openController(gameController);
+		fPanel->openPanel(gamePanel);
 	}
 
 	/**

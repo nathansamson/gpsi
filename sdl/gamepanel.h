@@ -1,5 +1,8 @@
-#include "zabbr/controller/sdlcontroller.h"
-#include "zabbr/controller/menucontroller.h"
+#ifndef INC_GAMEPANEL_H
+#define INC_GAMEPANEL_H
+
+#include "zabbr/panels/sdlpanel.h"
+#include "zabbr/panels/menupanel.h"
 #include "zabbr/misc/stopwatch.h"
 #include "src/game/game.h"
 #include "zabbr/resources/resourcemanager.h"
@@ -11,12 +14,12 @@
 namespace SISDL {
 	
 	/**
-	 * The game controller.
+	 * The game panel.
 	*/
-	class GameController: public Zabbr::VSDLController {
+	class GamePanel: public Zabbr::VSDLPanel {
 	public:
-		GameController(Zabbr::SDLWindow*);
-		virtual ~GameController();
+		GamePanel(Zabbr::SDLWindow*);
+		virtual ~GamePanel();
 	
 		virtual void draw();
 		virtual void keyPress(SDL_KeyboardEvent);
@@ -52,7 +55,7 @@ namespace SISDL {
 		/**
 		 * The quit confirmation dialog.
 		*/
-		Zabbr::MenuController* fQuitConfirmation;
+		Zabbr::MenuPanel* fQuitConfirmation;
 		
 		/**
 		 * Flag to see if we should close.
@@ -80,3 +83,5 @@ namespace SISDL {
 		Zabbr::StringFontResource* fScoreText;
 	};
 }
+
+#endif // INC_GAMEPANEL_H

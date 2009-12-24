@@ -1,6 +1,6 @@
 #include <sstream>
 
-#include "highscorecontroller.h"
+#include "highscorepanel.h"
 
 namespace SISDL {
 	/**
@@ -9,7 +9,7 @@ namespace SISDL {
 	 * @param window The SDLWIndow.
 	 * @param score The score of the user
 	*/
-	HighscoreController::HighscoreController(Zabbr::SDLWindow* window, int score): Zabbr::VSDLController(window),
+	HighscorePanel::HighscorePanel(Zabbr::SDLWindow* window, int score): Zabbr::VSDLPanel(window),
 		     fHighscores(".gpsi.high", 50), fScore(score),
 		     fEnterHighscore(fHighscores.isHighscore(score)) {	
 		fFont = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 18);
@@ -36,7 +36,7 @@ namespace SISDL {
 	/**
 	 * destructor.
 	*/
-	HighscoreController::~HighscoreController() {
+	HighscorePanel::~HighscorePanel() {
 		Zabbr::ResourceManager::manager().free(fTitleString);
 		SDL_FreeSurface(highscoreListSurface);
 	}
@@ -44,7 +44,7 @@ namespace SISDL {
 	/**
 	 * Draw the controller.
 	*/
-	void HighscoreController::draw() {
+	void HighscorePanel::draw() {
 		if (fEnterHighscore) {
 			fNameInputWidget->draw(fWindow->getXResolution() / 2, fWindow->getYResolution() / 2 - fNameInputWidget->getHeight()/2);
 		} else {
@@ -58,7 +58,7 @@ namespace SISDL {
 	 *
 	 * @param evnt The SDL_KeyboardEvent
 	*/
-	void HighscoreController::keyRelease(SDL_KeyboardEvent evnt) {
+	void HighscorePanel::keyRelease(SDL_KeyboardEvent evnt) {
 		if (fEnterHighscore) {
 			fNameInputWidget->keyRelease(evnt);
 			if (evnt.keysym.sym == SDLK_ESCAPE || evnt.keysym.sym == SDLK_RETURN) {
@@ -77,7 +77,7 @@ namespace SISDL {
 			}
 		} else {
 			if (evnt.keysym.sym == SDLK_ESCAPE) {
-				openParentController();
+				openParentPanel();
 			}
 		}
 	}
@@ -90,7 +90,7 @@ namespace SISDL {
 	 * @param entry The entry
 	 * @param y The y coordinate of the entry
 	*/
-	void HighscoreController::blitScoreEntry(SDL_Surface* surface,
+	void HighscorePanel::blitScoreEntry(SDL_Surface* surface,
 	                                         int position,
 	                                         SI::Highscores::ScoreEntry entry,
 	                                         int& y) {
