@@ -69,9 +69,9 @@ namespace SI {
 	 * @return A highscore list with entries best entries and context entries before and after the new highscore.
 	*/
 	Highscores::HighscoreList Highscores::setHighscore(std::string name, int score,
-	                                       int context, int entries) {
+	                                       unsigned int context, unsigned int entries) {
 		
-		int pos = 0;
+		unsigned int pos = 0;
 		for (InternalHighscoreList::iterator it = fList.begin(); it != fList.end(); it++) {
 			if ((*it).second < score) {
 				fList.insert(it, 1, ScoreEntry(name, score)); 
@@ -79,15 +79,23 @@ namespace SI {
 			}
 			pos++;
 		}
+		if (pos == fList.size()) {
+			// We did not insert, the new score is the last score.
+			fList.push_back(ScoreEntry(name, score));
+		}
 		if (fList.size() > fMaxEntries) {
 			fList.erase(fList.begin()+fMaxEntries, fList.end());
 		}
 		
 		HighscoreList subset;
+		std::cout << pos << std::endl;
 		if (pos < entries) {
 			// the context is bad, so we will fill with 2 * context + entries + 1
 			entries = 2 * context + entries + 1;
-			int pos = 1;
+			if (entries > fList.size()) {
+				entries = fList.size();
+			}
+			unsigned int pos = 1;
 			for (InternalHighscoreList::iterator it = fList.begin(); it != fList.begin()+entries && pos <= entries; it++) {
 				subset[pos] = (*it);
 				pos++;
@@ -99,15 +107,19 @@ namespace SI {
 				best++;
 			}
 			
-			unsigned int contextLeft = pos - context + 1;
-			unsigned int contextRight = pos + context + 1;
+			int contextLeft = pos - context + 1;
+			int contextRight = pos + context + 1;
 			
-			if (contextRight >= fList.size()) {
+			if (contextRight >= (int)fList.size()) {
 				contextLeft -= (contextRight - fList.size());
 				contextRight = fList.size();
 			}
+			if (contextLeft < 1) {
+				contextLeft = 1;
+			}
 			
-			for (unsigned int i = contextLeft; i <= contextRight; i++) {
+			for (int i = contextLeft; i <= contextRight; i++) {
+				std::cout << i << std::endl;
 				subset[i] = fList[i-1];
 			}
 		}

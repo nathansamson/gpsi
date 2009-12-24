@@ -25,7 +25,7 @@ namespace SI {
 		~Highscores();
 		
 		bool isHighscore(int);
-		HighscoreList setHighscore(std::string, int, int, int);
+		HighscoreList setHighscore(std::string, int, unsigned int, unsigned int);
 		HighscoreList getBestHighscores(int);
 		void save(std::string);
 	private:

@@ -112,6 +112,48 @@ namespace SITest {
 		CPPUNIT_ASSERT(HENTRY("Nathan8", 2000) == list[8]);
 		CPPUNIT_ASSERT(HENTRY("Nathan9", 1000) == list[9]);
 		CPPUNIT_ASSERT(HENTRY("New score", 750) == list[10]);
+		
+		highScores = Highscores("misc/tests/highscores/10items.high", 20);
+		list = highScores.setHighscore("Last highscore", 400, 2, 3);
+		CPPUNIT_ASSERT(list.size() == 8);
+		CPPUNIT_ASSERT(HENTRY("Nathan1", 10000) == list[1]);
+		CPPUNIT_ASSERT(HENTRY("Nathan2", 8000) == list[2]);	
+		CPPUNIT_ASSERT(HENTRY("Nathan3", 7000) == list[3]);
+		CPPUNIT_ASSERT(HENTRY("Nathan7", 3000) == list[7]);
+		CPPUNIT_ASSERT(HENTRY("Nathan8", 2000) == list[8]);
+		CPPUNIT_ASSERT(HENTRY("Nathan9", 1000) == list[9]);
+		CPPUNIT_ASSERT(HENTRY("Nathan10", 500) == list[10]);
+		CPPUNIT_ASSERT(HENTRY("Last highscore", 400) == list[11]);
+		
+		highScores = Highscores("misc/tests/highscores/10items.high", 20);
+		list = highScores.setHighscore("Best highscore", 40000, 2, 15);
+		CPPUNIT_ASSERT(list.size() == 11);
+		CPPUNIT_ASSERT(HENTRY("Best highscore", 40000) == list[1]);
+		CPPUNIT_ASSERT(HENTRY("Nathan1", 10000) == list[2]);
+		CPPUNIT_ASSERT(HENTRY("Nathan2", 8000) == list[3]);	
+		CPPUNIT_ASSERT(HENTRY("Nathan3", 7000) == list[4]);
+		CPPUNIT_ASSERT(HENTRY("Nathan4", 6000) == list[5]);
+		CPPUNIT_ASSERT(HENTRY("Nathan5", 5000) == list[6]);
+		CPPUNIT_ASSERT(HENTRY("Nathan6", 4000) == list[7]);
+		CPPUNIT_ASSERT(HENTRY("Nathan7", 3000) == list[8]);
+		CPPUNIT_ASSERT(HENTRY("Nathan8", 2000) == list[9]);
+		CPPUNIT_ASSERT(HENTRY("Nathan9", 1000) == list[10]);
+		CPPUNIT_ASSERT(HENTRY("Nathan10", 500) == list[11]);
+		
+		highScores = Highscores("misc/tests/highscores/10items.high", 20);
+		list = highScores.setHighscore("Last highscore", 0, 7, 2);
+		CPPUNIT_ASSERT(list.size() == 11);
+		CPPUNIT_ASSERT(HENTRY("Nathan1", 10000) == list[1]);
+		CPPUNIT_ASSERT(HENTRY("Nathan2", 8000) == list[2]);	
+		CPPUNIT_ASSERT(HENTRY("Nathan3", 7000) == list[3]);
+		CPPUNIT_ASSERT(HENTRY("Nathan4", 6000) == list[4]);
+		CPPUNIT_ASSERT(HENTRY("Nathan5", 5000) == list[5]);
+		CPPUNIT_ASSERT(HENTRY("Nathan6", 4000) == list[6]);
+		CPPUNIT_ASSERT(HENTRY("Nathan7", 3000) == list[7]);
+		CPPUNIT_ASSERT(HENTRY("Nathan8", 2000) == list[8]);
+		CPPUNIT_ASSERT(HENTRY("Nathan9", 1000) == list[9]);
+		CPPUNIT_ASSERT(HENTRY("Nathan10", 500) == list[10]);
+		CPPUNIT_ASSERT(HENTRY("Last highscore", 0) == list[11]);
 	}
 	
 	void HighscoresTest::testSave() {
