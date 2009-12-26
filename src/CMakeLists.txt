@@ -6,6 +6,7 @@ add_library (si SHARED
                ./game/entitygroup.cpp
                ./game/gameentity.cpp
                ./game/synchronousdriver.cpp
+               ./game/demodriver.cpp
                ./game/bullet.cpp
                ./game/game.cpp
                ./game/levelreader.cpp

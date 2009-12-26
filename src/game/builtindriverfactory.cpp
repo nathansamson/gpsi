@@ -8,8 +8,13 @@
 
 #include "game/builtindriverfactory.h"
 #include "game/synchronousdriver.h"
+#include "game/demodriver.h"
 
 namespace SI {
+	VShipDriver* BuiltinDriverFactory::createUserDriver() {
+		return new DemoDriver();
+	}
+
 	/**
 	 * Creates a driver.
 	 *

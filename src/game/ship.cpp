@@ -123,9 +123,20 @@ namespace SI {
 		if (yDiff < -ticks * fShipType.fMaxAbsSpeedDiff.getY()) {
 			yDiff = -ticks * fShipType.fMaxAbsSpeedDiff.getY();
 		}
+		
 		movement.setX(xDiff + fCurrentSpeed.getX() * ticks);
 		movement.setY(yDiff + fCurrentSpeed.getY() * ticks);
 		fCurrentSpeed += Vector2(xDiff, yDiff) / ticks;
+		
+		if (getPosition().getX() + movement.getX() < -4.0) {
+			movement.setX(-4.0 - getPosition().getX());
+			fCurrentSpeed = -fCurrentSpeed;
+		}
+		
+		if (getPosition().getX() + movement.getX() > 4.0) {
+			movement.setX(4.0 - getPosition().getX());
+			fCurrentSpeed = -fCurrentSpeed;
+		}
 		VGameEntity::move(movement);
 	}
 	
