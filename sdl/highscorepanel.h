@@ -24,6 +24,7 @@ namespace SISDL {
 		virtual void draw();
 		virtual void keyRelease(SDL_KeyboardEvent);
 	private:
+		static std::string getHighscoreFile();
 		void blitScoreEntry(SDL_Surface*, int, std::string,
 	                        int, bool, int&);
 	

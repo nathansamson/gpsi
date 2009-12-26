@@ -5,6 +5,10 @@
 */
 
 #include <sstream>
+#include <iostream>
+#include <fstream>
+
+#include "zabbr/resources/resourcemanager.h"
 
 #include "highscorepanel.h"
 
@@ -16,7 +20,7 @@ namespace SISDL {
 	 * @param score The score of the user
 	*/
 	HighscorePanel::HighscorePanel(Zabbr::SDLWindow* window, int score): Zabbr::VSDLPanel(window),
-		     fHighscores(".gpsi.high", 50), fScore(score),
+		     fHighscores(HighscorePanel::getHighscoreFile(), 50), fScore(score),
 		     fEnterHighscore(fHighscores.isHighscore(score)) {	
 		fFont = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 18);
 		
@@ -71,7 +75,7 @@ namespace SISDL {
 				fEnterHighscore = false;
 				SI::Highscores::UpdatedHighscoreList hiList = fHighscores.setHighscore(fNameInputWidget->getValue(), fScore, 3, 8);
 				delete fNameInputWidget;
-				fHighscores.save(".gpsi.high");
+				fHighscores.save(HighscorePanel::getHighscoreFile());
 			
 				highscoreListSurface = SDL_CreateRGBSurface(SDL_SWSURFACE | SDL_SRCALPHA, fWindow->getXResolution() - 240, fWindow->getYResolution() - 100, 32, 0, 0, 0, 0);
 
@@ -137,5 +141,55 @@ namespace SISDL {
 		SDL_BlitSurface(entryStringRes->getSurface(), 0, surface, &dst);
 		y += entryStringRes->getHeight();
 		Zabbr::ResourceManager::manager().free(entryStringRes);
+	}
+	
+	/**
+	 * Get the location of the higscore file.
+	 * If the file does not exist write a default highscore file from data/ directory to the file.
+	 *
+	 * @return the location of the higscore file.
+	*/
+	std::string HighscorePanel::getHighscoreFile() {
+		char* pFilePath = getenv("XDG_DATA_DIR");
+		std::string fileName = "GPSI.high";
+		std::string filePath;
+		if (pFilePath == 0) {
+			pFilePath = getenv("HOME");
+			if (pFilePath == 0) {
+				pFilePath = getenv("USERPROFILE");
+				if (pFilePath == 0) {
+					fileName = ".GPSI.high";
+					filePath = "."; // Current Working directory...
+				} else {
+					filePath = pFilePath;
+					filePath += "/.local/share";
+				}
+			} else {
+				filePath = pFilePath;
+				filePath += "/.local/share";
+			}
+		} else {
+			filePath = pFilePath;
+		}
+		
+		FILE* pFile = fopen((filePath+"/"+fileName).c_str(), "r");
+		if (pFile == 0) {
+			// Copy data file to filePath
+			
+			std::ifstream is;
+			std::ofstream os;
+			std::filebuf* fb;
+			
+			is.open((Zabbr::ResourceManager::fgDataPath+"/default.high").c_str(), std::ios_base::in);
+			fb = os.rdbuf();
+			fb->open ((filePath+"/"+fileName).c_str(), std::ios_base::out);
+			is >> fb;
+			
+			fb->close();
+			is.close();
+		} else {
+			fclose(pFile);
+		}
+		return filePath+"/"+fileName;
 	}
 }
