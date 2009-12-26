@@ -22,10 +22,10 @@ namespace SISDL {
 		virtual ~HighscorePanel();
 
 		virtual void draw();
-		virtual void keyRelease(SDL_KeyboardEvent evnt);
+		virtual void keyRelease(SDL_KeyboardEvent);
 	private:
-		void blitScoreEntry(SDL_Surface* surface, int position,
-	                        SI::Highscores::ScoreEntry entry, int& y);
+		void blitScoreEntry(SDL_Surface*, int, std::string,
+	                        int, bool, int&);
 	
 		/**
 		 * The highscore list 

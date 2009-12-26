@@ -33,7 +33,7 @@ namespace SISDL {
 
 			int y = 0;
 			for(SI::Highscores::HighscoreList::iterator it = hiList.begin(); it != hiList.end(); it++) {
-				blitScoreEntry(highscoreListSurface, (*it).first, (*it).second, y);
+				blitScoreEntry(highscoreListSurface, (*it).first, (*it).second.first, (*it).second.second, false, y);
 			}
 			Zabbr::ResourceManager::manager().free(fFont);
 		}
@@ -69,15 +69,15 @@ namespace SISDL {
 			fNameInputWidget->keyRelease(evnt);
 			if (evnt.keysym.sym == SDLK_ESCAPE || evnt.keysym.sym == SDLK_RETURN) {
 				fEnterHighscore = false;
-				SI::Highscores::HighscoreList hiList = fHighscores.setHighscore(fNameInputWidget->getValue(), fScore, 3, 8);
+				SI::Highscores::UpdatedHighscoreList hiList = fHighscores.setHighscore(fNameInputWidget->getValue(), fScore, 3, 8);
 				delete fNameInputWidget;
 				fHighscores.save(".gpsi.high");
 			
 				highscoreListSurface = SDL_CreateRGBSurface(SDL_SWSURFACE | SDL_SRCALPHA, fWindow->getXResolution() - 240, fWindow->getYResolution() - 100, 32, 0, 0, 0, 0);
 
 				int y = 0;
-				for(SI::Highscores::HighscoreList::iterator it = hiList.begin(); it != hiList.end(); it++) {
-					blitScoreEntry(highscoreListSurface, (*it).first, (*it).second, y);
+				for(SI::Highscores::UpdatedHighscoreList::iterator it = hiList.begin(); it != hiList.end(); it++) {
+					blitScoreEntry(highscoreListSurface, (*it).first, (*it).second.getName(), (*it).second.getScore(), (*it).second.isUpdated(), y);
 				}
 				Zabbr::ResourceManager::manager().free(fFont);
 			}
@@ -98,17 +98,28 @@ namespace SISDL {
 	*/
 	void HighscorePanel::blitScoreEntry(SDL_Surface* surface,
 	                                         int position,
-	                                         SI::Highscores::ScoreEntry entry,
+	                                         std::string name,
+	                                         int score, bool updated,
 	                                         int& y) {
-		SDL_Color white = {255, 255, 255};
+		SDL_Color color;
+		if (!updated) {
+			color.r = 255;
+			color.g = 255;
+			color.b = 255;
+		} else {
+			color.r = 0;
+			color.g = 255;
+			color.b = 0;
+		}
+			
 		std::string entryString;
 		std::stringstream ss;
 		ss << position;
 		ss >> entryString;
-		entryString += ") " + entry.first;
+		entryString += ") " + name;
 	
 		Zabbr::StringFontResource* entryStringRes;
-		entryStringRes = Zabbr::ResourceManager::manager().string(entryString, fFont, white);
+		entryStringRes = Zabbr::ResourceManager::manager().string(entryString, fFont, color);
 		SDL_Rect dst;
 		dst.x = 0;
 		dst.y = y;
@@ -117,10 +128,10 @@ namespace SISDL {
 	
 		ss.clear();
 		
-		ss << entry.second;
+		ss << score;
 		ss >> entryString;
 	
-		entryStringRes = Zabbr::ResourceManager::manager().string(entryString, fFont, white);
+		entryStringRes = Zabbr::ResourceManager::manager().string(entryString, fFont, color);
 		dst.x = surface->w - entryStringRes->getWidth();
 		dst.y = y;
 		SDL_BlitSurface(entryStringRes->getSurface(), 0, surface, &dst);
