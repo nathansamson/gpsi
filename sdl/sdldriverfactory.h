@@ -18,7 +18,7 @@ namespace SISDL {
 	public:
 		virtual SI::VShipDriver* createUserDriver();
 		SDLInputDriver* getUserDriver();
-	private:
+	protected:
 		/**
 		 * The current user driver.
 		*/

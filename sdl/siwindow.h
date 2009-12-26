@@ -20,6 +20,7 @@ namespace SISDL {
 	class SIWindow : public  SDLWindow {
 	public:
 		void run(bool);
+		void rundemo();
 
 		void onQuitButtonClicked(SDL_MouseButtonEvent);
 		void onRequestQuitMainMenu();
