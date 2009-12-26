@@ -1,6 +1,12 @@
 #ifndef INC_SHIPDRIVER_H
 #define INC_SHIPDRIVER_H
 
+/** \file
+ * File for the ship driver.
+ *
+ * @author Nathan Samson
+*/
+
 #include "misc/vector2.h"
 
 namespace SI {

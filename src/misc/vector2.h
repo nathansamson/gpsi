@@ -1,6 +1,12 @@
 #ifndef INC_VECTOR2_H
 #define INC_VECTOR2_H
 
+/** \file
+ * File for the vector.
+ *
+ * @author Nathan Samson
+*/
+
 #include <iostream>
 
 namespace SI {

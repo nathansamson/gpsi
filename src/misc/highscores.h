@@ -1,6 +1,12 @@
 #ifndef INC_HIGSCORES_H
 #define INC_HIGHSCORES_H
 
+/** \file
+ * File for the highscores.
+ *
+ * @author Nathan Samson
+*/
+
 #include <string>
 #include <vector>
 #include <map>

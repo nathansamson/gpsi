@@ -1,6 +1,12 @@
 #ifndef INC_SYNCHRONOUSDRIVER_H
 #define INC_SYNCHRONOUSDRIVER_H
 
+/** \file
+ * File for the synchronous driver.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/shipdriver.h"
 
 namespace SI {

@@ -1,6 +1,12 @@
 #ifndef INC_CLUSTERBOMBCANNON_H
 #define INC_CLUSTERBOMBCANNON_H
 
+/** \file
+ * File for the cluster bomb cannon.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/weapons/weapon.h"
 #include "game/clusterbomb.h"
 

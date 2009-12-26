@@ -1,3 +1,9 @@
+/** \file
+ * File for the ship.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/ship.h"
 #include "game/gameentityfactory.h"
 #include "misc/boundingbox.h"

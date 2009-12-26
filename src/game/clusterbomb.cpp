@@ -1,3 +1,9 @@
+/** \file
+ * File for the cluserbomb.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/clusterbomb.h"
 #include "game/gameentityfactory.h"
 

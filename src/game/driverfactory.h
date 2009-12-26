@@ -1,6 +1,12 @@
 #ifndef INC_DRIVERFACTORY_H
 #define INC_DRIVERFACTORY_H
 
+/** \file
+ * File for the driver factory.
+ *
+ * @author Nathan Samson
+*/
+
 #include <map>
 #include "game/shipdriver.h"
 

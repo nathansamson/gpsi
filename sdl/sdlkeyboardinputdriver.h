@@ -1,6 +1,12 @@
 #ifndef INC_SDLKEYBOARDINPUTDRIVER_H
 #define INC_SDLKEYBOARDINPUTDRIVER_H
 
+/** \file
+ * File for the SDL keyboard input driver.
+ *
+ * @author Nathan Samson
+*/
+
 #include "sdlinputdriver.h"
 
 namespace SISDL {

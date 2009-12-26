@@ -1,3 +1,9 @@
+/** \file
+ * File for the bounding shape.
+ *
+ * @author Nathan Samson
+*/
+
 #include "misc/boundingshape.h"
 
 namespace SI {

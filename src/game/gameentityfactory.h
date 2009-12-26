@@ -1,6 +1,12 @@
 #ifndef INC_GAMEENTITYFACTORY_H
 #define INC_GAMEENTITYFACTORY_H
 
+/** \file
+ * File for the entity factory.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/shipdriver.h"
 #include "game/ship.h"
 #include "game/bullet.h"

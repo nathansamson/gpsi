@@ -1,3 +1,9 @@
+/** \file
+ * File for the sdl ship.
+ *
+ * @author Nathan Samson
+*/
+
 #include "sdlship.h"
 
 #include "zabbr/resources/resourcemanager.h"

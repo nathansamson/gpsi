@@ -1,6 +1,12 @@
 #ifndef SDL_INPUTDRIVER_H
 #define SDL_INPUTDRIVER_H
 
+/** \file
+ * File for the SDL input driver.
+ *
+ * @author Nathan Samson
+*/
+
 #include "SDL.h"
 
 #include "src/game/shipdriver.h"

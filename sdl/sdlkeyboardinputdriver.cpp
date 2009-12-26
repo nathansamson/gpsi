@@ -1,3 +1,9 @@
+/** \file
+ * File for the SDL keyboard input driver.
+ *
+ * @author Nathan Samson
+*/
+
 #include <cmath>
 #include "sdlkeyboardinputdriver.h"
 

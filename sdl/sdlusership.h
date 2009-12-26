@@ -1,5 +1,14 @@
+#ifndef INC_SDLUSERSHIP_H
+#define INC_SDLUSERSHIP_H
+
 #include "sdlship.h"
 #include "zabbr/resources/resourcemanager.h"
+
+/** \file
+ * File for the SDL user ship.
+ *
+ * @author Nathan Samson
+*/
 
 namespace SISDL {
 	/**
@@ -26,3 +35,5 @@ namespace SISDL {
 		Zabbr::StringFontResource* fHealthText;
 	};
 }
+
+#endif // INC_SDLUSERSHIP_H

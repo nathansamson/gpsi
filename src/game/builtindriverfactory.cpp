@@ -1,3 +1,9 @@
+/** \file
+ * File for the builtin driver factory.
+ *
+ * @author Nathan Samson
+*/
+
 #include <cstdlib>
 
 #include "game/builtindriverfactory.h"

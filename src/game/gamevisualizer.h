@@ -1,6 +1,12 @@
 #ifndef INC_GAMEVISUALIZER_H
 #define INC_GAMEVISUALIZER_H
 
+/** \file
+ * File for the game visualizer.
+ *
+ * @author Nathan Samson
+*/
+
 #include <string>
 
 namespace SI {

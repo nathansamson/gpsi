@@ -1,6 +1,12 @@
 #ifndef INC_SDLCLUSTERBOMB_H
 #define INC_SDLCLUSTERBOMB_H
 
+/** \file
+ * File for the SDL cluster bomb.
+ *
+ * @author Nathan Samson
+*/
+
 #include "zabbr/sdlwindow.h"
 #include "zabbr/resources/imageresource.h"
 

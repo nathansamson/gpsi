@@ -1,3 +1,9 @@
+/** \file
+ * File for the game.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/game.h"
 #include "game/levelreader.h"
 #include "game/builtindriverfactory.h"

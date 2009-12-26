@@ -1,6 +1,12 @@
 #ifndef INC_AMMOTYPE_H
 #define INC_AMMOTYPE_H
 
+/** \file
+ * File for the ammunition type.
+ *
+ * @author Nathan Samson
+*/
+
 #include "misc/boundingshape.h"
 
 namespace SI {

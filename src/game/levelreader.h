@@ -1,6 +1,12 @@
 #ifndef INC_LEVELREADER_H
 #define INC_LEVELREADER_H
 
+/** \file
+ * File for the levelreader.
+ *
+ * @author Nathan Samson
+*/
+
 #include <string>
 #include <map>
 #include <vector>

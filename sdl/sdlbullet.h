@@ -1,6 +1,12 @@
 #ifndef INC_SDLBULLET_H
 #define INC_SDLBULLET_H
 
+/** \file
+ * File for the SDL bullets.
+ *
+ * @author Nathan Samson
+*/
+
 #include "zabbr/sdlwindow.h"
 #include "zabbr/resources/imageresource.h"
 #include "src/game/bullet.h"

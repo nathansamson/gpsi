@@ -1,6 +1,12 @@
 #ifndef INC_CLUSTERBOMB_H
 #define INC_CLUSTERBOMB_H
 
+/** \file
+ * File for the cluster bomb.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/ammotype.h"
 #include "game/bullet.h"
 #include "game/projectile.h"

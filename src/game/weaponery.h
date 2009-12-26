@@ -1,6 +1,12 @@
 #ifndef INC_WEAPONERY_H
 #define INC_WEAPONERY_H
 
+/** \file
+ * File for the weaponery (weapon depot).
+ *
+ * @author Nathan Samson
+*/
+
 #include <map>
 
 #include "game/weapons/weapon.h"

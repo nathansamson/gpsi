@@ -1,3 +1,9 @@
+/** \file
+ * File for the game panel.
+ *
+ * @author Nathan Samson
+*/
+
 #include <sstream>
 
 #include "zabbr/widgets/button.h"

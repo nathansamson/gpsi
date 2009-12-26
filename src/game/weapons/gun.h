@@ -1,6 +1,12 @@
 #ifndef INC_GUN_H
 #define INC_GUN_H
 
+/** \file
+ * File for the gun.
+ *
+ * @author Nathan Samson
+*/
+
 #include "misc/vector2.h"
 #include "game/weapons/weapon.h"
 #include "game/bullet.h"

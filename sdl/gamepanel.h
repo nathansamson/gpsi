@@ -1,6 +1,12 @@
 #ifndef INC_GAMEPANEL_H
 #define INC_GAMEPANEL_H
 
+/** \file
+ * File for the SDL game panel.
+ *
+ * @author Nathan Samson
+*/
+
 #include "zabbr/panels/sdlpanel.h"
 #include "zabbr/panels/menupanel.h"
 #include "zabbr/misc/stopwatch.h"

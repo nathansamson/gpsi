@@ -1,6 +1,12 @@
 #ifndef INC_GAME_H
 #define INC_GAME_H
 
+/** \file
+ * File for the game.
+ *
+ * @author Nathan Samson
+*/
+
 #include <list>
 #include <string>
 

@@ -1,6 +1,12 @@
 #ifndef INC_ENTITYGROUP_H
 #define INC_ENTITYGROUP_H
 
+/** \file
+ * File for the entity group.
+ *
+ * @author Nathan Samson
+*/
+
 #include <string>
 
 namespace SI {

@@ -1,6 +1,12 @@
 #ifndef INC_PROJECTILE_H
 #define INC_PROJECTILE_H
 
+/** \file
+ * File for the projectile.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/gameentity.h"
 
 namespace SI {

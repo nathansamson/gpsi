@@ -1,3 +1,9 @@
+/** \file
+ * File for the weaponery (weapon depot).
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/weaponery.h"
 
 namespace SI {
