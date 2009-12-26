@@ -14,6 +14,7 @@
 #include "zabbr/widgets/button.h"
 #include "zabbr/widgets/label.h"
 #include "zabbr/resources/resourcemanager.h"
+#include "zabbr/misc/fontprefetcher.h"
 #include "normalgamepanel.h"
 #include "demogamepanel.h"
 #include "siwindow.h"
@@ -60,6 +61,18 @@ namespace SISDL {
 		try {
 			if (!game) {
 				MenuPanel* menu = new MenuPanel(this);
+				SplashPanel* splash = new SplashPanel(this, "splash.png", menu);
+				FontPrefetcher* fontPrefetcher = new FontPrefetcher("Loading fonts...");
+				fontPrefetcher->addFontSize(18);
+				fontPrefetcher->addFontSize(24);
+				fontPrefetcher->addFontSize(28);
+				fontPrefetcher->addFontSize(34);
+				fontPrefetcher->addFont("DejaVuSans-Bold.ttf");
+				fontPrefetcher->addFont("fonts/Blackout-Midnight.ttf");
+				fontPrefetcher->addFont("fonts/orbitron-black.ttf");
+				splash->addPrefetcher(fontPrefetcher);
+				
+				
 				SDL_Color c = {255, 255, 255};
 				menu->addWidget(new Label(this, "/Space/ Invaders", c, "fonts/orbitron-black.ttf", 64));
 			
@@ -75,8 +88,7 @@ namespace SISDL {
 			
 				menu->connectRequestQuit(new ClassCallback0<SIWindow>(this, &SIWindow::onRequestQuitMainMenu));
 	
-				VSDLPanel* controller = new SplashPanel(this, "splash.png", menu);
-				SDLWindow::run(controller);
+				SDLWindow::run(splash);
 			} else {
 				SDLWindow::run(new NormalGamePanel(this));
 			}
