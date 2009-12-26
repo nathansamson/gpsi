@@ -12,6 +12,8 @@ add_executable (sisdl
                   ./main.cpp
                   ./siwindow.cpp
                   ./gamepanel.cpp
+                  ./normalgamepanel.cpp
+                  ./demogamepanel.cpp
                   ./highscorepanel.cpp
                   ./sdlbullet.cpp
                   ./sdlclusterbomb.cpp

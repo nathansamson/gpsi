@@ -29,25 +29,18 @@ namespace SISDL {
 	
 		virtual void draw();
 		virtual void keyPress(SDL_KeyboardEvent);
-		virtual void keyRelease(SDL_KeyboardEvent);
+	protected:
+		void startGame(SI::IDriverFactory*);
 		
-		void onRequestQuitGame();
-		void onResumeGame(SDL_MouseButtonEvent);
-		void onQuitGame(SDL_MouseButtonEvent);
-		void onCloseGame(SDL_MouseButtonEvent);
-	private:
-		void startGame();
-	
+		void close();
+		void pause();
+		void resume();
+		
 		/**
 		 * The game
 		*/
 		SI::Game* fGame;
-		
-		/**
-		 * The input driver for the user.
-		*/
-		SDLInputDriver* fInputDriver;
-		
+	private:		
 		/**
 		 * The timer.
 		*/
@@ -59,34 +52,14 @@ namespace SISDL {
 		double fTimeRemainder;
 		
 		/**
-		 * The quit confirmation dialog.
-		*/
-		Zabbr::MenuPanel* fQuitConfirmation;
-		
-		/**
-		 * Flag to see if we should close.
-		*/
-		bool fClosed;
-		
-		/**
 		 * The game visualizer.
 		*/
 		SDLGameVisualizer* fGameVisualizer;
 		
 		/**
-		 * The driver factory.
+		 * Flag to see if we should close.
 		*/
-		SDLDriverFactory* fDriverFactory;
-		
-		/**
-		 * The font.
-		*/
-		Zabbr::FontResource* fFont;
-		
-		/**
-		 * The text of the score.
-		*/
-		Zabbr::StringFontResource* fScoreText;
+		bool fClosed;
 	};
 }
 

@@ -14,10 +14,33 @@
 #include "zabbr/widgets/button.h"
 #include "zabbr/widgets/label.h"
 #include "zabbr/resources/resourcemanager.h"
-#include "gamepanel.h"
+#include "normalgamepanel.h"
+#include "demogamepanel.h"
 #include "siwindow.h"
 
 namespace SISDL {
+
+	/**
+	 * Run the space invaders window in demo mode.
+	*/
+	
+	void SIWindow::rundemo() {
+		try {
+			open(640, 480, false);
+		} catch (SDLInitializationException e) {
+			std::cerr << "Could not initialize SDL: " << e.getError() << std::endl;
+			return;
+		}
+		
+		setDataPath();
+
+		try {
+			SDLWindow::run(new DemoGamePanel(this));
+		} catch (ResourceNotLoadedException& e) {
+			std::cerr << "Could not load resource " << e.getResourceID() << " :" << e.getError() << std::endl;
+		}
+		close();
+	}
 	
 	/**
 	 * Run the Space Invaders window.
@@ -55,7 +78,7 @@ namespace SISDL {
 				VSDLPanel* controller = new SplashPanel(this, "splash.png", menu);
 				SDLWindow::run(controller);
 			} else {
-				SDLWindow::run(new GamePanel(this));
+				SDLWindow::run(new NormalGamePanel(this));
 			}
 		} catch (ResourceNotLoadedException& e) {
 			std::cerr << "Could not load resource " << e.getResourceID() << " :" << e.getError() << std::endl;
@@ -103,9 +126,7 @@ namespace SISDL {
 	 * Callback to start the game.
 	*/
 	void SIWindow::startGame(SDL_MouseButtonEvent e) {
-		GamePanel* gamePanel = new GamePanel(this);
-		
-		fPanel->openPanel(gamePanel);
+		fPanel->openPanel(new NormalGamePanel(this));
 	}
 
 	/**
