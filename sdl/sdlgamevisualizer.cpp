@@ -1,3 +1,9 @@
+/** \file
+ * File for the SDL game visualizer.
+ *
+ * @author Nathan Samson
+*/
+
 #include "sdl/sdlgamevisualizer.h"
 
 #include <iostream>

@@ -1,6 +1,12 @@
 #ifndef INC_BULLET_H
 #define INC_BULLET_H
 
+/** \file
+ * File for the bullet.
+ *
+ * @author Nathan Samson
+*/
+
 #include "misc/vector2.h"
 #include "game/ammotype.h"
 #include "game/projectile.h"

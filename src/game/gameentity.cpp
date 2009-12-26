@@ -1,3 +1,9 @@
+/** \file
+ * File for the game entity.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/gameentity.h"
 #include "misc/boundingbox.h"
 

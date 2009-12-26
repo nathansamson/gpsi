@@ -1,3 +1,9 @@
+/** \file
+ * File for the SDL bullet.
+ *
+ * @author Nathan Samson
+*/
+
 #include "zabbr/resources/resourcemanager.h"
 #include "src/misc/boundingbox.h"
 

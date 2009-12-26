@@ -1,3 +1,9 @@
+/** \file
+ * File for the SDL user ship.
+ *
+ * @author Nathan Samson
+*/
+
 #include <sstream>
 #include "sdlusership.h"
 

@@ -1,3 +1,9 @@
+/** \file
+ * File for the bullet.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/bullet.h"
 
 namespace SI {

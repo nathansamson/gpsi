@@ -1,3 +1,9 @@
+/** \file
+ * File for the level reader.
+ *
+ * @author Nathan Samson
+*/
+
 #include <map>
 
 #include "game/levelreader.h"

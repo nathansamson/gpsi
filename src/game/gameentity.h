@@ -1,6 +1,12 @@
 #ifndef INC_GAMEENTITY_H
 #define INC_GAMEENTITY_H
 
+/** \file
+ * File for the game entity.
+ *
+ * @author Nathan Samson
+*/
+
 #include <vector>
 
 #include "misc/vector2.h"

@@ -1,3 +1,9 @@
+/** \file
+ * File for the highscores.
+ *
+ * @author Nathan Samson
+*/
+
 #include <algorithm>
 
 #include "tinyxml/ticpp.h"

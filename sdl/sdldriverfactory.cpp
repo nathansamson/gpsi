@@ -1,5 +1,10 @@
-#include "sdldriverfactory.h"
+/** \file
+ * File for the sdl driver factory.
+ *
+ * @author Nathan Samson
+*/
 
+#include "sdldriverfactory.h"
 
 namespace SISDL {
 	/**

@@ -1,3 +1,9 @@
+/** \file
+ * File for the gun.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/weapons/gun.h"
 #include "game/gameentity.h"
 #include "game/gameentityfactory.h"

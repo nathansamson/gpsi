@@ -1,3 +1,9 @@
+/** \file
+ * File for the cluster bomb.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/gameentity.h"
 #include "game/gameentityfactory.h"
 #include "game/weapons/clusterbombcannon.h"

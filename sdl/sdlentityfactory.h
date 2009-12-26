@@ -1,5 +1,14 @@
+#ifndef INC_SDLENTITYFACTORY_H
+#define INC_SDLENTITYFACTORY_H
+
 #include "src/game/gameentityfactory.h"
 #include "zabbr/sdlwindow.h"
+
+/** \file
+ * File for the SDL entity factory.
+ *
+ * @author Nathan Samson
+*/
 
 namespace SISDL {
 	/**
@@ -19,3 +28,5 @@ namespace SISDL {
 		Zabbr::SDLWindow* fWindow;
 	};
 }
+
+#endif // INC_SDLENTITYFACTORY_H

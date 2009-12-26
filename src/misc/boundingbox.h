@@ -1,6 +1,12 @@
 #ifndef INC_BOUNDINGBOX_H
 #define INC_BOUNDINGBOX_H
 
+/** \file
+ * File for the bounding boxes.
+ *
+ * @author Nathan Samson
+*/
+
 #include "misc/boundingshape.h"
 
 namespace SI {

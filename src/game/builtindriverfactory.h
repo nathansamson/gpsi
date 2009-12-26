@@ -1,6 +1,12 @@
 #ifndef INC_BUILTIN_DRIVERFACTORY_H
 #define INC_BUILTIN_DRIVERFACTORY_H
 
+/** \file
+ * File for the builtin driver factory.
+ *
+ * @author Nathan Samson
+*/
+
 #include <string>
 
 #include "game/driverfactory.h"

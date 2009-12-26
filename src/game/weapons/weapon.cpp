@@ -1,3 +1,9 @@
+/** \file
+ * File for the weapon.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/weapons/weapon.h"
 
 namespace SI {

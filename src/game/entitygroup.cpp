@@ -1,3 +1,9 @@
+/** \file
+ * File for the entity group.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/entitygroup.h"
 
 namespace SI {

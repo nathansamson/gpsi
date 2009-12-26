@@ -1,6 +1,12 @@
 #ifndef INC_HIGHSCORE_PANEL
 #define INC_HIGHSCORE_PANEL
 
+/** \file
+ * File for the highscore panel.
+ *
+ * @author Nathan Samson
+*/
+
 #include "zabbr/panels/sdlpanel.h"
 #include "zabbr/widgets/textinput.h"
 

@@ -1,6 +1,12 @@
 #ifndef INC_BOUNDINGSHAPE_H
 #define INC_BOUNDINGSHAPE_H
 
+/** \file
+ * File for the bounding shape.
+ *
+ * @author Nathan Samson
+*/
+
 #include "misc/vector2.h"
 
 namespace SI {

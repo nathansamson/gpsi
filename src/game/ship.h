@@ -1,6 +1,12 @@
 #ifndef INC_SHIP_H
 #define INC_SHIP_H
 
+/** \file
+ * File for the ship.
+ *
+ * @author Nathan Samson
+*/
+
 #include <vector>
 
 #include "misc/vector2.h"

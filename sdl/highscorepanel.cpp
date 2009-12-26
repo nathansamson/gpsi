@@ -1,3 +1,9 @@
+/** \file
+ * File for the highscore panel.
+ *
+ * @author Nathan Samson
+*/
+
 #include <sstream>
 
 #include "highscorepanel.h"
@@ -110,6 +116,7 @@ namespace SISDL {
 		Zabbr::ResourceManager::manager().free(entryStringRes);
 	
 		ss.clear();
+		
 		ss << entry.second;
 		ss >> entryString;
 	

@@ -1,3 +1,9 @@
+/** \file
+ * File for the SDL entity factory.
+ *
+ * @author Nathan Samson
+*/
+
 #include "sdlentityfactory.h"
 #include "sdlship.h"
 #include "sdlusership.h"

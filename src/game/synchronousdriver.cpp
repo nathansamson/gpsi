@@ -1,3 +1,9 @@
+/** \file
+ * File for the synchronous driver.
+ *
+ * @author Nathan Samson
+*/
+
 #include <cmath>
 #include <cstdlib>
 

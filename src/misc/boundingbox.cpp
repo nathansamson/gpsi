@@ -1,3 +1,9 @@
+/** \file
+ * File for the bounding box.
+ *
+ * @author Nathan Samson
+*/
+
 #include <typeinfo>
 #include "misc/boundingbox.h"
 

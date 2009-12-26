@@ -1,6 +1,12 @@
 #ifndef INC_SDLSHIP_H
 #define INC_SDLSHIP_H
 
+/** \file
+ * File for the SDL ship.
+ *
+ * @author Nathan Samson
+*/
+
 #include "src/game/ship.h"
 #include "zabbr/resources/imageresource.h"
 #include "zabbr/sdlwindow.h"

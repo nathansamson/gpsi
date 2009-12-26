@@ -1,3 +1,9 @@
+/** \file
+ * File for the SDL cluster bomb.
+ *
+ * @author Nathan Samson
+*/
+
 #include "zabbr/resources/resourcemanager.h"
 #include "sdl/sdlclusterbomb.h"
 #include "src/misc/boundingbox.h"

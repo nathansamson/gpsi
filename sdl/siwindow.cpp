@@ -1,3 +1,9 @@
+/** \file
+ * File for the SI window.
+ *
+ * @author Nathan Samson
+*/
+
 #include <iostream>
 #include "SDL.h"
 

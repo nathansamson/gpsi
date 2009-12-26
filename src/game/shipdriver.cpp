@@ -1,3 +1,9 @@
+/** \file
+ * File for the ship driver.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/ship.h"
 #include "game/shipdriver.h"
 

@@ -1,6 +1,12 @@
 #ifndef INC_WEAPON_H
 #define INC_WEAPON_H
 
+/** \file
+ * File for the weapon.
+ *
+ * @author Nathan Samson
+*/
+
 #include "game/gameentity.h"
 
 namespace SI {

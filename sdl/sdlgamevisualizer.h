@@ -1,10 +1,16 @@
 #ifndef INC_SDLGAMEVISUALIZER_H
 #define INC_SDLGAMEVISUALIZER_H
 
+/** \file
+ * File for the SDL entity factory.
+ *
+ * @author Nathan Samson
+*/
+
 #include "zabbr/sdlwindow.h"
+#include "zabbr/resources/resourcemanager.h"
 
 #include "src/game/gamevisualizer.h"
-#include "resources/resourcemanager.h"
 
 namespace SISDL {
 	/**

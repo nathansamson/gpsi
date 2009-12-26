@@ -1,6 +1,12 @@
 #ifndef INC_SIWINDOW_H
 #define INC_SIWINDOW_H
 
+/** \file
+ * File for the SI window.
+ *
+ * @author Nathan Samson
+*/
+
 #include "zabbr/sdlwindow.h"
 #include "zabbr/events/callbacks.h"
 
