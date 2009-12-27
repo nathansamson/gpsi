@@ -3,7 +3,6 @@
  *
  * @author Nathan Samson
 */
-
 #include "sdlship.h"
 
 #include "zabbr/resources/resourcemanager.h"
@@ -31,7 +30,7 @@ namespace SISDL {
 	         fBoundingBox(SI::BoundingBoxDescription(*dynamic_cast<SI::BoundingBoxDescription*>(t.fBoundingShapeDesc))) {
 	    int width = fBoundingBox.getWidth() / 8.0 * fWindow->getXResolution();
 	    int height = fBoundingBox.getHeight() / 6.0 * fWindow->getYResolution();
-		fImage = Zabbr::ResourceManager::manager().image(t.fName+".png", width, height, true, dir);
+		fImage = Zabbr::ResourceManager::manager().image(t.fName+".png", width, height, false, dir);
 		fCbID = fWindow->connectOnScreenSizeChanged(new Zabbr::ClassCallback3<SDLShip, Zabbr::SDLWindow*, int, int>(this, &SDLShip::onScreenSizeChanged));
 	}
 	
@@ -87,11 +86,17 @@ namespace SISDL {
 	 * @param y The y screen-coordinate
 	*/
 	void SDLShip::positionToWindowCoords(int& x, int& y) {
-		SI::Vector2 p ((getPosition() + SI::Vector2(4.0, -3.0)) * (fWindow->getXResolution()/8));
-		p -= SI::Vector2(fImage->getWidth() / 2, - fImage->getHeight() / 2);
+		double tX = getPosition().getX();
+		double tY = getPosition().getY();
+		tX += 4;
+		tY = 3 - tY;
+		tX *= fWindow->getXResolution() / 8.0;
+		tY *= fWindow->getYResolution() / 6.0;
 		
-		x = p.getX();
-		y = -p.getY();
+		tX -= fImage->getWidth() / 2;
+		tY -= fImage->getHeight() / 2;
+		x = tX;
+		y = tY;
 	}
 
 	/**
@@ -105,6 +110,6 @@ namespace SISDL {
 		Zabbr::ResourceManager::manager().free(fImage);
 		int width = fBoundingBox.getWidth() / 8.0 * x;
 	    int height = fBoundingBox.getHeight() / 6.0 * y;
-		fImage = Zabbr::ResourceManager::manager().image(fShipType.fName+".png", width, height, true, getDirection());
+		fImage = Zabbr::ResourceManager::manager().image(fShipType.fName+".png", width, height, false, getDirection());
 	}
 }
