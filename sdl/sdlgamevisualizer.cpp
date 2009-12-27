@@ -17,7 +17,7 @@ namespace SISDL {
 	SDLGameVisualizer::SDLGameVisualizer(Zabbr::SDLWindow* window):
 	    fWindow(window), fInNonGamePhase(false) {
 	    SDL_Color white = {255, 255, 255};
-	    fStatusLabel = new Zabbr::Label(fWindow, "", white, "DejaVuSans-Bold.ttf", 32);
+	    fStatusLabel = new Zabbr::Label(fWindow, "", white, Zabbr::FONTSIZE_BIG);
 	}
 	
 	SDLGameVisualizer::~SDLGameVisualizer() {

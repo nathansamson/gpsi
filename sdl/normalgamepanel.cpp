@@ -28,7 +28,7 @@ namespace SISDL {
 		connectRequestQuit(new Zabbr::ClassCallback0<NormalGamePanel>(this, &NormalGamePanel::onRequestQuitGame));
 		
 		SDL_Color white = {255, 255, 255};
-		fScoreLabel = new Zabbr::Label(fWindow, "", white, "DejaVuSans-Bold.ttf", 18);
+		fScoreLabel = new Zabbr::Label(fWindow, "", white, Zabbr::FONTSIZE_SMALL);
 	}
 	
 	NormalGamePanel::~NormalGamePanel() {
