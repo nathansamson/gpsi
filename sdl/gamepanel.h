@@ -8,7 +8,6 @@
 */
 
 #include "zabbr/panels/sdlpanel.h"
-#include "zabbr/panels/menupanel.h"
 #include "zabbr/misc/stopwatch.h"
 #include "src/game/game.h"
 #include "zabbr/resources/resourcemanager.h"
