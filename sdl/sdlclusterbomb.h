@@ -20,6 +20,7 @@ namespace SISDL {
 	public:
 		SDLClusterBomb(SI::Vector2, int, SI::EntityGroup*, SI::ClusterBombType*,
 		          SI::IGameEntityFactory*, Zabbr::SDLWindow*);
+		virtual ~SDLClusterBomb();
 	
 		virtual std::vector<VGameEntity*> update(int);
 		virtual void visualize();

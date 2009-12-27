@@ -30,6 +30,10 @@ namespace SISDL {
 		fImage = Zabbr::ResourceManager::manager().image("clusterbomb.png", width, height, true, dir);
 	}
 	
+	SDLClusterBomb::~SDLClusterBomb() {
+		Zabbr::ResourceManager::manager().free(fImage);
+	}
+	
 	/**
 	 * Draws the cluster bomb.
 	*/
