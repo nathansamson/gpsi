@@ -29,7 +29,8 @@ namespace SISDL {
 	*/
 	void SDLGameVisualizer::draw() {
 		if (fInNonGamePhase) {
-			fStatusLabel->draw(0, 0);
+			fStatusLabel->draw((fWindow->getXResolution() - fStatusLabel->getWidth()) / 2,
+			                   (fWindow->getYResolution() - fStatusLabel->getHeight()) / 2);
 		}
 	}
 	

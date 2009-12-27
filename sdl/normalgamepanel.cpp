@@ -41,12 +41,14 @@ namespace SISDL {
 	void NormalGamePanel::draw() {
 		GamePanel::draw();
 		
-		std::stringstream ssScoreText;
-		ssScoreText << fGame->getUserScore();
-		std::string scoreText;
-		ssScoreText >> scoreText;
-		fScoreLabel->setLabel(scoreText);
-		fScoreLabel->draw(10, 10);
+		if (!fGameVisualizer->inNonGamePhase()) {
+			std::stringstream ssScoreText;
+			ssScoreText << fGame->getUserScore();
+			std::string scoreText;
+			ssScoreText >> scoreText;
+			fScoreLabel->setLabel(scoreText);
+			fScoreLabel->draw(10, 10);
+		}
 	}
 	
 	/**

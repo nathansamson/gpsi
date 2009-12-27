@@ -7,8 +7,9 @@
  * @author Nathan Samson
 */
 
-#include "zabbr/panels/sdlpanel.h"
+#include "zabbr/panels/widgetpanel.h"
 #include "zabbr/widgets/textinput.h"
+#include "zabbr/widgets/vbox.h"
 
 #include "src/misc/highscores.h"
 
@@ -16,17 +17,17 @@ namespace SISDL {
 	/**
 	 * A panel to draw highscores and insert a new highscore
 	*/
-	class HighscorePanel: public Zabbr::VSDLPanel {
+	class HighscorePanel: public Zabbr::WidgetPanel {
 	public:
 		HighscorePanel(Zabbr::SDLWindow*, int);		
 		virtual ~HighscorePanel();
 
-		virtual void draw();
+		//virtual void draw();
 		virtual void keyRelease(SDL_KeyboardEvent);
 	private:
 		static std::string getHighscoreFile();
-		void blitScoreEntry(SDL_Surface*, int, std::string,
-	                        int, bool, int&);
+		void addScoreEntryToTable(Zabbr::VBox*, Zabbr::VBox*, Zabbr::VBox*,
+		                          int, std::string, int, bool);
 	
 		/**
 		 * The highscore list 
