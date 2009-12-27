@@ -24,6 +24,9 @@ namespace SISDL {
 	
 		virtual void visualize();
 	private:
+		/**
+		 * The label for the health of the user.
+		*/
 		Zabbr::Label* fLabelWidget;
 	};
 }

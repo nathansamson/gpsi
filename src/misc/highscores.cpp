@@ -9,6 +9,14 @@
 #include "tinyxml/ticpp.h"
 #include "misc/highscores.h"
 
+/**
+ * Compare 2 highscores.
+ *
+ * @param a The first highscore.
+ * @param b The second highscore.
+ *
+ * @return True if a > b.
+*/
 bool highscoreComp(std::pair<std::string, int> a,
                    std::pair<std::string, int> b) {
 	return a.second > b.second;

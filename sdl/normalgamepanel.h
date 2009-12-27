@@ -11,6 +11,9 @@
 #include "gamepanel.h"
 
 namespace SISDL {
+	/**
+	 * The game panel for normal play modus.
+	*/
 	class NormalGamePanel: public GamePanel {
 	public:
 		NormalGamePanel(Zabbr::SDLWindow* w);

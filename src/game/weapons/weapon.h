@@ -14,6 +14,9 @@ namespace SI {
 	class IGameEntityFactory;
 	class VWeapon;
 	
+	/**
+	 * Base class for weapon blueprints.
+	*/
 	class VWeaponBlueprint {
 	public:
 		VWeaponBlueprint(int, IGameEntityFactory*);
