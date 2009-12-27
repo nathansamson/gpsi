@@ -51,7 +51,7 @@ namespace SISDL {
 	*/
 	void SIWindow::run(bool game) {
 		try {
-			open(640, 480, false);
+			open(640, 480, false, true);
 		} catch (SDLInitializationException e) {
 			std::cerr << "Could not initialize SDL: " << e.getError() << std::endl;
 			return;
