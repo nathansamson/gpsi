@@ -88,20 +88,20 @@ namespace SISDL {
 	*/
 	void NormalGamePanel::onRequestQuitGame() {
 		pause();
-		/*fQuitConfirmation = new Zabbr::MenuPanel(fWindow);
+		fQuitConfirmation = new Zabbr::MenuPanel(fWindow, "Game Paused");
 		Zabbr::Button* b = new Zabbr::Button(fWindow, "Resume game");
 		b->connectOnMouseClick(new Zabbr::ClassCallback1<NormalGamePanel, SDL_MouseButtonEvent>(this, &NormalGamePanel::onResumeGame));
-		fQuitConfirmation->addWidget(b);
+		fQuitConfirmation->addButton(b);
 
 		b = new Zabbr::Button(fWindow, "Quit Game");
 		b->connectOnMouseClick(new Zabbr::ClassCallback1<NormalGamePanel, SDL_MouseButtonEvent>(this, &NormalGamePanel::onQuitGame));
-		fQuitConfirmation->addWidget(b);
+		fQuitConfirmation->addButton(b);
 		
 		b = new Zabbr::Button(fWindow, "Close game");
 		b->connectOnMouseClick(new Zabbr::ClassCallback1<NormalGamePanel, SDL_MouseButtonEvent>(this, &NormalGamePanel::onCloseGame));
-		fQuitConfirmation->addWidget(b);
+		fQuitConfirmation->addButton(b);
 
-		openPanel(fQuitConfirmation);*/
+		openPanel(fQuitConfirmation);
 	}
 	
 	/**
