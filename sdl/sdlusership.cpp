@@ -25,7 +25,7 @@ namespace SISDL {
 	                 SI::ShipType t, SI::IGameEntityFactory* fac,
 	                 SI::Weaponery* weaponery, Zabbr::SDLWindow* w): SDLShip(driver, v, dir, group, t, fac, weaponery, w) {
 		SDL_Color c = {0, 255, 0};
-		fLabelWidget = new Zabbr::Label(w, "", c, "DejaVuSans-Bold.ttf", 16);
+		fLabelWidget = new Zabbr::Label(w, "", c, Zabbr::FONTSIZE_SMALL);
 	}
 	
 	SDLUserShip::~SDLUserShip() {

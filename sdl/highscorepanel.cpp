@@ -32,7 +32,7 @@ namespace SISDL {
 			dynamic_cast<Zabbr::VBox*>(fTopLevel)->setYAlign(Zabbr::YALIGN_CENTER);
 		} else {
 			SDL_Color white = {255, 255, 255};
-			Zabbr::Label* titleLabel = new Zabbr::Label(fWindow, "Highscores", white, "DejaVuSans-Bold.ttf", 32);
+			Zabbr::Label* titleLabel = new Zabbr::Label(fWindow, "Highscores", white, Zabbr::FONTSIZE_MEDIUM);
 			dynamic_cast<Zabbr::VBox*>(fTopLevel)->appendWidget(titleLabel);
 			Zabbr::HBox* scoreHBox = new Zabbr::HBox(window, false, 5);
 			dynamic_cast<Zabbr::VBox*>(fTopLevel)->appendWidget(scoreHBox);
@@ -77,7 +77,7 @@ namespace SISDL {
 				fHighscores.save(HighscorePanel::getHighscoreFile());
 			
 				SDL_Color white = {255, 255, 255};
-				Zabbr::Label* titleLabel = new Zabbr::Label(fWindow, "Highscores", white, "DejaVuSans-Bold.ttf", 32);
+				Zabbr::Label* titleLabel = new Zabbr::Label(fWindow, "Highscores", white, Zabbr::FONTSIZE_MEDIUM);
 				dynamic_cast<Zabbr::VBox*>(fTopLevel)->appendWidget(titleLabel);
 				Zabbr::HBox* scoreHBox = new Zabbr::HBox(fWindow, false, 5);
 				dynamic_cast<Zabbr::VBox*>(fTopLevel)->appendWidget(scoreHBox);
@@ -135,17 +135,17 @@ namespace SISDL {
 		ss >> entryString;
 		entryString += ")";
 
-		Zabbr::Label* posLabel = new Zabbr::Label(fWindow, entryString, color, "DejaVuSans-Bold.ttf", 16);
+		Zabbr::Label* posLabel = new Zabbr::Label(fWindow, entryString, color, Zabbr::FONTSIZE_SMALL);
 		posBox->appendWidget(posLabel);
 		
-		Zabbr::Label* nameLabel = new Zabbr::Label(fWindow, name, color, "DejaVuSans-Bold.ttf", 16);
+		Zabbr::Label* nameLabel = new Zabbr::Label(fWindow, name, color, Zabbr::FONTSIZE_SMALL);
 		nameBox->appendWidget(nameLabel);
 		
 		ss.clear();
 		ss << score;
 		ss >> entryString;
 		
-		Zabbr::Label* scoreLabel = new Zabbr::Label(fWindow, entryString, color, "DejaVuSans-Bold.ttf", 16);
+		Zabbr::Label* scoreLabel = new Zabbr::Label(fWindow, entryString, color, Zabbr::FONTSIZE_SMALL);
 		scoreBox->appendWidget(scoreLabel);
 	}
 	
