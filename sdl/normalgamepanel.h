@@ -7,7 +7,7 @@
  * @author Nathan Samson
 */
 #include "zabbr/widgets/label.h"
-#include "zabbr/panels/widgetpanel.h"
+#include "zabbr/panels/menupanel.h"
 #include "gamepanel.h"
 
 namespace SISDL {
@@ -33,7 +33,7 @@ namespace SISDL {
 		/**
 		 * The quit confirmation dialog.
 		*/
-		Zabbr::WidgetPanel* fQuitConfirmation;
+		Zabbr::MenuPanel* fQuitConfirmation;
 		
 		/**
 		 * The driver factory.
