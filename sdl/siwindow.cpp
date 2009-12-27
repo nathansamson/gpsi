@@ -9,10 +9,11 @@
 
 #include "zabbr/sdlwindow.h"
 #include "zabbr/panels/splashpanel.h"
-#include "zabbr/panels/menupanel.h"
+#include "zabbr/panels/widgetpanel.h"
 #include "zabbr/panels/dialogpanel.h"
 #include "zabbr/widgets/button.h"
 #include "zabbr/widgets/label.h"
+#include "zabbr/widgets/vbox.h"
 #include "zabbr/resources/resourcemanager.h"
 #include "zabbr/misc/fontprefetcher.h"
 #include "normalgamepanel.h"
@@ -60,7 +61,8 @@ namespace SISDL {
 
 		try {
 			if (!game) {
-				MenuPanel* menu = new MenuPanel(this);
+				VBox* rootVBox = new VBox(this, false, 5);
+				WidgetPanel* menu = new WidgetPanel(this, rootVBox);
 				SplashPanel* splash = new SplashPanel(this, "splash.png", menu);
 				FontPrefetcher* fontPrefetcher = new FontPrefetcher("Loading fonts...");
 				fontPrefetcher->addFontSize(18);
@@ -74,17 +76,17 @@ namespace SISDL {
 				
 				
 				SDL_Color c = {255, 255, 255};
-				menu->addWidget(new Label(this, "/Space/ Invaders", c, "fonts/orbitron-black.ttf", 64));
+				rootVBox->appendWidget(new Label(this, "/Space/ Invaders", c, "fonts/orbitron-black.ttf", 64));
 			
 				Button* start = new Button(this, "Start game");
 				start->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::startGame));
-				menu->addWidget(start);
+				rootVBox->appendWidget(start);
 			
-				menu->addWidget(new Button(this, "Another button"));
+				rootVBox->appendWidget(new Button(this, "Another button"));
 			
 				Button* b = new Button(this, "Quit");
 				b->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::onQuitButtonClicked));
-				menu->addWidget(b);
+				rootVBox->appendWidget(b);
 			
 				menu->connectRequestQuit(new ClassCallback0<SIWindow>(this, &SIWindow::onRequestQuitMainMenu));
 	
