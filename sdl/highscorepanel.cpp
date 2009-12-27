@@ -9,7 +9,6 @@
 #include <fstream>
 
 #include "zabbr/resources/resourcemanager.h"
-
 #include "highscorepanel.h"
 
 namespace SISDL {
@@ -22,24 +21,24 @@ namespace SISDL {
 	HighscorePanel::HighscorePanel(Zabbr::SDLWindow* window, int score): Zabbr::VSDLPanel(window),
 		     fHighscores(HighscorePanel::getHighscoreFile(), 50), fScore(score),
 		     fEnterHighscore(fHighscores.isHighscore(score)) {	
-		fFont = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 18);
+		/*fFont = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 18);
 		
 		Zabbr::FontResource* titleFont = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 32);
 		SDL_Color white = {255, 255, 255};
 		fTitleString = Zabbr::ResourceManager::manager().string("Highscores", titleFont, white);
-		Zabbr::ResourceManager::manager().free(titleFont);
+		Zabbr::ResourceManager::manager().free(titleFont);*/
 		
 		if (fEnterHighscore) {
 			fNameInputWidget = new Zabbr::TextInputWidget(fWindow, "Nathan Samson");
 		} else {
-			SI::Highscores::HighscoreList hiList = fHighscores.getBestHighscores(15);
+			/*SI::Highscores::HighscoreList hiList = fHighscores.getBestHighscores(15);
 			highscoreListSurface = SDL_CreateRGBSurface(SDL_SWSURFACE | SDL_SRCALPHA, fWindow->getXResolution() - 240, fWindow->getYResolution() - 100, 32, 0, 0, 0, 0);
 
 			int y = 0;
 			for(SI::Highscores::HighscoreList::iterator it = hiList.begin(); it != hiList.end(); it++) {
 				blitScoreEntry(highscoreListSurface, (*it).first, (*it).second.first, (*it).second.second, false, y);
 			}
-			Zabbr::ResourceManager::manager().free(fFont);
+			Zabbr::ResourceManager::manager().free(fFont);*/
 		}
 	}
 
@@ -47,8 +46,6 @@ namespace SISDL {
 	 * destructor.
 	*/
 	HighscorePanel::~HighscorePanel() {
-		Zabbr::ResourceManager::manager().free(fTitleString);
-		SDL_FreeSurface(highscoreListSurface);
 	}
 
 	/**
@@ -58,8 +55,8 @@ namespace SISDL {
 		if (fEnterHighscore) {
 			fNameInputWidget->draw(fWindow->getXResolution() / 2, fWindow->getYResolution() / 2 - fNameInputWidget->getHeight()/2);
 		} else {
-			fWindow->drawSurface(fTitleString, fWindow->getXResolution() / 2 - fTitleString->getWidth() / 2, 10);
-			fWindow->drawSurface(highscoreListSurface, 120, 50);
+		//	fWindow->drawSurface(fTitleString, fWindow->getXResolution() / 2 - fTitleString->getWidth() / 2, 10);
+		//	fWindow->drawSurface(highscoreListSurface, 120, 50);
 		}
 	}
 
@@ -75,7 +72,7 @@ namespace SISDL {
 				fEnterHighscore = false;
 				SI::Highscores::UpdatedHighscoreList hiList = fHighscores.setHighscore(fNameInputWidget->getValue(), fScore, 3, 8);
 				delete fNameInputWidget;
-				fHighscores.save(HighscorePanel::getHighscoreFile());
+				/*fHighscores.save(HighscorePanel::getHighscoreFile());
 			
 				highscoreListSurface = SDL_CreateRGBSurface(SDL_SWSURFACE | SDL_SRCALPHA, fWindow->getXResolution() - 240, fWindow->getYResolution() - 100, 32, 0, 0, 0, 0);
 
@@ -83,7 +80,7 @@ namespace SISDL {
 				for(SI::Highscores::UpdatedHighscoreList::iterator it = hiList.begin(); it != hiList.end(); it++) {
 					blitScoreEntry(highscoreListSurface, (*it).first, (*it).second.getName(), (*it).second.getScore(), (*it).second.isUpdated(), y);
 				}
-				Zabbr::ResourceManager::manager().free(fFont);
+				Zabbr::ResourceManager::manager().free(fFont);*/
 			}
 		} else {
 			if (evnt.keysym.sym == SDLK_ESCAPE) {
@@ -105,7 +102,7 @@ namespace SISDL {
 	                                         std::string name,
 	                                         int score, bool updated,
 	                                         int& y) {
-		SDL_Color color;
+		/*SDL_Color color;
 		if (!updated) {
 			color.r = 255;
 			color.g = 255;
@@ -140,7 +137,7 @@ namespace SISDL {
 		dst.y = y;
 		SDL_BlitSurface(entryStringRes->getSurface(), 0, surface, &dst);
 		y += entryStringRes->getHeight();
-		Zabbr::ResourceManager::manager().free(entryStringRes);
+		Zabbr::ResourceManager::manager().free(entryStringRes);*/
 	}
 	
 	/**

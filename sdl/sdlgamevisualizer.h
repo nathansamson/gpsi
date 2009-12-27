@@ -8,7 +8,7 @@
 */
 
 #include "zabbr/sdlwindow.h"
-#include "zabbr/resources/resourcemanager.h"
+#include "zabbr/widgets/label.h"
 
 #include "src/game/gamevisualizer.h"
 
@@ -19,6 +19,7 @@ namespace SISDL {
 	class SDLGameVisualizer: public SI::IGameVisualizer {
 	public:
 		SDLGameVisualizer(Zabbr::SDLWindow*);
+		~SDLGameVisualizer();
 	
 		virtual void draw();
 		virtual bool inNonGamePhase();
@@ -40,9 +41,7 @@ namespace SISDL {
 		/**
 		 * The status text.
 		*/
-		Zabbr::StringFontResource* fStatusText;
-		
-		void showString(std::string);
+		Zabbr::Label* fStatusLabel;
 	};
 }
 

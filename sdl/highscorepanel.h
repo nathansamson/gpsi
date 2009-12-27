@@ -47,21 +47,6 @@ namespace SISDL {
 		 * The text input field.
 		*/
 		Zabbr::TextInputWidget* fNameInputWidget;
-		
-		/**
-		 * The font.
-		*/
-		Zabbr::FontResource* fFont;
-		
-		/**
-		 * The title string.
-		*/
-		Zabbr::StringFontResource* fTitleString;
-
-		/**
-		 * The higschore list surface.
-		*/
-		SDL_Surface* highscoreListSurface;
 	};
 }
 
