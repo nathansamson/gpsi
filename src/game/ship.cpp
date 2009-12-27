@@ -25,8 +25,8 @@ namespace SI {
 	Ship::Ship(VShipDriver* driver, Vector2 pos, int dir, EntityGroup* group,
 	           ShipType type, IGameEntityFactory* fac, Weaponery* weaponery):
 	      VGameEntity(pos, dir, type.fBoundingShapeDesc, group, fac),
-	      fRequestFire(false), fShipDriver(driver), fWeaponery(weaponery),
-	      fShipType(type), fCurrentSpeed (0.0, 0.0), fHP(type.fHitPoints) {
+	      fShipType(type), fRequestFire(false), fShipDriver(driver),
+	      fWeaponery(weaponery), fCurrentSpeed (0.0, 0.0), fHP(type.fHitPoints) {
 		fShipDriver->bind(this);
 		fActiveWeapon = 0;
 		for (std::vector<std::string>::iterator it = type.fWeapons.begin(); it != type.fWeapons.end(); it++) {
