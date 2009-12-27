@@ -15,7 +15,13 @@ namespace SISDL {
 	 * @param window The SDLWindow.
 	*/
 	SDLGameVisualizer::SDLGameVisualizer(Zabbr::SDLWindow* window):
-	    fWindow(window), fInNonGamePhase(false), fStatusText(0) {
+	    fWindow(window), fInNonGamePhase(false) {
+	    SDL_Color white = {255, 255, 255};
+	    fStatusLabel = new Zabbr::Label(fWindow, "", white, "DejaVuSans-Bold.ttf", 32);
+	}
+	
+	SDLGameVisualizer::~SDLGameVisualizer() {
+		delete fStatusLabel;
 	}
 	
 	/**
@@ -23,7 +29,7 @@ namespace SISDL {
 	*/
 	void SDLGameVisualizer::draw() {
 		if (fInNonGamePhase) {
-			fWindow->drawSurface(fStatusText, 0, 0);
+			fStatusLabel->draw(0, 0);
 		}
 	}
 	
@@ -41,7 +47,7 @@ namespace SISDL {
 	*/
 	void SDLGameVisualizer::userDies() {
 		fInNonGamePhase = true;
-		showString("You loose!");
+		fStatusLabel->setLabel("You loose!");
 	}
 	
 	/**
@@ -49,7 +55,7 @@ namespace SISDL {
 	*/
 	void SDLGameVisualizer::userWins() {
 		fInNonGamePhase = true;
-		showString("You win!");
+		fStatusLabel->setLabel("You win!");
 	}
 	
 	/**
@@ -59,19 +65,7 @@ namespace SISDL {
 	*/
 	void SDLGameVisualizer::levelChange(std::string name) {
 		fInNonGamePhase = true;
-		showString(name);
-	}
-	
-	/**
-	 * Show a string in the center of the screen.
-	 *
-	 * @param str The string.
-	*/
-	void SDLGameVisualizer::showString(std::string str) {
-		Zabbr::FontResource* font = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 30);
-		SDL_Color c = {255, 255, 255};
-		fStatusText = Zabbr::ResourceManager::manager().string(str, font, c);
-		Zabbr::ResourceManager::manager().free(font);
+		fStatusLabel->setLabel(name);
 	}
 	
 	/**
@@ -83,8 +77,6 @@ namespace SISDL {
 		if (!fInNonGamePhase) return;
 		if (evnt.keysym.sym == SDLK_RETURN || evnt.keysym.sym == SDLK_SPACE) {
 			fInNonGamePhase = false;
-			Zabbr::ResourceManager::manager().free(fStatusText);
-			fStatusText = 0;
 		}
 	}
 }

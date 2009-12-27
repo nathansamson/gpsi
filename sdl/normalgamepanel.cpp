@@ -26,11 +26,13 @@ namespace SISDL {
 		fDriverFactory = new SDLDriverFactory();
 		startGame(fDriverFactory);
 		connectRequestQuit(new Zabbr::ClassCallback0<NormalGamePanel>(this, &NormalGamePanel::onRequestQuitGame));
-		fFont = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 18);
+		
+		SDL_Color white = {255, 255, 255};
+		fScoreLabel = new Zabbr::Label(fWindow, "", white, "DejaVuSans-Bold.ttf", 18);
 	}
 	
 	NormalGamePanel::~NormalGamePanel() {
-		Zabbr::ResourceManager::manager().free(fFont);
+		delete fScoreLabel;
 	}
 	
 	/**
@@ -38,14 +40,13 @@ namespace SISDL {
 	*/
 	void NormalGamePanel::draw() {
 		GamePanel::draw();
-		SDL_Color white = {255, 255, 255};
+		
 		std::stringstream ssScoreText;
 		ssScoreText << fGame->getUserScore();
 		std::string scoreText;
 		ssScoreText >> scoreText;
-		fScoreText = Zabbr::ResourceManager::manager().string(scoreText, fFont, white);
-		fWindow->drawSurface(fScoreText, 10, 10);
-		Zabbr::ResourceManager::manager().free(fScoreText);
+		fScoreLabel->setLabel(scoreText);
+		fScoreLabel->draw(10, 10);
 	}
 	
 	/**

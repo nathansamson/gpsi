@@ -2,7 +2,7 @@
 #define INC_SDLUSERSHIP_H
 
 #include "sdlship.h"
-#include "zabbr/resources/resourcemanager.h"
+#include "zabbr/widgets/label.h"
 
 /** \file
  * File for the SDL user ship.
@@ -24,15 +24,7 @@ namespace SISDL {
 	
 		virtual void visualize();
 	private:
-		/**
-		 * The font that is being used.
-		*/
-		Zabbr::FontResource* fFont;
-		
-		/**
-		 * The string of the current health.
-		*/
-		Zabbr::StringFontResource* fHealthText;
+		Zabbr::Label* fLabelWidget;
 	};
 }
 

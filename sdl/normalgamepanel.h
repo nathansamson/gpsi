@@ -6,7 +6,7 @@
  *
  * @author Nathan Samson
 */
-
+#include "zabbr/widgets/label.h"
 #include "gamepanel.h"
 
 namespace SISDL {
@@ -38,17 +38,11 @@ namespace SISDL {
 		 * The driver factory.
 		*/
 		SDLDriverFactory* fDriverFactory;
-		
-				
+
 		/**
-		 * The font.
+		 * The score text.
 		*/
-		Zabbr::FontResource* fFont;
-		
-		/**
-		 * The text of the score.
-		*/
-		Zabbr::StringFontResource* fScoreText;
+		Zabbr::Label* fScoreLabel;
 	};
 }
 
