@@ -8,6 +8,7 @@
 */
 
 #include "src/game/ship.h"
+#include "src/misc/boundingbox.h"
 #include "zabbr/resources/imageresource.h"
 #include "zabbr/sdlwindow.h"
 
@@ -25,6 +26,8 @@ namespace SISDL {
 		virtual std::vector<VGameEntity*> update(int);
 		virtual void visualize();
 		virtual bool isVisible();
+		
+		void onScreenSizeChanged(Zabbr::SDLWindow*, int, int);
 	protected:
 		/**
 		 * The window.
@@ -42,6 +45,16 @@ namespace SISDL {
 		 * Number of ticks passed since dead.
 		*/
 		int ticksSinceDead;
+		
+		/**
+		 * The bounding box of the ship.
+		*/
+		SI::BoundingBoxDescription fBoundingBox;
+		
+		/**
+		 * The callback ID of the screen resized param.
+		*/
+		int fCbID;
 	};
 }
 

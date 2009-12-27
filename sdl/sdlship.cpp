@@ -7,8 +7,8 @@
 #include "sdlship.h"
 
 #include "zabbr/resources/resourcemanager.h"
+#include "zabbr/events/callbacks.h"
 #include "src/misc/vector2.h"
-#include "src/misc/boundingbox.h"
 
 namespace SISDL {
 	/**
@@ -27,11 +27,12 @@ namespace SISDL {
 	                 SI::EntityGroup* group,
 	                 SI::ShipType t, SI::IGameEntityFactory* fac,
 	                 SI::Weaponery* weaponery, Zabbr::SDLWindow* w):
-	         SI::Ship(driver, v, dir, group, t, fac, weaponery), fWindow(w), ticksSinceDead(0) {
-	    SI::BoundingBoxDescription* bb = dynamic_cast<SI::BoundingBoxDescription*>(t.fBoundingShapeDesc);
-	    int width = bb->getWidth() / 8.0 * fWindow->getXResolution();
-	    int height = bb->getHeight() / 6.0 * fWindow->getYResolution();
+	         SI::Ship(driver, v, dir, group, t, fac, weaponery), fWindow(w), ticksSinceDead(0),
+	         fBoundingBox(SI::BoundingBoxDescription(*dynamic_cast<SI::BoundingBoxDescription*>(t.fBoundingShapeDesc))) {
+	    int width = fBoundingBox.getWidth() / 8.0 * fWindow->getXResolution();
+	    int height = fBoundingBox.getHeight() / 6.0 * fWindow->getYResolution();
 		fImage = Zabbr::ResourceManager::manager().image(t.fName+".png", width, height, true, dir);
+		fCbID = fWindow->connectOnScreenSizeChanged(new Zabbr::ClassCallback3<SDLShip, Zabbr::SDLWindow*, int, int>(this, &SDLShip::onScreenSizeChanged));
 	}
 	
 	/**
@@ -39,6 +40,7 @@ namespace SISDL {
 	*/
 	SDLShip::~SDLShip() {
 		 Zabbr::ResourceManager::manager().free(fImage);
+		 fWindow->disconnectOnScreenSizeChanged(fCbID);
 	}
 	
 	/**
@@ -92,4 +94,17 @@ namespace SISDL {
 		y = -p.getY();
 	}
 
+	/**
+	 * The on screen size changed event.
+	 *
+	 * @param w The window that fired the event.
+	 * @param x The x resolution.
+	 * @param y The y resolution. 
+	*/
+	void SDLShip::onScreenSizeChanged(Zabbr::SDLWindow* w, int x, int y) {
+		Zabbr::ResourceManager::manager().free(fImage);
+		int width = fBoundingBox.getWidth() / 8.0 * x;
+	    int height = fBoundingBox.getHeight() / 6.0 * y;
+		fImage = Zabbr::ResourceManager::manager().image(fShipType.fName+".png", width, height, true, getDirection());
+	}
 }

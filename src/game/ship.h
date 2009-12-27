@@ -66,6 +66,11 @@ namespace SI {
 		double getHealth();
 		
 		friend class VShipDriver;
+	protected:
+		/**
+		 * The type of the ship.
+		*/
+		ShipType fShipType;
 	private:
 		void fire();
 		
@@ -93,11 +98,6 @@ namespace SI {
 		 * The weaponery of the ship.
 		*/
 		Weaponery* fWeaponery;
-		
-		/**
-		 * The type of the ship.
-		*/
-		ShipType fShipType;
 		
 		/**
 		 * The current speed of the ship.

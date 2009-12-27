@@ -5,7 +5,6 @@
 */
 
 #include "zabbr/resources/resourcemanager.h"
-#include "src/misc/boundingbox.h"
 
 #include "sdlbullet.h"
 
@@ -23,15 +22,17 @@ namespace SISDL {
 	SDLBullet::SDLBullet(SI::Vector2 speed, int dir, SI::EntityGroup* group,
 	                     SI::BulletType* t, SI::IGameEntityFactory* fac,
 	                     Zabbr::SDLWindow* w):
-	           SI::Bullet(speed, dir, group, t, fac), fWindow(w), ticksSinceDead(0) {
-		SI::BoundingBoxDescription* bb = dynamic_cast<SI::BoundingBoxDescription*>(t->fBoundingShapeDesc);
-	    int width = bb->getWidth() / 8.0 * fWindow->getXResolution();
-	    int height = bb->getHeight() / 6.0 * fWindow->getYResolution();
+	           SI::Bullet(speed, dir, group, t, fac), fWindow(w), ticksSinceDead(0),
+	           fBoundingBox(SI::BoundingBoxDescription(*dynamic_cast<SI::BoundingBoxDescription*>(t->fBoundingShapeDesc))) {
+	    int width = fBoundingBox.getWidth() / 8.0 * fWindow->getXResolution();
+	    int height = fBoundingBox.getHeight() / 6.0 * fWindow->getYResolution();
 		fImage = Zabbr::ResourceManager::manager().image("bullet.png", width, height, true, dir);
+		fCbID = fWindow->connectOnScreenSizeChanged(new Zabbr::ClassCallback3<SDLBullet, Zabbr::SDLWindow*, int, int>(this, &SDLBullet::onScreenSizeChanged));
 	}
 	
 	SDLBullet::~SDLBullet() {
 		Zabbr::ResourceManager::manager().free(fImage);
+		fWindow->disconnectOnScreenSizeChanged(fCbID);
 	}
 	
 	/**
@@ -83,5 +84,19 @@ namespace SISDL {
 		
 		x = p.getX();
 		y = -p.getY();
+	}
+	
+	/**
+	 * The on screen size changed event.
+	 *
+	 * @param w The window that fired the event.
+	 * @param x The x resolution.
+	 * @param y The y resolution. 
+	*/
+	void SDLBullet::onScreenSizeChanged(Zabbr::SDLWindow* w, int x, int y) {
+		Zabbr::ResourceManager::manager().free(fImage);
+		int width = fBoundingBox.getWidth() / 8.0 * x;
+	    int height = fBoundingBox.getHeight() / 6.0 * y;
+		fImage = Zabbr::ResourceManager::manager().image("bullet.png", width, height, true, getDirection());
 	}
 }
