@@ -62,3 +62,20 @@
    fun:XGetDefault
 }
 
+{
+   anothersup
+   Memcheck:Leak
+   fun:malloc
+   obj:/usr/lib/libX11.so.6.2.0
+   fun:_XrmInternalStringToQuark
+   fun:XStringToKeysym
+   fun:_XimParseStringFile
+   fun:_XimLocalOpenIM
+   fun:_XimOpenIM
+   obj:/usr/lib/libSDL-1.2.so.0.11.2
+   obj:/usr/lib/libSDL-1.2.so.0.11.2
+   fun:SDL_VideoInit
+   fun:SDL_InitSubSystem
+   fun:SDL_Init
+}
+
