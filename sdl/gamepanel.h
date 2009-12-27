@@ -39,6 +39,11 @@ namespace SISDL {
 		 * The game
 		*/
 		SI::Game* fGame;
+	protected:
+		/**
+		 * The game visualizer.
+		*/
+		SDLGameVisualizer* fGameVisualizer;
 	private:		
 		/**
 		 * The timer.
@@ -49,11 +54,6 @@ namespace SISDL {
 		 * The remaining time of last frame.
 		*/
 		double fTimeRemainder;
-		
-		/**
-		 * The game visualizer.
-		*/
-		SDLGameVisualizer* fGameVisualizer;
 		
 		/**
 		 * Flag to see if we should close.

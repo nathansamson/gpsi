@@ -34,7 +34,6 @@ namespace SISDL {
 			openParentPanel();
 		}
 		
-	
 		if (!fTimer.isPaused()) {
 			double time = fTimer.reset();
 			int ticks = (time + fTimeRemainder) * 1000;
@@ -43,6 +42,10 @@ namespace SISDL {
 			fGame->update(ticks);
 		} else {
 			fGame->update(0); // Let the entities draw themselves.
+		}
+		
+		if (fIsBackground) {
+			fWindow->drawRectangle(0, 0, fWindow->getXResolution(), fWindow->getYResolution(), 0, 0, 0, 0.3);
 		}
 	}
 	

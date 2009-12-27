@@ -8,6 +8,9 @@
 #include <iostream>
 #include <fstream>
 
+#include "zabbr/widgets/label.h"
+#include "zabbr/widgets/hbox.h"
+#include "zabbr/widgets/vbox.h"
 #include "zabbr/resources/resourcemanager.h"
 #include "highscorepanel.h"
 
@@ -18,27 +21,36 @@ namespace SISDL {
 	 * @param window The SDLWIndow.
 	 * @param score The score of the user
 	*/
-	HighscorePanel::HighscorePanel(Zabbr::SDLWindow* window, int score): Zabbr::VSDLPanel(window),
+	HighscorePanel::HighscorePanel(Zabbr::SDLWindow* window, int score):
+	         Zabbr::WidgetPanel(window, new Zabbr::VBox(window, false, 10)),
 		     fHighscores(HighscorePanel::getHighscoreFile(), 50), fScore(score),
 		     fEnterHighscore(fHighscores.isHighscore(score)) {	
-		/*fFont = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 18);
-		
-		Zabbr::FontResource* titleFont = Zabbr::ResourceManager::manager().font("DejaVuSans-Bold.ttf", 32);
-		SDL_Color white = {255, 255, 255};
-		fTitleString = Zabbr::ResourceManager::manager().string("Highscores", titleFont, white);
-		Zabbr::ResourceManager::manager().free(titleFont);*/
 		
 		if (fEnterHighscore) {
 			fNameInputWidget = new Zabbr::TextInputWidget(fWindow, "Nathan Samson");
+			dynamic_cast<Zabbr::VBox*>(fTopLevel)->appendWidget(fNameInputWidget);
+			dynamic_cast<Zabbr::VBox*>(fTopLevel)->setYAlign(Zabbr::YALIGN_CENTER);
 		} else {
-			/*SI::Highscores::HighscoreList hiList = fHighscores.getBestHighscores(15);
-			highscoreListSurface = SDL_CreateRGBSurface(SDL_SWSURFACE | SDL_SRCALPHA, fWindow->getXResolution() - 240, fWindow->getYResolution() - 100, 32, 0, 0, 0, 0);
-
-			int y = 0;
+			SDL_Color white = {255, 255, 255};
+			Zabbr::Label* titleLabel = new Zabbr::Label(fWindow, "Highscores", white, "DejaVuSans-Bold.ttf", 32);
+			dynamic_cast<Zabbr::VBox*>(fTopLevel)->appendWidget(titleLabel);
+			Zabbr::HBox* scoreHBox = new Zabbr::HBox(window, false, 5);
+			dynamic_cast<Zabbr::VBox*>(fTopLevel)->appendWidget(scoreHBox);
+			
+			Zabbr::VBox* posBox = new Zabbr::VBox(fWindow, false, 5, Zabbr::XALIGN_RIGHT, Zabbr::YALIGN_CENTER);
+			scoreHBox->appendWidget(posBox);
+			Zabbr::VBox* nameBox = new Zabbr::VBox(fWindow, false, 5, Zabbr::XALIGN_LEFT, Zabbr::YALIGN_CENTER);
+			scoreHBox->appendWidget(nameBox);
+			Zabbr::VBox* scoreBox = new Zabbr::VBox(fWindow, false, 5, Zabbr::XALIGN_LEFT, Zabbr::YALIGN_CENTER);
+			scoreHBox->appendWidget(scoreBox);
+			
+			SI::Highscores::HighscoreList hiList = fHighscores.getBestHighscores(15);
 			for(SI::Highscores::HighscoreList::iterator it = hiList.begin(); it != hiList.end(); it++) {
-				blitScoreEntry(highscoreListSurface, (*it).first, (*it).second.first, (*it).second.second, false, y);
+				addScoreEntryToTable(posBox, nameBox, scoreBox, (*it).first,
+				                     (*it).second.first, (*it).second.second,
+				                     false);
 			}
-			Zabbr::ResourceManager::manager().free(fFont);*/
+			nameBox->setWidth(400 - scoreBox->getWidth() - posBox->getWidth());
 		}
 	}
 
@@ -46,18 +58,6 @@ namespace SISDL {
 	 * destructor.
 	*/
 	HighscorePanel::~HighscorePanel() {
-	}
-
-	/**
-	 * Draw the controller.
-	*/
-	void HighscorePanel::draw() {
-		if (fEnterHighscore) {
-			fNameInputWidget->draw(fWindow->getXResolution() / 2, fWindow->getYResolution() / 2 - fNameInputWidget->getHeight()/2);
-		} else {
-		//	fWindow->drawSurface(fTitleString, fWindow->getXResolution() / 2 - fTitleString->getWidth() / 2, 10);
-		//	fWindow->drawSurface(highscoreListSurface, 120, 50);
-		}
 	}
 
 	/**
@@ -71,16 +71,30 @@ namespace SISDL {
 			if (evnt.keysym.sym == SDLK_ESCAPE || evnt.keysym.sym == SDLK_RETURN) {
 				fEnterHighscore = false;
 				SI::Highscores::UpdatedHighscoreList hiList = fHighscores.setHighscore(fNameInputWidget->getValue(), fScore, 3, 8);
-				delete fNameInputWidget;
-				/*fHighscores.save(HighscorePanel::getHighscoreFile());
+				fNameInputWidget = 0;
+				dynamic_cast<Zabbr::VBox*>(fTopLevel)->clear();
+				dynamic_cast<Zabbr::VBox*>(fTopLevel)->setYAlign(Zabbr::YALIGN_TOP);
+				fHighscores.save(HighscorePanel::getHighscoreFile());
 			
-				highscoreListSurface = SDL_CreateRGBSurface(SDL_SWSURFACE | SDL_SRCALPHA, fWindow->getXResolution() - 240, fWindow->getYResolution() - 100, 32, 0, 0, 0, 0);
+				SDL_Color white = {255, 255, 255};
+				Zabbr::Label* titleLabel = new Zabbr::Label(fWindow, "Highscores", white, "DejaVuSans-Bold.ttf", 32);
+				dynamic_cast<Zabbr::VBox*>(fTopLevel)->appendWidget(titleLabel);
+				Zabbr::HBox* scoreHBox = new Zabbr::HBox(fWindow, false, 5);
+				dynamic_cast<Zabbr::VBox*>(fTopLevel)->appendWidget(scoreHBox);
+			
+				Zabbr::VBox* posBox = new Zabbr::VBox(fWindow, false, 5, Zabbr::XALIGN_RIGHT, Zabbr::YALIGN_CENTER);
+				scoreHBox->appendWidget(posBox);
+				Zabbr::VBox* nameBox = new Zabbr::VBox(fWindow, false, 5, Zabbr::XALIGN_LEFT, Zabbr::YALIGN_CENTER);
+				scoreHBox->appendWidget(nameBox);
+				Zabbr::VBox* scoreBox = new Zabbr::VBox(fWindow, false, 5, Zabbr::XALIGN_LEFT, Zabbr::YALIGN_CENTER);
+				scoreHBox->appendWidget(scoreBox);
 
-				int y = 0;
 				for(SI::Highscores::UpdatedHighscoreList::iterator it = hiList.begin(); it != hiList.end(); it++) {
-					blitScoreEntry(highscoreListSurface, (*it).first, (*it).second.getName(), (*it).second.getScore(), (*it).second.isUpdated(), y);
+					addScoreEntryToTable(posBox, nameBox, scoreBox, (*it).first,
+						                 (*it).second.getName(), (*it).second.getScore(),
+						                 (*it).second.isUpdated());
 				}
-				Zabbr::ResourceManager::manager().free(fFont);*/
+				nameBox->setWidth(400 - scoreBox->getWidth() - posBox->getWidth());
 			}
 		} else {
 			if (evnt.keysym.sym == SDLK_ESCAPE) {
@@ -90,19 +104,21 @@ namespace SISDL {
 	}
 	
 	/**
-	 * Helper function to blit score entries on a surface.
+	 * Helper function add an entry to the table.
 	 *
-	 * @param surface The surface to blit on.
+	 * @param posBox The VBox with all positions
+	 * @param nameBox The VBox with all names
+	 * @param scoreBox The VBx with all scores.
 	 * @param position The position in the highscore list.
-	 * @param entry The entry
-	 * @param y The y coordinate of the entry
+	 * @param name The name of the entry
+	 * @param updated If the entry is updated (and should have another color)
 	*/
-	void HighscorePanel::blitScoreEntry(SDL_Surface* surface,
-	                                         int position,
-	                                         std::string name,
-	                                         int score, bool updated,
-	                                         int& y) {
-		/*SDL_Color color;
+	void HighscorePanel::addScoreEntryToTable(Zabbr::VBox* posBox,
+	                                          Zabbr::VBox* nameBox,
+	                                          Zabbr::VBox* scoreBox,
+	                                          int position, std::string name,
+	                                          int score, bool updated) {
+		SDL_Color color;
 		if (!updated) {
 			color.r = 255;
 			color.g = 255;
@@ -117,27 +133,20 @@ namespace SISDL {
 		std::stringstream ss;
 		ss << position;
 		ss >> entryString;
-		entryString += ") " + name;
-	
-		Zabbr::StringFontResource* entryStringRes;
-		entryStringRes = Zabbr::ResourceManager::manager().string(entryString, fFont, color);
-		SDL_Rect dst;
-		dst.x = 0;
-		dst.y = y;
-		SDL_BlitSurface(entryStringRes->getSurface(), 0, surface, &dst);
-		Zabbr::ResourceManager::manager().free(entryStringRes);
-	
-		ss.clear();
+		entryString += ")";
+
+		Zabbr::Label* posLabel = new Zabbr::Label(fWindow, entryString, color, "DejaVuSans-Bold.ttf", 16);
+		posBox->appendWidget(posLabel);
 		
+		Zabbr::Label* nameLabel = new Zabbr::Label(fWindow, name, color, "DejaVuSans-Bold.ttf", 16);
+		nameBox->appendWidget(nameLabel);
+		
+		ss.clear();
 		ss << score;
 		ss >> entryString;
-	
-		entryStringRes = Zabbr::ResourceManager::manager().string(entryString, fFont, color);
-		dst.x = surface->w - entryStringRes->getWidth();
-		dst.y = y;
-		SDL_BlitSurface(entryStringRes->getSurface(), 0, surface, &dst);
-		y += entryStringRes->getHeight();
-		Zabbr::ResourceManager::manager().free(entryStringRes);*/
+		
+		Zabbr::Label* scoreLabel = new Zabbr::Label(fWindow, entryString, color, "DejaVuSans-Bold.ttf", 16);
+		scoreBox->appendWidget(scoreLabel);
 	}
 	
 	/**
