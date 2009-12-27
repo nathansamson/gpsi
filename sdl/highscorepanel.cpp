@@ -97,9 +97,7 @@ namespace SISDL {
 				nameBox->setWidth(400 - scoreBox->getWidth() - posBox->getWidth());
 			}
 		} else {
-			if (evnt.keysym.sym == SDLK_ESCAPE) {
-				openParentPanel();
-			}
+			openParentPanel();
 		}
 	}
 	

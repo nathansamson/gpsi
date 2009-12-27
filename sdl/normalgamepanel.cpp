@@ -102,6 +102,8 @@ namespace SISDL {
 		b = new Zabbr::Button(fWindow, "Close game");
 		b->connectOnMouseClick(new Zabbr::ClassCallback1<NormalGamePanel, SDL_MouseButtonEvent>(this, &NormalGamePanel::onCloseGame));
 		fQuitConfirmation->addButton(b);
+		fQuitConfirmation->connectOnKeyRelease(new Zabbr::ClassCallback2<NormalGamePanel, Zabbr::VSDLPanel*, SDL_KeyboardEvent>(this, &NormalGamePanel::onKeyReleaseQuitConfirmation));
+		fQuitConfirmation->connectRequestQuit(new Zabbr::ClassCallback0<NormalGamePanel>(this, &NormalGamePanel::onQuitConfirmationQuit));
 
 		openPanel(fQuitConfirmation);
 	}
@@ -128,5 +130,27 @@ namespace SISDL {
 	*/
 	void NormalGamePanel::onCloseGame(SDL_MouseButtonEvent e) {
 		fQuitConfirmation->quit();
+	}
+	
+	/**
+	 * Key release callback.
+	 *
+	 * @param panel The panel
+	 * @parem event The event
+	*/
+	void NormalGamePanel::onKeyReleaseQuitConfirmation(Zabbr::VSDLPanel* panel, SDL_KeyboardEvent event) {
+		if (event.keysym.sym == SDLK_ESCAPE) {
+			fQuitConfirmation->openParentPanel();
+			resume();
+		}
+	}
+	
+	/**
+	 * Quit request callback for the quit confirmation.
+	*/
+	void NormalGamePanel::onQuitConfirmationQuit() {
+		fQuitConfirmation->openParentPanel();
+		close();
+		openPanel(new HighscorePanel(fWindow, fGame->getUserScore()));
 	}
 }

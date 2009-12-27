@@ -85,6 +85,7 @@ namespace SISDL {
 				menu->addButton(b);
 			
 				menu->connectRequestQuit(new ClassCallback0<SIWindow>(this, &SIWindow::onRequestQuitMainMenu));
+				menu->connectOnKeyRelease(new ClassCallback2<SIWindow, Zabbr::VSDLPanel*, SDL_KeyboardEvent>(this, &SIWindow::onMainMenuKeyRelease));
 	
 				SDLWindow::run(splash);
 			} else {
@@ -111,8 +112,8 @@ namespace SISDL {
 	*/
 	void SIWindow::onRequestQuitMainMenu() {
 		std::vector<std::pair<int, std::string> > responseIDs;
-		responseIDs.push_back(std::pair<int, std::string>(0, "No"));
-		responseIDs.push_back(std::pair<int, std::string>(1, "Yes"));
+		responseIDs.push_back(std::pair<int, std::string>(Zabbr::DialogPanel::Cancel, "No"));
+		responseIDs.push_back(std::pair<int, std::string>(Zabbr::DialogPanel::Quit, "Yes"));
 		DialogPanel* quitConfirmation = new DialogPanel(this, "Are you sure you want to quit?", responseIDs);
 		quitConfirmation->connectOnResponse(new ClassCallback1<SIWindow, int>(this, &SIWindow::onQuitConfirmationResponse));
 
@@ -125,9 +126,9 @@ namespace SISDL {
 	 * @param response The response ID.
 	*/
 	void SIWindow::onQuitConfirmationResponse(int response) {
-		if (response == 0) {
+		if (response == Zabbr::DialogPanel::Cancel) {
 			fPanel->openParentPanel();
-		} else {
+		} else if (response == Zabbr::DialogPanel::Quit) {
 			fPanel->quit();
 		}
 	}
@@ -144,5 +145,11 @@ namespace SISDL {
 	*/
 	void SIWindow::setDataPath() {
 		ResourceManager::fgDataPath = "./data/";
+	}
+	
+	void SIWindow::onMainMenuKeyRelease(Zabbr::VSDLPanel* panel, SDL_KeyboardEvent event) {
+		if (event.keysym.sym == SDLK_ESCAPE) {
+			panel->requestQuit();
+		}
 	}
 }

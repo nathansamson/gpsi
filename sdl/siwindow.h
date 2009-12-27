@@ -29,6 +29,8 @@ namespace SISDL {
 		void startGame(SDL_MouseButtonEvent);
 	private:
 		void setDataPath();
+		
+		void onMainMenuKeyRelease(Zabbr::VSDLPanel*, SDL_KeyboardEvent);
 	};
 }
 

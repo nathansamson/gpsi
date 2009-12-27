@@ -22,12 +22,14 @@ namespace SISDL {
 		virtual void draw();
 		virtual void keyPress(SDL_KeyboardEvent);
 		virtual void keyRelease(SDL_KeyboardEvent);
-		
+	private:
 		void onRequestQuitGame();
 		void onResumeGame(SDL_MouseButtonEvent);
 		void onQuitGame(SDL_MouseButtonEvent);
 		void onCloseGame(SDL_MouseButtonEvent);
-	private:
+		void onKeyReleaseQuitConfirmation(Zabbr::VSDLPanel*, SDL_KeyboardEvent);
+		void onQuitConfirmationQuit();
+	
 		/**
 		 * The input driver for the user.
 		*/
