@@ -26,7 +26,7 @@ namespace SI {
 	           ShipType type, IGameEntityFactory* fac, Weaponery* weaponery):
 	      VGameEntity(pos, dir, type.fBoundingShapeDesc, group, fac),
 	      fShipType(type), fRequestFire(false), fShipDriver(driver),
-	      fWeaponery(weaponery), fCurrentSpeed (0.0, 0.0), fHP(type.fHitPoints) {
+	      fWeaponery(weaponery), fHP(type.fHitPoints) {
 		fShipDriver->bind(this);
 		fActiveWeapon = 0;
 		for (std::vector<std::string>::iterator it = type.fWeapons.begin(); it != type.fWeapons.end(); it++) {
@@ -106,36 +106,14 @@ namespace SI {
 	 * @param ticks The number of ticks
 	*/
 	void Ship::move(Vector2& movement, int ticks) {
-		Vector2 maxSpeed = ticks * fShipType.fMaxSpeed;
-		movement.inBounds(maxSpeed, -maxSpeed);
-		double xDiff = movement.getX() - fCurrentSpeed.getX() * ticks;
-		double yDiff = movement.getY() - fCurrentSpeed.getY() * ticks;
-		if (xDiff > ticks * fShipType.fMaxAbsSpeedDiff.getX()) {
-			xDiff = ticks * fShipType.fMaxAbsSpeedDiff.getX();
-		}
-		if (xDiff < -ticks * fShipType.fMaxAbsSpeedDiff.getX()) {
-			xDiff = -ticks * fShipType.fMaxAbsSpeedDiff.getX();
-		}
-		
-		if (yDiff > ticks * fShipType.fMaxAbsSpeedDiff.getY()) {
-			yDiff = ticks * fShipType.fMaxAbsSpeedDiff.getY();
-		}
-		if (yDiff < -ticks * fShipType.fMaxAbsSpeedDiff.getY()) {
-			yDiff = -ticks * fShipType.fMaxAbsSpeedDiff.getY();
-		}
-		
-		movement.setX(xDiff + fCurrentSpeed.getX() * ticks);
-		movement.setY(yDiff + fCurrentSpeed.getY() * ticks);
-		fCurrentSpeed += Vector2(xDiff, yDiff) / ticks;
+		movement.inBounds(fShipType.fMaxSpeed * ticks, -fShipType.fMaxSpeed * ticks);
 		
 		if (getPosition().getX() + movement.getX() < -4.0) {
 			movement.setX(-4.0 - getPosition().getX());
-			fCurrentSpeed = -fCurrentSpeed;
 		}
 		
 		if (getPosition().getX() + movement.getX() > 4.0) {
 			movement.setX(4.0 - getPosition().getX());
-			fCurrentSpeed = -fCurrentSpeed;
 		}
 		VGameEntity::move(movement);
 	}

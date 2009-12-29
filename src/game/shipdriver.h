@@ -25,7 +25,7 @@ namespace SI {
 		virtual void update(int) = 0;
 		void bind(Ship*);
 	protected:
-		void move(Vector2, int);
+		void move(Vector2&, int);
 		void fire();
 	private:
 		/**

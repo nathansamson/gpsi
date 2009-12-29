@@ -3,7 +3,8 @@
 
 namespace SITest {
 	void MockShipDriver::update(int ticks) {
-		move(SI::Vector2(1.0/100, 0) * ticks, ticks);
+		SI::Vector2 m = SI::Vector2(1.0, 0) * ticks;
+		move(m, ticks);
 		if (ticks == MAGIC_FIRE_TICK) {
 			fire();
 		}

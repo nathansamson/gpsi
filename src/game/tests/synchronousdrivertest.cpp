@@ -21,7 +21,6 @@ namespace SITest {
 		ShipType t;
 		t.fBoundingShapeDesc = new BoundingBoxDescription(0.0, 0.0);
 		t.fMaxSpeed = Vector2(0.0002, 0.0001);
-		t.fMaxAbsSpeedDiff = t.fMaxSpeed;
 		fEntityFactory = new MockGameEntityFactory();
 		fShip = new SITest::MockShip(fDriver, SI::Vector2(0.0, 0.0), 0, 0, 0, t, fEntityFactory);
 		delete t.fBoundingShapeDesc;
@@ -44,19 +43,19 @@ namespace SITest {
 		
 		sideEffects = fShip->update(10);
 		clearSideEffects(sideEffects);
-		SITEST_ASSERT_VECTORS_EQUAL(Vector2(2.0, -1.001), fShip->getPosition());
+		SITEST_ASSERT_VECTORS_EQUAL(Vector2(1.998, -1.001), fShip->getPosition());
 		
 		sideEffects = fShip->update(10);
 		clearSideEffects(sideEffects);
-		SITEST_ASSERT_VECTORS_EQUAL(Vector2(1.998, -1.002), fShip->getPosition());
+		SITEST_ASSERT_VECTORS_EQUAL(Vector2(1.996, -1.002), fShip->getPosition());
 		
-		sideEffects = fShip->update(10000-10);
+		sideEffects = fShip->update(10000-20);
 		clearSideEffects(sideEffects);
-		SITEST_ASSERT_VECTORS_EQUAL(Vector2(0.00, -2.001), fShip->getPosition());
+		SITEST_ASSERT_VECTORS_EQUAL(Vector2(0.00, -2.000), fShip->getPosition());
 		
 		sideEffects = fShip->update(10000+10);
 		clearSideEffects(sideEffects);
-		SITEST_ASSERT_VECTORS_EQUAL(Vector2(-1.994, -3.002), fShip->getPosition());
+		SITEST_ASSERT_VECTORS_EQUAL(Vector2(-2.002, -3.001), fShip->getPosition());
 	}
 	
 	CppUnit::Test* SynchronousDriverTest::suite() {

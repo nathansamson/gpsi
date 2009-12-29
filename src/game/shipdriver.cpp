@@ -30,7 +30,7 @@ namespace SI {
 	 * @param v The offset of the movement.
 	 * @param ticks The ticks passed since last update.
 	*/
-	void VShipDriver::move(Vector2 v, int ticks) {
+	void VShipDriver::move(Vector2& v, int ticks) {
 		fEntity->move(v, ticks);
 	}
 	

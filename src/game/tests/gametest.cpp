@@ -50,7 +50,7 @@ namespace SITest {
 		
 		fGame->update(1);
 		CPPUNIT_ASSERT(fEntityFactory->fBullets[0]->fVisualized);
-		assertVectorEquality(Vector2((MAGIC_FIRE_TICK)*0.01+1, -1.999), fEntityFactory->fBullets[0]->getPosition());
+		assertVectorEquality(Vector2((MAGIC_FIRE_TICK)*0.01+1.0, -1.999), fEntityFactory->fBullets[0]->getPosition());
 		
 		fGame->update(MAGIC_FIRE_TICK); // No firing, to short after the first one.
 		CPPUNIT_ASSERT_EQUAL(6, (int)fEntityFactory->fBullets.size()); // The AI's use the MockShipDriver

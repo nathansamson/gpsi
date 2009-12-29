@@ -42,11 +42,6 @@ namespace SI {
 		SI::Vector2 fMaxSpeed;
 		
 		/**
-		 * The maximum diff of speed.
-		*/
-		SI::Vector2 fMaxAbsSpeedDiff;
-		
-		/**
 		 * Total hitpoints of the game.
 		*/
 		int fHitPoints;
@@ -98,11 +93,6 @@ namespace SI {
 		 * The weaponery of the ship.
 		*/
 		Weaponery* fWeaponery;
-		
-		/**
-		 * The current speed of the ship.
-		*/
-		Vector2 fCurrentSpeed;
 		
 		/**
 		 * The current Health Points of the ship.

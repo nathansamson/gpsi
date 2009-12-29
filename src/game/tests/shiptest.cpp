@@ -16,7 +16,6 @@ namespace SITest {
 		ShipType s;
 		s.fBoundingShapeDesc = new BoundingBoxDescription(1.0, 1.0);
 		s.fMaxSpeed = Vector2(0.01, 0);
-		s.fMaxAbsSpeedDiff = s.fMaxSpeed;
 		fEntityFactory = new MockGameEntityFactory();
 		fShip = new Ship(new MockShipDriver(), Vector2(0, 0), 0, 0, s, fEntityFactory, 0);
 		delete s.fBoundingShapeDesc;
@@ -30,9 +29,9 @@ namespace SITest {
 	void ShipTest::testUpdate() {
 		assertVectorEquality(Vector2(0, 0), fShip->getPosition());
 		fShip->update(100);
-		assertVectorEquality(Vector2(1, 0), fShip->getPosition());
+		assertVectorEquality(Vector2(1.0, 0), fShip->getPosition());
 		fShip->update(0);
-		assertVectorEquality(Vector2(1, 0), fShip->getPosition());
+		assertVectorEquality(Vector2(1.0, 0), fShip->getPosition());
 	}
 	
 	CppUnit::Test* ShipTest::suite() {
