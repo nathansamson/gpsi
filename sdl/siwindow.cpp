@@ -144,7 +144,25 @@ namespace SISDL {
 	 * Sets the data path of the manager.
 	*/
 	void SIWindow::setDataPath() {
-		ResourceManager::fgDataPath = "./data/";
+		FILE* phony = fopen("./data/splash.png", "r");
+		if (phony) {
+			ResourceManager::fgDataPath = "./data/";
+			fclose(phony);
+		} else {
+			phony = fopen("/usr/local/share/gpsi/splash.png", "r");
+			if (phony) {
+				ResourceManager::fgDataPath = "/usr/local/share/gpsi/";
+				fclose(phony);
+			} else {
+				phony = fopen("/usr/share/gpsi/splash.png", "r");
+				if (phony) {
+					ResourceManager::fgDataPath = "/usr/share/gpsi/";
+					fclose(phony);
+				} else {
+					throw 1234; // Who needs exceptions anyway?
+				}
+			}
+		}
 	}
 	
 	void SIWindow::onMainMenuKeyRelease(Zabbr::VSDLPanel* panel, SDL_KeyboardEvent event) {
