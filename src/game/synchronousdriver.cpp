@@ -27,17 +27,17 @@ namespace SI {
 	void SynchronousDriver::update(int ticks) {
 		if (ticks == 0) return;
 	
-		Vector2 step = Vector2(fDir*0.0002*ticks, -0.0001*ticks);
-		if (std::fabs((fMoved+step).getX()) >= fXMargin-1E-8) {
-			if (fDir == 1) {
-				step -= 2*Vector2((fMoved+step).getX()-fXMargin, 0.0);
-			} else {
-				step -= 2*Vector2((fMoved+step).getX()+fXMargin, 0.0);
-			}
-			fDir *= -1;
-		}
+		Vector2 step = Vector2(fDir*1.0*ticks, -1.0*ticks);
+		Vector2 requested = step;
 		move(step, ticks);
 		fMoved += step;
+		if (fMoved.getX() >= fXMargin || fMoved.getX() <= -fXMargin) {
+			if (fMoved.getX() > 0) {
+				fDir = -1;
+			} else {
+				fDir = 1;
+			}
+		}
 		
 		if (std::rand() % (25000 / ticks) == 0) {
 			fire();

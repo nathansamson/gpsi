@@ -156,7 +156,7 @@ namespace SI {
 				shipType.fWeapons.push_back(weaponNode->GetAttribute("name"));
 			}
 			shipType.fMaxSpeed = parseVector(shipTypeNode->FirstChild("maxspeed")->ToElement());
-			shipType.fMaxAbsSpeedDiff = parseVector(shipTypeNode->FirstChild("maxspeeddiff")->ToElement());
+			//shipType.fMaxAbsSpeedDiff = parseVector(shipTypeNode->FirstChild("maxspeeddiff")->ToElement());
 			shipType.fHitPoints = shipTypeNode->GetAttribute<int>("hitpoints");
 			
 			shipTypes[shipType.fName] = shipType;

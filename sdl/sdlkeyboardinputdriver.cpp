@@ -24,7 +24,8 @@ namespace SISDL {
 			fSpeed = SI::Vector2(1.0, 0.0); 
 		}
 		
-		move(fSpeed * ticks, ticks);
+		SI::Vector2 m = fSpeed * ticks;
+		move(m, ticks);
 		if (fFire) {
 			fire();
 		}

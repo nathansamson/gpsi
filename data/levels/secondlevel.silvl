@@ -30,8 +30,7 @@
 			<weapons>
 				<weapon name="normal-gun" />
 			</weapons>
-			<maxspeed x="0.05" y="0.01" />
-			<maxspeeddiff x="0.05" y="0.01" />
+			<maxspeed x="0.0004" y="0.00025" />
 		</ship>
 		<ship name="X Wing" hitpoints="7">
 			<boundingshape type="boundingbox" w="0.8" h="0.56"/>
@@ -39,7 +38,6 @@
 				<weapon name="cluster-bomb-cannon" />
 			</weapons>
 			<maxspeed x="0.002" y="0" />
-			<maxspeeddiff x="0.00001" y="0" />
 		</ship>
 	</ships>
 	<enemies>
