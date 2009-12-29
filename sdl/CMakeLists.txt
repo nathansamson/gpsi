@@ -6,7 +6,7 @@ include_directories (${GPSI_SOURCE_DIR}/src
                      ${SDLTTF_INCLUDE_DIR}
                      ${SDLGFX_INCLUDE_DIR})
 
-add_executable (sisdl
+add_executable (gpsi
                   ./sdlship.cpp
                   ./sdlusership.cpp
                   ./main.cpp
@@ -22,8 +22,11 @@ add_executable (sisdl
                   ./sdlgamevisualizer.cpp
                   ./sdldriverfactory.cpp)
 
-target_link_libraries (sisdl si ticpp zabbr
+target_link_libraries (gpsi si ticpp zabbr
                              ${SDL_LIBRARY}
                              ${SDLIMAGE_LIBRARY}
                              ${SDLTTF_LIBRARY}
                              ${SDLGFX_LIBRARY})
+
+install(TARGETS gpsi
+        RUNTIME DESTINATION bin)

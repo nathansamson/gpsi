@@ -49,3 +49,6 @@ if(CPPUNIT_FOUND)
 		                            ${CMAKE_SOURCE_DIR}/src/misc/tests/highscores
 		                            ${CMAKE_BINARY_DIR}/src/misc/tests/highscores)
 endif()
+
+install(TARGETS si
+        LIBRARY DESTINATION lib)

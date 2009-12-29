@@ -1,5 +1,11 @@
 cmake_minimum_required (VERSION 2.6)
 project (GPSI)
+set(CPACK_PACKAGE_NAME "s20081398")
+set(CPACK_PACKAGE_VERSION_MAJOR 0)
+set(CPACK_PACKAGE_VERSION_MINOR 9)
+set(CPACK_PACKAGE_VERSION_PATCH beta1)
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Nathan Samson")
+include(CPack)
 
 set(CMAKE_MODULE_PATH "${GPSI_SOURCE_DIR}")
 option(DEBUG "Set true if debug should be used")
@@ -60,3 +66,6 @@ endif()
 execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
 		                            ${CMAKE_SOURCE_DIR}/data
 		                            ${CMAKE_BINARY_DIR}/data)
+
+install(DIRECTORY data/
+        DESTINATION share/gpsi)
