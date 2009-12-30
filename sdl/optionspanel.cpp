@@ -24,10 +24,12 @@ namespace SISDL {
 		table->setWidget(new Zabbr::Label(fWindow, "Placeholder", white), 0, 1);
 		
 		table->setWidget(new Zabbr::Label(fWindow, "Fullscreen*", white), 1, 0);
-		table->setWidget(new Zabbr::Label(fWindow, "Placeholder2", white), 1, 1);
+		fFullscreenCheckbox = new Zabbr::CheckBox(fWindow, false);
+		table->setWidget(fFullscreenCheckbox, 1, 1);
 		
 		table->setWidget(new Zabbr::Label(fWindow, "Sound", white), 2, 0);
-		table->setWidget(new Zabbr::Label(fWindow, "Placeholder3", white), 2, 1);
+		fSoundCheckbox = new Zabbr::CheckBox(fWindow, false);
+		table->setWidget(fSoundCheckbox, 2, 1);
 		
 		table->setWidget(new Zabbr::Label(fWindow, "Name", white), 3, 0);
 		fNameInput = new Zabbr::TextInputWidget(fWindow, "Nathan Samson");
