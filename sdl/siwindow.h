@@ -20,6 +20,8 @@ namespace SISDL {
 	*/
 	class SIWindow : public  SDLWindow {
 	public:
+		SIWindow();
+	
 		void run(bool);
 		void rundemo();
 

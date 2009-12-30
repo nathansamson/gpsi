@@ -18,14 +18,17 @@
 #include "normalgamepanel.h"
 #include "demogamepanel.h"
 #include "optionspanel.h"
+#include "configurationmanager.h"
 #include "siwindow.h"
 
 namespace SISDL {
 
+	SIWindow::SIWindow(): SDLWindow("Space-Invaders") {
+	}
+
 	/**
 	 * Run the space invaders window in demo mode.
 	*/
-	
 	void SIWindow::rundemo() {
 		try {
 			open(640, 480, false);
@@ -51,7 +54,9 @@ namespace SISDL {
 	*/
 	void SIWindow::run(bool game) {
 		try {
-			open(640, 480, false, true);
+			open(ConfigurationManager::getOption<int>("xres", 640),
+			     ConfigurationManager::getOption<int>("yres", 480),
+			     ConfigurationManager::getOption("fullscreen", false), true, 4.0/3.0);
 		} catch (SDLInitializationException e) {
 			std::cerr << "Could not initialize SDL: " << e.getError() << std::endl;
 			return;

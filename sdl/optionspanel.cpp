@@ -22,23 +22,24 @@ namespace SISDL {
 		
 		Zabbr::Table* table = new Zabbr::Table(fWindow, 30, 10, 4, 2);
 		table->setWidget(new Zabbr::Label(fWindow, "Resolution", white), 0, 0);
-		fResolutionCombobox = new Zabbr::ComboBox(fWindow);
-		fResolutionCombobox->addOption("640x480");
-		fResolutionCombobox->addOption("800x600");
-		fResolutionCombobox->addOption("1024x768");
-		fResolutionCombobox->setSelectedOption(ConfigurationManager::getOption<std::string>("resolution"));
+		fResolutionCombobox = new Zabbr::ComboBox<Zabbr::VideoMode>(fWindow);
+		std::vector<Zabbr::VideoMode> resolutions = fWindow->getAvailableResolutions();
+		for(std::vector<Zabbr::VideoMode>::iterator it = resolutions.begin(); it != resolutions.end(); it++) {
+			fResolutionCombobox->addOption((*it));
+		}
+		fResolutionCombobox->setSelectedOption(fWindow->getVideoMode());
 		table->setWidget(fResolutionCombobox, 0, 1);
 		
 		table->setWidget(new Zabbr::Label(fWindow, "Fullscreen*", white), 1, 0);
-		fFullscreenCheckbox = new Zabbr::CheckBox(fWindow, ConfigurationManager::getOption("fullscreen"));
+		fFullscreenCheckbox = new Zabbr::CheckBox(fWindow, ConfigurationManager::getOption("fullscreen", false));
 		table->setWidget(fFullscreenCheckbox, 1, 1);
 		
 		table->setWidget(new Zabbr::Label(fWindow, "Sound", white), 2, 0);
-		fSoundCheckbox = new Zabbr::CheckBox(fWindow, ConfigurationManager::getOption("sound"));
+		fSoundCheckbox = new Zabbr::CheckBox(fWindow, ConfigurationManager::getOption("sound", false));
 		table->setWidget(fSoundCheckbox, 2, 1);
 		
 		table->setWidget(new Zabbr::Label(fWindow, "Name", white), 3, 0);
-		fNameInput = new Zabbr::TextInputWidget(fWindow, ConfigurationManager::getOption<std::string>("name"));
+		fNameInput = new Zabbr::TextInputWidget(fWindow, ConfigurationManager::getOption<std::string>("name", "Nathan Samson"));
 		fNameInput->setWidth(150);
 		table->setWidget(fNameInput, 3, 1);
 		
@@ -84,7 +85,9 @@ namespace SISDL {
 	 * Save the settings and close the window.
 	*/
 	void OptionsPanel::saveAndClose() {
-		ConfigurationManager::setOption<std::string>("resolution", fResolutionCombobox->getSelectedOption());
+		ConfigurationManager::setOption<int>("xres", fResolutionCombobox->getSelectedOption().getX());
+		ConfigurationManager::setOption<int>("yres", fResolutionCombobox->getSelectedOption().getY());
+		fWindow->resize(fResolutionCombobox->getSelectedOption());
 		ConfigurationManager::setOption("fullscreen", fFullscreenCheckbox->isEnabled());
 		ConfigurationManager::setOption("sound", fSoundCheckbox->isEnabled());
 		ConfigurationManager::setOption<std::string>("name", fNameInput->getValue());
