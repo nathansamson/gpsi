@@ -13,21 +13,24 @@ namespace SISDL {
 		 * Returns the value of a boolean option
 		 *
 		 * @param option The name of the option.
+		 * @param default The default value.
+		 *
 		 * @return The value of the option.
 		*/
-		static bool getOption(std::string option) {
-			 return get().getInternalOption(option);
+		static bool getOption(std::string option, bool def) {
+			 return get().getInternalOption(option, def);
 		}
 	
 		/**
 		 * Returns the value of an option
 		 *
 		 * @param option The name of the option.
+		 * @param def The default value
 		 * @return The value of the option.
 		*/
 		template<typename T>
-		static T getOption(std::string option) {
-			 return get().getInternalOption<T>(option);
+		static T getOption(std::string option, T def) {
+			 return get().getInternalOption<T>(option, def);
 		}
 	
 		/**
@@ -95,31 +98,36 @@ namespace SISDL {
 		 * Returns the value of an option
 		 *
 		 * @param option The name of the option.
+		 * @param def The default value.
 		 * @return The value of the option.
 		*/
 		template<typename T>
-		T getInternalOption(std::string name) {
-			T val;
+		T getInternalOption(std::string name, T def) {
 			try {
+				T val;
 				fDocument.FirstChildElement("configuration")->FirstChildElement(name)->GetText(&val);
+				return val;
 			} catch (...) {
+				return def;
 			}
-			return val;
 		}
 		
 		/**
 		 * Returns the value of a boolean option
 		 *
 		 * @param option The name of the option.
+		 * @param def The default value
 		 * @return The value of the option.
 		*/
-		bool getInternalOption(std::string name) {
+		bool getInternalOption(std::string name, bool def) {
 			try {
 				std::string text = fDocument.FirstChildElement("configuration")->FirstChildElement(name)->GetText();
 				if (text == "true") {
 					return true;
-				} else {
+				} else if (text == "false") {
 					return false;
+				} else {
+					return def;
 				}
 			} catch (...) {
 				return false;	
