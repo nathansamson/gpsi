@@ -20,7 +20,7 @@
 			<weapons>
 				<weapon name="normal-gun" />
 			</weapons>
-			<maxspeed x="0.0003" y="0.0002" />
+			<maxspeed x="0.0003" y="0.00005" />
 		</ship>
 		<ship name="X Wing" hitpoints="10">
 			<boundingshape type="boundingbox" w="0.8" h="0.56"/>
@@ -31,9 +31,9 @@
 		</ship>
 	</ships>
 	<enemies>
-		<row y="2.5" shiptype="Obi-Wan_starfighter" count="5" margin="0.0" align="center" driver="syncdriver" />
-		<row y="1.6" shiptype="Obi-Wan_starfighter" count="5" margin="0.0" align="center" driver="syncdriver" />
-		<row y="0.7" shiptype="Obi-Wan_starfighter" count="5" margin="0.0" align="center" driver="syncdriver" />
+		<row y="2.5" shiptype="Obi-Wan_starfighter" count="8" margin="0.0" align="0.5" driver="syncdriver" packed="packed" />
+		<row y="1.6" shiptype="Obi-Wan_starfighter" count="8" margin="0.0" align="center" driver="syncdriver" packed="packed" />
+		<row y="0.7" shiptype="Obi-Wan_starfighter" count="8" margin="0.0" align="-0.5" driver="syncdriver" packed="packed" />
 	</enemies>
 	<usership shiptype="X Wing" />
 </level>
