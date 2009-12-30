@@ -23,11 +23,24 @@ namespace SI {
 	VShipDriver* BuiltinDriverFactory::createEnemyDriver(std::string name,
 	                   std::map<std::string, std::string> atts) {
 		if (name == "syncdriver") {
-			// They can move
-			// 8 - 2 * margin / count
-			double margin = atof(atts["margin"].c_str());
 			int count = atoi(atts["count"].c_str());
-			return new SynchronousDriver((8 - 2 * margin) / (2 * count));
+			if (atts["packed"] == "packed") {
+				// They can move
+				// (8 - width * count) / 2
+				double width = 0.80;
+				double offset;
+				if (atts["align"] == "center") {
+					offset = 0.0;
+				} else {
+					offset = atof(atts["align"].c_str());
+				}
+				return new SynchronousDriver((8 - width * count) / 2, offset);
+			} else {
+				// They can move
+				// 8 - 2 * margin / count
+				double margin = atof(atts["margin"].c_str());
+				return new SynchronousDriver((8 - 2 * margin) / (2 * count));
+			}
 		} else {
 			return 0;
 		}

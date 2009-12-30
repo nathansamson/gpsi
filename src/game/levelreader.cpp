@@ -195,16 +195,22 @@ namespace SI {
 			double margin = rowElement->GetAttribute<double>("margin");
 			std::string align = rowElement->GetAttribute("align");
 			double y = rowElement->GetAttribute<double>("y");
+			bool packed = rowElement->GetAttribute("packed") == "packed";
+			double offset;
+			if (align == "center") {
+				offset = 0.0;
+			} else {
+				offset = rowElement->GetAttribute<double>("align");
+			}
+			double width = (dynamic_cast<BoundingBoxDescription*>(shipType.fBoundingShapeDesc))->getWidth();
 			
 			for (int i = 1; i <= count; i++) {
 				Vector2 pos;
-				double offset;
-				if (align == "center") {
-					offset = 0.0;
-				} else {
-					offset = rowElement->GetAttribute<double>("align");
+				if (packed) {	
+					pos = Vector2((i-1)*(width) + (width / 2) + (8 - width * count) / 2 -4.0 + offset, y); 
+				} else {		
+					pos = Vector2(i*(8.0-2*margin)/(count+1) + offset -4.0 + margin, y);
 				}
-				pos = Vector2(i*(8.0-2*margin)/(count+1) + offset -4.0 + margin, y);
 				
 				ticpp::Iterator<ticpp::Attribute> attribute;
 				std::map<std::string, std::string> attributeMap;

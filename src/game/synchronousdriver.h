@@ -16,6 +16,7 @@ namespace SI {
 	class SynchronousDriver: public VShipDriver {
 	public:
 		SynchronousDriver(double);
+		SynchronousDriver(double, double);
 		
 		virtual void update(int);
 	private:

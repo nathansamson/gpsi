@@ -13,9 +13,19 @@ namespace SI {
 	/**
 	 * A Synchronous driver.
 	 *
-	 * @param xMargin The minimal distance to the border.
+	 * @param xMargin The maximal movement on the x-axis
 	*/
 	SynchronousDriver::SynchronousDriver(double xMargin): fXMargin(xMargin), fMoved(0.0, 0.0), fDir(1) {
+		std::srand(time(0));
+	}
+	
+	/**
+	 * A Synchronous driver.
+	 *
+	 * @param xMargin The maximal movement on the x-axis
+	 * @param offset The movement already done.
+	*/
+	SynchronousDriver::SynchronousDriver(double xMargin, double offset): fXMargin(xMargin), fMoved(offset, 0.0), fDir(1) {
 		std::srand(time(0));
 	}
 	
