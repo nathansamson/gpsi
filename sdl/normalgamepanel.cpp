@@ -12,6 +12,7 @@
 
 #include "normalgamepanel.h"
 #include "highscorepanel.h"
+#include "optionspanel.h"
 #include "sdlkeyboardinputdriver.h"
 #include "sdldriverfactory.h"
 
@@ -95,6 +96,10 @@ namespace SISDL {
 		b->connectOnMouseClick(new Zabbr::ClassCallback1<NormalGamePanel, SDL_MouseButtonEvent>(this, &NormalGamePanel::onResumeGame));
 		fQuitConfirmation->addButton(b);
 
+		b = new Zabbr::Button(fWindow, "Options");
+		b->connectOnClicked(new Zabbr::ClassCallback1<NormalGamePanel, Zabbr::Button*>(this, &NormalGamePanel::onOpenOptions));
+		fQuitConfirmation->addButton(b);
+
 		b = new Zabbr::Button(fWindow, "Quit Game");
 		b->connectOnMouseClick(new Zabbr::ClassCallback1<NormalGamePanel, SDL_MouseButtonEvent>(this, &NormalGamePanel::onQuitGame));
 		fQuitConfirmation->addButton(b);
@@ -152,5 +157,22 @@ namespace SISDL {
 		fQuitConfirmation->openParentPanel();
 		close();
 		openPanel(new HighscorePanel(fWindow, fGame->getUserScore()));
+	}
+	
+	/**
+	 * Callback for the options button
+	*/
+	void NormalGamePanel::onOpenOptions(Zabbr::Button*) {
+		fQuitConfirmation->openParentPanel();
+		OptionsPanel* options = new OptionsPanel(fWindow);
+		options->connectOnClosePanel(new Zabbr::ClassCallback1<NormalGamePanel, Zabbr::VSDLPanel*>(this, &NormalGamePanel::onCloseOptions));
+		openPanel(options);	
+	}
+	
+	/**
+	 * On Close options callback;
+	*/
+	void NormalGamePanel::onCloseOptions(Zabbr::VSDLPanel*) {
+		resume();
 	}
 }

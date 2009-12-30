@@ -7,6 +7,7 @@
  * @author Nathan Samson
 */
 #include "zabbr/widgets/label.h"
+#include "zabbr/widgets/button.h"
 #include "zabbr/panels/menupanel.h"
 #include "gamepanel.h"
 
@@ -29,6 +30,8 @@ namespace SISDL {
 		void onCloseGame(SDL_MouseButtonEvent);
 		void onKeyReleaseQuitConfirmation(Zabbr::VSDLPanel*, SDL_KeyboardEvent);
 		void onQuitConfirmationQuit();
+		void onOpenOptions(Zabbr::Button*);
+		void onCloseOptions(Zabbr::VSDLPanel*);
 	
 		/**
 		 * The input driver for the user.
