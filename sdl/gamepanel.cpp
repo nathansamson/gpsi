@@ -66,6 +66,8 @@ namespace SISDL {
 		fGame = new SI::Game(new SDLEntityFactory(fWindow),
 		                     "data/levels/", "firstlevel.silvl",
 		                     fGameVisualizer, driverFactory);
+		fGame->update(0);
+		fTimer.reset();
 	}
 	
 	/**
