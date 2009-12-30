@@ -5,6 +5,7 @@
 #include "zabbr/widgets/vbox.h"
 #include "zabbr/widgets/table.h"
 #include "zabbr/widgets/label.h"
+#include "configurationmanager.h"
 #include "optionspanel.h"
 
 namespace SISDL {
@@ -25,18 +26,19 @@ namespace SISDL {
 		fResolutionCombobox->addOption("640x480");
 		fResolutionCombobox->addOption("800x600");
 		fResolutionCombobox->addOption("1024x768");
+		fResolutionCombobox->setSelectedOption(ConfigurationManager::getOption<std::string>("resolution"));
 		table->setWidget(fResolutionCombobox, 0, 1);
 		
 		table->setWidget(new Zabbr::Label(fWindow, "Fullscreen*", white), 1, 0);
-		fFullscreenCheckbox = new Zabbr::CheckBox(fWindow, false);
+		fFullscreenCheckbox = new Zabbr::CheckBox(fWindow, ConfigurationManager::getOption("fullscreen"));
 		table->setWidget(fFullscreenCheckbox, 1, 1);
 		
 		table->setWidget(new Zabbr::Label(fWindow, "Sound", white), 2, 0);
-		fSoundCheckbox = new Zabbr::CheckBox(fWindow, false);
+		fSoundCheckbox = new Zabbr::CheckBox(fWindow, ConfigurationManager::getOption("sound"));
 		table->setWidget(fSoundCheckbox, 2, 1);
 		
 		table->setWidget(new Zabbr::Label(fWindow, "Name", white), 3, 0);
-		fNameInput = new Zabbr::TextInputWidget(fWindow, "Nathan Samson");
+		fNameInput = new Zabbr::TextInputWidget(fWindow, ConfigurationManager::getOption<std::string>("name"));
 		fNameInput->setWidth(150);
 		table->setWidget(fNameInput, 3, 1);
 		
@@ -82,7 +84,10 @@ namespace SISDL {
 	 * Save the settings and close the window.
 	*/
 	void OptionsPanel::saveAndClose() {
-		std::cout << fNameInput->getValue() << std::endl;
+		ConfigurationManager::setOption<std::string>("resolution", fResolutionCombobox->getSelectedOption());
+		ConfigurationManager::setOption("fullscreen", fFullscreenCheckbox->isEnabled());
+		ConfigurationManager::setOption("sound", fSoundCheckbox->isEnabled());
+		ConfigurationManager::setOption<std::string>("name", fNameInput->getValue());
 		openParentPanel();
 	}
 }
