@@ -11,13 +11,13 @@
 #include "zabbr/panels/splashpanel.h"
 #include "zabbr/panels/widgetpanel.h"
 #include "zabbr/panels/dialogpanel.h"
-#include "zabbr/widgets/button.h"
 #include "zabbr/widgets/label.h"
 #include "zabbr/widgets/vbox.h"
 #include "zabbr/resources/resourcemanager.h"
 #include "zabbr/misc/fontprefetcher.h"
 #include "normalgamepanel.h"
 #include "demogamepanel.h"
+#include "optionspanel.h"
 #include "siwindow.h"
 
 namespace SISDL {
@@ -78,11 +78,13 @@ namespace SISDL {
 				start->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::startGame));
 				menu->addButton(start);
 			
-				menu->addButton(new Button(this, "Another button"));
+				Button* options = new Button(this, "Options"); 
+				menu->addButton(options);
+				options->connectOnClicked(new ClassCallback1<SIWindow, Button*>(this, &SIWindow::onOpenOptions));
 			
-				Button* b = new Button(this, "Quit");
-				b->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::onQuitButtonClicked));
-				menu->addButton(b);
+				Button* quit = new Button(this, "Quit");
+				quit->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::onQuitButtonClicked));
+				menu->addButton(quit);
 			
 				menu->connectRequestQuit(new ClassCallback0<SIWindow>(this, &SIWindow::onRequestQuitMainMenu));
 				menu->connectOnKeyRelease(new ClassCallback2<SIWindow, Zabbr::VSDLPanel*, SDL_KeyboardEvent>(this, &SIWindow::onMainMenuKeyRelease));
@@ -169,5 +171,12 @@ namespace SISDL {
 		if (event.keysym.sym == SDLK_ESCAPE) {
 			panel->requestQuit();
 		}
+	}
+	
+	/**
+	 * Callback when clicked on the options button.
+	*/
+	void SIWindow::onOpenOptions(Zabbr::Button*) {
+		fPanel->openPanel(new OptionsPanel(this));
 	}
 }

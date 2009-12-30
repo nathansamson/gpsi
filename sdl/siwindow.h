@@ -8,6 +8,7 @@
 */
 
 #include "zabbr/sdlwindow.h"
+#include "zabbr/widgets/button.h"
 #include "zabbr/events/callbacks.h"
 
 namespace SISDL {
@@ -31,6 +32,7 @@ namespace SISDL {
 		void setDataPath();
 		
 		void onMainMenuKeyRelease(Zabbr::VSDLPanel*, SDL_KeyboardEvent);
+		void onOpenOptions(Zabbr::Button*);
 	};
 }
 

@@ -15,6 +15,7 @@ add_executable (gpsi
                   ./normalgamepanel.cpp
                   ./demogamepanel.cpp
                   ./highscorepanel.cpp
+                  ./optionspanel.cpp
                   ./sdlbullet.cpp
                   ./sdlclusterbomb.cpp
                   ./sdlentityfactory.cpp
