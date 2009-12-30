@@ -21,7 +21,11 @@ namespace SISDL {
 		
 		Zabbr::Table* table = new Zabbr::Table(fWindow, 30, 10, 4, 2);
 		table->setWidget(new Zabbr::Label(fWindow, "Resolution", white), 0, 0);
-		table->setWidget(new Zabbr::Label(fWindow, "Placeholder", white), 0, 1);
+		fResolutionCombobox = new Zabbr::ComboBox(fWindow);
+		fResolutionCombobox->addOption("640x480");
+		fResolutionCombobox->addOption("800x600");
+		fResolutionCombobox->addOption("1024x768");
+		table->setWidget(fResolutionCombobox, 0, 1);
 		
 		table->setWidget(new Zabbr::Label(fWindow, "Fullscreen*", white), 1, 0);
 		fFullscreenCheckbox = new Zabbr::CheckBox(fWindow, false);
