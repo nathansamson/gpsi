@@ -5,6 +5,7 @@
 #include "zabbr/widgets/button.h"
 #include "zabbr/widgets/textinput.h"
 #include "zabbr/widgets/checkbox.h"
+#include "zabbr/widgets/combobox.h"
 
 namespace SISDL {
 	/**
@@ -23,6 +24,7 @@ namespace SISDL {
 		Zabbr::TextInputWidget* fNameInput;
 		Zabbr::CheckBox* fSoundCheckbox;
 		Zabbr::CheckBox* fFullscreenCheckbox;
+		Zabbr::ComboBox* fResolutionCombobox;
 	};
 }
 
