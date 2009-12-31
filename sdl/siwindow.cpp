@@ -92,7 +92,7 @@ namespace SISDL {
 				menu->addButton(quit);
 			
 				menu->connectRequestQuit(new ClassCallback0<SIWindow>(this, &SIWindow::onRequestQuitMainMenu));
-				menu->connectOnKeyRelease(new ClassCallback2<SIWindow, Zabbr::VSDLPanel*, SDL_KeyboardEvent>(this, &SIWindow::onMainMenuKeyRelease));
+				menu->connectOnKeyPress(new ClassCallback2<SIWindow, Zabbr::VSDLPanel*, SDL_KeyboardEvent>(this, &SIWindow::onMainMenuKeyPress));
 	
 				SDLWindow::run(splash);
 			} else {
@@ -172,7 +172,7 @@ namespace SISDL {
 		}
 	}
 	
-	void SIWindow::onMainMenuKeyRelease(Zabbr::VSDLPanel* panel, SDL_KeyboardEvent event) {
+	void SIWindow::onMainMenuKeyPress(Zabbr::VSDLPanel* panel, SDL_KeyboardEvent event) {
 		if (event.keysym.sym == SDLK_ESCAPE) {
 			panel->requestQuit();
 		}

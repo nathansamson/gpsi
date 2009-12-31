@@ -13,6 +13,7 @@
 #include "zabbr/widgets/vbox.h"
 #include "zabbr/resources/resourcemanager.h"
 #include "highscorepanel.h"
+#include "configurationmanager.h"
 
 namespace SISDL {
 	/**
@@ -27,7 +28,10 @@ namespace SISDL {
 		     fEnterHighscore(fHighscores.isHighscore(score)) {	
 		
 		if (fEnterHighscore) {
-			fNameInputWidget = new Zabbr::TextInputWidget(fWindow, "Nathan Samson");
+			SDL_Color white = {255, 255, 255};
+			Zabbr::Label* label = new Zabbr::Label(fWindow, "Congratulations! You have a new highscore.", white);
+			dynamic_cast<Zabbr::VBox*>(fTopLevel)->appendWidget(label);
+			fNameInputWidget = new Zabbr::TextInputWidget(fWindow, ConfigurationManager::getOption<std::string>("name", "Your Name"));
 			dynamic_cast<Zabbr::VBox*>(fTopLevel)->appendWidget(fNameInputWidget);
 			dynamic_cast<Zabbr::VBox*>(fTopLevel)->setYAlign(Zabbr::YALIGN_CENTER);
 		} else {
