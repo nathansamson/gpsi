@@ -4,6 +4,7 @@
  * @author Nathan Samson
 */
 
+#include "resources/resourcemanager.h"
 #include "gamepanel.h"
 #include "sdlentityfactory.h"
 
@@ -64,7 +65,7 @@ namespace SISDL {
 	void GamePanel::startGame(SI::IDriverFactory* driverFactory) {
 		fGameVisualizer = new SDLGameVisualizer(fWindow);
 		fGame = new SI::Game(new SDLEntityFactory(fWindow),
-		                     "data/levels/", "firstlevel.silvl",
+		                     Zabbr::ResourceManager::fgDataPath+"/levels/", "firstlevel.silvl",
 		                     fGameVisualizer, driverFactory);
 		fGame->update(0);
 		fTimer.reset();
