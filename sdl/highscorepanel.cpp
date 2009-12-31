@@ -61,13 +61,12 @@ namespace SISDL {
 	}
 
 	/**
-	 * Method called by the window if a key is released.
+	 * Method called by the window if a key is press.
 	 *
 	 * @param evnt The SDL_KeyboardEvent
 	*/
-	void HighscorePanel::keyRelease(SDL_KeyboardEvent evnt) {
+	void HighscorePanel::keyPress(SDL_KeyboardEvent evnt) {
 		if (fEnterHighscore) {
-			fNameInputWidget->keyRelease(evnt);
 			if (evnt.keysym.sym == SDLK_ESCAPE || evnt.keysym.sym == SDLK_RETURN) {
 				fEnterHighscore = false;
 				SI::Highscores::UpdatedHighscoreList hiList = fHighscores.setHighscore(fNameInputWidget->getValue(), fScore, 3, 8);
@@ -99,6 +98,10 @@ namespace SISDL {
 		} else {
 			openParentPanel();
 		}
+	}
+	
+	void HighscorePanel::keyRelease(SDL_KeyboardEvent evnt) {
+		if (fEnterHighscore) fNameInputWidget->keyRelease(evnt);
 	}
 	
 	/**

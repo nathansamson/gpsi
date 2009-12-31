@@ -23,6 +23,7 @@ namespace SISDL {
 		virtual ~HighscorePanel();
 
 		//virtual void draw();
+		virtual void keyPress(SDL_KeyboardEvent);
 		virtual void keyRelease(SDL_KeyboardEvent);
 	private:
 		static std::string getHighscoreFile();
