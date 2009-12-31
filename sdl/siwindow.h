@@ -33,7 +33,7 @@ namespace SISDL {
 	private:
 		void setDataPath();
 		
-		void onMainMenuKeyRelease(Zabbr::VSDLPanel*, SDL_KeyboardEvent);
+		void onMainMenuKeyPress(Zabbr::VSDLPanel*, SDL_KeyboardEvent);
 		void onOpenOptions(Zabbr::Button*);
 	};
 }
