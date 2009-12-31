@@ -15,7 +15,11 @@ namespace SI {
 	*/
 	class AmmoType {
 	public:
+		AmmoType(IBoundingShapeDescription* shape): fBoundingShapeDesc(shape) {}
 		virtual ~AmmoType() { delete fBoundingShapeDesc; }
+		
+		IBoundingShapeDescription* getShape() {return fBoundingShapeDesc;}
+	private:
 		
 		/**
 		 * The bounding shape of the bullet.

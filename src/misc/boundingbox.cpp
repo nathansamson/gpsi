@@ -33,6 +33,15 @@ namespace SI {
 	VBoundingShape* BoundingBoxDescription::createShape() {
 		return new BoundingBox(this);
 	}
+	
+	/**
+	 * Copy the bounding box description.
+	 *
+	 * @return A copy of the bounding box
+	*/
+	BoundingBoxDescription* BoundingBoxDescription::copy() {
+		return new BoundingBoxDescription(*this);
+	}
 
 	/**
 	 * Returns the width of the bounding box.
@@ -101,5 +110,23 @@ namespace SI {
 				throw UnresolvedIntersectionException(o, this);
 			}
 		}
+	}
+	
+	/**
+	 * Returns the width of the bounding box.
+	 *
+	 * @return the width.
+	*/
+	double BoundingBox::getWidth() {
+		return fW;
+	}
+	
+	/**
+	 * Returns the height of the bounding box.
+	 *
+	 * @return the height.
+	*/
+	double BoundingBox::getHeight() {
+		return fH;
 	}
 }

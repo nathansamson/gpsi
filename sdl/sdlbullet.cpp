@@ -22,10 +22,9 @@ namespace SISDL {
 	SDLBullet::SDLBullet(SI::Vector2 speed, int dir, SI::EntityGroup* group,
 	                     SI::BulletType* t, SI::IGameEntityFactory* fac,
 	                     Zabbr::SDLWindow* w):
-	           SI::Bullet(speed, dir, group, t, fac), fWindow(w), ticksSinceDead(0),
-	           fBoundingBox(SI::BoundingBoxDescription(*dynamic_cast<SI::BoundingBoxDescription*>(t->fBoundingShapeDesc))) {
-	    int width = fBoundingBox.getWidth() / 8.0 * fWindow->getXResolution();
-	    int height = fBoundingBox.getHeight() / 6.0 * fWindow->getYResolution();
+	           SI::Bullet(speed, dir, group, t, fac), fWindow(w), ticksSinceDead(0) {
+	    int width = getWidth() / 8.0 * fWindow->getXResolution();
+	    int height = getHeight() / 6.0 * fWindow->getYResolution();
 		fImage = Zabbr::ResourceManager::manager().image("bullet.png", width, height, false, dir);
 		fCbID = fWindow->connectOnScreenSizeChanged(new Zabbr::ClassCallback3<SDLBullet, Zabbr::SDLWindow*, int, int>(this, &SDLBullet::onScreenSizeChanged));
 	}
@@ -101,8 +100,8 @@ namespace SISDL {
 	*/
 	void SDLBullet::onScreenSizeChanged(Zabbr::SDLWindow* w, int x, int y) {
 		Zabbr::ResourceManager::manager().free(fImage);
-		int width = fBoundingBox.getWidth() / 8.0 * x;
-	    int height = fBoundingBox.getHeight() / 6.0 * y;
+		int width = getWidth() / 8.0 * x;
+	    int height = getHeight() / 6.0 * y;
 		fImage = Zabbr::ResourceManager::manager().image("bullet.png", width, height, false, getDirection());
 	}
 }

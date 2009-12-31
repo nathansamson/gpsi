@@ -46,11 +46,6 @@ namespace SISDL {
 		int ticksSinceDead;
 		
 		/**
-		 * The bounding box of the bullet.
-		*/
-		SI::BoundingBoxDescription fBoundingBox;
-		
-		/**
 		 * The callback ID of the screen resized param.
 		*/
 		int fCbID;

@@ -26,11 +26,10 @@ namespace SISDL {
 	                 SI::EntityGroup* group,
 	                 SI::ShipType t, SI::IGameEntityFactory* fac,
 	                 SI::Weaponery* weaponery, Zabbr::SDLWindow* w):
-	         SI::Ship(driver, v, dir, group, t, fac, weaponery), fWindow(w), ticksSinceDead(0),
-	         fBoundingBox(SI::BoundingBoxDescription(*dynamic_cast<SI::BoundingBoxDescription*>(t.fBoundingShapeDesc))) {
-	    int width = fBoundingBox.getWidth() / 8.0 * fWindow->getXResolution();
-	    int height = fBoundingBox.getHeight() / 6.0 * fWindow->getYResolution();
-		fImage = Zabbr::ResourceManager::manager().image(t.fName+".png", width, height, false, dir);
+	         SI::Ship(driver, v, dir, group, t, fac, weaponery), fWindow(w), ticksSinceDead(0) {
+	    int width = getWidth() / 8.0 * fWindow->getXResolution();
+	    int height = getHeight() / 6.0 * fWindow->getYResolution();
+		fImage = Zabbr::ResourceManager::manager().image(t.getName()+".png", width, height, false, dir);
 		fCbID = fWindow->connectOnScreenSizeChanged(new Zabbr::ClassCallback3<SDLShip, Zabbr::SDLWindow*, int, int>(this, &SDLShip::onScreenSizeChanged));
 	}
 	
@@ -108,8 +107,8 @@ namespace SISDL {
 	*/
 	void SDLShip::onScreenSizeChanged(Zabbr::SDLWindow* w, int x, int y) {
 		Zabbr::ResourceManager::manager().free(fImage);
-		int width = fBoundingBox.getWidth() / 8.0 * x;
-	    int height = fBoundingBox.getHeight() / 6.0 * y;
-		fImage = Zabbr::ResourceManager::manager().image(fShipType.fName+".png", width, height, false, getDirection());
+		int width = getWidth() / 8.0 * x;
+	    int height = getHeight() / 6.0 * y;
+		fImage = Zabbr::ResourceManager::manager().image(fShipType.getName()+".png", width, height, false, getDirection());
 	}
 }

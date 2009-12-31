@@ -47,11 +47,6 @@ namespace SISDL {
 		int ticksSinceDead;
 		
 		/**
-		 * The bounding box of the ship.
-		*/
-		SI::BoundingBoxDescription fBoundingBox;
-		
-		/**
 		 * The callback ID of the screen resized param.
 		*/
 		int fCbID;
