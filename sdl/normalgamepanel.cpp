@@ -61,6 +61,11 @@ namespace SISDL {
 		GamePanel::keyPress(evnt);
 		fInputDriver = fDriverFactory->getUserDriver();
 		if (!fGame->isUserDead()) fInputDriver->keyDown(evnt);
+		if (!fGame->isPlaying()) {
+			HighscorePanel* panel = new HighscorePanel(fWindow, fGame->getUserScore());
+			panel->connectOnClosePanel(new Zabbr::ClassCallback1<NormalGamePanel, Zabbr::VSDLPanel*>(this, &NormalGamePanel::onHighscoreClose));
+			openPanel(panel);
+		}
 	}
 	
 	/**
@@ -73,16 +78,6 @@ namespace SISDL {
 		if (!fGame->isUserDead()) fInputDriver->keyRelease(evnt);
 		if (evnt.keysym.sym == SDLK_ESCAPE) {
 			requestQuit();
-		} else if (evnt.keysym.sym == SDLK_RETURN) {
-			if (!fGame->isPlaying()) {
-				// TODO: Show a menu to choose what to do
-				
-				// Play new game
-				// Go to main menu
-				// Quit
-				close();
-				openPanel(new HighscorePanel(fWindow, fGame->getUserScore()));
-			}
 		}
 	}
 	
@@ -174,5 +169,17 @@ namespace SISDL {
 	*/
 	void NormalGamePanel::onCloseOptions(Zabbr::VSDLPanel*) {
 		resume();
+	}
+	
+	/**
+	 * Callback when the highscores close.
+	*/
+	void NormalGamePanel::onHighscoreClose(Zabbr::VSDLPanel*) {
+			// TODO: Show a menu to choose what to do
+			
+			// Play new game
+			// Go to main menu
+			// Quit
+			close();
 	}
 }

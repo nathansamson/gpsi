@@ -32,6 +32,7 @@ namespace SISDL {
 		void onQuitConfirmationQuit();
 		void onOpenOptions(Zabbr::Button*);
 		void onCloseOptions(Zabbr::VSDLPanel*);
+		void onHighscoreClose(Zabbr::VSDLPanel*);
 	
 		/**
 		 * The input driver for the user.

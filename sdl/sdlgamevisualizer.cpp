@@ -75,9 +75,6 @@ namespace SISDL {
 	 * @param evnt The SDL_KeyboardEvent the keyboard event.
 	*/
 	void SDLGameVisualizer::keyPress(SDL_KeyboardEvent evnt) {
-		if (!fInNonGamePhase) return;
-		if (evnt.keysym.sym == SDLK_RETURN || evnt.keysym.sym == SDLK_SPACE) {
-			fInNonGamePhase = false;
-		}
+		fInNonGamePhase = false;
 	}
 }
