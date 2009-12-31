@@ -17,6 +17,10 @@ namespace SI {
 	*/
 	class BulletType: public AmmoType {
 	public:
+		BulletType(IBoundingShapeDescription*, Vector2);
+	
+		Vector2 getSpeed();
+	private:
 		/**
 		 * The speed of the bullet.
 		*/

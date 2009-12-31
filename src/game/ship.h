@@ -20,7 +20,18 @@ namespace SI {
 	/**
 	 * Description of a ship.
 	*/
-	struct ShipType {
+	class ShipType {
+	public:
+		ShipType();
+		ShipType(std::string, IBoundingShapeDescription*, 
+		         std::vector<std::string>, Vector2, int);
+		ShipType(const ShipType&);
+		~ShipType();
+
+		std::string getName();
+		double getWidth();
+		friend class Ship;
+	private:
 		/**
 		 * The bounding shape of the ship.
 		*/

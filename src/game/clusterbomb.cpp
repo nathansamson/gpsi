@@ -9,6 +9,39 @@
 
 namespace SI {
 	/**
+	 * Constructor.
+	 *
+	 * @param shape The shape of the bomb.
+	 * @param speed The speed of the bomb
+	 * @param ticksAlive The number of ticks before it explodes
+	 * @param bulletType The type of the bullet.
+	 * @param noBullets The number of bullets.
+	*/
+	ClusterBombType::ClusterBombType(IBoundingShapeDescription* shape,
+	                                 Vector2 speed, int ticksAlive,
+	                                 BulletType* bulletType, int noBullets):
+	                    AmmoType(shape),
+	                    fSpeed(speed), fBulletType(bulletType),
+	                    fBullets(noBullets), fMaxTicksAlive(ticksAlive) {
+	}
+	
+	Vector2 ClusterBombType::getSpeed() {
+		return fSpeed;
+	}
+	
+	int ClusterBombType::getTicksAlive() {
+		return fMaxTicksAlive;
+	}
+	
+	BulletType* ClusterBombType::getBulletType() {
+		return fBulletType;
+	}
+	
+	int ClusterBombType::getNumberOfBullets() {
+		return fBullets;
+	}
+
+	/**
 	 * Public constructor.
 	 *
 	 * @param pos The position of the cluster bomb.
@@ -19,7 +52,7 @@ namespace SI {
 	*/
 	ClusterBomb::ClusterBomb(Vector2 pos, int dir, EntityGroup* group,
 	                         ClusterBombType* type, IGameEntityFactory* fac):
-	    IProjectile(pos, dir, type->fBoundingShapeDesc, group, fac),
+	    IProjectile(pos, dir, type->getShape(), group, fac),
 	    fClusterBombType(type), fTicksAlive(0), fExploded(false) {
 	}
 	
@@ -35,18 +68,18 @@ namespace SI {
 			return std::vector<VGameEntity*>();
 		}
 		fTicksAlive += ticks;
-		if (fTicksAlive > fClusterBombType->fMaxTicksAlive) {
+		if (fTicksAlive > fClusterBombType->getTicksAlive()) {
 			fExploded = true;
 		}
-		move(ticks * fClusterBombType->fSpeed);
+		move(ticks * fClusterBombType->getSpeed());
 		if (fExploded) {
 			// return something
 			std::vector<VGameEntity*> bullets;
-			for (int i = 0; i < fClusterBombType->fBullets; i++) {
+			for (int i = 0; i < fClusterBombType->getNumberOfBullets(); i++) {
 				int rotated = 0;
 				
-				rotated = (i+1)*1.0/(fClusterBombType->fBullets+1) * 180 - 90;
-				bullets.push_back(fEntityFactory->createBullet(getPosition(), rotated, getGroup(), fClusterBombType->fBulletType));
+				rotated = (i+1)*1.0/(fClusterBombType->getNumberOfBullets()+1) * 180 - 90;
+				bullets.push_back(fEntityFactory->createBullet(getPosition(), rotated, getGroup(), fClusterBombType->getBulletType()));
 			}
 			die();
 			return bullets;

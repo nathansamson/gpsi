@@ -18,12 +18,9 @@ namespace SITest {
 	
 	void SynchronousDriverTest::setUp() {
 		fDriver = new SI::SynchronousDriver(2.0);
-		ShipType t;
-		t.fBoundingShapeDesc = new BoundingBoxDescription(0.0, 0.0);
-		t.fMaxSpeed = Vector2(0.0002, 0.0001);
+		ShipType t("Mock", new BoundingBoxDescription(1.0, 1.0), std::vector<std::string>(), Vector2(0.0002, 0.0001), 0);
 		fEntityFactory = new MockGameEntityFactory();
 		fShip = new SITest::MockShip(fDriver, SI::Vector2(0.0, 0.0), 0, 0, 0, t, fEntityFactory);
-		delete t.fBoundingShapeDesc;
 	}
 	
 	void SynchronousDriverTest::tearDown() {

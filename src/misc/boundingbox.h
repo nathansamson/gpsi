@@ -19,9 +19,10 @@ namespace SI {
 	public:
 		BoundingBoxDescription(double, double);
 		BoundingBoxDescription(const BoundingBoxDescription&);
+		virtual BoundingBoxDescription* copy();
 		virtual VBoundingShape* createShape();
 		
-		double getWidth();
+		virtual double getWidth();
 		double getHeight();
 	private:
 		/**
@@ -43,6 +44,9 @@ namespace SI {
 		BoundingBox(BoundingBoxDescription*);
 	
 		virtual bool intersects(VBoundingShape*);
+		
+		virtual double getWidth();
+		virtual double getHeight();
 	protected:
 		virtual bool intersects(VBoundingShape*, bool);
 	private:

@@ -100,6 +100,24 @@ namespace SI {
 	}
 	
 	/**
+	 * Returns the width of the entity.
+	 *
+	 * @return The width of the entity.
+	*/
+	double VGameEntity::getWidth() {
+		return fBoundingShape->getWidth();
+	}
+	
+	/**
+	 * Returns the height of the entity.
+	 *
+	 * @return The height of the entity.
+	*/
+	double VGameEntity::getHeight() {
+		return fBoundingShape->getHeight();
+	}
+	
+	/**
 	 * Visualize the entity. The VGameEntity will do nothing.
 	*/
 	void VGameEntity::visualize() {

@@ -11,9 +11,8 @@ namespace SITest {
 	                                   &BulletTest::name) \
 	
 	void BulletTest::setUp() {
-		BulletType* b = new BulletType();
-		b->fSpeed = Vector2(0.000, 0.001);
-		b->fBoundingShapeDesc = new BoundingBoxDescription(0.1, 0.1);
+		IBoundingShapeDescription* shape = new BoundingBoxDescription(0.1, 0.1);
+		BulletType* b = new BulletType(shape, Vector2(0.000, 0.001));
 		fBullet = new Bullet(Vector2(0.0, 0.0), 0, 0, b, 0);
 		delete b;
 	}

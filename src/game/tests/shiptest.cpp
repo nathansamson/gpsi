@@ -13,12 +13,9 @@ namespace SITest {
 	                                   &ShipTest::name) \
 	
 	void ShipTest::setUp() {
-		ShipType s;
-		s.fBoundingShapeDesc = new BoundingBoxDescription(1.0, 1.0);
-		s.fMaxSpeed = Vector2(0.01, 0);
+		ShipType s("Mock", new BoundingBoxDescription(1.0, 1.0), std::vector<std::string>(), Vector2(0.01, 0), 0);
 		fEntityFactory = new MockGameEntityFactory();
 		fShip = new Ship(new MockShipDriver(), Vector2(0, 0), 0, 0, s, fEntityFactory, 0);
-		delete s.fBoundingShapeDesc;
 	}
 	
 	void ShipTest::tearDown() {

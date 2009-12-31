@@ -30,6 +30,16 @@ namespace SI {
 		*/
 		virtual bool intersects(VBoundingShape*, bool) = 0;
 		
+		/**
+		 * Returns the width of the shape.
+		*/
+		virtual double getWidth() = 0;
+		
+		/**
+		 * Returns the height of the shape.
+		*/
+		virtual double getHeight() = 0;
+		
 		void setOffset(Vector2);
 	protected:
 
@@ -51,6 +61,18 @@ namespace SI {
 		 * @return The bounding shape created from the blueprint.
 		*/
 		virtual VBoundingShape* createShape() = 0;
+		
+		/**
+		 * Returns the width of the shape.
+		*/
+		virtual double getWidth() = 0;
+		
+		/**
+		 * Copies the shape
+		 *
+		 * @return A copy of the shape.
+		*/
+		virtual IBoundingShapeDescription* copy() = 0;
 	};
 	
 	/**

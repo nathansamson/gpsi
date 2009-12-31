@@ -46,6 +46,9 @@ namespace SI {
 		void checkCollision(VGameEntity*);
 		bool isDead();
 		bool crossesLine(double);
+		
+		double getWidth();
+		double getHeight();
 	protected:
 		void move(Vector2);
 		

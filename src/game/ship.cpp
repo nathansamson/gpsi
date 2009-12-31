@@ -11,6 +11,59 @@
 namespace SI {
 
 	/**
+	 * Default constructor, do not use.
+	*/
+	ShipType::ShipType(): fBoundingShapeDesc(0) {
+	}
+
+	/**
+	 * Public constructor.
+	 *
+	 * @param name The name of the ship.
+	 * @param shape The shape of the ship. The shiptype is the owner of this object.
+	 * @param weapons A list of weapons
+	 * @param speed The speed of the ship
+	 * @param hitpoints The hit points
+	*/
+	ShipType::ShipType(std::string name, IBoundingShapeDescription* shape, 
+		         std::vector<std::string> weapons, Vector2 speed, int hitpoints):
+		         fBoundingShapeDesc(shape), fName(name), fWeapons(weapons),
+		         fMaxSpeed(speed), fHitPoints(hitpoints) {
+	}
+	
+	ShipType::ShipType(const ShipType& other):
+	             fName(other.fName), fWeapons(other.fWeapons),
+		         fMaxSpeed(other.fMaxSpeed), fHitPoints(other.fHitPoints) {
+		if (other.fBoundingShapeDesc) {
+			fBoundingShapeDesc = other.fBoundingShapeDesc->copy();
+		} else {
+			fBoundingShapeDesc = 0;
+		}
+	}
+	
+	/**
+	 * Returns the name of the ship.
+	 *
+	 * @return The name of the ship.
+	*/
+	std::string ShipType::getName() {
+		return fName;
+	}
+	
+	/**
+	 * Returns the width of the ship.
+	 *
+	 * @return The widht of the ship.
+	*/
+	double ShipType::getWidth() {
+		return fBoundingShapeDesc->getWidth();
+	}
+	
+	ShipType::~ShipType() {
+		if (fBoundingShapeDesc) delete fBoundingShapeDesc;
+	}
+
+	/**
 	 * Public constructor.
 	 *
 	 * @param driver The driver for the ship. The ship manages the driver, 
@@ -29,7 +82,7 @@ namespace SI {
 	      fWeaponery(weaponery), fHP(type.fHitPoints) {
 		fShipDriver->bind(this);
 		fActiveWeapon = 0;
-		for (std::vector<std::string>::iterator it = type.fWeapons.begin(); it != type.fWeapons.end(); it++) {
+		for (std::vector<std::string>::iterator it = fShipType.fWeapons.begin(); it != fShipType.fWeapons.end(); it++) {
 			fWeapons.push_back(fWeaponery->getWeapon((*it), this));
 		}
 	}

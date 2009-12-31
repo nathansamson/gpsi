@@ -13,17 +13,13 @@ namespace SITest {
 	
 	void GunTest::setUp() {
 		fEntityFactory = new MockGameEntityFactory();
-		ShipType shiptype;
-		shiptype.fBoundingShapeDesc = new BoundingBoxDescription(1.0, 1.0);
-		fBulletType = new BulletType;
-		fBulletType->fSpeed = Vector2(0.0, 0.01);
-		fBulletType->fBoundingShapeDesc = new BoundingBoxDescription(0.1, 0.1);
+		ShipType shiptype("Mock", new BoundingBoxDescription(1.0, 1.0), std::vector<std::string>(), Vector2(0.0002, 0.0001), 0);
+		fBulletType = new BulletType(new BoundingBoxDescription(0.1, 0.1), Vector2(0.0, 0.01));
 		fEntityGroup = new EntityGroup("group");
 		fShip = new Ship(new MockShipDriver(), Vector2(0, 0), 0, fEntityGroup, shiptype, fEntityFactory, 0);
 		GunBlueprint* blueprint = new GunBlueprint(500, fEntityFactory, Vector2(1.0, 0.5), fBulletType);
 		fGun = blueprint->attachWeaponToShip(fShip);
 		delete blueprint;
-		delete shiptype.fBoundingShapeDesc;
 	}
 	
 	void GunTest::tearDown() {

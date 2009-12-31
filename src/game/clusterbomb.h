@@ -17,6 +17,13 @@ namespace SI {
 	*/
 	class ClusterBombType: public AmmoType {
 	public:
+		ClusterBombType(IBoundingShapeDescription*, Vector2, int, BulletType*, int);
+		
+		Vector2 getSpeed();
+		int getTicksAlive();
+		BulletType* getBulletType();
+		int getNumberOfBullets();
+	private:
 		/**
 		 * The speed of the bomb.
 		*/

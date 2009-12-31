@@ -24,6 +24,14 @@ namespace SITest {
 			}
 		}
 		
+		virtual double getWidth() {
+			return 0.1;
+		}
+		
+		virtual double getHeight() {
+			return 0.1;
+		}
+		
 		bool fRecursive;
 	};
 

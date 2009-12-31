@@ -39,8 +39,8 @@ namespace SI {
 	 * Desctructor.
 	*/
 	LevelReader::~LevelReader() {
-		for (std::map<std::string, ShipType>::iterator it = fShipTypes.begin(); it != fShipTypes.end(); it++) {
-			delete (*it).second.fBoundingShapeDesc;
+		for (std::map<std::string, ShipType*>::iterator it = fShipTypes.begin(); it != fShipTypes.end(); it++) {
+			delete (*it).second;
 		}
 	}
 	
@@ -71,12 +71,16 @@ namespace SI {
 		{// Bullets
 			ticpp::Iterator<ticpp::Element> bulletNode("bullet");
 			for (bulletNode = bulletNode.begin(ammoNode); bulletNode != bulletNode.end(); bulletNode++) {
-				BulletType* bullet = new BulletType();
-				parseBoundingShape(bullet->fBoundingShapeDesc,
+				IBoundingShapeDescription* shape;
+				parseBoundingShape(shape,
 					               bulletNode->FirstChild("boundingshape")->ToElement());
+
 				double ySpeed;
 				bulletNode->FirstChild("speed")->ToElement()->GetText(&ySpeed);
-				bullet->fSpeed = Vector2(0.0, ySpeed);
+				Vector2 speed = Vector2(0.0, ySpeed);
+				
+				BulletType* bullet = new BulletType(shape, speed);
+				
 				fWeaponery->addAmmo(bulletNode->GetAttribute("id"), bullet);
 			}
 		}
@@ -85,19 +89,22 @@ namespace SI {
 			// Cluster bombs
 			ticpp::Iterator<ticpp::Element> clusterNode("clusterbomb");
 			for (clusterNode = clusterNode.begin(ammoNode); clusterNode != clusterNode.end(); clusterNode++) {
-				ClusterBombType* cluster = new ClusterBombType();
-				parseBoundingShape(cluster->fBoundingShapeDesc,
+				IBoundingShapeDescription* shape;
+				parseBoundingShape(shape,
 					               clusterNode->FirstChild("boundingshape")->ToElement());
 				double ySpeed;
 				clusterNode->FirstChild("speed")->ToElement()->GetText(&ySpeed);
-				cluster->fSpeed = Vector2(0.0, ySpeed);
-				clusterNode->FirstChild("maxticksalive")->ToElement()->GetText(&cluster->fMaxTicksAlive);
+				Vector2 speed = Vector2(0.0, ySpeed);
+				int ticksAlive;
+				clusterNode->FirstChild("maxticksalive")->ToElement()->GetText(&ticksAlive);
 				
-				clusterNode->FirstChild("bullets")->ToElement()->GetText(&cluster->fBullets);
-				cluster->fBulletType = fWeaponery->getAmmoType<BulletType>(
+				int bullets;
+				clusterNode->FirstChild("bullets")->ToElement()->GetText(&bullets);
+				BulletType* type = fWeaponery->getAmmoType<BulletType>(
 				                         clusterNode->FirstChild("bullet-type")
 				                                    ->ToElement()->GetText());
 				
+				ClusterBombType* cluster = new ClusterBombType(shape, speed, ticksAlive, type, bullets);
 				fWeaponery->addAmmo(clusterNode->GetAttribute("id"), cluster);
 			}
 		}
@@ -140,26 +147,26 @@ namespace SI {
 	 *
 	 * @return A map with ID's and shiptypes.
 	*/
-	std::map<std::string, ShipType> LevelReader::parseShipTypes() {
-		std::map<std::string, ShipType> shipTypes;
+	std::map<std::string, ShipType*> LevelReader::parseShipTypes() {
+		std::map<std::string, ShipType*> shipTypes;
 		ticpp::Element* shipsNode = fLevel.FirstChild("level")->FirstChild("ships")->ToElement();
 		ticpp::Iterator<ticpp::Element> shipTypeNode("ship");
 		for (shipTypeNode = shipTypeNode.begin(shipsNode); shipTypeNode != shipTypeNode.end(); shipTypeNode++) {
-			ShipType shipType;
-			shipType.fName = (*shipTypeNode).GetAttribute("name");
+			std::string name = (*shipTypeNode).GetAttribute("name");
 			ticpp::Element* boundingshape = (*shipTypeNode).FirstChild("boundingshape")->ToElement();
-			parseBoundingShape(shipType.fBoundingShapeDesc, boundingshape);
+			IBoundingShapeDescription* shape;
+			parseBoundingShape(shape, boundingshape);
 			
 			ticpp::Element* weaponsNode = shipTypeNode->FirstChild("weapons")->ToElement();
 			ticpp::Iterator<ticpp::Element> weaponNode("weapon");
+			std::vector<std::string> weapons;
 			for (weaponNode = weaponNode.begin(weaponsNode); weaponNode != weaponNode.end(); weaponNode++) {
-				shipType.fWeapons.push_back(weaponNode->GetAttribute("name"));
+				weapons.push_back(weaponNode->GetAttribute("name"));
 			}
-			shipType.fMaxSpeed = parseVector(shipTypeNode->FirstChild("maxspeed")->ToElement());
-			//shipType.fMaxAbsSpeedDiff = parseVector(shipTypeNode->FirstChild("maxspeeddiff")->ToElement());
-			shipType.fHitPoints = shipTypeNode->GetAttribute<int>("hitpoints");
+			Vector2 speed = parseVector(shipTypeNode->FirstChild("maxspeed")->ToElement());
+			int hitpoints = shipTypeNode->GetAttribute<int>("hitpoints");
 			
-			shipTypes[shipType.fName] = shipType;
+			shipTypes[name] = new ShipType(name, shape, weapons, speed, hitpoints);
 		}
 		return shipTypes;
 	}
@@ -190,7 +197,7 @@ namespace SI {
 		ticpp::Element* enemiesNode = fLevel.FirstChild("level")->FirstChild("enemies")->ToElement();
 		ticpp::Iterator<ticpp::Element> rowElement("row");
 		for (rowElement = rowElement.begin(enemiesNode); rowElement != rowElement.end(); rowElement++) {
-			ShipType shipType = fShipTypes[rowElement->GetAttribute("shiptype")];
+			ShipType shipType = *fShipTypes[rowElement->GetAttribute("shiptype")];
 			int count = rowElement->GetAttribute<int>("count");
 			double margin = rowElement->GetAttribute<double>("margin");
 			std::string align = rowElement->GetAttribute("align");
@@ -202,7 +209,7 @@ namespace SI {
 			} else {
 				offset = rowElement->GetAttribute<double>("align");
 			}
-			double width = (dynamic_cast<BoundingBoxDescription*>(shipType.fBoundingShapeDesc))->getWidth();
+			double width = shipType.getWidth();
 			
 			for (int i = 1; i <= count; i++) {
 				Vector2 pos;
@@ -236,7 +243,7 @@ namespace SI {
 	*/
 	Ship* LevelReader::getUserShip(EntityGroup* userGroup) {
 		ticpp::Element* shipNode = fLevel.FirstChild("level")->FirstChild("usership")->ToElement();
-		ShipType shipType = fShipTypes[shipNode->GetAttribute("shiptype")];
+		ShipType shipType = *fShipTypes[shipNode->GetAttribute("shiptype")];
 		return fEntityFactory->createUserShip(fDriverFactory->createUserDriver(),
 				                         Vector2(0, -2.0), 0, userGroup, fWeaponery,
 				                         shipType);
