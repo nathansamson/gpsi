@@ -21,10 +21,12 @@ namespace SI {
 		for (std::map<std::string, VWeaponBlueprint*>::iterator it = fWeapons.begin(); it != fWeapons.end(); it++) {
 			delete (*it).second;
 		}
+		fWeapons.clear();
 		
 		for (std::map<std::string, AmmoType*>::iterator it = fAmmo.begin(); it != fAmmo.end(); it++) {
 			delete (*it).second;
 		}
+		fAmmo.clear();
 	}
 
 	/**

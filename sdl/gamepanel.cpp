@@ -4,6 +4,8 @@
  * @author Nathan Samson
 */
 
+#include <exception>
+
 #include "resources/resourcemanager.h"
 #include "gamepanel.h"
 #include "sdlentityfactory.h"
@@ -16,7 +18,7 @@ namespace SISDL {
 	 * @param w The Window
 	*/
 	GamePanel::GamePanel(Zabbr::SDLWindow* w): Zabbr::VSDLPanel(w),
-	                fGame(0), fTimeRemainder(0.0), fClosed(false) {
+	                fGame(0), fTimeRemainder(0.0), fClosed(false), fErrorLabel(0) {
 	}
 	
 	/**
@@ -25,6 +27,7 @@ namespace SISDL {
 	GamePanel::~GamePanel() {
 		delete fGame;
 		delete fGameVisualizer;
+		if (fErrorLabel) delete fErrorLabel;
 	}
 	
 	/**
@@ -33,6 +36,13 @@ namespace SISDL {
 	void GamePanel::draw() {
 		if (fClosed && !fIsBackground) {
 			openParentPanel();
+			return;
+		}
+		
+		if (fErrorLabel) {
+			fErrorLabel->draw(fWindow->getXResolution() / 2 - fErrorLabel->getWidth() / 2,
+			                  fWindow->getYResolution() / 2 - fErrorLabel->getHeight() / 2);
+			return;
 		}
 		
 		if (!fTimer.isPaused()) {
@@ -40,7 +50,12 @@ namespace SISDL {
 			int ticks = (time + fTimeRemainder) * 1000;
 			fTimeRemainder = ((time + fTimeRemainder) * 1000 - ticks) / 1000;
 		
-			fGame->update(ticks);
+			try {
+				fGame->update(ticks);
+			} catch (std::exception& e) {
+				error(e.what());
+				return;
+			}
 		} else {
 			fGame->update(0); // Let the entities draw themselves.
 		}
@@ -57,6 +72,9 @@ namespace SISDL {
 	*/
 	void GamePanel::keyPress(SDL_KeyboardEvent evnt) {
 		fGameVisualizer->keyPress(evnt);
+		if (fErrorLabel) {
+			close();
+		}
 	}
 	
 	/**
@@ -64,10 +82,15 @@ namespace SISDL {
 	*/
 	void GamePanel::startGame(SI::IDriverFactory* driverFactory) {
 		fGameVisualizer = new SDLGameVisualizer(fWindow);
-		fGame = new SI::Game(new SDLEntityFactory(fWindow),
-		                     Zabbr::ResourceManager::fgDataPath+"/levels/", "firstlevel.silvl",
-		                     fGameVisualizer, driverFactory);
+		try {
+			fGame = new SI::Game(new SDLEntityFactory(fWindow),
+			                     Zabbr::ResourceManager::fgDataPath+"/levels/", "firstlevel.silvl",
+			                     fGameVisualizer, driverFactory);
 		fGame->update(0);
+		} catch (std::exception& e) {
+			error(e.what());
+			return;
+		}
 		fTimer.reset();
 	}
 	
@@ -76,6 +99,14 @@ namespace SISDL {
 	*/
 	void GamePanel::close() {
 		fClosed = true;
+	}
+	
+	/**
+	 * Show an error.
+	*/
+	void GamePanel::error(std::string error) {
+		SDL_Color white = {255, 255, 255};
+		fErrorLabel = new Zabbr::Label(fWindow, error, white);
 	}
 	
 	/**

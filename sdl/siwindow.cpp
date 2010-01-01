@@ -5,6 +5,7 @@
 */
 
 #include <iostream>
+#include <stdexcept>
 #include "SDL.h"
 
 #include "zabbr/sdlwindow.h"
@@ -32,12 +33,15 @@ namespace SISDL {
 	void SIWindow::rundemo() {
 		try {
 			open(640, 480, false);
+			
+			setDataPath();
 		} catch (SDLInitializationException e) {
 			std::cerr << "Could not initialize SDL: " << e.getError() << std::endl;
 			return;
+		} catch (std::exception& e) {
+			std::cerr << e.what() << std::endl;
+			return;
 		}
-		
-		setDataPath();
 
 		try {
 			SDLWindow::run(new DemoGamePanel(this));
@@ -57,12 +61,15 @@ namespace SISDL {
 			open(ConfigurationManager::getOption<int>("xres", 640),
 			     ConfigurationManager::getOption<int>("yres", 480),
 			     ConfigurationManager::getOption("fullscreen", false), true, 4.0/3.0);
+			
+			setDataPath();
 		} catch (SDLInitializationException e) {
 			std::cerr << "Could not initialize SDL: " << e.getError() << std::endl;
 			return;
+		} catch (std::exception& e) {
+			std::cerr << e.what() << std::endl;
+			return;
 		}
-		
-		setDataPath();
 
 		try {
 			if (!game) {
@@ -166,7 +173,7 @@ namespace SISDL {
 					ResourceManager::fgDataPath = "/usr/share/gpsi/";
 					fclose(phony);
 				} else {
-					throw 1234; // Who needs exceptions anyway?
+					throw std::runtime_error("No data path found.");
 				}
 			}
 		}

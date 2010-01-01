@@ -11,6 +11,7 @@
 #include "zabbr/misc/stopwatch.h"
 #include "src/game/game.h"
 #include "zabbr/resources/resourcemanager.h"
+#include "zabbr/widgets/label.h"
 
 #include "sdlinputdriver.h"
 #include "sdldriverfactory.h"
@@ -34,6 +35,7 @@ namespace SISDL {
 		void close();
 		void pause();
 		void resume();
+		void error(std::string);
 		
 		/**
 		 * The game
@@ -59,6 +61,11 @@ namespace SISDL {
 		 * Flag to see if we should close.
 		*/
 		bool fClosed;
+		
+		/**
+		 * Error label
+		*/
+		Zabbr::Label* fErrorLabel;
 	};
 }
 
