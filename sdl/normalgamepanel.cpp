@@ -42,7 +42,7 @@ namespace SISDL {
 	void NormalGamePanel::draw() {
 		GamePanel::draw();
 		
-		if (!fGameVisualizer->inNonGamePhase()) {
+		if (!fGameVisualizer->inNonGamePhase() && fGame) {
 			std::stringstream ssScoreText;
 			ssScoreText << fGame->getUserScore();
 			std::string scoreText;
@@ -59,6 +59,7 @@ namespace SISDL {
 	*/
 	void NormalGamePanel::keyPress(SDL_KeyboardEvent evnt) {
 		GamePanel::keyPress(evnt);
+		if (! fGame) return;
 		fInputDriver = fDriverFactory->getUserDriver();
 		if (!fGame->isUserDead()) fInputDriver->keyDown(evnt);
 		if (!fGame->isPlaying()) {
@@ -74,6 +75,7 @@ namespace SISDL {
 	 * @param evnt The SDL_KeyboardEvent
 	*/
 	void NormalGamePanel::keyRelease(SDL_KeyboardEvent evnt) {
+		if (! fGame) return;
 		fInputDriver = fDriverFactory->getUserDriver();
 		if (!fGame->isUserDead()) fInputDriver->keyRelease(evnt);
 		if (evnt.keysym.sym == SDLK_ESCAPE) {

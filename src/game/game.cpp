@@ -4,6 +4,8 @@
  * @author Nathan Samson
 */
 
+#include <stdexcept>
+
 #include "game/game.h"
 #include "game/levelreader.h"
 #include "game/builtindriverfactory.h"
@@ -204,14 +206,18 @@ namespace SI {
 		fEntities.clear();
 		
 		
-		LevelReader level = LevelReader(fLevelDirectory+levelName, fEntityFactory, fDriverFactory, fWeaponery);
-		fEntities.push_back(level.getUserShip(fUserGroup));
+		try {
+			LevelReader level = LevelReader(fLevelDirectory+levelName, fEntityFactory, fDriverFactory, fWeaponery);
+			fEntities.push_back(level.getUserShip(fUserGroup));
 		
-		std::vector<Ship*> ships = level.getEnemyShips(fAIGroup);
-		for (std::vector<Ship*>::iterator it = ships.begin(); it != ships.end(); it++) {
-			fEntities.push_back((*it));
+			std::vector<Ship*> ships = level.getEnemyShips(fAIGroup);
+			for (std::vector<Ship*>::iterator it = ships.begin(); it != ships.end(); it++) {
+				fEntities.push_back((*it));
+			}
+			fCurrentLevel = level.getLevelName();
+			fNextLevel = level.getNextLevel();
+		} catch (...) {
+			throw std::runtime_error("Level file could not be loaded.");
 		}
-		fCurrentLevel = level.getLevelName();
-		fNextLevel = level.getNextLevel();
 	}
 }

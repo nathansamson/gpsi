@@ -57,7 +57,7 @@ namespace SI {
 			double h = boundingshape->GetAttribute<double>("h");
 			shape = new BoundingBoxDescription(w, h);
 		} else {
-			throw 666;
+			throw std::runtime_error("Unrecognized bounding shape.");
 		}
 	}
 	
