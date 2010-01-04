@@ -26,6 +26,7 @@ namespace SI {
 		ShipType(std::string, IBoundingShapeDescription*, 
 		         std::vector<std::string>, Vector2, int);
 		ShipType(const ShipType&);
+		ShipType& operator=(const ShipType& other);
 		~ShipType();
 
 		std::string getName();
