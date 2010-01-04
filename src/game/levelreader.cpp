@@ -40,9 +40,9 @@ namespace SI {
 	 * Desctructor.
 	*/
 	LevelReader::~LevelReader() {
-		for (std::map<std::string, ShipType*>::iterator it = fShipTypes.begin(); it != fShipTypes.end(); it++) {
+		/*for (std::map<std::string, ShipType*>::iterator it = fShipTypes.begin(); it != fShipTypes.end(); it++) {
 			delete (*it).second;
-		}
+		}*/
 	}
 	
 	/**
@@ -148,8 +148,8 @@ namespace SI {
 	 *
 	 * @return A map with ID's and shiptypes.
 	*/
-	std::map<std::string, ShipType*> LevelReader::parseShipTypes() {
-		std::map<std::string, ShipType*> shipTypes;
+	std::map<std::string, ShipType> LevelReader::parseShipTypes() {
+		std::map<std::string, ShipType> shipTypes;
 		ticpp::Element* shipsNode = fLevel.FirstChild("level")->FirstChild("ships")->ToElement();
 		ticpp::Iterator<ticpp::Element> shipTypeNode("ship");
 		for (shipTypeNode = shipTypeNode.begin(shipsNode); shipTypeNode != shipTypeNode.end(); shipTypeNode++) {
@@ -167,7 +167,7 @@ namespace SI {
 			Vector2 speed = parseVector(shipTypeNode->FirstChild("maxspeed")->ToElement());
 			int hitpoints = shipTypeNode->GetAttribute<int>("hitpoints");
 			
-			shipTypes[name] = new ShipType(name, shape, weapons, speed, hitpoints);
+			shipTypes[name] = ShipType(name, shape, weapons, speed, hitpoints);
 		}
 		return shipTypes;
 	}
@@ -198,7 +198,7 @@ namespace SI {
 		ticpp::Element* enemiesNode = fLevel.FirstChild("level")->FirstChild("enemies")->ToElement();
 		ticpp::Iterator<ticpp::Element> rowElement("row");
 		for (rowElement = rowElement.begin(enemiesNode); rowElement != rowElement.end(); rowElement++) {
-			ShipType shipType = *fShipTypes[rowElement->GetAttribute("shiptype")];
+			ShipType shipType = fShipTypes[rowElement->GetAttribute("shiptype")];
 			int count = rowElement->GetAttribute<int>("count");
 			double margin = rowElement->GetAttribute<double>("margin");
 			std::string align = rowElement->GetAttribute("align");
@@ -244,7 +244,7 @@ namespace SI {
 	*/
 	Ship* LevelReader::getUserShip(EntityGroup* userGroup) {
 		ticpp::Element* shipNode = fLevel.FirstChild("level")->FirstChild("usership")->ToElement();
-		ShipType shipType = *fShipTypes[shipNode->GetAttribute("shiptype")];
+		ShipType shipType = fShipTypes[shipNode->GetAttribute("shiptype")];
 		return fEntityFactory->createUserShip(fDriverFactory->createUserDriver(),
 				                         Vector2(0, -2.0), 0, userGroup, fWeaponery,
 				                         shipType);

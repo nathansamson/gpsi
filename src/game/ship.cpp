@@ -41,6 +41,24 @@ namespace SI {
 		}
 	}
 	
+	ShipType& ShipType::operator=(const ShipType& other) {
+		if (&other != this) {
+			if (fBoundingShapeDesc) {
+				delete fBoundingShapeDesc;
+			}
+			fName = other.fName;
+			fWeapons = other.fWeapons;
+			fMaxSpeed = other.fMaxSpeed;
+			fHitPoints = other.fHitPoints;
+			if (other.fBoundingShapeDesc) {
+				fBoundingShapeDesc = other.fBoundingShapeDesc->copy();
+			} else {
+				fBoundingShapeDesc = 0;
+			}
+		}
+		return *this;
+	}
+	
 	/**
 	 * Returns the name of the ship.
 	 *

@@ -34,7 +34,7 @@ namespace SI {
 		static void parseBoundingShape(IBoundingShapeDescription*&, ticpp::Element*);
 		void parseAmmo();
 		void parseWeapons();
-		std::map<std::string, ShipType*> parseShipTypes();
+		std::map<std::string, ShipType> parseShipTypes();
 
 		/**
 		 * The TiCPP XML document.
@@ -59,7 +59,7 @@ namespace SI {
 		/**
 		 * A map of ship types.
 		*/
-		std::map<std::string, ShipType*> fShipTypes;
+		std::map<std::string, ShipType> fShipTypes;
 	};
 }
 
