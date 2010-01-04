@@ -5,6 +5,7 @@
 */
 
 #include <map>
+#include <stdexcept>
 
 #include "game/levelreader.h"
 #include "game/ship.h"
