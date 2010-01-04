@@ -3,13 +3,14 @@ Compileren
 
   * CMake
     ----------------
-     1) cd build
-     2) cmake .. (of cmake -DDEBUG=On .. om met debug opties te compileren)
-     3) make
+     1) mkdir build
+     2) cd build
+     3) cmake .. (of cmake -DDEBUG=On .. om met debug opties te compileren)
+     4) make
 
 	(Extra make targets:
-           make clean (gaat alle gecompileerde bestanden verwijderen)
-           make doc  (gaat documentatie compileren)
+           make clean (gaat alle door make gegenereerde bestanden verwijderen)
+           make doc  (gaat documentatie genereren)
            make test (gaat de space invaders library unittesten)
            make package_source
            make package
@@ -21,7 +22,7 @@ Compileren
      1) make
 
         (Extra make targets: 
-           make clean (gaat alle gecompileerde bestanden verwijderen)
+           make clean (gaat alle gegenereerde bestanden verwijderen)
            make docs  (gaat documentatie compileren)
            make test (gaat de space invaders library unittesten)
            make run (gaat het programma uitvoeren)
@@ -77,6 +78,6 @@ Broncode structuur
    De broncode van het spel zelf, die gebruik maakt van zabbr en de
    space invaders game engine.
 
- Verdere documantie kan gevonden worden door het bouwen van de documentatie
- (en kan gevonden worden in ./docs/ of ./build/docs/ naargelang er met
-  cmake of met make werd gewerkt).
+ Verdere documantie kan gevonden worden in ./docs of ./build/docs (naargelang 
+   make doc met cmake methode of make docs met makefile methode werd 
+   uitgevoerd) 
