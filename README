@@ -1,0 +1,82 @@
+Compileren
+==========
+
+  * CMake
+    ----------------
+     1) cd build
+     2) cmake .. (of cmake -DDEBUG=On .. om met debug opties te compileren)
+     3) make
+
+	(Extra make targets:
+           make clean (gaat alle gecompileerde bestanden verwijderen)
+           make doc  (gaat documentatie compileren)
+           make test (gaat de space invaders library unittesten)
+           make package_source
+           make package
+           make install
+           make ...)
+
+  * Gewone Makefiles (zal door eclipse worden gebruikt als er wordt gebuild)
+    ----------------
+     1) make
+
+        (Extra make targets: 
+           make clean (gaat alle gecompileerde bestanden verwijderen)
+           make docs  (gaat documentatie compileren)
+           make test (gaat de space invaders library unittesten)
+           make run (gaat het programma uitvoeren)
+           make memcheck (gaat valgrind samen met ./sdl/gpsi runnen om 
+                          memory leaks en andere problemen te vinden))
+
+  * Voor -en nadelen van CMake
+    ------------------------------
+    - CMake gaat op zoek naar de libraries en een aantal andere dependencies
+    zoals Doxygen, SDL of CPPunit.
+    - Het out-of-source builden van cmake heeft als voordeel dat een clean zeer
+    gemakkelijk is (rm -rf build/*), en dat de broncode mappen niet worden
+    bevuild met .o, .d en andere files.
+    - CMake gaat zelf een aantal zaken regelen, zodat het switchen tussen
+    static en dynamische libraries bv zeer gemakkelijk is.
+    - CMake heeft een aantal standaard export targets die het ook zeer
+    om het programma te distribueren (als broncode, of als binary).
+    - CMake heeft als voordeel tov mijn Makefiles dat als er ergens een .h
+    bestand wordt gewijzigd dat alles correct wordt gehercompileerd.
+
+    - Het nadeel van cmake is wel dat integratie met eclipse lastig is, 
+      dat is ook de reden dat het eclipse project standaard de make
+      methode gebruikt.
+
+Het programma starten
+=====================
+
+ (Dit hangt af ofdat u met cmake of met make hebt gebouwd).
+
+ Met cmake: ./build/sdl/gpsi
+ Met make: ./run.sh
+ Eclipse: binary -> gpsi -> run as local c/c++ application
+              (eventueel moet LD_LIBRARY_PATH nog worden ingesteld).
+
+ In beide gevallen moet ./data in de current working directory zitten
+  (in ./build/ wordt er automatisch een dynamische link naar gelegd door cmake).
+
+
+Broncode structuur
+==================
+
+ * tclap/ en tinyxml/
+    2 (templatized) libraries die gebruikt worden (niet zelf geschreven)
+ * src/
+   De broncode van de game-engine.
+    - src/game/
+      Meeste game-engine bestanden
+    - src/misc/
+      Enkele bestanden die niet specifiek met space-invaders te maken hebben.
+ * zabbr/
+   Een GUI library voor SDL. (zelf geschreven).
+ * sdl/
+   De broncode van het spel zelf, die gebruik maakt van zabbr en de
+   space invaders game engine.
+
+ Verdere documantie kan gevonden worden door het bouwen van de documentatie
+ (en kan gevonden worden in ./docs/ of ./build/docs/ naargelang er met
+  cmake of met make werd gewerkt).
