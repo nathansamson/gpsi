@@ -1,7 +1,7 @@
 include Makefile.conf
 export CXXFLAGS += -Werror -Wall
 
-.PHONY: sdlgui zabbr lib test docs docsupload memcheck run
+.PHONY: sdlgui zabbr lib test docs memcheck run
 
 all: ticpp lib zabbr sdlgui
 
@@ -23,14 +23,11 @@ sdlgui: lib zabbr
 docs:
 	doxygen > /dev/null
 
-docsupload: docs
-	lftp -f docs-upload.lftp
-
 memcheck: sdlgui
-	LD_LIBRARY_PATH=./src valgrind --leak-check=full --suppressions=./sdl.sup ./sdl/sisdl
+	LD_LIBRARY_PATH=./src valgrind --leak-check=full --suppressions=./sdl.sup ./sdl/gpsi
 	
 run: sdlgui
-	LD_LIBRARY_PATH=./src ./sdl/sisdl
+	LD_LIBRARY_PATH=./src ./sdl/gpsi
 
 clean:
 	$(MAKE) -C tinyxml clean
