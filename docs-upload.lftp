@@ -1,3 +1,0 @@
-open ftp://sidocs@nathansamson.be:vZ1jo93ydcG3jjy6t5d6K@ftp.nathansamson.be
-lcd build/docs/html
-mirror --reverse --delete --use-cache --verbose --parallel=4
