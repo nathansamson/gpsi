@@ -7,6 +7,7 @@
 
 #include "zabbr/resources/resourcemanager.h"
 #include "zabbr/events/callbacks.h"
+#include "zabbr/misc/audiomanager.h"
 #include "src/misc/vector2.h"
 
 namespace SISDL {
@@ -63,6 +64,9 @@ namespace SISDL {
 	*/
 	std::vector<SI::VGameEntity*> SDLShip::update(int ticks) {
 		if (isDead()) {
+			if (ticksSinceDead == 0) {
+				Zabbr::AudioManager::get().play("sounds/explosion.ogg", 0);
+			}
 			ticksSinceDead += ticks;
 		}
 		return Ship::update(ticks);
