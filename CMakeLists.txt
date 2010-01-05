@@ -55,6 +55,13 @@ include(FindSDL)
 include(FindSDL_ttf)
 include(FindSDL_image)
 include(FindSDL_gfx)
+include(FindSDL_mixer)
+
+if(SDLMIXER_FOUND)
+	add_definitions(-DENABLE_AUDIO)
+else()
+	message(STATUS "Will build without audio/music support")
+endif()
 
 if(SDL_FOUND AND SDLTTF_FOUND AND SDLIMAGE_FOUND AND SDLGFX_FOUND)
 	add_subdirectory (zabbr)
