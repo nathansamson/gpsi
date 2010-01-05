@@ -29,5 +29,10 @@ target_link_libraries (gpsi si ticpp zabbr
                              ${SDLTTF_LIBRARY}
                              ${SDLGFX_LIBRARY})
 
+if(SDLMIXER_FOUND)
+	include_directories (${SDLMIXER_INCLUDE_DIR})
+	target_link_libraries (gpsi ${SDLMIXER_LIBRARY})
+endif()
+
 install(TARGETS gpsi
         RUNTIME DESTINATION bin)
