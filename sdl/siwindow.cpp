@@ -16,6 +16,9 @@
 #include "zabbr/widgets/vbox.h"
 #include "zabbr/resources/resourcemanager.h"
 #include "zabbr/misc/fontprefetcher.h"
+#ifdef ENABLE_AUDIO
+#include "zabbr/misc/soundprefetcher.h"
+#endif
 #include "normalgamepanel.h"
 #include "demogamepanel.h"
 #include "optionspanel.h"
@@ -85,6 +88,12 @@ namespace SISDL {
 				fontPrefetcher->addFont("fonts/Blackout-Midnight.ttf");
 				fontPrefetcher->addFont("fonts/orbitron-black.ttf");
 				splash->addPrefetcher(fontPrefetcher);
+				
+				#ifdef ENABLE_AUDIO
+				SoundPrefetcher* soundFetch = new SoundPrefetcher("Loading sounds...");
+				soundFetch->addSound("sounds/explosion.ogg");
+				splash->addPrefetcher(soundFetch);
+				#endif
 			
 				Button* start = new Button(this, "Start game");
 				start->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::startGame));
