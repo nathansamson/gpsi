@@ -20,12 +20,18 @@ namespace SI {
 	
 		Vector2 step = ticks * fDirection;
 		move(step, ticks);
+		if ((int)(step.getX() * 1000) == 0) {
+			fTicksPassedSinceLastChange = fTicksForMove;
+		}
 		
 		fTicksPassedSinceLastChange += ticks;
-		if (fTicksPassedSinceLastChange > fTicksForMove) {
+		if (fTicksPassedSinceLastChange >= fTicksForMove) {
 			fTicksForMove = rand() % 1000 + 500;
 			fDirection = Vector2((rand() % 3 - 1) * 1.0, (rand() % 3 - 1) * 1.0);
 			fTicksPassedSinceLastChange = 0;
+		}
+		if (rand() % 1000) {
+			fire();
 		}
 	}
 }
