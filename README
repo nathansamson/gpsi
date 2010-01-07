@@ -96,3 +96,16 @@ Licentie van data files
   * ruimteschepen van http://yellowicon.com/downloads/
   * bullet.png en clusterbomb.png door mij
   * DejaVuSans-Bold.ttf uit standaard Ubuntu distributie
+
+Geïmplementeerde features
+========================
+ * Schieten, doodgaan, bewegen, winnen
+ * Menu met muis
+ * Highscores
+ * Opties (resolutie, fullscreen, ...)
+ * Muziek/Geluid (werkt alleen in cmake versie)
+ * Levels (uit XML bestand)
+ * Meerdere types projectielen (clusterbom, kogel)
+ * Verschillende type snelheden (snelheid, vorm, ...)
+ * Self-running demo (start het spel met -d/--demo als optie)
+ * ...
