@@ -5,6 +5,7 @@
 */
 
 #include "zabbr/resources/resourcemanager.h"
+#include "zabbr/misc/audiomanager.h"
 
 #include "sdlbullet.h"
 
@@ -27,6 +28,7 @@ namespace SISDL {
 	    int height = getHeight() / 6.0 * fWindow->getYResolution();
 		fImage = Zabbr::ResourceManager::manager().image("bullet.png", width, height, false, dir);
 		fCbID = fWindow->connectOnScreenSizeChanged(new Zabbr::ClassCallback3<SDLBullet, Zabbr::SDLWindow*, int, int>(this, &SDLBullet::onScreenSizeChanged));
+		Zabbr::AudioManager::get().play("sounds/firebullet.ogg", 0);
 	}
 	
 	SDLBullet::~SDLBullet() {
