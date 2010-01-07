@@ -81,3 +81,18 @@ Broncode structuur
  Verdere documantie kan gevonden worden in ./docs of ./build/docs (naargelang 
    make doc met cmake methode of make docs met makefile methode werd 
    uitgevoerd) 
+ De documentatie kan ook gevonden worden op http://nathansamson.be
+
+Licentie van data files
+=======================
+  * music/voices-of-space/* door http://www.jamendo.com/en/artist/WMRI onder
+       http://creativecommons.org/licenses/by-sa/3.0/
+  * music/AC-Space.mp3 door http://www.jamendo.com/en/artist/ACQuality onder
+       http://creativecommons.org/licenses/by-nc-sa/3.0/
+  * music/sounds/* door Nathan Samson onder
+       http://creativecommons.org/licenses/by-sa/3.0/
+  * fonts/Blackout-Midnight.ttf en fonts/orbitron*-.ttf
+       opensource fonts van http://www.theleagueofmoveabletype.com
+  * ruimteschepen van http://yellowicon.com/downloads/
+  * bullet.png en clusterbomb.png door mij
+  * DejaVuSans-Bold.ttf uit standaard Ubuntu distributie
