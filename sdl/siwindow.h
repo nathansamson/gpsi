@@ -35,6 +35,7 @@ namespace SISDL {
 		
 		void onMainMenuKeyPress(Zabbr::VSDLPanel*, SDL_KeyboardEvent);
 		void onOpenOptions(Zabbr::Button*);
+		void startMusic(Zabbr::VSDLPanel*);
 	};
 }
 
