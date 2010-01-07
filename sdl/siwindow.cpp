@@ -49,7 +49,7 @@ namespace SISDL {
 		}
 
 		try {
-			SDLWindow::run(new DemoGamePanel(this));
+			runSplashPanel(new DemoGamePanel(this));
 		} catch (ResourceNotLoadedException& e) {
 			std::cerr << "Could not load resource " << e.getResourceID() << " :" << e.getError() << std::endl;
 		}
@@ -77,50 +77,10 @@ namespace SISDL {
 		}
 
 		try {
+			VSDLPanel* panel;
 			if (!game) {
 				SDL_Color white = {255, 255, 255};
 				MenuPanel* menu = new MenuPanel(this, "/Space/ Invaders", white, "fonts/orbitron-black.ttf", 64);
-				SplashPanel* splash = new SplashPanel(this, "splash.png", menu);
-				FontPrefetcher* fontPrefetcher = new FontPrefetcher("Loading fonts...");
-				fontPrefetcher->addFontSize(18);
-				fontPrefetcher->addFontSize(24);
-				fontPrefetcher->addFontSize(28);
-				fontPrefetcher->addFontSize(34);
-				fontPrefetcher->addFont("DejaVuSans-Bold.ttf");
-				fontPrefetcher->addFont("fonts/Blackout-Midnight.ttf");
-				fontPrefetcher->addFont("fonts/orbitron-black.ttf");
-				splash->addPrefetcher(fontPrefetcher);
-				
-				#ifdef ENABLE_AUDIO
-				SoundPrefetcher* soundFetch = new SoundPrefetcher("Loading sounds...");
-				soundFetch->addSound("sounds/explosion.ogg");
-				soundFetch->addSound("sounds/firebullet.ogg");
-				soundFetch->addSound("sounds/clusterbomb.ogg");
-				splash->addPrefetcher(soundFetch);
-				
-				if (ConfigurationManager::getOption("play-music", false)) {
-					MusicPrefetcher* musicFetch = new MusicPrefetcher("Loading music");
-					musicFetch->addMusic("music/AC SPACE.mp3");
-					musicFetch->addMusic("music/voices-of-space/01 - Voice One.mp3");
-					musicFetch->addMusic("music/voices-of-space/02 - Stardust.mp3");
-					musicFetch->addMusic("music/voices-of-space/03 - Voice Two.mp3");
-					musicFetch->addMusic("music/voices-of-space/04 - Planet's Orbit.mp3");
-					musicFetch->addMusic("music/voices-of-space/05 - Visions.mp3");
-					musicFetch->addMusic("music/voices-of-space/06 - Voice Three.mp3");
-					musicFetch->addMusic("music/voices-of-space/07 - Emotional Signals.mp3");
-					musicFetch->addMusic("music/voices-of-space/08 - Voice Four.mp3");
-					musicFetch->addMusic("music/voices-of-space/09 - Lost in Space.mp3");
-					musicFetch->addMusic("music/voices-of-space/10 - Lost in Time.mp3");
-					musicFetch->addMusic("music/voices-of-space/11 - Parsecs Part I.mp3");
-					musicFetch->addMusic("music/voices-of-space/12 - Parsecs Part II.mp3");
-					musicFetch->addMusic("music/voices-of-space/13 - Final Voice.mp3");
-					musicFetch->addMusic("music/voices-of-space/14 - Starlight.mp3");
-					musicFetch->addMusic("music/voices-of-space/15 - Voices of Space.mp3");
-					splash->addPrefetcher(musicFetch);
-				}
-				
-				splash->connectOnClosePanel(new ClassCallback1<SIWindow, VSDLPanel*>(this, &SIWindow::startMusic));
-				#endif
 			
 				Button* start = new Button(this, "Start game");
 				start->connectOnMouseClick(new ClassCallback1<SIWindow, SDL_MouseButtonEvent>(this, &SIWindow::startGame));
@@ -136,15 +96,63 @@ namespace SISDL {
 			
 				menu->connectRequestQuit(new ClassCallback0<SIWindow>(this, &SIWindow::onRequestQuitMainMenu));
 				menu->connectOnKeyPress(new ClassCallback2<SIWindow, Zabbr::VSDLPanel*, SDL_KeyboardEvent>(this, &SIWindow::onMainMenuKeyPress));
-	
-				SDLWindow::run(splash);
+				
+				panel = menu;
 			} else {
-				SDLWindow::run(new NormalGamePanel(this));
+				panel = new NormalGamePanel(this);
 			}
+			
+			runSplashPanel(panel);
 		} catch (ResourceNotLoadedException& e) {
 			std::cerr << "Could not load resource " << e.getResourceID() << " :" << e.getError() << std::endl;
 		}
 		close();
+	}
+	
+	void SIWindow::runSplashPanel(VSDLPanel* panel) {
+		SplashPanel* splash = new SplashPanel(this, "splash.png", panel);
+		FontPrefetcher* fontPrefetcher = new FontPrefetcher("Loading fonts...");
+		fontPrefetcher->addFontSize(18);
+		fontPrefetcher->addFontSize(24);
+		fontPrefetcher->addFontSize(28);
+		fontPrefetcher->addFontSize(34);
+		fontPrefetcher->addFont("DejaVuSans-Bold.ttf");
+		fontPrefetcher->addFont("fonts/Blackout-Midnight.ttf");
+		fontPrefetcher->addFont("fonts/orbitron-black.ttf");
+		splash->addPrefetcher(fontPrefetcher);
+	
+		#ifdef ENABLE_AUDIO
+		SoundPrefetcher* soundFetch = new SoundPrefetcher("Loading sounds...");
+		soundFetch->addSound("sounds/explosion.ogg");
+		soundFetch->addSound("sounds/firebullet.ogg");
+		soundFetch->addSound("sounds/clusterbomb.ogg");
+		splash->addPrefetcher(soundFetch);
+	
+		if (ConfigurationManager::getOption("play-music", false)) {
+			MusicPrefetcher* musicFetch = new MusicPrefetcher("Loading music");
+			musicFetch->addMusic("music/AC SPACE.mp3");
+			musicFetch->addMusic("music/voices-of-space/01 - Voice One.mp3");
+			musicFetch->addMusic("music/voices-of-space/02 - Stardust.mp3");
+			musicFetch->addMusic("music/voices-of-space/03 - Voice Two.mp3");
+			musicFetch->addMusic("music/voices-of-space/04 - Planet's Orbit.mp3");
+			musicFetch->addMusic("music/voices-of-space/05 - Visions.mp3");
+			musicFetch->addMusic("music/voices-of-space/06 - Voice Three.mp3");
+			musicFetch->addMusic("music/voices-of-space/07 - Emotional Signals.mp3");
+			musicFetch->addMusic("music/voices-of-space/08 - Voice Four.mp3");
+			musicFetch->addMusic("music/voices-of-space/09 - Lost in Space.mp3");
+			musicFetch->addMusic("music/voices-of-space/10 - Lost in Time.mp3");
+			musicFetch->addMusic("music/voices-of-space/11 - Parsecs Part I.mp3");
+			musicFetch->addMusic("music/voices-of-space/12 - Parsecs Part II.mp3");
+			musicFetch->addMusic("music/voices-of-space/13 - Final Voice.mp3");
+			musicFetch->addMusic("music/voices-of-space/14 - Starlight.mp3");
+			musicFetch->addMusic("music/voices-of-space/15 - Voices of Space.mp3");
+			splash->addPrefetcher(musicFetch);
+		}
+	
+		splash->connectOnClosePanel(new ClassCallback1<SIWindow, VSDLPanel*>(this, &SIWindow::startMusic));
+		#endif
+		
+		SDLWindow::run(splash);
 	}
 	
 	void SIWindow::startMusic(VSDLPanel*) {

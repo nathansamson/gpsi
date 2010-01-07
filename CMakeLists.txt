@@ -9,7 +9,20 @@ set(CPACK_SOURCE_IGNORE_FILES
 "~$"
 "\\\\.git"
 "\\\\.gitignore"
-"build/*"
+"build/"
+"data/music/voices-of-space/02 - Stardust.mp3"
+"data/music/voices-of-space/03 - Voice Two.mp3"
+"data/music/voices-of-space/04 - Planet's Orbit.mp3"
+"data/music/voices-of-space/05 - Visions.mp3"
+"data/music/voices-of-space/06 - Voice Three.mp3"
+"data/music/voices-of-space/07 - Emotional Signals.mp3"
+"data/music/voices-of-space/08 - Voice Four.mp3"
+"data/music/voices-of-space/09 - Lost in Space.mp3"
+"data/music/voices-of-space/11 - Parsecs Part I.mp3"
+"data/music/voices-of-space/12 - Parsecs Part II.mp3"
+"data/music/voices-of-space/13 - Final Voice.mp3"
+"data/music/voices-of-space/14 - Starlight.mp3"
+"data/music/voices-of-space/15 - Voices of Space.mp3"
 )
 SET(CPACK_SOURCE_TBZ2 "OFF")
 SET(CPACK_SOURCE_TGZ "ON")
