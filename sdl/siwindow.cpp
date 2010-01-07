@@ -94,6 +94,8 @@ namespace SISDL {
 				#ifdef ENABLE_AUDIO
 				SoundPrefetcher* soundFetch = new SoundPrefetcher("Loading sounds...");
 				soundFetch->addSound("sounds/explosion.ogg");
+				soundFetch->addSound("sounds/firebullet.ogg");
+				soundFetch->addSound("sounds/clusterbomb.ogg");
 				splash->addPrefetcher(soundFetch);
 				
 				MusicPrefetcher* musicFetch = new MusicPrefetcher("Loading music");

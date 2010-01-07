@@ -5,6 +5,7 @@
 */
 
 #include "zabbr/resources/resourcemanager.h"
+#include "zabbr/misc/audiomanager.h"
 #include "sdl/sdlclusterbomb.h"
 
 namespace SISDL {
@@ -26,6 +27,7 @@ namespace SISDL {
 	    int height = getHeight() / 6.0 * fWindow->getYResolution();
 		fImage = Zabbr::ResourceManager::manager().image("clusterbomb.png", width, height, false, dir);
 		fCbID = fWindow->connectOnScreenSizeChanged(new Zabbr::ClassCallback3<SDLClusterBomb, Zabbr::SDLWindow*, int, int>(this, &SDLClusterBomb::onScreenSizeChanged));
+		Zabbr::AudioManager::get().play("sounds/clusterbomb.ogg", 0);
 	}
 	
 	SDLClusterBomb::~SDLClusterBomb() {
