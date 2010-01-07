@@ -22,6 +22,7 @@ namespace SISDL {
 		void saveAndClose();
 		
 		Zabbr::TextInputWidget* fNameInput;
+		Zabbr::CheckBox* fMusicCheckbox;
 		Zabbr::CheckBox* fSoundCheckbox;
 		Zabbr::CheckBox* fFullscreenCheckbox;
 		Zabbr::ComboBox<Zabbr::VideoMode>* fResolutionCombobox;
