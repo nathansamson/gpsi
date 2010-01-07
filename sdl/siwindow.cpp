@@ -18,6 +18,7 @@
 #include "zabbr/misc/fontprefetcher.h"
 #ifdef ENABLE_AUDIO
 #include "zabbr/misc/soundprefetcher.h"
+#include "zabbr/misc/musicprefetcher.h"
 #endif
 #include "zabbr/misc/audiomanager.h"
 #include "normalgamepanel.h"
@@ -94,6 +95,25 @@ namespace SISDL {
 				SoundPrefetcher* soundFetch = new SoundPrefetcher("Loading sounds...");
 				soundFetch->addSound("sounds/explosion.ogg");
 				splash->addPrefetcher(soundFetch);
+				
+				MusicPrefetcher* musicFetch = new MusicPrefetcher("Loading music");
+				musicFetch->addMusic("music/AC SPACE.mp3");
+				musicFetch->addMusic("music/voices-of-space/01 - Voice One.mp3");
+				musicFetch->addMusic("music/voices-of-space/02 - Stardust.mp3");
+				musicFetch->addMusic("music/voices-of-space/03 - Voice Two.mp3");
+				musicFetch->addMusic("music/voices-of-space/04 - Planet's Orbit.mp3");
+				musicFetch->addMusic("music/voices-of-space/05 - Visions.mp3");
+				musicFetch->addMusic("music/voices-of-space/06 - Voice Three.mp3");
+				musicFetch->addMusic("music/voices-of-space/07 - Emotional Signals.mp3");
+				musicFetch->addMusic("music/voices-of-space/08 - Voice Four.mp3");
+				musicFetch->addMusic("music/voices-of-space/09 - Lost in Space.mp3");
+				musicFetch->addMusic("music/voices-of-space/10 - Lost in Time.mp3");
+				musicFetch->addMusic("music/voices-of-space/11 - Parsecs Part I.mp3");
+				musicFetch->addMusic("music/voices-of-space/12 - Parsecs Part II.mp3");
+				musicFetch->addMusic("music/voices-of-space/13 - Final Voice.mp3");
+				musicFetch->addMusic("music/voices-of-space/14 - Starlight.mp3");
+				musicFetch->addMusic("music/voices-of-space/15 - Voices of Space.mp3");
+				splash->addPrefetcher(musicFetch);
 				
 				splash->connectOnClosePanel(new ClassCallback1<SIWindow, VSDLPanel*>(this, &SIWindow::startMusic));
 				#endif
