@@ -19,6 +19,7 @@
 #ifdef ENABLE_AUDIO
 #include "zabbr/misc/soundprefetcher.h"
 #endif
+#include "zabbr/misc/audiomanager.h"
 #include "normalgamepanel.h"
 #include "demogamepanel.h"
 #include "optionspanel.h"
@@ -93,6 +94,8 @@ namespace SISDL {
 				SoundPrefetcher* soundFetch = new SoundPrefetcher("Loading sounds...");
 				soundFetch->addSound("sounds/explosion.ogg");
 				splash->addPrefetcher(soundFetch);
+				
+				splash->connectOnClosePanel(new ClassCallback1<SIWindow, VSDLPanel*>(this, &SIWindow::startMusic));
 				#endif
 			
 				Button* start = new Button(this, "Start game");
@@ -118,6 +121,26 @@ namespace SISDL {
 			std::cerr << "Could not load resource " << e.getResourceID() << " :" << e.getError() << std::endl;
 		}
 		close();
+	}
+	
+	void SIWindow::startMusic(VSDLPanel*) {
+		AudioManager::get().addMusicFile("music/AC SPACE.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/01 - Voice One.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/02 - Stardust.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/03 - Voice Two.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/04 - Planet's Orbit.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/05 - Visions.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/06 - Voice Three.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/07 - Emotional Signals.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/08 - Voice Four.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/09 - Lost in Space.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/10 - Lost in Time.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/11 - Parsecs Part I.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/12 - Parsecs Part II.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/13 - Final Voice.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/14 - Starlight.mp3");
+		AudioManager::get().addMusicFile("music/voices-of-space/15 - Voices of Space.mp3");
+		AudioManager::get().startMusic();
 	}
 
 	/**
