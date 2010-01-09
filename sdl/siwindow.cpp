@@ -131,21 +131,6 @@ namespace SISDL {
 		if (ConfigurationManager::getOption("play-music", false)) {
 			MusicPrefetcher* musicFetch = new MusicPrefetcher("Loading music");
 			musicFetch->addMusic("music/AC SPACE.mp3");
-			musicFetch->addMusic("music/voices-of-space/01 - Voice One.mp3");
-			musicFetch->addMusic("music/voices-of-space/02 - Stardust.mp3");
-			musicFetch->addMusic("music/voices-of-space/03 - Voice Two.mp3");
-			musicFetch->addMusic("music/voices-of-space/04 - Planet's Orbit.mp3");
-			musicFetch->addMusic("music/voices-of-space/05 - Visions.mp3");
-			musicFetch->addMusic("music/voices-of-space/06 - Voice Three.mp3");
-			musicFetch->addMusic("music/voices-of-space/07 - Emotional Signals.mp3");
-			musicFetch->addMusic("music/voices-of-space/08 - Voice Four.mp3");
-			musicFetch->addMusic("music/voices-of-space/09 - Lost in Space.mp3");
-			musicFetch->addMusic("music/voices-of-space/10 - Lost in Time.mp3");
-			musicFetch->addMusic("music/voices-of-space/11 - Parsecs Part I.mp3");
-			musicFetch->addMusic("music/voices-of-space/12 - Parsecs Part II.mp3");
-			musicFetch->addMusic("music/voices-of-space/13 - Final Voice.mp3");
-			musicFetch->addMusic("music/voices-of-space/14 - Starlight.mp3");
-			musicFetch->addMusic("music/voices-of-space/15 - Voices of Space.mp3");
 			splash->addPrefetcher(musicFetch);
 		}
 	
@@ -157,21 +142,6 @@ namespace SISDL {
 	
 	void SIWindow::startMusic(VSDLPanel*) {
 		AudioManager::get().addMusicFile("music/AC SPACE.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/01 - Voice One.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/02 - Stardust.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/03 - Voice Two.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/04 - Planet's Orbit.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/05 - Visions.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/06 - Voice Three.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/07 - Emotional Signals.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/08 - Voice Four.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/09 - Lost in Space.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/10 - Lost in Time.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/11 - Parsecs Part I.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/12 - Parsecs Part II.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/13 - Final Voice.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/14 - Starlight.mp3");
-		AudioManager::get().addMusicFile("music/voices-of-space/15 - Voices of Space.mp3");
 		if (ConfigurationManager::getOption("play-music", false)) {
 			AudioManager::get().startMusic();
 		}
